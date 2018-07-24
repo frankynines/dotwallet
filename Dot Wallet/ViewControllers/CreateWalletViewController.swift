@@ -12,15 +12,22 @@ class CreateWalletViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
+        if (EtherWallet.account.hasAccount == true) {
+            self.pushWalletHomeScreen()
+        }
+        
     }
     
     @IBAction func iba_createNewWallet(){
         
-        let alertView = UIAlertController.init(title: "New Wallet", message: "Enter Password to secure wallet", preferredStyle: .alert)
+        let alertView = UIAlertController.init(title: "New Wallet", message: "Enter Pincode to secure wallet", preferredStyle: .alert)
         
         alertView.addTextField { (inputField) in
             inputField.tag = 0
-            inputField.placeholder = "Password"
+            inputField.placeholder = "Pincode"
+            inputField.keyboardType = UIKeyboardType.decimalPad
         }
         
         alertView.addAction(UIAlertAction(title: "Enter", style: .default, handler: { (action) in
@@ -58,7 +65,9 @@ class CreateWalletViewController: UIViewController {
         
         alertView.addTextField { (inputField) in
             inputField.tag = 1
-            inputField.placeholder = "Password"
+            inputField.placeholder = "Pincode"
+            inputField.keyboardType = UIKeyboardType.decimalPad
+
         }
         
         alertView.addAction(UIAlertAction(title: "Enter", style: .default, handler: { (action) in

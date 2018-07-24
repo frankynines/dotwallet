@@ -1,0 +1,6 @@
+framework module AlertOnboarding {
+  umbrella header "AlertOnboarding-umbrella.h"
+
+  export *
+  module * { export * }
+}

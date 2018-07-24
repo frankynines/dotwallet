@@ -30,26 +30,14 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Private Key" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jxt-O2-M6g">
-                                <rect key="frame" x="120" y="127.5" width="135" height="14.5"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Public Key" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="YGU-HV-d2I">
                                 <rect key="frame" x="20" y="89" width="335" height="18.5"/>
                                 <fontDescription key="fontDescription" name="CourierNewPS-BoldMT" family="Courier New" pointSize="16"/>
                                 <color key="textColor" red="0.016804177310000001" green="0.19835099580000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Private Key" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="Fgu-cB-G5d">
-                                <rect key="frame" x="20" y="162" width="335" height="18.5"/>
-                                <fontDescription key="fontDescription" name="CourierNewPS-BoldMT" family="Courier New" pointSize="16"/>
-                                <color key="textColor" red="0.016804177310000001" green="0.19835099580000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mra-z5-sDj">
-                                <rect key="frame" x="120" y="200.5" width="135" height="48"/>
+                                <rect key="frame" x="20" y="127.5" width="335" height="48"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                 <state key="normal" title="0.0">
                                     <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -84,30 +72,44 @@
                                     <action selector="iba_copyPublicAddress" destination="Xqw-P3-uUd" eventType="touchUpInside" id="b4H-hz-Zpk"/>
                                 </connections>
                             </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="LN2-vE-Mjb">
+                                <rect key="frame" x="137" y="195.5" width="100" height="100"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="100" id="nvK-n8-vak"/>
+                                    <constraint firstAttribute="height" constant="100" id="qYF-Y9-a74"/>
+                                </constraints>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CKG-bZ-Wlg">
+                                <rect key="frame" x="20" y="20" width="30" height="30"/>
+                                <state key="normal" title="KILL">
+                                    <color key="titleColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="iba_killwallet" destination="Xqw-P3-uUd" eventType="touchUpInside" id="X6b-b0-E7k"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="Jxt-O2-M6g" firstAttribute="top" secondItem="YGU-HV-d2I" secondAttribute="bottom" constant="20" id="01t-nE-ctF"/>
                             <constraint firstItem="nVF-rd-4iU" firstAttribute="leading" secondItem="Tch-iM-Wz7" secondAttribute="leading" constant="120" id="8fW-IL-tgo"/>
+                            <constraint firstItem="Mra-z5-sDj" firstAttribute="top" secondItem="YGU-HV-d2I" secondAttribute="bottom" constant="20" id="A38-yz-mdA"/>
+                            <constraint firstItem="LN2-vE-Mjb" firstAttribute="centerX" secondItem="I9y-Ur-NcH" secondAttribute="centerX" id="BhU-f8-OxX"/>
+                            <constraint firstItem="CKG-bZ-Wlg" firstAttribute="top" secondItem="Tch-iM-Wz7" secondAttribute="top" id="HxE-bS-i1N"/>
                             <constraint firstItem="Dc7-OS-LtW" firstAttribute="top" secondItem="mvs-ld-abX" secondAttribute="bottom" constant="8" id="Kb1-H6-G8o"/>
-                            <constraint firstItem="Fgu-cB-G5d" firstAttribute="leading" secondItem="Tch-iM-Wz7" secondAttribute="leading" constant="20" id="L2r-vB-HD6"/>
                             <constraint firstItem="AZm-tN-ozY" firstAttribute="leading" secondItem="Tch-iM-Wz7" secondAttribute="leading" constant="120" id="LX0-5U-str"/>
                             <constraint firstItem="Tch-iM-Wz7" firstAttribute="trailing" secondItem="Dc7-OS-LtW" secondAttribute="trailing" id="Ndb-s4-Sji"/>
-                            <constraint firstItem="Tch-iM-Wz7" firstAttribute="trailing" secondItem="Fgu-cB-G5d" secondAttribute="trailing" constant="20" id="PkI-RK-8t9"/>
                             <constraint firstItem="nVF-rd-4iU" firstAttribute="top" secondItem="Tch-iM-Wz7" secondAttribute="top" id="Tie-et-vg4"/>
-                            <constraint firstItem="Jxt-O2-M6g" firstAttribute="leading" secondItem="Tch-iM-Wz7" secondAttribute="leading" constant="120" id="a8Z-9s-p3f"/>
+                            <constraint firstItem="LN2-vE-Mjb" firstAttribute="top" secondItem="Mra-z5-sDj" secondAttribute="bottom" constant="20" id="Ulf-wo-WJV"/>
                             <constraint firstItem="Dc7-OS-LtW" firstAttribute="bottom" secondItem="Tch-iM-Wz7" secondAttribute="bottom" id="aAX-uv-Nhe"/>
                             <constraint firstItem="Tch-iM-Wz7" firstAttribute="trailing" secondItem="AZm-tN-ozY" secondAttribute="trailing" constant="120" id="b9c-6P-5UR"/>
-                            <constraint firstItem="Tch-iM-Wz7" firstAttribute="trailing" secondItem="Mra-z5-sDj" secondAttribute="trailing" constant="120" id="dZv-Pt-Ybt"/>
-                            <constraint firstItem="Fgu-cB-G5d" firstAttribute="top" secondItem="Jxt-O2-M6g" secondAttribute="bottom" constant="20" id="eYK-Cf-FFQ"/>
-                            <constraint firstItem="Tch-iM-Wz7" firstAttribute="trailing" secondItem="Jxt-O2-M6g" secondAttribute="trailing" constant="120" id="hWg-EP-rWs"/>
+                            <constraint firstItem="Tch-iM-Wz7" firstAttribute="trailing" secondItem="Mra-z5-sDj" secondAttribute="trailing" constant="20" id="dZv-Pt-Ybt"/>
                             <constraint firstItem="mvs-ld-abX" firstAttribute="centerX" secondItem="I9y-Ur-NcH" secondAttribute="centerX" id="hiI-AP-oPl"/>
+                            <constraint firstItem="CKG-bZ-Wlg" firstAttribute="leading" secondItem="Tch-iM-Wz7" secondAttribute="leading" constant="20" id="hsq-IM-iLQ"/>
                             <constraint firstItem="Dc7-OS-LtW" firstAttribute="leading" secondItem="Tch-iM-Wz7" secondAttribute="leading" id="kAS-fF-T9e"/>
                             <constraint firstItem="YGU-HV-d2I" firstAttribute="leading" secondItem="Tch-iM-Wz7" secondAttribute="leading" constant="20" id="kOq-uQ-6as"/>
-                            <constraint firstItem="Mra-z5-sDj" firstAttribute="leading" secondItem="Tch-iM-Wz7" secondAttribute="leading" constant="120" id="kia-WB-ZG5"/>
+                            <constraint firstItem="Mra-z5-sDj" firstAttribute="leading" secondItem="Tch-iM-Wz7" secondAttribute="leading" constant="20" id="kia-WB-ZG5"/>
                             <constraint firstItem="YGU-HV-d2I" firstAttribute="top" secondItem="AZm-tN-ozY" secondAttribute="bottom" constant="20" id="nmK-Bn-uM1"/>
                             <constraint firstItem="Tch-iM-Wz7" firstAttribute="trailing" secondItem="nVF-rd-4iU" secondAttribute="trailing" constant="120" id="q9i-jf-3eR"/>
-                            <constraint firstItem="Mra-z5-sDj" firstAttribute="top" secondItem="Fgu-cB-G5d" secondAttribute="bottom" constant="20" id="qAA-hG-lBI"/>
                             <constraint firstItem="Tch-iM-Wz7" firstAttribute="trailing" secondItem="YGU-HV-d2I" secondAttribute="trailing" constant="20" id="sLr-nB-QMP"/>
                             <constraint firstItem="AZm-tN-ozY" firstAttribute="top" secondItem="nVF-rd-4iU" secondAttribute="bottom" constant="20" id="yWo-Sx-en3"/>
                         </constraints>
@@ -115,8 +117,8 @@
                     </view>
                     <connections>
                         <outlet property="iboBalance" destination="Mra-z5-sDj" id="vtJ-9o-bfr"/>
-                        <outlet property="iboPrivateKey" destination="Fgu-cB-G5d" id="ZK5-VG-vRB"/>
                         <outlet property="iboPublicKey" destination="YGU-HV-d2I" id="d50-Vg-GYO"/>
+                        <outlet property="iboQRCode" destination="LN2-vE-Mjb" id="tCR-yn-Aiw"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aoK-lf-tIy" sceneMemberID="firstResponder"/>

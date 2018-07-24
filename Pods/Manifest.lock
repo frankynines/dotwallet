@@ -2,6 +2,7 @@ PODS:
   - Alamofire (4.7.3)
   - Alamofire-Synchronous (4.0.0):
     - Alamofire (~> 4.0)
+  - AlertOnboarding (2.0)
   - BigInt (3.0.1):
     - SipHash (~> 1.2)
   - CryptoCurrencyKit (0.3.1)
@@ -24,6 +25,7 @@ PODS:
     - secp256k1_ios (~> 0.1.3)
 
 DEPENDENCIES:
+  - AlertOnboarding
   - CryptoCurrencyKit
   - JModalController
   - QRCode
@@ -34,6 +36,7 @@ DEPENDENCIES:
 SPEC CHECKSUMS:
   Alamofire: c7287b6e5d7da964a70935e5db17046b7fde6568
   Alamofire-Synchronous: eedf1e6e961c3795a63c74990b3f7d9fbfac7e50
+  AlertOnboarding: 2e6804e67894894807c5d24bcfcd7905897e6f08
   BigInt: 8e8a52161c745cd3ab78e3dc346a9fbee51e6cf6
   CryptoCurrencyKit: 5c78da2dfb845e2feddb519b56169ab39f117ca1
   CryptoSwift: 6c778d69282bed3b4e975ff97a79d074f20bb011
@@ -47,6 +50,6 @@ SPEC CHECKSUMS:
   SmileLock: 247b62849cedca324e70ccfad5d01714602d739e
   web3swift: 79f72b48005f1b28e73191eaf78194d6cf5f8a35
 
-PODFILE CHECKSUM: 997a11ed93134abf482f3a7181d15c0fa7afbd15
+PODFILE CHECKSUM: 49dcac50cf6c6f66229f8d1c773c86272e68c496
 
 COCOAPODS: 1.4.0

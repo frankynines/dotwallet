@@ -7,6 +7,7 @@ public protocol AccountService {
     func verifyPassword(_ password: String) -> Bool
     func generateAccount(password: String) throws
     func importAccount(privateKey: String, password: String) throws
+    func killKeystore() throws
 }
 
 extension EtherWallet: AccountService {
@@ -101,6 +102,29 @@ extension EtherWallet: AccountService {
         keystoreCache = keystore
         
         return keystore
+    }
+    
+    public func killKeystore() throws {
+
+        guard let userDir = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first else {
+            throw WalletError.invalidPath
+        }
+
+        if  (keystoreCache != nil) {
+            
+            if FileManager.default.fileExists(atPath: userDir + keystoreDirectoryName) {
+                do {
+                    try FileManager.default.removeItem(atPath: userDir + keystoreDirectoryName + keystoreFileName)
+                    keystoreCache = nil
+                    print("REMOVE", userDir + keystoreDirectoryName + keystoreFileName)
+                } catch {
+                    print(error.localizedDescription)
+                }
+                
+               
+            }
+        }
+        
     }
 }
 //var keystoreCache: BIP32Keystore?

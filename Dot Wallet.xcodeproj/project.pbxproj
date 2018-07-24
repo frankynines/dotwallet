@@ -26,6 +26,7 @@
 		2F0EFCC82106FE6F003EF740 /* EthplorerAPIResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F0EFCBD2106FE6E003EF740 /* EthplorerAPIResponse.swift */; };
 		2F0EFCC92106FE6F003EF740 /* GasStationAPIResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F0EFCBE2106FE6E003EF740 /* GasStationAPIResponse.swift */; };
 		2F0EFCCA2106FE6F003EF740 /* EtherscanAPIResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F0EFCBF2106FE6E003EF740 /* EtherscanAPIResponse.swift */; };
+		2F0EFCCC21072E38003EF740 /* TransactionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F0EFCCB21072E38003EF740 /* TransactionViewController.swift */; };
 		DFBF12152ACF0C100AFAA0C4 /* Pods_Dot_WalletUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 17873D468537B1C8CB4EF2DF /* Pods_Dot_WalletUITests.framework */; };
 		E450703040B27130D6EDC7AD /* Pods_Dot_WalletTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5BA6F8401712A96C29B862DC /* Pods_Dot_WalletTests.framework */; };
 /* End PBXBuildFile section */
@@ -75,6 +76,7 @@
 		2F0EFCBD2106FE6E003EF740 /* EthplorerAPIResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EthplorerAPIResponse.swift; sourceTree = "<group>"; };
 		2F0EFCBE2106FE6E003EF740 /* GasStationAPIResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GasStationAPIResponse.swift; sourceTree = "<group>"; };
 		2F0EFCBF2106FE6E003EF740 /* EtherscanAPIResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EtherscanAPIResponse.swift; sourceTree = "<group>"; };
+		2F0EFCCB21072E38003EF740 /* TransactionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionViewController.swift; sourceTree = "<group>"; };
 		43B940DA664FC791F17688AD /* Pods-Dot Wallet.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Dot Wallet.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Dot Wallet/Pods-Dot Wallet.debug.xcconfig"; sourceTree = "<group>"; };
 		5BA6F8401712A96C29B862DC /* Pods_Dot_WalletTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Dot_WalletTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A43F46B778D77C277DDBE130 /* Pods-Dot WalletTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Dot WalletTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Dot WalletTests/Pods-Dot WalletTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -171,6 +173,7 @@
 				2F0EFCAF2106FDF0003EF740 /* CreateWalletViewController.swift */,
 				2F0EFC7E21063937003EF740 /* WalletHomeViewController.swift */,
 				2F0EFCAD210639E2003EF740 /* SendViewController.swift */,
+				2F0EFCCB21072E38003EF740 /* TransactionViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -383,6 +386,7 @@
 				"${SRCROOT}/Pods/Target Support Files/Pods-Dot Wallet/Pods-Dot Wallet-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/Alamofire-Synchronous/Alamofire_Synchronous.framework",
+				"${BUILT_PRODUCTS_DIR}/AlertOnboarding/AlertOnboarding.framework",
 				"${BUILT_PRODUCTS_DIR}/BigInt/BigInt.framework",
 				"${BUILT_PRODUCTS_DIR}/CryptoCurrencyKit/CryptoCurrencyKit.framework",
 				"${BUILT_PRODUCTS_DIR}/CryptoSwift/CryptoSwift.framework",
@@ -400,6 +404,7 @@
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire_Synchronous.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AlertOnboarding.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/BigInt.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CryptoCurrencyKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CryptoSwift.framework",
@@ -555,6 +560,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2F0EFC7F21063937003EF740 /* WalletHomeViewController.swift in Sources */,
+				2F0EFCCC21072E38003EF740 /* TransactionViewController.swift in Sources */,
 				2F0EFCC62106FE6F003EF740 /* EtherWallet+Account.swift in Sources */,
 				2F0EFCC42106FE6F003EF740 /* EtherWallet+Transaction.swift in Sources */,
 				2F0EFC7D21063937003EF740 /* AppDelegate.swift in Sources */,

@@ -9,7 +9,7 @@
 import UIKit
 import Foundation
 import web3swift
-
+import QRCode
 class WalletHomeViewController: UIViewController {
     
     @IBOutlet var iboPrivateKey: UILabel!
@@ -17,26 +17,33 @@ class WalletHomeViewController: UIViewController {
     
     @IBOutlet var iboBalance: UIButton!
 
+    @IBOutlet var iboQRCode: UIImageView!
     public var pass:String!
+    
+    var publicAddress: String!
+    
+    
 
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        if (EtherWallet.account.hasAccount == true && pass.isEmpty == false) {
-            do {
-                
-            } catch {
-                
-            }
+        
+        self.navigationController?.isNavigationBarHidden = true
+
+        if (EtherWallet.account.hasAccount == true) {
+            publicAddress = EtherWallet.account.address
+            iboPublicKey.text = publicAddress
+            let qrCode = QRCode(publicAddress)
+            iboQRCode.image = qrCode?.image
+            
+            self.getBalance()
         }
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
     }
-    
-    
-    
     
     @IBAction func getBalance(){
         
@@ -63,12 +70,22 @@ class WalletHomeViewController: UIViewController {
     }
     
     @IBAction func iba_copyPublicAddress(){
-        UIPasteboard.general.string = iboPublicKey.text
+        UIPasteboard.general.string = EtherWallet.account.address
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    @IBAction func iba_killwallet(){
+        do {
+            try EtherWallet.account.killKeystore()
+            let vc = self.storyboard?.instantiateViewController(withIdentifier: "sb_CreateWalletViewController")
+            self.navigationController?.setViewControllers([vc!], animated: true)
+        } catch {
+            print(error.localizedDescription)
+        }
     }
 
 

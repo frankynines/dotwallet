@@ -14,10 +14,10 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "7C44A058CD70686EC561A657968D0CFC"
-               BlueprintName = "secp256k1_ios"
+               BlueprintIdentifier = "61CAAB0B452AD9292881C77D52E53262"
+               BlueprintName = "AlertOnboarding"
                ReferencedContainer = "container:Pods.xcodeproj"
-               BuildableName = "secp256k1_ios.framework">
+               BuildableName = "AlertOnboarding.framework">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>

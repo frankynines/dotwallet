@@ -39,9 +39,7 @@ class SendViewController: UIViewController {
     }
     
     @IBAction func iba_dismissView(){
-        self.dismiss(animated: true) {
-            //
-        }
+        self.navigationController?.popViewController(animated: true)
     }
     
     @IBAction func iba_sendTransaction () {

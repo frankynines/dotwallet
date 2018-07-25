@@ -10,55 +10,62 @@ import UIKit
 import Foundation
 import web3swift
 import QRCode
-class WalletHomeViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
-    
-    
+import JModalController
+
+class WalletHomeViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, WalletHeaderDelegate {
     
     @IBOutlet var ibo_tableView:UITableView!
+    @IBOutlet var ibo_walletHeader:WalletHeaderViewController!
     
     var tokens = ["0xe3818504c1b32bf1557b16c238b2e01fd3149c17",
-                  "0x0abdace70d3790235af448c88547603b945604ea",
                   "0xf230b790e05390fc8295f4d3f60332c93bed42e2",
-                  "0x0d8775f648430679a709e98d2b0cb6250d2887ef",
-                  "0xe3818504c1b32bf1557b16c238b2e01fd3149c17"]
+                  "0x4156D3342D5c385a87D264F90653733592000581",
+                  "0x744d70fdbe2ba4cf95131626614a1763df805b9e",
+                  "0xc5bbae50781be1669306b9e001eff57a2957b09d",
+                  "0x42d6622dece394b54999fbd73d108123806f6a18",
+                  "0xa74476443119A942dE498590Fe1f2454d7D4aC0d",
+                  "0xd0a4b8946cb52f0661273bfbc6fd0e0c75fc6433",
+                  "0x558ec3152e2eb2174905cd19aea4e34a23de9ad6",
+                  "0xd850942ef8811f2a866692a623011bde52a462c1",
+                  "0xe41d2489571d322189246dafa5ebde1f4699f498",
+                  
+                  ]
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         self.navigationController?.isNavigationBarHidden = true
-
-        
-        self.getTransactions()
-        
     }
-    
-    func getTransactions(){
-        EtherWallet.transaction.getTransactionHistory(address: EtherWallet.account.address!)
-    }
-    
-   
     
     override func viewWillAppear(_ animated: Bool) {
-
+        ibo_tableView.contentInset = UIEdgeInsetsMake(self.ibo_walletHeader.view.frame.height - 50, 0, 0, 0)
         super.viewWillAppear(animated)
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         self.ibo_tableView.reloadData()
-
     }
 
-    
     @IBAction func displaySendViewController(){
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "sb_SendViewController")
         present(vc!, animated: true) {
-            //
         }
     }
     
-    @IBAction func iba_copyPublicAddress(){
-        UIPasteboard.general.string = EtherWallet.account.address
+    func iba_presentReceiveModal() {
+        let simpleVC = self.storyboard?.instantiateViewController(withIdentifier: "sb_ReceiveViewController") as! ReceiveViewController
+        
+        //Set the delegate in order to dismiss the modal
+        //        simpleVC?.delegate = self
+        
+        //Set configuration settings to customize how the modal presents
+        let config = JModalConfig(transitionDirection: .bottom, animationOptions: UIViewAnimationOptions.curveEaseInOut, animationDuration: 0.2, backgroundTransformPercentage: 0.95, backgroundTransform: true, tapOverlayDismiss: true, swipeDirections: [UISwipeGestureRecognizerDirection.down] )
+        
+        //Present the modal!
+        //`self` if no navigation or tabBar controllers are present!
+        presentModal(self, modalViewController: simpleVC, config: config) {
+            print("Presented Simple Modal")
+        }
     }
     
     override func didReceiveMemoryWarning() {
@@ -66,71 +73,42 @@ class WalletHomeViewController: UIViewController, UITableViewDelegate, UITableVi
         // Dispose of any resources that can be recreated.
     }
     
-    @IBAction func iba_killwallet(){
-        do {
-            try EtherWallet.account.killKeystore()
-            let vc = self.storyboard?.instantiateViewController(withIdentifier: "sb_CreateWalletViewController")
-            self.navigationController?.setViewControllers([vc!], animated: true)
-        } catch {
-            print(error.localizedDescription)
-        }
-    }
     
     //TABLE VIEW
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.tokens.count + 1
+        return self.tokens.count
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if indexPath.row == 0 {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "main") as! WalletTokenMain
-            cell.setupCell()
-            return cell
-        } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: "token") as! WalletTokenCell
-            cell.setupCell(_tokenAddress: self.tokens[indexPath.row - 1])
+        cell.alpha = 0;
+            DispatchQueue.global(qos: .background).async {
+                // Call your background task
+                DispatchQueue.main.async {
+                    cell.setupCell(_tokenAddress: self.tokens[indexPath.row])
+                }
+            }
+        
+        
             return cell
-        }
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print(indexPath.row)
     }
     
-}
-
-class WalletTokenMain:UITableViewCell {
-    
-    @IBOutlet var iboPrivateKey: UILabel!
-    @IBOutlet var iboPublicKey: UILabel!
-    @IBOutlet var iboBalance: UIButton!
-    @IBOutlet var iboQRCode: UIImageView!
-    
-    func setupCell(){
-        
-        if (EtherWallet.account.hasAccount == true) {
-            self.iboPublicKey.text = EtherWallet.account.address
-            self.iboBalance.setTitle("0.00", for: .normal)
-            
-            let qrCode = QRCode(EtherWallet.account.address!)
-            iboQRCode.image = qrCode?.image
-            
-            self.refreshBalance()
-        }
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let y = 250 - (scrollView.contentOffset.y + 200)
+        let height = min(max(y, 265), 800)
+        self.ibo_walletHeader.view.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.size.width, height: height)
     }
     
-    @IBAction func refreshBalance(){
-        
-        EtherWallet.balance.etherBalance { balance in
-            self.iboBalance.setTitle(balance, for: .normal)
-            print("Balance:", balance ?? String())
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let destination = segue.destination
+        if let walletHeaderContainer = destination as? WalletHeaderViewController {
+            ibo_walletHeader = walletHeaderContainer
+            ibo_walletHeader.delegate = self
         }
-        
-        
-        
     }
-    
-    
-    
 }
 
 class WalletTokenCell:UITableViewCell {
@@ -169,12 +147,9 @@ class WalletTokenCell:UITableViewCell {
         EtherWallet.tokens.getTokenMetaData(contractAddress: _tokenAddress, param: "symbol") { (symbol) in
             self.iboTokenSymbol.text = symbol
         }
+        
+        self.alpha = 1
 
-        
-        
-        
-        
-       
     }
 }
 

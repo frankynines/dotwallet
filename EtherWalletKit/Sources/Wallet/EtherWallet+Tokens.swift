@@ -10,11 +10,9 @@ import web3swift
 
 public protocol TokenService {
     func getTokenMetaData(contractAddress: String, param:String, completion: @escaping (String?) -> ())
-
 }
 
 extension EtherWallet: TokenService {
-
 
     public func getTokenMetaData(contractAddress: String, param:String, completion: @escaping (String?) -> ()) {
         DispatchQueue.global().async {
@@ -37,7 +35,6 @@ extension EtherWallet: TokenService {
         let callResult = contractMethod?.call(options: nil)
         guard case .success(let package)? = callResult, let data = package["0"] as? String else { throw WalletError.networkFailure
         }
-        print(data)
         return data
     }
 }

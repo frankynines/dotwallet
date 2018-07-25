@@ -19,7 +19,7 @@ class CreateWalletViewController: UIViewController {
         }
         
         do {
-           let pKEY = try EtherWallet.account.privateKey(password: "123")
+           let pKEY = try EtherWallet.account.privateKey(password: "")
             print(pKEY)
         } catch {
             
@@ -44,9 +44,7 @@ class CreateWalletViewController: UIViewController {
             
             for inputField in alertView.textFields! {
                 let field = inputField
-                if (field.text?.isEmpty)! {
-                    return
-                }
+
                 switch field.tag {
                 case 0:
                     pass = field.text!
@@ -84,9 +82,6 @@ class CreateWalletViewController: UIViewController {
             
             for inputField in alertView.textFields! {
                 let field = inputField
-                if (field.text?.isEmpty)! {
-                    return
-                }
             
                 switch field.tag {
                     case 0:

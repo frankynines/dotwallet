@@ -6,6 +6,7 @@ public protocol BalanceService {
     func etherBalance(completion: @escaping (String?) -> ())
     func tokenBalanceSync(contractAddress: String) throws -> String
     func tokenBalance(contractAddress: String, completion: @escaping (String?) -> ())
+
 }
 
 extension EtherWallet: BalanceService {
@@ -54,4 +55,6 @@ extension EtherWallet: BalanceService {
             }
         }
     }
+    
+    
 }

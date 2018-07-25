@@ -54,7 +54,6 @@ class SendViewController: UIViewController {
         alertView.addTextField { (inputField) in
             inputField.tag = 0
             inputField.placeholder = "Pincode"
-            inputField.keyboardType = UIKeyboardType.decimalPad
         }
         
         alertView.addAction(UIAlertAction(title: "Enter", style: .default, handler: { (action) in
@@ -74,7 +73,11 @@ class SendViewController: UIViewController {
             }
             
             EtherWallet.transaction.sendEther(to: receiptAddress, amount: amount, password: pass) { (status) in
-                //
+                //status is transaction hash
+                if status != nil {
+                    print("Success Send")
+                    self.dismiss(animated: true, completion: nil)
+                }
             }
         }))
         

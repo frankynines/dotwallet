@@ -27,6 +27,7 @@
 		2F0EFCC92106FE6F003EF740 /* GasStationAPIResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F0EFCBE2106FE6E003EF740 /* GasStationAPIResponse.swift */; };
 		2F0EFCCA2106FE6F003EF740 /* EtherscanAPIResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F0EFCBF2106FE6E003EF740 /* EtherscanAPIResponse.swift */; };
 		2F0EFCCC21072E38003EF740 /* TransactionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F0EFCCB21072E38003EF740 /* TransactionViewController.swift */; };
+		2F6CBD5B2108B7FC0026C858 /* EtherWallet+Tokens.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F6CBD5A2108B7FC0026C858 /* EtherWallet+Tokens.swift */; };
 		DFBF12152ACF0C100AFAA0C4 /* Pods_Dot_WalletUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 17873D468537B1C8CB4EF2DF /* Pods_Dot_WalletUITests.framework */; };
 		E450703040B27130D6EDC7AD /* Pods_Dot_WalletTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5BA6F8401712A96C29B862DC /* Pods_Dot_WalletTests.framework */; };
 /* End PBXBuildFile section */
@@ -77,6 +78,7 @@
 		2F0EFCBE2106FE6E003EF740 /* GasStationAPIResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GasStationAPIResponse.swift; sourceTree = "<group>"; };
 		2F0EFCBF2106FE6E003EF740 /* EtherscanAPIResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EtherscanAPIResponse.swift; sourceTree = "<group>"; };
 		2F0EFCCB21072E38003EF740 /* TransactionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionViewController.swift; sourceTree = "<group>"; };
+		2F6CBD5A2108B7FC0026C858 /* EtherWallet+Tokens.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EtherWallet+Tokens.swift"; sourceTree = "<group>"; };
 		43B940DA664FC791F17688AD /* Pods-Dot Wallet.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Dot Wallet.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Dot Wallet/Pods-Dot Wallet.debug.xcconfig"; sourceTree = "<group>"; };
 		5BA6F8401712A96C29B862DC /* Pods_Dot_WalletTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Dot_WalletTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A43F46B778D77C277DDBE130 /* Pods-Dot WalletTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Dot WalletTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Dot WalletTests/Pods-Dot WalletTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -203,6 +205,7 @@
 				2F0EFCB82106FE6E003EF740 /* EtherWallet+Transaction.swift */,
 				2F0EFCB92106FE6E003EF740 /* EtherWallet.swift */,
 				2F0EFCBA2106FE6E003EF740 /* EtherWallet+Account.swift */,
+				2F6CBD5A2108B7FC0026C858 /* EtherWallet+Tokens.swift */,
 			);
 			path = Wallet;
 			sourceTree = "<group>";
@@ -253,7 +256,6 @@
 				2F0EFC7621063937003EF740 /* Frameworks */,
 				2F0EFC7721063937003EF740 /* Resources */,
 				24E11348699AC7245C553B0A /* [CP] Embed Pods Frameworks */,
-				92BD4496AB87835486BB74E4 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -272,8 +274,6 @@
 				2F0EFC8921063938003EF740 /* Sources */,
 				2F0EFC8A21063938003EF740 /* Frameworks */,
 				2F0EFC8B21063938003EF740 /* Resources */,
-				864C08259D9796467976CFB8 /* [CP] Embed Pods Frameworks */,
-				6B7171B18DB8C643673A84C3 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -293,8 +293,6 @@
 				2F0EFC9421063938003EF740 /* Sources */,
 				2F0EFC9521063938003EF740 /* Frameworks */,
 				2F0EFC9621063938003EF740 /* Resources */,
-				8DCE638B6129F359B661FA4F /* [CP] Embed Pods Frameworks */,
-				28543119EC8B7525171B27A0 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -423,21 +421,6 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Dot Wallet/Pods-Dot Wallet-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		28543119EC8B7525171B27A0 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Dot WalletUITests/Pods-Dot WalletUITests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		405F09B3B8157F079C914B83 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -456,21 +439,6 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		6B7171B18DB8C643673A84C3 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Dot WalletTests/Pods-Dot WalletTests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		7BB63CAE043D1EEE99993845 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -487,51 +455,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		864C08259D9796467976CFB8 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Dot WalletTests/Pods-Dot WalletTests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		8DCE638B6129F359B661FA4F /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Dot WalletUITests/Pods-Dot WalletUITests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		92BD4496AB87835486BB74E4 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Dot Wallet/Pods-Dot Wallet-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		ED8E808DD4B21F070083FA4F /* [CP] Check Pods Manifest.lock */ = {
@@ -572,6 +495,7 @@
 				2F0EFCC92106FE6F003EF740 /* GasStationAPIResponse.swift in Sources */,
 				2F0EFCC82106FE6F003EF740 /* EthplorerAPIResponse.swift in Sources */,
 				2F0EFCC22106FE6F003EF740 /* WalletError.swift in Sources */,
+				2F6CBD5B2108B7FC0026C858 /* EtherWallet+Tokens.swift in Sources */,
 				2F0EFCAE210639E2003EF740 /* SendViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -749,6 +673,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = L4843RP2R9;
 				INFOPLIST_FILE = "Dot Wallet/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -768,6 +693,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = L4843RP2R9;
 				INFOPLIST_FILE = "Dot Wallet/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

@@ -18,6 +18,15 @@ class CreateWalletViewController: UIViewController {
             self.pushWalletHomeScreen()
         }
         
+        do {
+           let pKEY = try EtherWallet.account.privateKey(password: "123")
+            print(pKEY)
+        } catch {
+            
+        }
+        print()
+        
+        
     }
     
     @IBAction func iba_createNewWallet(){
@@ -27,7 +36,6 @@ class CreateWalletViewController: UIViewController {
         alertView.addTextField { (inputField) in
             inputField.tag = 0
             inputField.placeholder = "Pincode"
-            inputField.keyboardType = UIKeyboardType.decimalPad
         }
         
         alertView.addAction(UIAlertAction(title: "Enter", style: .default, handler: { (action) in
@@ -66,7 +74,6 @@ class CreateWalletViewController: UIViewController {
         alertView.addTextField { (inputField) in
             inputField.tag = 1
             inputField.placeholder = "Pincode"
-            inputField.keyboardType = UIKeyboardType.decimalPad
 
         }
         
@@ -118,6 +125,7 @@ class CreateWalletViewController: UIViewController {
         do {
             try EtherWallet.account.importAccount(privateKey: pKey, password: pass)
             print(EtherWallet.account.address!)
+            self.pushWalletHomeScreen()
         } catch {
             self.alertError(error: error)
         }

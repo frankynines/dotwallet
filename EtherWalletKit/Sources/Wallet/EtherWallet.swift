@@ -6,8 +6,11 @@ public class EtherWallet {
     public static let account: AccountService = EtherWallet.shared
     public static let balance: BalanceService = EtherWallet.shared
     public static let transaction: TransactionService = EtherWallet.shared
+    public static let tokens: TokenService = EtherWallet.shared
     
-    let web3Main = Web3.InfuraRopstenWeb3()
+    public let web3Main = Web3.InfuraRopstenWeb3() // Change to MainNet when Launch
+    let etherscanURL = "https://api-ropsten.etherscan.io" // Change to MainNet when Launch
+
     let keystoreDirectoryName = "/keystore"
     let keystoreFileName = "/key.json"
     let defaultGasLimitForTokenTransfer = 100000

@@ -10,6 +10,10 @@ public protocol TransactionService {
     func sendTokenSync(to toAddress: String, contractAddress: String, amount: String, password: String, decimal: Int, gasPrice: String?) throws -> String
     func sendToken(to toAddress: String, contractAddress: String, amount: String, password: String, decimal:Int, completion: @escaping (String?) -> ())
     func sendToken(to toAddress: String, contractAddress: String, amount: String, password: String, decimal:Int, gasPrice: String?, completion: @escaping (String?) -> ())
+    
+    //TRX History
+    func getTransactionHistory(address:String)
+
 }
 
 extension EtherWallet: TransactionService {
@@ -106,6 +110,29 @@ extension EtherWallet: TransactionService {
                 completion(txHash)
             }
         }
+    }
+    
+    public func getTransactionHistory(address:String){
+        let url = NSURL(string: etherscanURL + "/api?module=account&action=txlist&address="+address+"&startblock=0&endblock=99999999&page=1&offset=10&sort=asc&apikey=Y2DRKI11G7A6NY61TKRYKVJ2HFXVAFHKRE")
+        
+        //fetching the data from the url
+        URLSession.shared.dataTask(with: (url as URL?)!, completionHandler: {(data, response, error) -> Void in
+            
+            if (try? JSONSerialization.jsonObject(with: data!, options: .allowFragments) as? NSDictionary) != nil {
+                
+                //printing the json in console
+                //print(jsonObj)
+                
+                OperationQueue.main.addOperation({
+                    //calling another function after fetching the json
+                    //it will show the names to label
+                })
+            }
+        }).resume()
+    }
+    
+    public func getTokenByContractAddress(address:String){
+        
     }
     
     

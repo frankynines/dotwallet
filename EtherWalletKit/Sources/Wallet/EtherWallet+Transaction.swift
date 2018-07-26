@@ -1,5 +1,6 @@
 import web3swift
 import BigInt
+import SwiftyJSON
 
 public protocol TransactionService {
     func sendEtherSync(to address: String, amount: String, password: String) throws -> String
@@ -12,7 +13,7 @@ public protocol TransactionService {
     func sendToken(to toAddress: String, contractAddress: String, amount: String, password: String, decimal:Int, gasPrice: String?, completion: @escaping (String?) -> ())
     
     //TRX History
-    func getTransactionHistory(address:String)
+    func getTransactionHistory(address:String, completion: @escaping ([JSON]?) -> ())
 
 }
 
@@ -112,28 +113,28 @@ extension EtherWallet: TransactionService {
         }
     }
     
-    public func getTransactionHistory(address:String){
+    public func getTransactionHistory(address:String, completion: @escaping ([JSON]?) -> ()){
         let url = NSURL(string: etherscanURL + "/api?module=account&action=txlist&address="+address+"&startblock=0&endblock=99999999&page=1&offset=10&sort=asc&apikey=Y2DRKI11G7A6NY61TKRYKVJ2HFXVAFHKRE")
+        
+        print("URL for API")
         
         //fetching the data from the url
         URLSession.shared.dataTask(with: (url as URL?)!, completionHandler: {(data, response, error) -> Void in
             
-            if (try? JSONSerialization.jsonObject(with: data!, options: .allowFragments) as? NSDictionary) != nil {
+            if let jsonObj = try? JSONSerialization.jsonObject(with: data!, options: .allowFragments) as? NSDictionary {
+                let json = JSON(data!)
+                let result = json["result"].arrayValue
+                print()
                 
-                //printing the json in console
-                //print(jsonObj)
-                
-                OperationQueue.main.addOperation({
-                    //calling another function after fetching the json
-                    //it will show the names to label
-                })
+                DispatchQueue.main.async {
+                    completion(result)
+                }
             }
         }).resume()
     }
     
-    public func getTokenByContractAddress(address:String){
-        
-    }
+   
+    
     
     
 }

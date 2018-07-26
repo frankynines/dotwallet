@@ -11,7 +11,7 @@ target 'Dot Wallet' do
   pod 'QRCode'
   pod 'web3swift', '~> 0.8.0'
   pod 'AlertOnboarding'
-
+  pod 'SwiftyJSON'
   # Pods for Dot Wallet
 
   target 'Dot WalletTests' do

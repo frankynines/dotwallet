@@ -21,6 +21,7 @@ class CreateWalletViewController: UIViewController {
         do {
            let pKEY = try EtherWallet.account.privateKey(password: "")
             print(pKEY)
+            print(EtherWallet.account.address!)
         } catch {
             
         }

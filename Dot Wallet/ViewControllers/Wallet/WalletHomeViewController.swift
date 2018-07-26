@@ -12,10 +12,12 @@ import web3swift
 import QRCode
 import JModalController
 
-class WalletHomeViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, WalletHeaderDelegate {
+class WalletHomeViewController: UIViewController, WalletHeaderDelegate, WalletTokenViewControllerDelegate {
     
-    @IBOutlet var ibo_tableView:UITableView!
+    
+    
     @IBOutlet var ibo_walletHeader:WalletHeaderViewController!
+    @IBOutlet var ibo_tokenListView:WalletTokenViewController!
     
     var tokens = ["0xe3818504c1b32bf1557b16c238b2e01fd3149c17",
                   "0xf230b790e05390fc8295f4d3f60332c93bed42e2",
@@ -37,16 +39,15 @@ class WalletHomeViewController: UIViewController, UITableViewDelegate, UITableVi
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        ibo_tableView.contentInset = UIEdgeInsetsMake(self.ibo_walletHeader.view.frame.height - 50, 0, 0, 0)
+        self.navigationController?.isNavigationBarHidden = true
         super.viewWillAppear(animated)
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        self.ibo_tableView.reloadData()
     }
-
-    @IBAction func displaySendViewController(){
+    
+    @IBAction func iba_displayTokenViewController(){
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "sb_SendViewController")
         present(vc!, animated: true) {
         }
@@ -54,15 +55,9 @@ class WalletHomeViewController: UIViewController, UITableViewDelegate, UITableVi
     
     func iba_presentReceiveModal() {
         let simpleVC = self.storyboard?.instantiateViewController(withIdentifier: "sb_ReceiveViewController") as! ReceiveViewController
-        
-        //Set the delegate in order to dismiss the modal
-        //        simpleVC?.delegate = self
-        
-        //Set configuration settings to customize how the modal presents
+   
         let config = JModalConfig(transitionDirection: .bottom, animationOptions: UIViewAnimationOptions.curveEaseInOut, animationDuration: 0.2, backgroundTransformPercentage: 0.95, backgroundTransform: true, tapOverlayDismiss: true, swipeDirections: [UISwipeGestureRecognizerDirection.down] )
-        
-        //Present the modal!
-        //`self` if no navigation or tabBar controllers are present!
+
         presentModal(self, modalViewController: simpleVC, config: config) {
             print("Presented Simple Modal")
         }
@@ -73,83 +68,34 @@ class WalletHomeViewController: UIViewController, UITableViewDelegate, UITableVi
         // Dispose of any resources that can be recreated.
     }
     
-    
-    //TABLE VIEW
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.tokens.count
-    }
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "token") as! WalletTokenCell
-        cell.alpha = 0;
-            DispatchQueue.global(qos: .background).async {
-                // Call your background task
-                DispatchQueue.main.async {
-                    cell.setupCell(_tokenAddress: self.tokens[indexPath.row])
-                }
-            }
-        
-        
-            return cell
-    }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print(indexPath.row)
-    }
-    
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        let y = 250 - (scrollView.contentOffset.y + 200)
-        let height = min(max(y, 265), 800)
-        self.ibo_walletHeader.view.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.size.width, height: height)
-    }
-    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let destination = segue.destination
         if let walletHeaderContainer = destination as? WalletHeaderViewController {
             ibo_walletHeader = walletHeaderContainer
             ibo_walletHeader.delegate = self
         }
+        
+        if let tokenListView = destination as? WalletTokenViewController {
+            ibo_tokenListView = tokenListView
+            ibo_tokenListView.tokens = self.tokens
+            ibo_tokenListView.delegate = self
+        }
+    }
+    
+    //TABLE VIEW DELEGATES
+    func walletTokenSelected(row: Int) {
+        
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "sb_TransactionViewController") as! TransactionViewController
+        vc.contractAddress = self.tokens[row]
+        
+        self.navigationController?.pushViewController(vc, animated: true)
+        
+    }
+    
+    func walletTokenStretchHeader(rect: CGRect) {
+        self.ibo_walletHeader.view.frame = rect
     }
 }
 
-class WalletTokenCell:UITableViewCell {
-    
-    @IBOutlet var iboTokenImage:UIImageView!
-    @IBOutlet var iboTokenName:UILabel!
-    @IBOutlet var iboTokenSymbol:UILabel!
-    @IBOutlet var iboTokenBalance:UILabel!
-    @IBOutlet var iboTokenFiat:UILabel!
-    
-    var tokenImageAddress = "https://raw.githubusercontent.com/trustwallet/tokens/master/images/"
-    
-    func setupCell(_tokenAddress:String!){
-        
-        let imageURL = tokenImageAddress + _tokenAddress + ".png"
-        do {
-            let imgdata = try Data(contentsOf: URL(string: imageURL)!)
-            self.iboTokenImage.image = UIImage(data: imgdata)
-        } catch {
-            print("Failed to load token image")
-        }
-        
-        self.syncTokenBalance(_tokenAddress: _tokenAddress)
-        
-    }
-    
-    func syncTokenBalance(_tokenAddress:String!){
-        EtherWallet.balance.tokenBalance(contractAddress: _tokenAddress) { (balance) in
-            self.iboTokenBalance.text = balance
-        }
-        
-        EtherWallet.tokens.getTokenMetaData(contractAddress: _tokenAddress, param: "name") { (result) in
-            self.iboTokenName.text = result
-        }
-        
-        EtherWallet.tokens.getTokenMetaData(contractAddress: _tokenAddress, param: "symbol") { (symbol) in
-            self.iboTokenSymbol.text = symbol
-        }
-        
-        self.alpha = 1
 
-    }
-}
 

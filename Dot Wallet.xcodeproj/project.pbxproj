@@ -127,7 +127,6 @@
 			isa = PBXGroup;
 			children = (
 				2F0EFC7B21063937003EF740 /* Dot Wallet */,
-				2F0EFCB12106FE6E003EF740 /* EtherWalletKit */,
 				2F0EFC9021063938003EF740 /* Dot WalletTests */,
 				2F0EFC9B21063938003EF740 /* Dot WalletUITests */,
 				2F0EFC7A21063937003EF740 /* Products */,
@@ -149,6 +148,8 @@
 		2F0EFC7B21063937003EF740 /* Dot Wallet */ = {
 			isa = PBXGroup;
 			children = (
+				2F7678E3210B827400919059 /* helpers */,
+				2F7678E2210B826B00919059 /* models */,
 				2F2F74B42109C38200612CF4 /* resources */,
 				2F0EFC7C21063937003EF740 /* AppDelegate.swift */,
 				2F0EFC8021063937003EF740 /* Main.storyboard */,
@@ -188,22 +189,15 @@
 			path = ViewControllers;
 			sourceTree = "<group>";
 		};
-		2F0EFCB12106FE6E003EF740 /* EtherWalletKit */ = {
-			isa = PBXGroup;
-			children = (
-				2F0EFCB42106FE6E003EF740 /* Sources */,
-			);
-			path = EtherWalletKit;
-			sourceTree = SOURCE_ROOT;
-		};
-		2F0EFCB42106FE6E003EF740 /* Sources */ = {
+		2F0EFCB12106FE6E003EF740 /* EtherKit */ = {
 			isa = PBXGroup;
 			children = (
 				2F0EFCB52106FE6E003EF740 /* Wallet */,
 				2F0EFCBB2106FE6E003EF740 /* Structure */,
 			);
-			path = Sources;
-			sourceTree = "<group>";
+			name = EtherKit;
+			path = "Dot Wallet/helpers/EtherKit";
+			sourceTree = SOURCE_ROOT;
 		};
 		2F0EFCB52106FE6E003EF740 /* Wallet */ = {
 			isa = PBXGroup;
@@ -271,6 +265,21 @@
 				2F2F74B221091E8200612CF4 /* WalletTokenListViewController.swift */,
 			);
 			path = Wallet;
+			sourceTree = "<group>";
+		};
+		2F7678E2210B826B00919059 /* models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = models;
+			sourceTree = "<group>";
+		};
+		2F7678E3210B827400919059 /* helpers */ = {
+			isa = PBXGroup;
+			children = (
+				2F0EFCB12106FE6E003EF740 /* EtherKit */,
+			);
+			path = helpers;
 			sourceTree = "<group>";
 		};
 		59FCCE122EF5FD25E3AB61B4 /* Pods */ = {
@@ -732,7 +741,10 @@
 				DEVELOPMENT_TEAM = L4843RP2R9;
 				INFOPLIST_FILE = "Dot Wallet/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.ninthindustry.Dot-Wallet";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
@@ -749,7 +761,10 @@
 				DEVELOPMENT_TEAM = L4843RP2R9;
 				INFOPLIST_FILE = "Dot Wallet/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.ninthindustry.Dot-Wallet";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
@@ -766,7 +781,11 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = L4843RP2R9;
 				INFOPLIST_FILE = "Dot WalletTests/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.ninthindustry.Dot-WalletTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
@@ -784,7 +803,11 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = L4843RP2R9;
 				INFOPLIST_FILE = "Dot WalletTests/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.ninthindustry.Dot-WalletTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
@@ -801,7 +824,11 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = L4843RP2R9;
 				INFOPLIST_FILE = "Dot WalletUITests/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.ninthindustry.Dot-WalletUITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
@@ -818,7 +845,11 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = L4843RP2R9;
 				INFOPLIST_FILE = "Dot WalletUITests/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.ninthindustry.Dot-WalletUITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;

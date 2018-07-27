@@ -30,6 +30,7 @@ class WalletHomeViewController: UIViewController, WalletHeaderDelegate, WalletTo
                   "0x558ec3152e2eb2174905cd19aea4e34a23de9ad6",
                   "0xd850942ef8811f2a866692a623011bde52a462c1",
                   "0xe41d2489571d322189246dafa5ebde1f4699f498",
+                  "0x9366605f6758727ad0fbce0d1a2a6c1cd197f2a3"
                   
                   ]
     

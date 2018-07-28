@@ -120,8 +120,10 @@ extension EtherWallet: TransactionService {
         
         //fetching the data from the url
         URLSession.shared.dataTask(with: (url as URL?)!, completionHandler: {(data, response, error) -> Void in
-            
-            if let jsonObj = try? JSONSerialization.jsonObject(with: data!, options: .allowFragments) as? NSDictionary {
+            if data == nil {
+                return
+            }
+            if (try? JSONSerialization.jsonObject(with: data!, options: .allowFragments) as? NSDictionary) != nil {
                 let json = JSON(data!)
                 let result = json["result"].arrayValue
                 print()

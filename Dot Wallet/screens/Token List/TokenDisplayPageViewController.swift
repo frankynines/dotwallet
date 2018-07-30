@@ -11,8 +11,6 @@ import UIKit
 
 class TokenDisplayViewController: UIPageViewController{
     
-    
-
     fileprivate lazy var pages: [UIViewController] = {
         return [
             self.getViewController(withIdentifier: "sb_TokenListViewController"),
@@ -20,12 +18,10 @@ class TokenDisplayViewController: UIPageViewController{
         ]
     }()
     
-    fileprivate func getViewController(withIdentifier identifier: String) -> UIViewController
-    {
+    fileprivate func getViewController(withIdentifier identifier: String) -> UIViewController {
         return UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: identifier)
     }
 
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -36,8 +32,6 @@ class TokenDisplayViewController: UIPageViewController{
         {
             setViewControllers([firstVC], direction: .forward, animated: true, completion: nil)
         }
-  
-        
     }
     
 }

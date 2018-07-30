@@ -11,17 +11,7 @@ import UIKit
 import web3swift
 import BigInt
 
-protocol TransactionViewControllerDelegate {
-    func txRowSelected(row:Int, transaction:GeneralTransactionData)
-    func tableViewScroll(rect:CGRect)
-}
-
 class TransactionViewController: UIViewController, UITabBarDelegate, UITableViewDataSource, UITableViewDelegate {
-    
-    var delegate:TransactionViewControllerDelegate?
-    
-    var contractAddress:String!
-    var transactions = [GeneralTransactionData]()
     
     @IBOutlet var ibo_tokenImage:UIImageView!
     @IBOutlet var ibo_tokenName:UILabel!
@@ -30,24 +20,8 @@ class TransactionViewController: UIViewController, UITabBarDelegate, UITableView
     
     @IBOutlet var ibo_tableView:UITableView!
     
-    var stretchHeight:CGFloat?
-    
-    lazy var refreshControl: UIRefreshControl = {
-        let refreshControl = UIRefreshControl()
-        refreshControl.addTarget(self, action:
-            #selector(self.handleRefresh(_:)),
-                                 for: UIControlEvents.valueChanged)
-        return refreshControl
-        
-    }()
-    
-    
-    @objc func handleRefresh(_ refreshControl: UIRefreshControl) {
-        self.requestTransactionHistory()
-        self.refreshBalance()
-        self.transactions.removeAll()
-        refreshControl.endRefreshing()
-    }
+    var contractAddress:String!
+    var transactions = [GeneralTransactionData]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -56,7 +30,7 @@ class TransactionViewController: UIViewController, UITabBarDelegate, UITableView
         self.ibo_tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 50, right: 0)
         self.navigationController?.isNavigationBarHidden = false
         
-        self.ibo_value.text = UserDefaults.standard.value(forKey: "ETHBalance") as! String
+        self.ibo_value.text = UserDefaults.standard.value(forKey: "ETHBalance") as? String
         
         self.requestTransactionHistory()
         self.refreshBalance()
@@ -79,12 +53,15 @@ class TransactionViewController: UIViewController, UITabBarDelegate, UITableView
     
     func requestTransactionHistory(){
         
-        
         EtherWallet.transaction.getTransactionHistory(address: EtherWallet.account.address!) { (jsonResult) in
+            print(jsonResult?.count)
             for transaction in jsonResult! {
                 let generalTransaction = transaction.rawString()
                 self.buildTransactionItem(transaction: generalTransaction!)
             }
+            
+            self.transactions.reverse()
+            self.ibo_tableView.reloadData()
         }
     }
     
@@ -95,25 +72,38 @@ class TransactionViewController: UIViewController, UITabBarDelegate, UITableView
             self.transactions.append(generalTransaction)
             self.ibo_tableView.reloadData()
         } catch {
-            print("FAILED")
+            print("Failed to Build Transaction Item")
         }
     }
     
+    lazy var refreshControl: UIRefreshControl = {
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action:
+            #selector(self.handleRefresh(_:)),
+                                 for: UIControlEvents.valueChanged)
+        return refreshControl
+        
+    }()
     
+    //REFRESH HANDLER
+    @objc func handleRefresh(_ refreshControl: UIRefreshControl) {
+        self.transactions.removeAll()
+        self.ibo_tableView.reloadData()
+        self.requestTransactionHistory()
+        self.refreshBalance()
+        refreshControl.endRefreshing()
+    }
     
     func refreshBalance(){
-        
         EtherWallet.balance.etherBalance { balance in
             UserDefaults.standard.set(balance, forKey: "ETHBalance")
             self.ibo_value?.text = balance
         }
-        
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.transactions.count
     }
-    
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
@@ -123,15 +113,7 @@ class TransactionViewController: UIViewController, UITabBarDelegate, UITableView
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        self.delegate?.txRowSelected(row: indexPath.row, transaction: self.transactions[indexPath.row])
-    }
-    
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        
-        let y = 200 - (scrollView.contentOffset.y + 200)
-        let height = min(max(y, 200), 1000)
-        self.delegate?.tableViewScroll(rect: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.size.width, height: height))
-        stretchHeight = height
+//        self.delegate?.txRowSelected(row: indexPath.row, transaction: self.transactions[indexPath.row])
     }
     
 }

@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 class TokenDisplayContainerViewController:UIViewController {
-    @IBAction func iba_simiss(){
+    @IBAction func iba_dismiss(){
      self.dismiss(animated: true, completion: nil)
     }
 }

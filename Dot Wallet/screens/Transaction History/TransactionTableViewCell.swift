@@ -5,7 +5,6 @@
 //  Created by Franky Aguilar on 7/27/18.
 //  Copyright © 2018 Ninth Industries. All rights reserved.
 //
-
 import Foundation
 import UIKit
 import BigInt
@@ -19,8 +18,8 @@ class TransactionTableCell:UITableViewCell {
     
     func setupCell(transaction:GeneralTransactionData!) {
         
-        let value = BigInt.init(transaction.value)
-        let amount = Web3.Utils.formatToPrecision(value!)
+        let amount = EtherWallet.balance.WeiToValue(wei: transaction.value)
+
         let date = Date(timeIntervalSince1970: Double.init(transaction.timestamp)!)
         let dayTimePeriodFormatter = DateFormatter()
         dayTimePeriodFormatter.dateFormat = "MMM dd YYYY hh:mm a"
@@ -30,7 +29,6 @@ class TransactionTableCell:UITableViewCell {
         self.ibo_value?.text = amount!
         self.ibo_timestamp?.text = dateString
         
-        
     }
-    
 }
+

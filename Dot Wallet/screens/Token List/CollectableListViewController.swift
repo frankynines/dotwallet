@@ -75,7 +75,6 @@ class CollectableViewCell:UICollectionViewCell {
     func setupCell(url:String){
        
         let imageURL = url.replacingOccurrences(of: "'\'", with: "")
-        print(imageURL)
         var image:UIImage?
         if imageURL.range(of:".svg") != nil {
             //need to draw SVG

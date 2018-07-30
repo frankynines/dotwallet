@@ -32,6 +32,8 @@
 		2F11AA7B210C95F700790BAF /* TokenData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F11AA7A210C95F700790BAF /* TokenData.swift */; };
 		2F11AA7D210C9F7A00790BAF /* TokenDisplayContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F11AA7C210C9F7A00790BAF /* TokenDisplayContainerViewController.swift */; };
 		2F11AA7F210CEA7A00790BAF /* icon_close_button.png in Resources */ = {isa = PBXBuildFile; fileRef = 2F11AA7E210CEA7A00790BAF /* icon_close_button.png */; };
+		2F11AA81210CEBA400790BAF /* ServiceTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F11AA80210CEBA400790BAF /* ServiceTimer.swift */; };
+		2F11AA83210D2D4900790BAF /* TestVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F11AA82210D2D4900790BAF /* TestVC.swift */; };
 		2F2F74B321091E8200612CF4 /* TokenListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F2F74B221091E8200612CF4 /* TokenListViewController.swift */; };
 		2F2F74B72109C48F00612CF4 /* icon_token_erc20.png in Resources */ = {isa = PBXBuildFile; fileRef = 2F2F74B62109C48F00612CF4 /* icon_token_erc20.png */; };
 		2F6CBD5B2108B7FC0026C858 /* EtherWallet+Tokens.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F6CBD5A2108B7FC0026C858 /* EtherWallet+Tokens.swift */; };
@@ -47,6 +49,7 @@
 		2FE75054210BFD9200AAD6E6 /* icon_dot.png in Resources */ = {isa = PBXBuildFile; fileRef = 2FE7504D210BFD9100AAD6E6 /* icon_dot.png */; };
 		2FE75055210BFD9200AAD6E6 /* 80676-200.png in Resources */ = {isa = PBXBuildFile; fileRef = 2FE7504E210BFD9100AAD6E6 /* 80676-200.png */; };
 		2FE75056210BFD9200AAD6E6 /* icon_transactions.png in Resources */ = {isa = PBXBuildFile; fileRef = 2FE7504F210BFD9100AAD6E6 /* icon_transactions.png */; };
+		2FF4A303210F210800C9EB89 /* StringHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FF4A302210F210800C9EB89 /* StringHelpers.swift */; };
 		DFBF12152ACF0C100AFAA0C4 /* Pods_Dot_WalletUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 17873D468537B1C8CB4EF2DF /* Pods_Dot_WalletUITests.framework */; };
 		E450703040B27130D6EDC7AD /* Pods_Dot_WalletTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5BA6F8401712A96C29B862DC /* Pods_Dot_WalletTests.framework */; };
 /* End PBXBuildFile section */
@@ -102,6 +105,8 @@
 		2F11AA7A210C95F700790BAF /* TokenData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenData.swift; sourceTree = "<group>"; };
 		2F11AA7C210C9F7A00790BAF /* TokenDisplayContainerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenDisplayContainerViewController.swift; sourceTree = "<group>"; };
 		2F11AA7E210CEA7A00790BAF /* icon_close_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_close_button.png; sourceTree = "<group>"; };
+		2F11AA80210CEBA400790BAF /* ServiceTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceTimer.swift; sourceTree = "<group>"; };
+		2F11AA82210D2D4900790BAF /* TestVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestVC.swift; sourceTree = "<group>"; };
 		2F2F74B221091E8200612CF4 /* TokenListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenListViewController.swift; sourceTree = "<group>"; };
 		2F2F74B62109C48F00612CF4 /* icon_token_erc20.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_token_erc20.png; sourceTree = "<group>"; };
 		2F6CBD5A2108B7FC0026C858 /* EtherWallet+Tokens.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EtherWallet+Tokens.swift"; sourceTree = "<group>"; };
@@ -117,6 +122,7 @@
 		2FE7504D210BFD9100AAD6E6 /* icon_dot.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_dot.png; sourceTree = "<group>"; };
 		2FE7504E210BFD9100AAD6E6 /* 80676-200.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "80676-200.png"; sourceTree = "<group>"; };
 		2FE7504F210BFD9100AAD6E6 /* icon_transactions.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_transactions.png; sourceTree = "<group>"; };
+		2FF4A302210F210800C9EB89 /* StringHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringHelpers.swift; sourceTree = "<group>"; };
 		43B940DA664FC791F17688AD /* Pods-Dot Wallet.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Dot Wallet.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Dot Wallet/Pods-Dot Wallet.debug.xcconfig"; sourceTree = "<group>"; };
 		5BA6F8401712A96C29B862DC /* Pods_Dot_WalletTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Dot_WalletTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A43F46B778D77C277DDBE130 /* Pods-Dot WalletTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Dot WalletTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Dot WalletTests/Pods-Dot WalletTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -301,6 +307,7 @@
 			isa = PBXGroup;
 			children = (
 				2F0EFC7E21063937003EF740 /* WalletHomeViewController.swift */,
+				2F11AA82210D2D4900790BAF /* TestVC.swift */,
 				2F7678E5210B832400919059 /* Ethereum Header */,
 			);
 			path = "Wallet Core";
@@ -344,8 +351,8 @@
 			children = (
 				2F11AA7C210C9F7A00790BAF /* TokenDisplayContainerViewController.swift */,
 				2F11AA76210C89D200790BAF /* TokenDisplayPageViewController.swift */,
-				2F2F74B221091E8200612CF4 /* TokenListViewController.swift */,
 				2F11AA78210C8DBF00790BAF /* CollectableListViewController.swift */,
+				2F2F74B221091E8200612CF4 /* TokenListViewController.swift */,
 			);
 			path = "Token List";
 			sourceTree = "<group>";
@@ -355,6 +362,8 @@
 			children = (
 				2F7678EA210B840300919059 /* GradientHelper.swift */,
 				2FE75047210BC78C00AAD6E6 /* RoundButton.swift */,
+				2F11AA80210CEBA400790BAF /* ServiceTimer.swift */,
+				2FF4A302210F210800C9EB89 /* StringHelpers.swift */,
 			);
 			path = Visual;
 			sourceTree = "<group>";
@@ -652,6 +661,9 @@
 				2F0EFCC72106FE6F003EF740 /* TransactionData.swift in Sources */,
 				2F0EFCC52106FE6F003EF740 /* EtherWallet.swift in Sources */,
 				2F11AA7B210C95F700790BAF /* TokenData.swift in Sources */,
+				2F11AA81210CEBA400790BAF /* ServiceTimer.swift in Sources */,
+				2FF4A303210F210800C9EB89 /* StringHelpers.swift in Sources */,
+				2F11AA83210D2D4900790BAF /* TestVC.swift in Sources */,
 				2F11AA79210C8DBF00790BAF /* CollectableListViewController.swift in Sources */,
 				2F0EFCC92106FE6F003EF740 /* GasStationAPIResponse.swift in Sources */,
 				2F6CF99D210C6F070057A50C /* WalletContainerViewController.swift in Sources */,

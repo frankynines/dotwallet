@@ -28,8 +28,6 @@ class CreateWalletViewController: UIViewController {
         } catch {
             
         }
-        print()
-        
         
     }
     

@@ -127,45 +127,4 @@ extension EtherWallet: AccountService {
         
     }
 }
-//var keystoreCache: BIP32Keystore?
-//print("Lets Go")
-//
-//let userDir = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0]
-//let keystoreManager = KeystoreManager.managerForPath(userDir + "/keystore")
-//
-//self.checkifkeystore()
-//
-//do{
-//    
-//    var keystore: BIP32Keystore?
-//    if keystore == nil {
-//        print(keystore)
-//    }
-//    if (keystoreManager?.addresses?.count == 0) { print("NO KEYSTORE")
-//        
-//        let mnemonic = try! BIP39.generateMnemonics(bitsOfEntropy: 128)!
-//        print("MNEMONIC", mnemonic)
-//        
-//        do {
-//            keystore = try! BIP32Keystore(mnemonics: mnemonic, password: passwd, mnemonicsPassword: "")
-//            let keydata = try JSONEncoder().encode(keystore?.keystoreParams)
-//            FileManager.default.createFile(atPath: userDir + "/keystore"+"/key.json", contents: keydata, attributes: nil)
-//            self.keystoreCache = keystore
-//            print("Save Keystore")
-//            print(keydata)
-//        } catch {
-//            print("Failed to Save Keystore")
-//        }
-//    } else {
-//        print("RESTORE KEYSTORE")
-//        keystore = keystoreManager?.walletForAddress((keystoreManager?.addresses![0])!) as? BIP32Keystore
-//    }
-//    guard let myaddress = keystore?.addresses?.first else {return}
-//    print("PUBLIC ADDRESS:", myaddress.address)
-//    
-//    self.getPrivateKey(address: myaddress, withKeystore: keystore!)
-//    
-//    
-//} catch {
-//    print(error.localizedDescription)
-//}
+

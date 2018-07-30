@@ -32,7 +32,6 @@ class TokenListViewController:UIViewController, UITableViewDelegate, UITableView
                   "0x9366605f6758727ad0fbce0d1a2a6c1cd197f2a3"
     ]
     
-    
     @IBOutlet var ibo_tokenTableView:UITableView!
     
     override func viewDidLoad() {
@@ -51,12 +50,11 @@ class TokenListViewController:UIViewController, UITableViewDelegate, UITableView
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "token") as! WalletTokenCell
         cell.alpha = 0;
-        DispatchQueue.global(qos: .background).async {
-            // Call your background task
-            DispatchQueue.main.async {
-                cell.setupCell(_tokenAddress: self.tokens[indexPath.row])
-            }
+        
+        DispatchQueue.main.async {
+            cell.setupCell(_tokenAddress: self.tokens[indexPath.row])
         }
+        
         return cell
     }
     
@@ -65,11 +63,7 @@ class TokenListViewController:UIViewController, UITableViewDelegate, UITableView
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-//        let y = 500 - (scrollView.contentOffset.y + 500)
-//        let height = min(max(y, 500), 400)
-//        self.delegate?.walletTokenStretchHeader(rect: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.size.width, height: height))
     }
-    
 }
 
 class WalletTokenCell:UITableViewCell {
@@ -92,7 +86,14 @@ class WalletTokenCell:UITableViewCell {
             self.iboTokenImage.image = UIImage(named: "icon_token_erc20.png")
         }
         
-        self.syncTokenBalance(_tokenAddress: _tokenAddress)
+        DispatchQueue.global(qos: .background).async {
+            // Call your background task
+            DispatchQueue.main.async {
+                self.syncTokenBalance(_tokenAddress: _tokenAddress)
+            }
+        }
+        
+        
         
     }
     
@@ -110,6 +111,5 @@ class WalletTokenCell:UITableViewCell {
         }
         
         self.alpha = 1
-        
     }
 }

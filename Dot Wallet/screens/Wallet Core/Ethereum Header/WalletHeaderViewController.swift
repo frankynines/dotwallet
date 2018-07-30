@@ -10,8 +10,7 @@ import Foundation
 import UIKit
 import QRCode
 import Hero
-
-
+import web3swift
 class WalletHeaderViewController:UIViewController, UIScrollViewDelegate{
     
     //HEADER
@@ -24,18 +23,33 @@ class WalletHeaderViewController:UIViewController, UIScrollViewDelegate{
 
     let impact = UIImpactFeedbackGenerator()
     var impactDetected = false
-
+    
+    var repeatableTimer:RepeatingTimer!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.setupHeaderView()
+        
         self.ibo_scrollview?.delegate = self
         self.ibo_scrollview?.canCancelContentTouches = true
+        
+        
+        self.setupHeaderView()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.refreshBalance()
+        
+        self.repeatableTimer = RepeatingTimer(timeInterval: 3)
+        self.repeatableTimer.eventHandler = {
+            self.refreshBalance()
+        }
+        self.repeatableTimer.resume()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        self.repeatableTimer.suspend()
     }
     
     func setupHeaderView(){
@@ -61,16 +75,9 @@ class WalletHeaderViewController:UIViewController, UIScrollViewDelegate{
         }
     }
     
-    @IBAction func iba_showTransactionHistory(){
-        
-        let vc2 = self.storyboard?.instantiateViewController(withIdentifier: "sb_TransactionViewController") as! TransactionViewController
-        present(vc2, animated: true, completion: nil)
-        
-    }
-    
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         
-        print(scrollView.contentOffset.y)
+        //VERTICLE SCROLLING EDGES
         if scrollView.contentOffset.y > 100 {
             if impactDetected == false {
                 impact.impactOccurred()
@@ -82,18 +89,31 @@ class WalletHeaderViewController:UIViewController, UIScrollViewDelegate{
         if scrollView.contentOffset.y < -100 {
             if impactDetected == false {
                 impact.impactOccurred()
-                iba_showTokenList()
+                iba_presentSendView()
             }
             self.impactDetected = true
         }
-//
+
         if scrollView.contentOffset.y <= 50 && scrollView.contentOffset.y >= -50 {
             self.impactDetected = false;
         }
-//
-//        if scrollView.contentOffset.y >= -50 {
-//            self.impactDetected = false;
-//        }
+
+    }
+    
+    @IBAction func iba_presentSendView(){
+        let vc = storyboard?.instantiateViewController(withIdentifier: "sb_SendViewController") as! SendViewController
+        self.present(vc, animated: true) {}
+    }
+    
+    @IBAction func iba_copyPublicAddress(){
+        UIPasteboard.general.string = EtherWallet.account.address
+    }
+    
+    
+    @IBAction func iba_showTransactionHistory(){
+        
+        let vc2 = self.storyboard?.instantiateViewController(withIdentifier: "sb_TransactionViewController") as! TransactionViewController
+        present(vc2, animated: true, completion: nil)
         
     }
     
@@ -106,44 +126,11 @@ class WalletHeaderViewController:UIViewController, UIScrollViewDelegate{
             print(error.localizedDescription)
         }
     }
-//
-    @IBAction func iba_copyPublicAddress(){
-        UIPasteboard.general.string = EtherWallet.account.address
-    }
-    
-    @IBAction func iba_shareAddress(){
-        //UIPasteboard.general.string = EtherWallet.account.address
-    }
     
     @IBAction func iba_showTokenList(){
         let vc = storyboard?.instantiateViewController(withIdentifier: "sb_TokenDisplayContainerViewController") as! TokenDisplayContainerViewController
-        self.present(vc, animated: true) {
-            //
-        }
+        self.present(vc, animated: true) {}
     }
-
-    @IBAction func iba_presentSendView(){
-        let vc = storyboard?.instantiateViewController(withIdentifier: "sb_SendViewController") as! SendViewController
-        self.present(vc, animated: true) {
-            //
-        }
-    }
-    @IBAction func setIsTouched(){
-        
-        let transform = CGAffineTransform.identity.scaledBy(x: 0.96, y: 0.96)
-        UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options: [], animations: {
-            self.iboCardView?.transform = transform
-        }, completion: nil)
-    }
-    @IBAction func setIsTouchedFalsed(){
-        let transform = CGAffineTransform.identity.scaledBy(x: 1, y: 1)
-        UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options: [], animations: {
-            self.iboCardView?.transform = transform
-        }, completion: nil)
-    }
-    
-  
-    
     
 }
 

@@ -43,8 +43,8 @@ class SendViewController: UIViewController, QRCodeReaderViewControllerDelegate {
     
     @IBAction func iba_dismissView(){
         self.dismiss(animated: true, completion: {
-            //
-        })    }
+        })
+    }
     
     @IBAction func iba_sendTransaction () {
         
@@ -75,7 +75,7 @@ class SendViewController: UIViewController, QRCodeReaderViewControllerDelegate {
             EtherWallet.transaction.sendEther(to: receiptAddress, amount: amount, password: pass) { (status) in
                 //status is transaction hash
                 if status != nil {
-                    print("Success Send")
+                    print("Success on Send Transaction")
                     self.dismiss(animated: true, completion: {
                         //
                     })
@@ -84,11 +84,7 @@ class SendViewController: UIViewController, QRCodeReaderViewControllerDelegate {
         }))
         
         alertView.addAction(UIAlertAction(title: "Cancel", style: .destructive, handler: nil))
-        
         self.present(alertView, animated: true, completion: nil)
-        
-       
-       
         
     }
     
@@ -100,10 +96,6 @@ class SendViewController: UIViewController, QRCodeReaderViewControllerDelegate {
         
     }
     
-    //QR
-    
-    // Good practice: create the reader lazily to avoid cpu overload during the
-    // initialization and each time we need to scan a QRCode
     lazy var readerVC: QRCodeReaderViewController = {
         let builder = QRCodeReaderViewControllerBuilder {
             $0.reader = QRCodeReader(metadataObjectTypes: [.qr], captureDevicePosition: .back)
@@ -113,21 +105,27 @@ class SendViewController: UIViewController, QRCodeReaderViewControllerDelegate {
     }()
     
     @IBAction func iba_scanAction(_ sender: AnyObject) {
-        // Retrieve the QRCode content
-        // By using the delegate pattern
+
         readerVC.delegate = self
-        // Or by using the closure pattern
         readerVC.completionBlock = { (result: QRCodeReaderResult?) in
-            self.ibo_addressField.text = result?.value.replacingOccurrences(of: "ethereum:", with: "")
+            
+            let urlQuery = URL(string: (result?.value)!)
+            
+            if let ethereumURL = urlQuery?.absoluteStringByTrimmingQuery(){
+                print("SCAN:" + ethereumURL)
+                self.ibo_addressField.text = ethereumURL.replacingOccurrences(of: "ethereum:", with: "")
+            }
+            
+            if let amount = Int((urlQuery?.queryParameters?["amount"])!) {
+                    let value = EtherWallet.balance.WeiToValue(wei: String(amount))!
+                self.ibo_sendAmount.text = value
+            }
+
         }
         
-        
-        // Presents the readerVC as modal form sheet
         readerVC.modalPresentationStyle = .formSheet
         present(readerVC, animated: true, completion: nil)
     }
-    
-    // MARK: - QRCodeReaderViewController Delegate Methods
     
     func reader(_ reader: QRCodeReaderViewController, didScanResult result: QRCodeReaderResult) {
         reader.stopScanning()
@@ -135,11 +133,8 @@ class SendViewController: UIViewController, QRCodeReaderViewControllerDelegate {
         dismiss(animated: true, completion: nil)
     }
     
-
-    
     func readerDidCancel(_ reader: QRCodeReaderViewController) {
         reader.stopScanning()
-        
         dismiss(animated: true, completion: nil)
     }
 

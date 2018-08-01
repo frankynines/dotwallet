@@ -14,9 +14,6 @@ class CreateWalletViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-       
-        
-        
         if (EtherWallet.account.hasAccount == true) {
             self.pushWalletHomeScreen()
         }

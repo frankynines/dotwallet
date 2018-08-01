@@ -10,7 +10,7 @@ public class EtherWallet {
     
     public let web3Main = Web3.InfuraRopstenWeb3() // Change to MainNet when Launch
     let etherscanURL = "https://api-ropsten.etherscan.io" // Change to MainNet when Launch
-
+    let tokenImageSrcURL = "https://raw.githubusercontent.com/trustwallet/tokens/master/images/"
     let keystoreDirectoryName = "/keystore"
     let keystoreFileName = "/key.json"
     let defaultGasLimitForTokenTransfer = 100000

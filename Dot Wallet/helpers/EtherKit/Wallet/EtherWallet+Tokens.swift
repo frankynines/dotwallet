@@ -10,17 +10,30 @@ import web3swift
 import SwiftyJSON
 
 public protocol TokenService {
-    func getTokenMetaData(contractAddress: String, param:String, completion: @escaping (String?) -> ())
+    func getTokenMetaData(contractAddress: String, completion: @escaping (ERC20Token) -> ())
     func getERC721Tokens(address:String, completion: @escaping ([JSON]?) -> ())
+    func getTokenImage(contractAddress:String, completion: @escaping (UIImage) -> ())
 }
 
 extension EtherWallet: TokenService {
-
-    public func getTokenMetaData(contractAddress: String, param:String, completion: @escaping (String?) -> ()) {
+ 
+    public func getTokenMetaData(contractAddress: String, completion: @escaping (ERC20Token) -> ()) {
         DispatchQueue.global().async {
-            let data = try? self.tokenMetaData(contractAddress: contractAddress, param: param)
+
+            
+            let name = try? self.tokenMetaData(contractAddress: contractAddress, param: "name")
+            let symbol = try? self.tokenMetaData(contractAddress: contractAddress, param: "symbol")
+            let decimal = try? self.tokenMetaData(contractAddress: contractAddress, param: "decimals")
+            
+            let token = ERC20Token.init(name: name,
+                                        symbol: symbol,
+                                        contractAddress: contractAddress,
+                                        decimal: decimal,
+                                        imageURL:self.getTokenImageURL(contractAddress: contractAddress),
+                                        balance: "0")
+            
             DispatchQueue.main.async {
-                completion(data)
+                completion(token)
             }
         }
     }
@@ -39,11 +52,30 @@ extension EtherWallet: TokenService {
         }
         return data
     }
-  
+    
+    public func getTokenImageURL(contractAddress:String) -> String {
+        return tokenImageSrcURL + contractAddress + ".png"
+    }
+    
+    public func getTokenImage(contractAddress:String, completion: @escaping (UIImage) -> ()) {
+        let imageURL = self.getTokenImageURL(contractAddress: contractAddress)
+        
+        var image = UIImage()
+        
+        do {
+            let imgdata = try Data(contentsOf: URL(string: imageURL)!)
+            image =  UIImage(data: imgdata)!
+        } catch {
+            image = UIImage(named: "icon_token_erc20.png")!
+        }
+        
+        DispatchQueue.main.async {
+            completion(image)
+        }
+    }
     
     public func getERC721Tokens(address:String, completion: @escaping ([JSON]?) -> ()){
-        let testAddress = "0xe307C2d3236bE4706E5D7601eE39F16d796d8195"
-        var url = URLComponents(string: "https://api.rarebits.io/v1/addresses/"+testAddress+"/token_items")
+        var url = URLComponents(string: "https://api.rarebits.io/v1/addresses/"+"0xe307c2d3236be4706e5d7601ee39f16d796d8195"+"/token_items")
         
         url?.queryItems = [
             URLQueryItem(name: "api_key", value: "cc0a1c99-069c-4955-9ddd-a2f450aaa0f2")
@@ -65,3 +97,7 @@ extension EtherWallet: TokenService {
     
     
 }
+
+
+
+

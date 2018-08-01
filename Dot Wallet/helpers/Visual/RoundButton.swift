@@ -37,6 +37,8 @@ import UIKit
     
     func refreshCorners(value: CGFloat) {
         layer.cornerRadius = value
+        layer.borderColor = UIColor.lightGray.cgColor
+        layer.borderWidth = 2
     }
     
     

@@ -8,20 +8,15 @@
 
 import UIKit
 import Foundation
-import web3swift
-import BigInt
-import QRCode
-import BLTNBoard
+
 
 class WalletHomeViewController: UIViewController {
     
-    @IBOutlet var ibo_walletHeader:WalletHeaderViewController?
+    @IBOutlet var ibo_walletHeader:WalletCardViewController?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.isNavigationBarHidden = true
-        
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -34,9 +29,17 @@ class WalletHomeViewController: UIViewController {
     }
     
     @IBAction func iba_displayTokenViewController(){
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "sb_SendViewController")
-            present(vc!, animated: true) {
-        }
+        
+        
+        
+//            vc.ibo_contentView =
+//
+//        let sendView = self.storyboard?.instantiateViewController(withIdentifier: "sb_SendViewController")
+        
+        
+    }
+    @IBAction func iba_displayWalletSettings(){
+        
     }
     
     override func didReceiveMemoryWarning() {
@@ -47,7 +50,7 @@ class WalletHomeViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let destination = segue.destination
         
-        if let headerView = destination as? WalletHeaderViewController {
+        if let headerView = destination as? WalletCardViewController {
             self.ibo_walletHeader = headerView
         }
     }

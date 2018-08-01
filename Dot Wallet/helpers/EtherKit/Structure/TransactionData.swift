@@ -73,3 +73,21 @@ struct GeneralTransactionData: Decodable {
     }
 }
 
+public struct ERC20Token:Codable {
+    let name:String?
+    let symbol:String?
+    let contractAddress:String?
+    let decimal:String?
+    let imageURL:String?
+    let balance:String?
+    
+    enum CodingKeys: String, CodingKey {
+        case name
+        case symbol
+        case contractAddress
+        case decimal
+        case imageURL
+        case balance
+    }
+}
+

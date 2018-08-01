@@ -6,6 +6,7 @@ PODS:
   - BigInt (3.0.1):
     - SipHash (~> 1.2)
   - BulletinBoard (2.0.1)
+  - Cache (5.0.0)
   - CryptoCurrencyKit (0.3.1)
   - CryptoSwift (0.10.0)
   - Hero (1.2.0)
@@ -16,9 +17,7 @@ PODS:
   - secp256k1_ios (0.1.3)
   - SipHash (1.2.2)
   - SmileLock (3.0.3)
-  - SwiftSVG (2.1.5)
   - SwiftyJSON (4.1.0)
-  - SwipeableTabBarController (1.3.0)
   - web3swift (0.8.1):
     - Alamofire (~> 4.7)
     - Alamofire-Synchronous (~> 4.0)
@@ -31,14 +30,13 @@ PODS:
 DEPENDENCIES:
   - AlertOnboarding
   - BulletinBoard
+  - Cache
   - CryptoCurrencyKit
   - Hero
   - QRCode
   - QRCodeReader.swift (~> 8.2.0)
   - SmileLock
-  - SwiftSVG (~> 2.0)
   - SwiftyJSON
-  - SwipeableTabBarController
   - web3swift (~> 0.8.0)
 
 SPEC REPOS:
@@ -48,6 +46,7 @@ SPEC REPOS:
     - AlertOnboarding
     - BigInt
     - BulletinBoard
+    - Cache
     - CryptoCurrencyKit
     - CryptoSwift
     - Hero
@@ -58,9 +57,7 @@ SPEC REPOS:
     - secp256k1_ios
     - SipHash
     - SmileLock
-    - SwiftSVG
     - SwiftyJSON
-    - SwipeableTabBarController
     - web3swift
 
 SPEC CHECKSUMS:
@@ -69,6 +66,7 @@ SPEC CHECKSUMS:
   AlertOnboarding: 2e6804e67894894807c5d24bcfcd7905897e6f08
   BigInt: 8e8a52161c745cd3ab78e3dc346a9fbee51e6cf6
   BulletinBoard: 99a428f91f64d0ffabf8a8104f79ecd064e2a4db
+  Cache: fae4826ba52d7a5d9a3a0ad6fe73e3501a82964f
   CryptoCurrencyKit: 5c78da2dfb845e2feddb519b56169ab39f117ca1
   CryptoSwift: 6c778d69282bed3b4e975ff97a79d074f20bb011
   Hero: 33dadf2cd1c98af71e213dcbc2902e6e03622a4e
@@ -79,11 +77,9 @@ SPEC CHECKSUMS:
   secp256k1_ios: ac9ef04e761f43c58012b28548afa91493761f17
   SipHash: fad90a4683e420c52ef28063063dbbce248ea6d4
   SmileLock: 247b62849cedca324e70ccfad5d01714602d739e
-  SwiftSVG: 9d78f41396a921c210ce9898ada05c85d412acb8
   SwiftyJSON: c29297daf073d2aa016295d5809cdd68045c39b3
-  SwipeableTabBarController: ca84e61b588e0d4ebd2b8b906f29509a490fdca4
   web3swift: 79f72b48005f1b28e73191eaf78194d6cf5f8a35
 
-PODFILE CHECKSUM: 194d66509e7c5e11a8a18f75cfc62857c4dde558
+PODFILE CHECKSUM: a27ff5820391896379bf5814816c0c91324a29d0
 
 COCOAPODS: 1.5.3

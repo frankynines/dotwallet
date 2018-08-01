@@ -26,7 +26,7 @@ class PassThroughView:UIView {
         }
     }
     
-    @IBInspectable var bottomColor: UIColor = .yellow {
+    @IBInspectable var bottomColor: UIColor = .cyan {
         didSet {
             setNeedsLayout()
         }
@@ -115,6 +115,36 @@ class PassThroughView:UIView {
         animation.fillMode = kCAFillModeForwards
         animation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionLinear)
         self.gradientLayer?.add(animation, forKey:"animateGradient")
+    }
+}
+
+@IBDesignable class RoundedRectangleView: UIView {
+    
+    @IBInspectable var cornerRadius: CGFloat = 0 {
+        didSet {
+            setNeedsLayout()
+        }
+    }
+    override class var layerClass: AnyClass {
+        return CALayer.self
+    }
+    override func layoutSubviews() {
+        self.layer.cornerRadius = cornerRadius
+    }
+}
+
+class BackgroundView: UIView {
+    
+    private var gradientLayer: CAGradientLayer!
+
+    override class var layerClass: AnyClass {
+        return CAGradientLayer.self
+    }
+    override func layoutSubviews() {
+        self.gradientLayer = self.layer as? CAGradientLayer
+        self.gradientLayer.colors = [UIColor(hexString: "99C4FF").cgColor, UIColor(hexString:"C19DFF").cgColor]
+        self.gradientLayer.startPoint = CGPoint(x: 0.5, y: 0)
+        self.gradientLayer.endPoint = CGPoint(x: 0, y: 1)
     }
 }
 

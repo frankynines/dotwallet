@@ -8,17 +8,15 @@ target 'Dot Wallet' do
   pod 'QRCodeReader.swift', '~> 8.2.0'
   pod 'QRCode'
   pod 'SwiftyJSON'
-  pod 'CryptoCurrencyKit'
+  pod 'Cache'
   pod 'web3swift', '~> 0.8.0'
-  
+  pod 'CryptoCurrencyKit'
+
   pod 'AlertOnboarding'
-  pod 'SwipeableTabBarController'
 
   pod 'Hero'
   pod 'BulletinBoard'
   pod 'SmileLock'
-
-  pod 'SwiftSVG', '~> 2.0'
 
   # Pods for Dot Wallet
 

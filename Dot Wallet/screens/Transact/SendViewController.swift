@@ -11,45 +11,66 @@ import UIKit
 import QRCodeReader
 import AVFoundation
 
-
-class SendViewController: UIViewController, QRCodeReaderViewControllerDelegate {
+class SendViewController: UITableViewController, QRCodeReaderViewControllerDelegate {
     
-    @IBOutlet var ibo_balance:UILabel!
+    @IBOutlet weak var ibo_balance:UILabel?
+    @IBOutlet weak var ibo_walletName:UILabel?
     
-    @IBOutlet var ibo_sendAmount:UITextField!
-    @IBOutlet var ibo_addressField:UITextField!
-
+    @IBOutlet weak var ibo_sendAmount:UITextField?
+    @IBOutlet weak var ibo_addressField:UITextField?
+    
+    var balance:String!
+    
+    var delegate:ModalSlideOverViewcontrollerDelegate?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.tableView.sectionHeaderHeight = 0
+        self.tableView.sectionFooterHeight = 0
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
+        self.syncbalance()
+        self.automaticallyAdjustsScrollViewInsets = false
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+    }
+    
+    func syncbalance(){
+        var balance:String!
         
-        do {
-            let balance = try EtherWallet.balance.etherBalanceSync()
-
-            self.ibo_balance.text = balance
-
-        } catch {
-            self.ibo_balance.text = "0.00"
+        DispatchQueue.global(qos: .background).async {
+            // Call your background task
+            do {
+                balance = try EtherWallet.balance.etherBalanceSync()
+                
+            } catch {
+                self.ibo_balance?.text = "0.00"
+            }
+            //UPDATE UI
+            DispatchQueue.main.async {
+                self.balance = balance
+                self.ibo_balance?.text = balance
+            }
         }
     }
     
     @IBAction func iba_dismissView(){
-        self.dismiss(animated: true, completion: {
-        })
+        self.dismiss(animated: true, completion: { })
     }
     
     @IBAction func iba_sendTransaction () {
         
-        let receiptAddress = ibo_addressField.text!
-        let amount = ibo_sendAmount.text!
+        if Float(balance)! <= Float(0.00) {
+            self.showAlert(title: "Oops", message: "You do not have enough ETH to send this transaction", completion: false)
+            return
+        }
+        
+        let receiptAddress = ibo_addressField?.text
+        let amount = ibo_sendAmount?.text
         
         let alertView = UIAlertController.init(title: "Confirm Send", message: "Sign your transaction using your Pincode", preferredStyle: .alert)
         
@@ -72,13 +93,12 @@ class SendViewController: UIViewController, QRCodeReaderViewControllerDelegate {
                 }
             }
             
-            EtherWallet.transaction.sendEther(to: receiptAddress, amount: amount, password: pass) { (status) in
+            EtherWallet.transaction.sendEther(to: receiptAddress!, amount: amount!, password: pass) { (status) in
                 //status is transaction hash
                 if status != nil {
-                    print("Success on Send Transaction")
-                    self.dismiss(animated: true, completion: {
-                        //
-                    })
+                    self.showAlert(title: "Success", message: "Transaction has been sent!", completion: true)
+                } else {
+                    self.showAlert(title: "Oops", message: "Transaction Failed", completion: false)
                 }
             }
         }))
@@ -88,10 +108,26 @@ class SendViewController: UIViewController, QRCodeReaderViewControllerDelegate {
         
     }
     
+    func showAlert(title:String, message:String, completion:Bool) {
+        let alertView = UIAlertController.init(title: title, message: message, preferredStyle: .alert)
+        
+        alertView.addAction(UIAlertAction(title: "Ok", style: .default, handler: { (action) in
+            if completion {
+                if self.delegate != nil {
+                    self.delegate?.modalSlideDismiss()
+                } else {
+                    self.dismiss(animated: true, completion: nil)
+                }
+            }
+        }))
+        
+        self.present(alertView, animated: true)
+    }
+    
     @IBAction func iba_pasteAddress () {
         
         if let myString = UIPasteboard.general.string {
-            self.ibo_addressField.text = myString
+            self.ibo_addressField?.text = myString
         }
         
     }
@@ -107,23 +143,27 @@ class SendViewController: UIViewController, QRCodeReaderViewControllerDelegate {
     @IBAction func iba_scanAction(_ sender: AnyObject) {
 
         readerVC.delegate = self
+        readerVC.view.frame = self.view.frame
         readerVC.completionBlock = { (result: QRCodeReaderResult?) in
-            
+            if result?.value == nil {
+                return
+            }
             let urlQuery = URL(string: (result?.value)!)
             
             if let ethereumURL = urlQuery?.absoluteStringByTrimmingQuery(){
                 print("SCAN:" + ethereumURL)
-                self.ibo_addressField.text = ethereumURL.replacingOccurrences(of: "ethereum:", with: "")
+                self.ibo_addressField?.text = ethereumURL.replacingOccurrences(of: "ethereum:", with: "")
             }
             
-            if let amount = Int((urlQuery?.queryParameters?["amount"])!) {
-                    let value = EtherWallet.balance.WeiToValue(wei: String(amount))!
-                self.ibo_sendAmount.text = value
-            }
+            guard (urlQuery?.queryParameters?.isEmpty)! else { return  }
+//            if let amount = Int((urlQuery?.queryParameters?["amount"])!) {
+//                    let value = EtherWallet.balance.WeiToValue(wei: String(amount))!
+//                self.ibo_sendAmount?.text = value
+//            }
 
         }
         
-        readerVC.modalPresentationStyle = .formSheet
+        readerVC.modalPresentationStyle = .overFullScreen
         present(readerVC, animated: true, completion: nil)
     }
     

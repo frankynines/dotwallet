@@ -15,6 +15,7 @@ class TransactionTableCell:UITableViewCell {
     @IBOutlet var ibo_address:UILabel?
     @IBOutlet var ibo_value:UILabel?
     @IBOutlet var ibo_timestamp:UILabel?
+    @IBOutlet var ibo_direction:UILabel?
     
     func setupCell(transaction:GeneralTransactionData!) {
         
@@ -22,16 +23,20 @@ class TransactionTableCell:UITableViewCell {
 
         let date = Date(timeIntervalSince1970: Double.init(transaction.timestamp)!)
         let dayTimePeriodFormatter = DateFormatter()
-        dayTimePeriodFormatter.dateFormat = "MMM dd YYYY hh:mm a"
+        dayTimePeriodFormatter.dateFormat = "MMM dd YYYY"
+        //dayTimePeriodFormatter.dateFormat = "MMM dd YYYY hh:mm a"
+
         let dateString = dayTimePeriodFormatter.string(from: date)
         
         
         if isSent(to: transaction.to) {
             self.ibo_address?.text = "to: " + transaction.to
             amount = "- " + amount!
+            self.ibo_direction?.text = "⇡"
         } else {
             amount = "+ " + amount!
             self.ibo_address?.text = "from: " + transaction.to
+            self.ibo_direction?.text = "⇣"
         }
         
         self.ibo_value?.text = amount!

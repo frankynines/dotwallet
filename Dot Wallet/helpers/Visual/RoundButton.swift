@@ -17,6 +17,12 @@ import UIKit
         }
     }
     
+    @IBInspectable var hasBorder: Bool = false {
+        didSet {
+            setBorder(hasBorder: hasBorder)
+        }
+    }
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         sharedInit()
@@ -38,8 +44,18 @@ import UIKit
     func refreshCorners(value: CGFloat) {
         layer.cornerRadius = value
         layer.borderColor = UIColor.lightGray.cgColor
-        layer.borderWidth = 2
+        layer.borderWidth = 1
     }
     
-    
+    func setBorder(hasBorder: Bool) {
+        if hasBorder == true {
+            layer.borderColor = UIColor.lightGray.cgColor
+            layer.borderWidth = 1
+        } else {
+            layer.borderColor = UIColor.clear.cgColor
+            layer.borderWidth = 0
+        }
+    }
 }
+    
+

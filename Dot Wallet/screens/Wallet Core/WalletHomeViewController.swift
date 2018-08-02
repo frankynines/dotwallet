@@ -28,20 +28,6 @@ class WalletHomeViewController: UIViewController {
         super.viewDidLayoutSubviews()
     }
     
-    @IBAction func iba_displayTokenViewController(){
-        
-        
-        
-//            vc.ibo_contentView =
-//
-//        let sendView = self.storyboard?.instantiateViewController(withIdentifier: "sb_SendViewController")
-        
-        
-    }
-    @IBAction func iba_displayWalletSettings(){
-        
-    }
-    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

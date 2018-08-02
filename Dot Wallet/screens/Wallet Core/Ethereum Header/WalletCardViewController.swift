@@ -11,7 +11,7 @@ import UIKit
 import QRCode
 import Hero
 import web3swift
-class WalletCardViewController:UIViewController, UIScrollViewDelegate, ModalSlideOverViewcontrollerDelegate{
+class WalletCardViewController:UIViewController, UIScrollViewDelegate, ModalSlideOverViewcontrollerDelegate, PopOverViewcontrollerDelegate{
     
     //HEADER
     @IBOutlet var ibo_scrollview:UIScrollView?
@@ -96,10 +96,24 @@ class WalletCardViewController:UIViewController, UIScrollViewDelegate, ModalSlid
         }
     }
     
+    @IBAction func iba_shareAddress(){
+        
+        // set up activity view controller
+        let textToShare = [ "Send me some Eth: ", EtherWallet.account.address ]
+        let activityViewController = UIActivityViewController(activityItems: textToShare as [Any], applicationActivities: nil)
+        activityViewController.popoverPresentationController?.sourceView = self.view // so that iPads won't crash
+        
+        // exclude some activity types from the list (optional)
+        activityViewController.excludedActivityTypes = [ UIActivityType.airDrop, UIActivityType.postToFacebook ]
+        
+        // present the view controller
+        self.present(activityViewController, animated: true, completion: nil)
+    }
+    
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         
         //VERTICLE SCROLLING EDGES
-        if scrollView.contentOffset.y > 100 {
+        if scrollView.contentOffset.y > 50 {
             if impactDetected == false {
                 impact.impactOccurred()
                 iba_presentSendView()
@@ -107,7 +121,7 @@ class WalletCardViewController:UIViewController, UIScrollViewDelegate, ModalSlid
             self.impactDetected = true
         }
         
-        if scrollView.contentOffset.y < -100 {
+        if scrollView.contentOffset.y < -50 {
             if impactDetected == false {
                 impact.impactOccurred()
                 self.iba_showWalletDetails()
@@ -152,6 +166,37 @@ class WalletCardViewController:UIViewController, UIScrollViewDelegate, ModalSlid
             self.slideModalController.view.removeFromSuperview()
             self.slideModalController.removeFromParentViewController()
             self.slideModalController = nil
+        }
+    }
+    
+    
+
+    
+    var popModalController:PopOverViewcontroller!
+    
+    @IBAction func iba_presentPopView(){
+        
+        guard popModalController == nil else {
+            return
+        }
+        
+        self.popModalController = PopOverViewcontroller()
+        self.popModalController = self.storyboard?.instantiateViewController(withIdentifier: "sb_PopOverViewcontroller") as! PopOverViewcontroller
+        self.popModalController.modalTitle = "Send Ethereum"
+        self.popModalController.view.frame = self.view.frame
+        self.popModalController.delegate = self
+        
+        //Assign Child Class
+        self.popModalController.viewController = sendVC
+        
+        self.view.addSubview(self.popModalController.view)
+        
+    }
+    func popOverDismiss() {
+        self.popModalController.animateModalOut {
+            self.popModalController.view.removeFromSuperview()
+            self.popModalController.removeFromParentViewController()
+            self.popModalController = nil
         }
     }
     

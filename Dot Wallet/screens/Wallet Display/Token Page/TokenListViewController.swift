@@ -19,6 +19,8 @@ class TokenListViewController:UIViewController, UITableViewDelegate, UITableView
     
     
     var delegate: WalletTokenViewControllerDelegate?
+    @IBOutlet var ibo_tableHeader:UILabel?
+
     
     var tokensContracts = ["0xe3818504c1b32bf1557b16c238b2e01fd3149c17",
                   "0xf230b790e05390fc8295f4d3f60332c93bed42e2",
@@ -99,8 +101,6 @@ class TokenListViewController:UIViewController, UITableViewDelegate, UITableView
         }
         
         
-       
-        
     }
     
      func append(_ objectsToAdd: [ERC20Token]) {
@@ -108,6 +108,8 @@ class TokenListViewController:UIViewController, UITableViewDelegate, UITableView
                 self.tokens.append(objectsToAdd[i])
                 self.ibo_tokenTableView.insertRows(at: [IndexPath(item:self.tokens.count - 1, section:0)], with: UITableViewRowAnimation.automatic)
         }
+        
+        self.ibo_tableHeader?.text = String(self.tokens.count) + " Tokens"
     }
     
     //TABLE VIEW

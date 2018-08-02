@@ -12,7 +12,8 @@ import UIKit
 class CollectableListViewController:UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
     
     @IBOutlet var ibo_collectionView:UICollectionView?
-    
+    @IBOutlet var ibo_tableHeader:UILabel?
+
     var tokens = [Erc721Token]()
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -51,6 +52,9 @@ class CollectableListViewController:UIViewController, UICollectionViewDelegate, 
         } catch {
             //print(error.localizedDescription)
         }
+        
+        self.ibo_tableHeader?.text = String(self.tokens.count) + " Collectibles"
+
     }
     
     private func append(_ objectsToAdd: [Erc721Token]) {

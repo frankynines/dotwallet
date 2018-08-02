@@ -12,11 +12,8 @@ target 'Dot Wallet' do
   pod 'web3swift', '~> 0.8.0'
   pod 'CryptoCurrencyKit'
 
-  pod 'AlertOnboarding'
-
   pod 'Hero'
   pod 'BulletinBoard'
-  pod 'SmileLock'
 
   # Pods for Dot Wallet
 

@@ -10,31 +10,23 @@ import Foundation
 import UIKit
 class WalletDisplayViewController:UIViewController, UIPageViewControllerDelegate, UIScrollViewDelegate, WalletPageViewControllerDelegate {
     
-    @IBOutlet weak var ibo_walletName:UILabel!
-    @IBOutlet weak var ibo_walletAddress:UILabel!
+    @IBOutlet weak var ibo_walletName:UILabel?
+    @IBOutlet weak var iboBalance: UILabel?
+    @IBOutlet weak var ibo_walletAddress:UILabel?
     @IBOutlet weak var ibo_walletCardScrollView:UIScrollView!
     
     var ibo_walletPageController:WalletPageViewController!
     
-    fileprivate lazy var pages: [UIViewController] = {
-        return [
-            self.getViewController(withIdentifier: "sb_TokenListViewController"),
-            self.getViewController(withIdentifier: "sb_CollectableListViewController"),
-            self.getViewController(withIdentifier: "sb_TransactionViewController")
-        ]
-    }()
-    
     public var pageIndex:Int!
-    
-    fileprivate func getViewController(withIdentifier identifier: String) -> UIViewController {
-        return UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: identifier)
-    }
-    
+    var pages = [UIViewController]()
+   
     override func viewDidLoad() {
         super.viewDidLoad()
-        ibo_walletName.text = "Ethereum Wallet"
-        ibo_walletAddress.text = EtherWallet.account.address
+        ibo_walletName?.text = "Ethereum Wallet"
+        ibo_walletAddress?.text = EtherWallet.account.address
         self.ibo_walletCardScrollView.delegate = self
+        
+        self.syncBalance()
     }
     
     @IBAction func iba_dismiss(){
@@ -44,6 +36,29 @@ class WalletDisplayViewController:UIViewController, UIPageViewControllerDelegate
     
     func walletPageCurrentPage(index: Int) {
         self.pageIndex = index
+    }
+    
+    func syncBalance(){
+        if (EtherWallet.account.hasAccount == true) {
+            
+            if let cacheBalance = UserDefaults.standard.value(forKey: "ETHBalance") {
+                self.iboBalance?.text = cacheBalance as? String
+            } else {
+                self.refreshBalance()
+            }
+
+        }
+    }
+    
+    func refreshBalance(){
+        
+        EtherWallet.balance.etherBalance { balance in
+            guard let networkbalance = balance else {
+                return
+            }
+            UserDefaults.standard.set(networkbalance, forKey: "ETHBalance")
+            self.iboBalance?.text = balance
+        }
     }
     
     @IBAction func gotoPage(button:UIButton){
@@ -78,22 +93,20 @@ class WalletDisplayViewController:UIViewController, UIPageViewControllerDelegate
             self.pageIndex = button.tag
             return
         }
-        
-        
-        
+
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let destination = segue.destination
         
-        if let headerView = destination as? WalletPageViewController {
+        if let pageController = destination as? WalletPageViewController {
             
             for i in 0..<pages.count {
                 self.pages[i].view.tag = i
             }
             self.pageIndex = 0
-            self.ibo_walletPageController = headerView
-            self.ibo_walletPageController.pages = self.pages
+            self.ibo_walletPageController = pageController
+            self.pages = self.ibo_walletPageController.pages
             self.ibo_walletPageController.childDelegate = self
         }
        

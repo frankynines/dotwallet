@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 protocol PopOverViewcontrollerDelegate {
-    func modalSlideDismiss()
+    func popOverDismiss()
 }
 
 class PopOverViewcontroller: UIViewController, UIScrollViewDelegate  {
@@ -29,22 +29,32 @@ class PopOverViewcontroller: UIViewController, UIScrollViewDelegate  {
     let impact = UIImpactFeedbackGenerator()
     var impactDetected = false
     
+    var delegate:PopOverViewcontrollerDelegate?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.ibo_containerScrollView?.delegate = self
     }
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        self.ibo_containerScrollView?.frame = CGRect(origin: CGPoint(x: 0, y: self.view.frame.size.height), size: self.view.frame.size)
         
-        UIView.animate(withDuration: 0.35, delay: 0.1, options: .curveEaseOut, animations: {
-            self.ibo_containerScrollView?.frame = CGRect(origin: CGPoint(x: 0, y: -20), size: self.view.frame.size)
-        }) { (complete) in
-            
-            UIView.animate(withDuration: 0.15, animations: {
-                self.ibo_containerScrollView?.frame = CGRect(origin: CGPoint(x: 0, y: 0), size: self.view.frame.size)
-            })
-        }
+        
+//
+        
+
+        self.ibo_containerScrollView?.transform = CGAffineTransform(scaleX: 0.8, y: 0.8)
+        
+        UIView.animate(withDuration: 0.5,
+                       delay: 0,
+                       usingSpringWithDamping: CGFloat(0.50),
+                       initialSpringVelocity: CGFloat(1.2),
+                       options: UIViewAnimationOptions.allowUserInteraction,
+                       animations: {
+                        self.ibo_containerScrollView?.transform = CGAffineTransform.identity
+        },
+                       completion: { Void in()  }
+        )
+        
         
         print("viewlayedoutsub")
     }
@@ -76,7 +86,7 @@ class PopOverViewcontroller: UIViewController, UIScrollViewDelegate  {
     }
     
     @IBAction func iba_dismissModal(){
-        //self.delegate?.modalSlideDismiss()
+        self.delegate?.popOverDismiss()
     }
     
     func animateModalOut( completion: @escaping() ->()){

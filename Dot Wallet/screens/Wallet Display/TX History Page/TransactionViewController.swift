@@ -18,6 +18,8 @@ class TransactionViewController: UIViewController, UITabBarDelegate, UITableView
     @IBOutlet var ibo_tokenSymbol:UILabel?
     @IBOutlet var ibo_value:UILabel?
     
+    @IBOutlet var ibo_tableHeader:UILabel?
+    
     @IBOutlet var ibo_tableView:UITableView!
     
     var contractAddress:String!
@@ -63,6 +65,7 @@ class TransactionViewController: UIViewController, UITabBarDelegate, UITableView
             
             self.transactions.reverse()
             self.ibo_tableView.reloadData()
+            self.ibo_tableHeader?.text = String(self.transactions.count) + " Transactions"
         }
     }
     

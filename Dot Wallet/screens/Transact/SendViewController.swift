@@ -32,6 +32,8 @@ class SendViewController: UITableViewController, QRCodeReaderViewControllerDeleg
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.syncbalance()
+        self.ibo_sendAmount?.text = ""
+        self.ibo_addressField?.text = ""
         self.automaticallyAdjustsScrollViewInsets = false
     }
     
@@ -149,17 +151,18 @@ class SendViewController: UITableViewController, QRCodeReaderViewControllerDeleg
                 return
             }
             let urlQuery = URL(string: (result?.value)!)
+            print(result!)
             
             if let ethereumURL = urlQuery?.absoluteStringByTrimmingQuery(){
                 print("SCAN:" + ethereumURL)
                 self.ibo_addressField?.text = ethereumURL.replacingOccurrences(of: "ethereum:", with: "")
             }
             
-            guard (urlQuery?.queryParameters?.isEmpty)! else { return  }
-//            if let amount = Int((urlQuery?.queryParameters?["amount"])!) {
-//                    let value = EtherWallet.balance.WeiToValue(wei: String(amount))!
-//                self.ibo_sendAmount?.text = value
-//            }
+           // guard (urlQuery?.queryParameters?.isEmpty)! else { return  }
+            if let amount = urlQuery?.queryParameters?["amount"] {
+//                let value = EtherWallet.balance.WeiToValue(wei: String(amount))!
+                self.ibo_sendAmount?.text = amount
+            }
 
         }
         

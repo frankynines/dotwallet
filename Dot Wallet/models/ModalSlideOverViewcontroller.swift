@@ -38,14 +38,17 @@ class ModalSlideOverViewcontroller: UIViewController, UIScrollViewDelegate  {
         super.viewDidLayoutSubviews()
         self.ibo_containerScrollView?.frame = CGRect(origin: CGPoint(x: 0, y: self.view.frame.size.height), size: self.view.frame.size)
         
-        UIView.animate(withDuration: 0.35, delay: 0.1, options: .curveEaseOut, animations: {
-            self.ibo_containerScrollView?.frame = CGRect(origin: CGPoint(x: 0, y: -20), size: self.view.frame.size)
-        }) { (complete) in
-            
-            UIView.animate(withDuration: 0.15, animations: {
+        UIView.animate(
+            withDuration: 0.5,
+            delay: 0,
+            usingSpringWithDamping: CGFloat(0.85),
+            initialSpringVelocity: CGFloat(1.3),
+            options: UIViewAnimationOptions.allowUserInteraction,
+            animations: {
                 self.ibo_containerScrollView?.frame = CGRect(origin: CGPoint(x: 0, y: 0), size: self.view.frame.size)
             })
-        }
+        
+        
         
         print("viewlayedoutsub")
     }

@@ -16,9 +16,17 @@ protocol WalletPageViewControllerDelegate {
 class WalletPageViewController: UIPageViewController{
     var childDelegate:WalletPageViewControllerDelegate?
     
-    var pages = [UIViewController]()
+    lazy var pages: [UIViewController] = {
+        return [
+            self.getViewController(withIdentifier: "sb_TokenListViewController"),
+            self.getViewController(withIdentifier: "sb_CollectableListViewController"),
+            self.getViewController(withIdentifier: "sb_TransactionViewController")
+        ]
+    }()
+    
     var pageIndex = 0
     var currentVC:UIViewController?
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,14 +36,21 @@ class WalletPageViewController: UIPageViewController{
         
     }
     
+    fileprivate func getViewController(withIdentifier identifier: String) -> UIViewController {
+        return UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: identifier)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+    }
+    
     override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         if let firstVC = pages.first {
             setViewControllers([firstVC], direction: .forward, animated: true, completion: nil)
             pageIndex = 0
         }
-        
     }
-    
     func sayHello(){
         print("JELLO")
     }
@@ -76,7 +91,6 @@ extension WalletPageViewController: UIPageViewControllerDelegate {
     func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
 
         let index = pageViewController.viewControllers?.first?.view.tag
-        print(index)
         self.childDelegate?.walletPageCurrentPage(index: index!)
     }
 }

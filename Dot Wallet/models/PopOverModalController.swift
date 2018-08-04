@@ -37,10 +37,6 @@ class PopOverViewcontroller: UIViewController, UIScrollViewDelegate  {
     }
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        
-        
-//
-        
 
         self.ibo_containerScrollView?.transform = CGAffineTransform(scaleX: 0.8, y: 0.8)
         

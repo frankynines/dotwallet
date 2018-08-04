@@ -6,6 +6,49 @@
 //  Copyright © 2018 Ninth Industries. All rights reserved.
 //
 
+struct OErc721Token: Decodable {
+    let token_id:String?
+    let image_url:String?
+    let image_preview_url:String?
+    let name:String?
+    let description:String?
+    let external_link:String?
+    let asset_contract:ERC721Contract?
+    
+    enum CodingKeys: String, CodingKey {
+        
+        case token_id
+        case image_url
+        case image_preview_url
+        case name
+        case description
+        case external_link
+        case asset_contract
+        
+    }
+}
+
+struct ERC721Contract:Decodable {
+    
+    let address:String?
+    let name:String?
+    let symbol:String?
+    let image_url:String?
+    let featured_image_url:String?
+    let description:String?
+    let external_link:String?
+    
+    enum CodingKeys: String, CodingKey {
+        case address
+        case name
+        case symbol
+        case image_url
+        case featured_image_url
+        case description
+        case external_link
+    }
+}
+
 struct Erc721Token: Decodable {
     let id:Int?
     let token_id:String?

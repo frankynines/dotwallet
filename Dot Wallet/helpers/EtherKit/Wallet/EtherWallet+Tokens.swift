@@ -8,10 +8,11 @@
 
 import web3swift
 import SwiftyJSON
+import Cache
 
 public protocol TokenService {
     func getTokenMetaData(contractAddress: String, completion: @escaping (ERC20Token) -> ())
-    func getERC721Tokens(address:String, completion: @escaping ([JSON]?) -> ())
+    func getERC721Tokens(address:String, tokenAddress:String, page:String, completion: @escaping ([JSON]?) -> ())
     func getTokenImage(contractAddress:String, completion: @escaping (UIImage) -> ())
 }
 
@@ -57,37 +58,96 @@ extension EtherWallet: TokenService {
         return tokenImageSrcURL + contractAddress + ".png"
     }
     
+
     public func getTokenImage(contractAddress:String, completion: @escaping (UIImage) -> ()) {
+        
         let imageURL = self.getTokenImageURL(contractAddress: contractAddress)
         
         var image = UIImage()
-        
+        //Check if Image has Cache
         do {
-            let imgdata = try Data(contentsOf: URL(string: imageURL)!)
-            image =  UIImage(data: imgdata)!
+            image = (try storage.object(forKey: imageURL))
         } catch {
-            image = UIImage(named: "icon_token_erc20.png")!
+            //Create Image and Cache
+            do {
+                let imgdata = try Data(contentsOf: URL(string: imageURL)!)
+                image =  UIImage(data: imgdata)!
+                try storage.setObject(image, forKey: imageURL)
+                
+            } catch {
+                image = UIImage(named: "icon_token_erc20.png")!
+            }
         }
+        
+
         
         DispatchQueue.main.async {
             completion(image)
         }
     }
     
-    public func getERC721Tokens(address:String, completion: @escaping ([JSON]?) -> ()){
-        var url = URLComponents(string: "https://api.rarebits.io/v1/addresses/"+"0xe307c2d3236be4706e5d7601ee39f16d796d8195"+"/token_items")
+    public func getERC721Tokens(address:String, tokenAddress:String, page:String, completion: @escaping ([JSON]?) -> ()){
+        
+        let urlString = "https://api.opensea.io/api/v1/assets/"
+        let parameters = ["owner":address,
+                          "asset_contract_address":tokenAddress,
+                          "order_by": "token_id",
+                          "offset":page,
+                          "limit":"20"]
+        let headers = ["X-API-KEY": "1a4288c7a6114fcd85f3d88aa37af0cc"]
+
+        var urlComponents = URLComponents(string: urlString)
+
+        var queryItems = [URLQueryItem]()
+        for (key, value) in parameters {
+            queryItems.append(URLQueryItem(name: key, value: value))
+        }
+
+        urlComponents?.queryItems = queryItems
+
+        var request = URLRequest(url: (urlComponents?.url)!)
+        request.httpMethod = "GET"
+
+        for (key, value) in headers {
+            request.setValue(value, forHTTPHeaderField: key)
+        }
+
+        URLSession.shared.dataTask(with: request, completionHandler: {(data, response, error) -> Void in
+            if data == nil {
+                return
+            }
+            if (try? JSONSerialization.jsonObject(with: data!, options: .allowFragments) as? NSDictionary) != nil {
+                let json = JSON(data!)
+
+                let result = json["assets"].arrayValue
+                DispatchQueue.main.async {
+                    completion(result)
+                }
+            }
+        }).resume()
+
+        return
+//
+        // Code for Rarebits <3
+        var url = URLComponents(string: "https://api.rarebits.io/v1/addresses/"+"0x482bf6B13e31E11f9FdA36e86e3B4Cd313F109CC"+"/token_items")
         
         url?.queryItems = [
-            URLQueryItem(name: "api_key", value: "cc0a1c99-069c-4955-9ddd-a2f450aaa0f2")
+            URLQueryItem(name: "api_key", value: "cc0a1c99-069c-4955-9ddd-a2f450aaa0f2"),
+            URLQueryItem(name: "page-size", value: "20"),
+            URLQueryItem(name: "page", value: page),
         ]
         
+
         URLSession.shared.dataTask(with: (url?.url as URL?)!, completionHandler: {(data, response, error) -> Void in
             if data == nil {
                 return
             }
             if (try? JSONSerialization.jsonObject(with: data!, options: .allowFragments) as? NSDictionary) != nil {
                 let json = JSON(data!)
+                print(json["total_entries"].numberValue)
+                print()
                 let result = json["entries"].arrayValue
+                print(result.count)
                 DispatchQueue.main.async {
                     completion(result)
                 }

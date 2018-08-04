@@ -44,6 +44,8 @@
 		2F6CF99D210C6F070057A50C /* WalletContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F6CF99C210C6F070057A50C /* WalletContainerViewController.swift */; };
 		2F7678E8210B835B00919059 /* TransactionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F7678E7210B835B00919059 /* TransactionTableViewCell.swift */; };
 		2F7678EB210B840300919059 /* GradientHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F7678EA210B840300919059 /* GradientHelper.swift */; };
+		2F77A33821136C0400D06DB4 /* TokenDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F77A33721136C0400D06DB4 /* TokenDetailViewController.swift */; };
+		2F8537912115BBB2001872BD /* TokenListDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F8537902115BBB2001872BD /* TokenListDelegate.swift */; };
 		2FE75048210BC78C00AAD6E6 /* RoundButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FE75047210BC78C00AAD6E6 /* RoundButton.swift */; };
 		2FE75050210BFD9200AAD6E6 /* icon_plus.png in Resources */ = {isa = PBXBuildFile; fileRef = 2FE75049210BFD9000AAD6E6 /* icon_plus.png */; };
 		2FE75051210BFD9200AAD6E6 /* icon_tokens.png in Resources */ = {isa = PBXBuildFile; fileRef = 2FE7504A210BFD9000AAD6E6 /* icon_tokens.png */; };
@@ -120,6 +122,8 @@
 		2F6CF99C210C6F070057A50C /* WalletContainerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletContainerViewController.swift; sourceTree = "<group>"; };
 		2F7678E7210B835B00919059 /* TransactionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionTableViewCell.swift; sourceTree = "<group>"; };
 		2F7678EA210B840300919059 /* GradientHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientHelper.swift; sourceTree = "<group>"; };
+		2F77A33721136C0400D06DB4 /* TokenDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenDetailViewController.swift; sourceTree = "<group>"; };
+		2F8537902115BBB2001872BD /* TokenListDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenListDelegate.swift; sourceTree = "<group>"; };
 		2FE75047210BC78C00AAD6E6 /* RoundButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundButton.swift; sourceTree = "<group>"; };
 		2FE75049210BFD9000AAD6E6 /* icon_plus.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_plus.png; sourceTree = "<group>"; };
 		2FE7504A210BFD9000AAD6E6 /* icon_tokens.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_tokens.png; sourceTree = "<group>"; };
@@ -296,6 +300,7 @@
 		2F65C3E9210FB980008DC7A2 /* Token Page */ = {
 			isa = PBXGroup;
 			children = (
+				2F8537902115BBB2001872BD /* TokenListDelegate.swift */,
 				2F11AA78210C8DBF00790BAF /* CollectableListViewController.swift */,
 				2F2F74B221091E8200612CF4 /* TokenListViewController.swift */,
 			);
@@ -366,6 +371,7 @@
 		2F7678E6210B833F00919059 /* Wallet Display */ = {
 			isa = PBXGroup;
 			children = (
+				2F77A33621136BED00D06DB4 /* DetailVC */,
 				2F6CF99C210C6F070057A50C /* WalletContainerViewController.swift */,
 				2F11AA76210C89D200790BAF /* WalletPageViewController.swift */,
 				2F65C3E9210FB980008DC7A2 /* Token Page */,
@@ -383,6 +389,14 @@
 				2FF4A302210F210800C9EB89 /* StringHelpers.swift */,
 			);
 			path = Visual;
+			sourceTree = "<group>";
+		};
+		2F77A33621136BED00D06DB4 /* DetailVC */ = {
+			isa = PBXGroup;
+			children = (
+				2F77A33721136C0400D06DB4 /* TokenDetailViewController.swift */,
+			);
+			path = DetailVC;
 			sourceTree = "<group>";
 		};
 		59FCCE122EF5FD25E3AB61B4 /* Pods */ = {
@@ -662,8 +676,10 @@
 				2F0EFC7F21063937003EF740 /* WalletHomeViewController.swift in Sources */,
 				2F0EFCCC21072E38003EF740 /* TransactionViewController.swift in Sources */,
 				2F6CBD622109005B0026C858 /* WalletCardViewController.swift in Sources */,
+				2F8537912115BBB2001872BD /* TokenListDelegate.swift in Sources */,
 				2F0EFCC62106FE6F003EF740 /* EtherWallet+Account.swift in Sources */,
 				2F11AA7D210C9F7A00790BAF /* WalletDisplayContainer.swift in Sources */,
+				2F77A33821136C0400D06DB4 /* TokenDetailViewController.swift in Sources */,
 				2F0EFCC42106FE6F003EF740 /* EtherWallet+Transaction.swift in Sources */,
 				2F0EFC7D21063937003EF740 /* AppDelegate.swift in Sources */,
 				2F0EFCC32106FE6F003EF740 /* EtherWallet+Balance.swift in Sources */,
@@ -862,11 +878,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = L4843RP2R9;
+				DEVELOPMENT_TEAM = L2VDMMX4A7;
 				INFOPLIST_FILE = "Dot Wallet/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.ninthindustry.Dot-Wallet";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.frankyaguilar.dotwallet;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -879,11 +898,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = L4843RP2R9;
+				DEVELOPMENT_TEAM = L2VDMMX4A7;
 				INFOPLIST_FILE = "Dot Wallet/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.ninthindustry.Dot-Wallet";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.frankyaguilar.dotwallet;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -899,7 +921,11 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = L4843RP2R9;
 				INFOPLIST_FILE = "Dot WalletTests/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.ninthindustry.Dot-WalletTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
@@ -917,7 +943,11 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = L4843RP2R9;
 				INFOPLIST_FILE = "Dot WalletTests/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.ninthindustry.Dot-WalletTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
@@ -934,7 +964,11 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = L4843RP2R9;
 				INFOPLIST_FILE = "Dot WalletUITests/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.ninthindustry.Dot-WalletUITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
@@ -951,7 +985,11 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = L4843RP2R9;
 				INFOPLIST_FILE = "Dot WalletUITests/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.ninthindustry.Dot-WalletUITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;

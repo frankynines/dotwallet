@@ -11,9 +11,19 @@ import UIKit
 
 protocol WalletPageViewControllerDelegate {
     func walletPageCurrentPage(index:Int)
+    func tokenDidSelectERC721(token:OErc721Token)
+    func tokenDidSelectERC20(token:ERC20Token)
 }
 
 class WalletPageViewController: UIPageViewController{
+//    func tokenDidSelectERC20(token: ERC20Token) {
+//        print("Tapped Token")
+//    }
+//    
+//    func tokenDidSelectERC721(token: OErc721Token) {
+//        print("Tapp from PageViewController")
+//    }
+    
     var childDelegate:WalletPageViewControllerDelegate?
     
     lazy var pages: [UIViewController] = {
@@ -24,15 +34,14 @@ class WalletPageViewController: UIPageViewController{
         ]
     }()
     
-    var pageIndex = 0
-    var currentVC:UIViewController?
-    
+    var pageIndex = 0    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.dataSource = self
         self.delegate   = self
+        
         
     }
     
@@ -50,9 +59,12 @@ class WalletPageViewController: UIPageViewController{
             setViewControllers([firstVC], direction: .forward, animated: true, completion: nil)
             pageIndex = 0
         }
-    }
-    func sayHello(){
-        print("JELLO")
+        
+        let tokenVC = self.pages[PageViews.TokenPage.rawValue] as! TokenListViewController
+        tokenVC.delegate = childDelegate
+        
+        let collectionVC = self.pages[PageViews.CollectiblePage.rawValue] as! CollectableListViewController
+        collectionVC.delegate = childDelegate
     }
     
 }

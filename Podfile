@@ -9,6 +9,7 @@ target 'Dot Wallet' do
   pod 'QRCode'
   pod 'SwiftyJSON'
   pod 'Cache'
+
   pod 'web3swift', '~> 0.8.0'
   pod 'CryptoCurrencyKit'
 

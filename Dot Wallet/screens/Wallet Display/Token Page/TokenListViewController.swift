@@ -10,15 +10,11 @@ import Foundation
 import UIKit
 import Cache
 
-protocol WalletTokenViewControllerDelegate {
-    func walletTokenSelected(row:Int)
-    func walletTokenStretchHeader(rect:CGRect)
-}
 
 class TokenListViewController:UIViewController, UITableViewDelegate, UITableViewDataSource {
     
+    var delegate:WalletPageViewControllerDelegate?
     
-    var delegate: WalletTokenViewControllerDelegate?
     @IBOutlet var ibo_tableHeader:UILabel?
 
     
@@ -124,8 +120,7 @@ class TokenListViewController:UIViewController, UITableViewDelegate, UITableView
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        self.delegate?.walletTokenSelected(row: indexPath.row)
-        print("TAP")
+        self.delegate?.tokenDidSelectERC20(token: self.tokens[indexPath.row])
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {

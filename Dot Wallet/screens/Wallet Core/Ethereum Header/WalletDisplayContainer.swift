@@ -8,7 +8,17 @@
 
 import Foundation
 import UIKit
-class WalletDisplayViewController:UIViewController, UIPageViewControllerDelegate, UIScrollViewDelegate, WalletPageViewControllerDelegate {
+
+enum PageViews:Int {
+    case TokenPage = 0
+    case CollectiblePage = 1
+    case TXHistory = 2
+}
+class WalletDisplayViewController:UIViewController, UIPageViewControllerDelegate, UIScrollViewDelegate, WalletPageViewControllerDelegate, PopOverViewcontrollerDelegate, TokenDelegate{
+    func tokenDidSelectERC20(token: ERC20Token) {
+        //
+    }
+    
     
     @IBOutlet weak var ibo_walletName:UILabel?
     @IBOutlet weak var iboBalance: UILabel?
@@ -75,8 +85,6 @@ class WalletDisplayViewController:UIViewController, UIPageViewControllerDelegate
                        completion: { Void in()  }
         )
         
-        //guard button.tag == self.pageIndex else {return}
-        
         if button.tag < self.pageIndex {
             self.ibo_walletPageController.setViewControllers([pages[button.tag]],
                                                              direction: .reverse,
@@ -109,12 +117,52 @@ class WalletDisplayViewController:UIViewController, UIPageViewControllerDelegate
             self.pages = self.ibo_walletPageController.pages
             self.ibo_walletPageController.childDelegate = self
         }
-       
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         if scrollView.contentOffset.y < -40 {
             self.iba_dismiss()
+        }
+    }
+    
+    //TOKEN SELECT
+    lazy var tokenDetail: TokenDetailViewController = {
+        return storyboard?.instantiateViewController(withIdentifier: "sb_TokenDetailViewController") as! TokenDetailViewController
+    }()
+    
+    
+    func tokenDidSelectERC721(token:OErc721Token) {
+        print(token)
+        self.presentPopView(vc: tokenDetail, token:token)
+    }
+    
+    // DISPLAY POPUP
+    var popModalController:PopOverViewcontroller!
+    
+    func presentPopView(vc:UIViewController, token:OErc721Token){
+        
+        guard popModalController == nil else {
+            return
+        }
+        
+        self.popModalController = PopOverViewcontroller()
+        self.popModalController = self.storyboard?.instantiateViewController(withIdentifier: "sb_PopOverViewcontroller") as! PopOverViewcontroller
+        self.popModalController.modalTitle = "Collectible"
+        self.popModalController.view.frame = self.view.frame
+        self.popModalController.delegate = self
+        let childView = vc as! TokenDetailViewController
+        childView.erc721Token = token
+        //Assign Child Class
+        self.popModalController.viewController = childView
+        
+        self.view.addSubview(self.popModalController.view)
+        
+    }
+    func popOverDismiss() {
+        self.popModalController.animateModalOut {
+            self.popModalController.view.removeFromSuperview()
+            self.popModalController.removeFromParentViewController()
+            self.popModalController = nil
         }
     }
     

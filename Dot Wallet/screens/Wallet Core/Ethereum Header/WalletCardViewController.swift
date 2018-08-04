@@ -11,7 +11,7 @@ import UIKit
 import QRCode
 import Hero
 import web3swift
-class WalletCardViewController:UIViewController, UIScrollViewDelegate, ModalSlideOverViewcontrollerDelegate, PopOverViewcontrollerDelegate{
+class WalletCardViewController:UIViewController, UIScrollViewDelegate, ModalSlideOverViewcontrollerDelegate{
     
     //HEADER
     @IBOutlet var ibo_scrollview:UIScrollView?
@@ -100,7 +100,7 @@ class WalletCardViewController:UIViewController, UIScrollViewDelegate, ModalSlid
         
         // set up activity view controller
         let textToShare = [ "Send me some Eth: ", EtherWallet.account.address ]
-        let activityViewController = UIActivityViewController(activityItems: textToShare as [Any], applicationActivities: nil)
+        let activityViewController = UIActivityViewController(activityItems: textToShare, applicationActivities: nil)
         activityViewController.popoverPresentationController?.sourceView = self.view // so that iPads won't crash
         
         // exclude some activity types from the list (optional)
@@ -172,33 +172,7 @@ class WalletCardViewController:UIViewController, UIScrollViewDelegate, ModalSlid
     
 
     
-    var popModalController:PopOverViewcontroller!
     
-    @IBAction func iba_presentPopView(){
-        
-        guard popModalController == nil else {
-            return
-        }
-        
-        self.popModalController = PopOverViewcontroller()
-        self.popModalController = self.storyboard?.instantiateViewController(withIdentifier: "sb_PopOverViewcontroller") as! PopOverViewcontroller
-        self.popModalController.modalTitle = "Send Ethereum"
-        self.popModalController.view.frame = self.view.frame
-        self.popModalController.delegate = self
-        
-        //Assign Child Class
-        self.popModalController.viewController = sendVC
-        
-        self.view.addSubview(self.popModalController.view)
-        
-    }
-    func popOverDismiss() {
-        self.popModalController.animateModalOut {
-            self.popModalController.view.removeFromSuperview()
-            self.popModalController.removeFromParentViewController()
-            self.popModalController = nil
-        }
-    }
     
     
     

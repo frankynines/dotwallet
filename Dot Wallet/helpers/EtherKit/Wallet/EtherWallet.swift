@@ -1,6 +1,6 @@
 import web3swift
 import BigInt
-
+import Cache
 public class EtherWallet {
     private static let shared = EtherWallet()
     public static let account: AccountService = EtherWallet.shared
@@ -18,10 +18,20 @@ public class EtherWallet {
     var options: Web3Options
     var keystoreCache: EthereumKeystoreV3?
     
+    public let imageStorage = try? Storage(
+        diskConfig: DiskConfig(name: "Tokens"),
+        memoryConfig: MemoryConfig(expiry: .never, countLimit: 10, totalCostLimit: 10),
+        transformer: TransformerFactory.forImage()
+    )
+    var storage:Storage<UIImage>
+    
     private init() {
         options = Web3Options.defaultOptions()
         options.gasLimit = BigUInt(defaultGasLimitForTokenTransfer)
+        storage = (imageStorage?.transformImage())!
+
         setupOptionsFrom()
+
     }
     
     func setupOptionsFrom() {

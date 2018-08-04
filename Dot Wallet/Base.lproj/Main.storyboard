@@ -670,21 +670,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <webView userInteractionEnabled="NO" contentMode="scaleAspectFit" scalesPageToFit="YES" translatesAutoresizingMaskIntoConstraints="NO" id="AGe-Le-G39">
-                                <rect key="frame" x="40" y="146.5" width="295" height="294"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" secondItem="AGe-Le-G39" secondAttribute="height" multiplier="1:1" constant="1" id="bmb-Mi-d3N"/>
-                                </constraints>
-                            </webView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ethereum" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cuC-JC-NXZ">
-                                <rect key="frame" x="20" y="91.5" width="335" height="35"/>
-                                <fontDescription key="fontDescription" name="Verdana" family="Verdana" pointSize="28"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PPs-zF-JvB" customClass="RoundButton" customModule="Dot_Wallet" customModuleProvider="target">
-                                <rect key="frame" x="40" y="547" width="295" height="40"/>
+                                <rect key="frame" x="40" y="557" width="295" height="40"/>
                                 <color key="backgroundColor" red="0.56862745100000001" green="0.50588235290000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="Vg7-wi-atG"/>
@@ -709,7 +696,7 @@
                                 </constraints>
                                 <state key="normal" title="View on Opensea.io"/>
                                 <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="boolean" keyPath="hasBorder" value="YES"/>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="hasBorder" value="NO"/>
                                     <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                         <real key="value" value="20"/>
                                     </userDefinedRuntimeAttribute>
@@ -719,31 +706,46 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="This is some important information about this token" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="srU-yk-cQr">
-                                <rect key="frame" x="40" y="460.5" width="295" height="66.5"/>
+                                <rect key="frame" x="40" y="434" width="295" height="113"/>
                                 <fontDescription key="fontDescription" name="Verdana" family="Verdana" pointSize="12"/>
                                 <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ethereum" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="22" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cuC-JC-NXZ">
+                                <rect key="frame" x="20" y="40" width="335" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="cbv-Wo-kzQ"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Verdana" family="Verdana" pointSize="28"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <webView userInteractionEnabled="NO" contentMode="scaleAspectFit" scalesPageToFit="YES" translatesAutoresizingMaskIntoConstraints="NO" id="AGe-Le-G39">
+                                <rect key="frame" x="40" y="100" width="315" height="314"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="AGe-Le-G39" secondAttribute="height" multiplier="1:1" constant="1" id="bmb-Mi-d3N"/>
+                                </constraints>
+                            </webView>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="en9-Cy-uQB" firstAttribute="trailing" secondItem="cuC-JC-NXZ" secondAttribute="trailing" constant="20" id="255-Rg-w2w"/>
                             <constraint firstItem="srU-yk-cQr" firstAttribute="leading" secondItem="en9-Cy-uQB" secondAttribute="leading" constant="40" id="4rq-mN-hJl"/>
                             <constraint firstItem="en9-Cy-uQB" firstAttribute="trailing" secondItem="uzh-vI-bqV" secondAttribute="trailing" constant="40" id="7PT-x0-N0V"/>
-                            <constraint firstItem="AGe-Le-G39" firstAttribute="top" secondItem="cuC-JC-NXZ" secondAttribute="bottom" constant="20" id="DvD-Qe-lTn"/>
-                            <constraint firstItem="PPs-zF-JvB" firstAttribute="top" secondItem="srU-yk-cQr" secondAttribute="bottom" constant="20" id="Elx-yP-Jhf"/>
+                            <constraint firstItem="cuC-JC-NXZ" firstAttribute="top" secondItem="en9-Cy-uQB" secondAttribute="top" constant="20" id="AWU-i4-xBR"/>
+                            <constraint firstItem="PPs-zF-JvB" firstAttribute="top" secondItem="srU-yk-cQr" secondAttribute="bottom" constant="10" id="Elx-yP-Jhf"/>
                             <constraint firstItem="en9-Cy-uQB" firstAttribute="trailing" secondItem="PPs-zF-JvB" secondAttribute="trailing" constant="40" id="G0q-lX-g0t"/>
-                            <constraint firstItem="AGe-Le-G39" firstAttribute="centerX" secondItem="iW9-np-Oy1" secondAttribute="centerX" id="HXL-XX-mV4"/>
                             <constraint firstItem="cuC-JC-NXZ" firstAttribute="leading" secondItem="en9-Cy-uQB" secondAttribute="leading" constant="20" id="Lxp-gn-NXZ"/>
-                            <constraint firstItem="uzh-vI-bqV" firstAttribute="top" secondItem="PPs-zF-JvB" secondAttribute="bottom" constant="20" id="NQ3-Tk-BuZ"/>
-                            <constraint firstItem="AGe-Le-G39" firstAttribute="centerY" secondItem="iW9-np-Oy1" secondAttribute="centerY" constant="-20" id="NRD-vg-pQc"/>
+                            <constraint firstItem="uzh-vI-bqV" firstAttribute="top" secondItem="PPs-zF-JvB" secondAttribute="bottom" constant="10" id="NQ3-Tk-BuZ"/>
                             <constraint firstItem="uzh-vI-bqV" firstAttribute="leading" secondItem="en9-Cy-uQB" secondAttribute="leading" constant="40" id="Sri-BN-4hS"/>
                             <constraint firstItem="en9-Cy-uQB" firstAttribute="trailing" secondItem="srU-yk-cQr" secondAttribute="trailing" constant="40" id="UKF-16-Rx3"/>
+                            <constraint firstItem="AGe-Le-G39" firstAttribute="top" secondItem="cuC-JC-NXZ" secondAttribute="bottom" constant="20" id="Zhc-3u-bG5"/>
                             <constraint firstItem="AGe-Le-G39" firstAttribute="leading" secondItem="en9-Cy-uQB" secondAttribute="leading" constant="40" id="bkO-e8-EJ9"/>
                             <constraint firstItem="en9-Cy-uQB" firstAttribute="bottom" secondItem="uzh-vI-bqV" secondAttribute="bottom" constant="20" id="gql-6q-Dt9"/>
                             <constraint firstItem="PPs-zF-JvB" firstAttribute="leading" secondItem="en9-Cy-uQB" secondAttribute="leading" constant="40" id="j71-qF-mGu"/>
-                            <constraint firstItem="srU-yk-cQr" firstAttribute="top" secondItem="AGe-Le-G39" secondAttribute="bottom" constant="20" id="uk0-Je-dca"/>
                             <constraint firstItem="en9-Cy-uQB" firstAttribute="trailing" secondItem="AGe-Le-G39" secondAttribute="trailing" constant="20" id="v9l-VW-kMv"/>
+                            <constraint firstItem="srU-yk-cQr" firstAttribute="top" secondItem="AGe-Le-G39" secondAttribute="bottom" constant="20" id="zQ1-QQ-jQX"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="en9-Cy-uQB"/>
                     </view>

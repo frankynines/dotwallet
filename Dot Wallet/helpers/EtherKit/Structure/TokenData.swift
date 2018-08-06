@@ -47,7 +47,44 @@ struct ERC721Contract:Decodable {
         case description
         case external_link
     }
+    
 }
+public struct ERC20Token:Codable {
+    let name:String?
+    let symbol:String?
+    let contractAddress:String?
+    let decimal:String?
+    let imageURL:String?
+    let balance:String?
+    
+    enum CodingKeys: String, CodingKey {
+        case name
+        case symbol
+        case contractAddress
+        case decimal
+        case imageURL
+        case balance
+    }
+}
+
+struct OERC20Token: Codable {
+    let decimals:Int?
+    let ens_address:String?
+    let name: String?
+    let website:String?
+    let address:String?
+    let symbol:String?
+    
+    enum CodingKeys:String, CodingKey {
+        case decimals
+        case ens_address
+        case name
+        case website
+        case address
+        case symbol
+    }
+}
+
 
 struct Erc721Token: Decodable {
     let id:Int?

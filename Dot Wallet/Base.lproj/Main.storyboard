@@ -770,17 +770,26 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pkz-ve-XEZ" customClass="GradientView" customModule="Dot_Wallet" customModuleProvider="target">
                                 <rect key="frame" x="10" y="30" width="355" height="637"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="10 Tokens" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hi3-rU-PKU">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0 Tokens" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hi3-rU-PKU">
                                         <rect key="frame" x="20" y="20" width="315" height="14"/>
                                         <fontDescription key="fontDescription" name="Menlo-Regular" family="Menlo" pointSize="12"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WkB-fv-KcK">
+                                        <rect key="frame" x="290" y="10" width="55" height="30"/>
+                                        <state key="normal" title="Manage"/>
+                                        <connections>
+                                            <action selector="iba_manageTokens" destination="WDM-FM-6TF" eventType="touchUpInside" id="Uda-Ua-FgQ"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="WkB-fv-KcK" secondAttribute="trailing" constant="10" id="CEA-am-8ea"/>
                                     <constraint firstItem="Hi3-rU-PKU" firstAttribute="leading" secondItem="pkz-ve-XEZ" secondAttribute="leading" constant="20" id="Uig-7N-v1x"/>
                                     <constraint firstAttribute="trailing" secondItem="Hi3-rU-PKU" secondAttribute="trailing" constant="20" id="WUw-eB-6wQ"/>
+                                    <constraint firstItem="WkB-fv-KcK" firstAttribute="top" secondItem="pkz-ve-XEZ" secondAttribute="top" constant="10" id="ae6-Km-Eh5"/>
                                     <constraint firstItem="Hi3-rU-PKU" firstAttribute="top" secondItem="pkz-ve-XEZ" secondAttribute="top" constant="20" id="fLj-WQ-Wg1"/>
                                 </constraints>
                                 <userDefinedRuntimeAttributes>
@@ -919,6 +928,118 @@
             </objects>
             <point key="canvasLocation" x="837.60000000000002" y="1223.8380809595203"/>
         </scene>
+        <!--Add Token View Controller-->
+        <scene sceneID="9YR-yT-J1r">
+            <objects>
+                <viewController storyboardIdentifier="sb_AddTokenViewController" id="WFZ-gL-9L7" customClass="AddTokenViewController" customModule="Dot_Wallet" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="VeD-jU-d09">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="65" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="fBf-BH-m5n">
+                                <rect key="frame" x="0.0" y="120" width="375" height="547"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" rowHeight="81" id="qgO-Tm-yR4" customClass="TokenListCell" customModule="Dot_Wallet" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="81"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="qgO-Tm-yR4" id="M9b-ZC-s7q">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="80.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="COp-A1-0dy">
+                                                    <rect key="frame" x="9" y="8" width="50" height="50"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hvn-9v-RhJ">
+                                                    <rect key="frame" x="67" y="34" width="298" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mFw-Qw-wGd">
+                                                    <rect key="frame" x="67" y="12" width="298" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                    <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Qhe-A1-GRY">
+                                                    <rect key="frame" x="311" y="25" width="49" height="31"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <connections>
+                                                        <action selector="switchTokenWithSwtch:" destination="qgO-Tm-yR4" eventType="valueChanged" id="W0K-kf-2LM"/>
+                                                    </connections>
+                                                </switch>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="iboSwitch" destination="Qhe-A1-GRY" id="cNd-q7-qUj"/>
+                                            <outlet property="iboTokenImage" destination="COp-A1-0dy" id="ORj-SZ-hlP"/>
+                                            <outlet property="iboTokenName" destination="Hvn-9v-RhJ" id="WRh-B5-N9Z"/>
+                                            <outlet property="iboTokenSymbol" destination="mFw-Qw-wGd" id="mDg-ft-eIB"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="WFZ-gL-9L7" id="imD-B9-bxm"/>
+                                    <outlet property="delegate" destination="WFZ-gL-9L7" id="XMy-Kj-50A"/>
+                                </connections>
+                            </tableView>
+                            <navigationBar contentMode="scaleToFill" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="G69-vI-mLm">
+                                <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                                <items>
+                                    <navigationItem title="Title" id="rFj-F1-7RV">
+                                        <barButtonItem key="leftBarButtonItem" title="Clear" style="plain" id="OeH-Sj-unb">
+                                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="X9k-A1-dx0">
+                                                <rect key="frame" x="16" y="7" width="83" height="30"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <state key="normal" title="Clear"/>
+                                                <connections>
+                                                    <action selector="iba_clearCache" destination="WFZ-gL-9L7" eventType="touchUpInside" id="NuM-py-bL0"/>
+                                                </connections>
+                                            </button>
+                                        </barButtonItem>
+                                        <barButtonItem key="rightBarButtonItem" title="Save" id="SlI-PE-DNa">
+                                            <connections>
+                                                <action selector="iba_dismiss" destination="WFZ-gL-9L7" id="Txf-xB-vU1"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                            <searchBar contentMode="redraw" text="" placeholder="Token Name" translatesAutoresizingMaskIntoConstraints="NO" id="wzc-xd-G9A">
+                                <rect key="frame" x="0.0" y="64" width="375" height="56"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="WFZ-gL-9L7" id="jnq-b5-LKV"/>
+                                </connections>
+                            </searchBar>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="G69-vI-mLm" firstAttribute="leading" secondItem="mQG-bF-INK" secondAttribute="leading" id="E1D-bD-Hxr"/>
+                            <constraint firstItem="fBf-BH-m5n" firstAttribute="leading" secondItem="mQG-bF-INK" secondAttribute="leading" id="E3C-Er-6t5"/>
+                            <constraint firstItem="wzc-xd-G9A" firstAttribute="trailing" secondItem="mQG-bF-INK" secondAttribute="trailing" id="JWf-cZ-fHS"/>
+                            <constraint firstItem="G69-vI-mLm" firstAttribute="trailing" secondItem="mQG-bF-INK" secondAttribute="trailing" id="Od2-Kv-nFu"/>
+                            <constraint firstItem="fBf-BH-m5n" firstAttribute="bottom" secondItem="mQG-bF-INK" secondAttribute="bottom" id="Wlt-bk-aSd"/>
+                            <constraint firstItem="fBf-BH-m5n" firstAttribute="top" secondItem="wzc-xd-G9A" secondAttribute="bottom" id="c2A-TJ-8a5"/>
+                            <constraint firstItem="wzc-xd-G9A" firstAttribute="leading" secondItem="mQG-bF-INK" secondAttribute="leading" id="fSB-Ll-67m"/>
+                            <constraint firstItem="fBf-BH-m5n" firstAttribute="trailing" secondItem="mQG-bF-INK" secondAttribute="trailing" id="pNp-QJ-eKt"/>
+                            <constraint firstItem="G69-vI-mLm" firstAttribute="top" secondItem="mQG-bF-INK" secondAttribute="top" id="z2U-nq-RKj"/>
+                            <constraint firstItem="wzc-xd-G9A" firstAttribute="top" secondItem="G69-vI-mLm" secondAttribute="bottom" id="zzW-un-V1l"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="mQG-bF-INK"/>
+                    </view>
+                    <connections>
+                        <outlet property="ibo_tableView" destination="fBf-BH-m5n" id="wMR-72-bUG"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Cky-Gq-P3V" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="856.79999999999995" y="1902.9985007496252"/>
+        </scene>
         <!--Wallet Page View Controller-->
         <scene sceneID="BWc-hc-4Wb">
             <objects>
@@ -938,7 +1059,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YVN-D6-zcQ" customClass="GradientView" customModule="Dot_Wallet" customModuleProvider="target">
                                 <rect key="frame" x="10" y="30" width="355" height="637"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Collectables" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PVB-wR-1BF">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Collectibles" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PVB-wR-1BF">
                                         <rect key="frame" x="20" y="20" width="315" height="14"/>
                                         <fontDescription key="fontDescription" name="Menlo-Regular" family="Menlo" pointSize="12"/>
                                         <nil key="textColor"/>

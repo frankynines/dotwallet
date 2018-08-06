@@ -42,6 +42,7 @@
 		2F6CBD5B2108B7FC0026C858 /* EtherWallet+Tokens.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F6CBD5A2108B7FC0026C858 /* EtherWallet+Tokens.swift */; };
 		2F6CBD622109005B0026C858 /* WalletCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F6CBD612109005B0026C858 /* WalletCardViewController.swift */; };
 		2F6CF99D210C6F070057A50C /* WalletContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F6CF99C210C6F070057A50C /* WalletContainerViewController.swift */; };
+		2F72E28C2116E6DF001EAA2B /* AddTokenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F72E28B2116E6DF001EAA2B /* AddTokenViewController.swift */; };
 		2F7678E8210B835B00919059 /* TransactionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F7678E7210B835B00919059 /* TransactionTableViewCell.swift */; };
 		2F7678EB210B840300919059 /* GradientHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F7678EA210B840300919059 /* GradientHelper.swift */; };
 		2F77A33821136C0400D06DB4 /* TokenDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F77A33721136C0400D06DB4 /* TokenDetailViewController.swift */; };
@@ -120,6 +121,7 @@
 		2F6CBD5A2108B7FC0026C858 /* EtherWallet+Tokens.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EtherWallet+Tokens.swift"; sourceTree = "<group>"; };
 		2F6CBD612109005B0026C858 /* WalletCardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletCardViewController.swift; sourceTree = "<group>"; };
 		2F6CF99C210C6F070057A50C /* WalletContainerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletContainerViewController.swift; sourceTree = "<group>"; };
+		2F72E28B2116E6DF001EAA2B /* AddTokenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTokenViewController.swift; sourceTree = "<group>"; };
 		2F7678E7210B835B00919059 /* TransactionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionTableViewCell.swift; sourceTree = "<group>"; };
 		2F7678EA210B840300919059 /* GradientHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientHelper.swift; sourceTree = "<group>"; };
 		2F77A33721136C0400D06DB4 /* TokenDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenDetailViewController.swift; sourceTree = "<group>"; };
@@ -300,9 +302,9 @@
 		2F65C3E9210FB980008DC7A2 /* Token Page */ = {
 			isa = PBXGroup;
 			children = (
-				2F8537902115BBB2001872BD /* TokenListDelegate.swift */,
-				2F11AA78210C8DBF00790BAF /* CollectableListViewController.swift */,
+				2F72E28A2116E6D0001EAA2B /* AddToken */,
 				2F2F74B221091E8200612CF4 /* TokenListViewController.swift */,
+				2F11AA78210C8DBF00790BAF /* CollectableListViewController.swift */,
 			);
 			path = "Token Page";
 			sourceTree = "<group>";
@@ -330,6 +332,15 @@
 				2F7678E5210B832400919059 /* Ethereum Header */,
 			);
 			path = "Wallet Core";
+			sourceTree = "<group>";
+		};
+		2F72E28A2116E6D0001EAA2B /* AddToken */ = {
+			isa = PBXGroup;
+			children = (
+				2F72E28B2116E6DF001EAA2B /* AddTokenViewController.swift */,
+				2F8537902115BBB2001872BD /* TokenListDelegate.swift */,
+			);
+			path = AddToken;
 			sourceTree = "<group>";
 		};
 		2F7678E2210B826B00919059 /* models */ = {
@@ -673,6 +684,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2F72E28C2116E6DF001EAA2B /* AddTokenViewController.swift in Sources */,
 				2F0EFC7F21063937003EF740 /* WalletHomeViewController.swift in Sources */,
 				2F0EFCCC21072E38003EF740 /* TransactionViewController.swift in Sources */,
 				2F6CBD622109005B0026C858 /* WalletCardViewController.swift in Sources */,

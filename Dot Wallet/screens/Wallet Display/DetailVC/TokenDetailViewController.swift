@@ -24,6 +24,8 @@ class TokenDetailViewController:UIViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        print("View will disapeear")
+        self.ibo_webview?.loadHTMLString("about:blank", baseURL: nil)
     }
     
     override func viewWillAppear(_ animated: Bool) {

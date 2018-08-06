@@ -14,6 +14,8 @@ public protocol TokenService {
     func getTokenMetaData(contractAddress: String, completion: @escaping (ERC20Token) -> ())
     func getERC721Tokens(address:String, tokenAddress:String, page:String, completion: @escaping ([JSON]?) -> ())
     func getTokenImage(contractAddress:String, completion: @escaping (UIImage) -> ())
+    
+    func getERC20TokenList(url:String, completion: @escaping ([JSON]?) -> ())
 }
 
 extension EtherWallet: TokenService {
@@ -56,6 +58,24 @@ extension EtherWallet: TokenService {
     
     public func getTokenImageURL(contractAddress:String) -> String {
         return tokenImageSrcURL + contractAddress + ".png"
+    }
+    
+    public func getERC20TokenList(url:String, completion: @escaping ([JSON]?) -> ()){
+        
+        let request = URLRequest(url: URL(string: url)!)
+        URLSession.shared.dataTask(with: request, completionHandler: {(data, response, error) -> Void in
+            if data == nil {
+                return
+            }
+            if (try? JSONSerialization.jsonObject(with: data!, options: .allowFragments) as? NSDictionary) != nil {
+                let json = JSON(data!)
+                let result = json.arrayValue
+                
+                DispatchQueue.main.async {
+                    completion(result)
+                }
+            }
+        }).resume()
     }
     
 

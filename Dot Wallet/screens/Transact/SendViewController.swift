@@ -11,7 +11,7 @@ import UIKit
 import QRCodeReader
 import AVFoundation
 
-class SendViewController: UITableViewController, QRCodeReaderViewControllerDelegate {
+class SendViewController: UIViewController, QRCodeReaderViewControllerDelegate {
     
     @IBOutlet weak var ibo_balance:UILabel?
     @IBOutlet weak var ibo_walletName:UILabel?
@@ -25,8 +25,7 @@ class SendViewController: UITableViewController, QRCodeReaderViewControllerDeleg
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.tableView.sectionHeaderHeight = 0
-        self.tableView.sectionFooterHeight = 0
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {

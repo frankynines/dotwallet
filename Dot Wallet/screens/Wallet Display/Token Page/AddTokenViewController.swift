@@ -77,7 +77,7 @@ class AddTokenViewController:UIViewController, UITableViewDelegate, UITableViewD
         
         print("Clear Cache")
         do {
-            try? userStorage?.removeObject(forKey: "UserTokens")
+            try? userStorage?.removeObject(forKey: EtherWallet.account.address!)
         } catch {
             print(error.localizedDescription)
         }
@@ -102,7 +102,10 @@ class AddTokenViewController:UIViewController, UITableViewDelegate, UITableViewD
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
+        if !searchActive {
         return 2
+        }
+        return 1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -148,6 +151,7 @@ class TokenListCell:UITableViewCell {
     @IBOutlet var iboTokenImage:UIImageView?
     @IBOutlet var iboTokenName:UILabel?
     @IBOutlet var iboTokenSymbol:UILabel?
+    @IBOutlet var iboTokenAddress:UILabel?
     @IBOutlet var iboSwitch:UISwitch?
     
     var tokenAddress:String!
@@ -160,6 +164,7 @@ class TokenListCell:UITableViewCell {
         self.iboTokenName?.text = token.name
         self.iboTokenSymbol?.text = token.symbol
         self.iboTokenImage?.image = nil
+        self.iboTokenAddress?.text = token.address
         self.tokenAddress = token.address
         
         iboSwitch?.isOn = false

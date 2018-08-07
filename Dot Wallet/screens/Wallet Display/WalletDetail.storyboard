@@ -103,7 +103,7 @@
                                     <constraint firstAttribute="trailing" secondItem="f7g-Pv-G3Y" secondAttribute="trailing" id="Pdf-ER-CoC"/>
                                     <constraint firstItem="f7g-Pv-G3Y" firstAttribute="top" secondItem="ahP-ji-iyw" secondAttribute="top" id="Wxo-6y-p7j"/>
                                     <constraint firstAttribute="bottom" secondItem="f7g-Pv-G3Y" secondAttribute="bottom" id="cMc-5D-dFT"/>
-                                    <constraint firstAttribute="height" constant="110" id="upW-L1-fVd"/>
+                                    <constraint firstAttribute="height" constant="100" id="upW-L1-fVd"/>
                                 </constraints>
                             </scrollView>
                             <containerView opaque="NO" contentMode="scaleToFill" restorationIdentifier="sb_TokenDisplayViewController" translatesAutoresizingMaskIntoConstraints="NO" id="ndt-tm-Yes">
@@ -158,7 +158,7 @@
                                     <constraint firstItem="h4Z-YM-swx" firstAttribute="top" secondItem="byl-y7-2bI" secondAttribute="top" constant="10" id="Ibk-HH-n7J"/>
                                     <constraint firstItem="Bro-Ob-thx" firstAttribute="top" secondItem="byl-y7-2bI" secondAttribute="top" constant="10" id="PSD-7u-DRW"/>
                                     <constraint firstItem="h4Z-YM-swx" firstAttribute="leading" secondItem="byl-y7-2bI" secondAttribute="leading" constant="60" id="lAI-e5-dUA"/>
-                                    <constraint firstAttribute="height" constant="110" id="xFc-4Z-A6L"/>
+                                    <constraint firstAttribute="height" constant="115" id="xFc-4Z-A6L"/>
                                 </constraints>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="color" keyPath="topColor">

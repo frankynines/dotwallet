@@ -127,20 +127,18 @@ class WalletDisplayViewController:UIViewController, UIPageViewControllerDelegate
     }
     
     //TOKEN SELECT
-    lazy var tokenDetail: TokenDetailViewController = {
-        return UIStoryboard(name: "Collectibles", bundle: nil).instantiateViewController(withIdentifier: "sb_TokenDetailViewController") as! TokenDetailViewController
-    }()
+    var tokenDetail: TokenDetailViewController!
     
     
     func tokenDidSelectERC721(token:OErc721Token) {
         print(token)
-        self.presentPopView(vc: tokenDetail, token:token)
+        self.presentPopView( token:token)
     }
     
     // DISPLAY POPUP
     var popModalController:PopOverViewcontroller!
     
-    func presentPopView(vc:UIViewController, token:OErc721Token){
+    func presentPopView(token:OErc721Token){
         
         guard popModalController == nil else {
             return
@@ -151,10 +149,10 @@ class WalletDisplayViewController:UIViewController, UIPageViewControllerDelegate
         self.popModalController.modalTitle = "Collectible"
         self.popModalController.view.frame = self.view.frame
         self.popModalController.delegate = self
-        let childView = vc as! TokenDetailViewController
-        childView.erc721Token = token
+        self.tokenDetail = UIStoryboard(name: "Collectibles", bundle: nil).instantiateViewController(withIdentifier: "sb_TokenDetailViewController") as! TokenDetailViewController
+        self.tokenDetail.erc721Token = token
         //Assign Child Class
-        self.popModalController.viewController = childView
+        self.popModalController.viewController = self.tokenDetail
         
         self.view.addSubview(self.popModalController.view)
         
@@ -164,6 +162,7 @@ class WalletDisplayViewController:UIViewController, UIPageViewControllerDelegate
             self.popModalController.view.removeFromSuperview()
             self.popModalController.removeFromParentViewController()
             self.popModalController = nil
+            self.tokenDetail = nil
         }
     }
     

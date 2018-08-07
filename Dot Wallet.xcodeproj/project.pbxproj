@@ -51,6 +51,7 @@
 		2FA5E2F921197B6900A4406E /* ModalControllers.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2FA5E2F821197B6900A4406E /* ModalControllers.storyboard */; };
 		2FA5E2FB21197D8600A4406E /* Collectibles.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2FA5E2FA21197D8600A4406E /* Collectibles.storyboard */; };
 		2FA5E2FD211981B900A4406E /* ERC20Tokens.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2FA5E2FC211981B900A4406E /* ERC20Tokens.storyboard */; };
+		2FA5E3002119834800A4406E /* TokenStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FA5E2FF2119834800A4406E /* TokenStorage.swift */; };
 		2FE75048210BC78C00AAD6E6 /* RoundButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FE75047210BC78C00AAD6E6 /* RoundButton.swift */; };
 		2FE75050210BFD9200AAD6E6 /* icon_plus.png in Resources */ = {isa = PBXBuildFile; fileRef = 2FE75049210BFD9000AAD6E6 /* icon_plus.png */; };
 		2FE75051210BFD9200AAD6E6 /* icon_tokens.png in Resources */ = {isa = PBXBuildFile; fileRef = 2FE7504A210BFD9000AAD6E6 /* icon_tokens.png */; };
@@ -134,6 +135,7 @@
 		2FA5E2F821197B6900A4406E /* ModalControllers.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ModalControllers.storyboard; sourceTree = "<group>"; };
 		2FA5E2FA21197D8600A4406E /* Collectibles.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Collectibles.storyboard; sourceTree = "<group>"; };
 		2FA5E2FC211981B900A4406E /* ERC20Tokens.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ERC20Tokens.storyboard; sourceTree = "<group>"; };
+		2FA5E2FF2119834800A4406E /* TokenStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenStorage.swift; sourceTree = "<group>"; };
 		2FE75047210BC78C00AAD6E6 /* RoundButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundButton.swift; sourceTree = "<group>"; };
 		2FE75049210BFD9000AAD6E6 /* icon_plus.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_plus.png; sourceTree = "<group>"; };
 		2FE7504A210BFD9000AAD6E6 /* icon_tokens.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_tokens.png; sourceTree = "<group>"; };
@@ -355,6 +357,7 @@
 		2F7678E3210B827400919059 /* helpers */ = {
 			isa = PBXGroup;
 			children = (
+				2FA5E2FE2119833800A4406E /* Storage */,
 				2F7678E9210B83FA00919059 /* Visual */,
 				2F0EFCB12106FE6E003EF740 /* EtherKit */,
 			);
@@ -412,6 +415,14 @@
 				2F77A33721136C0400D06DB4 /* TokenDetailViewController.swift */,
 			);
 			path = "Collectible Page";
+			sourceTree = "<group>";
+		};
+		2FA5E2FE2119833800A4406E /* Storage */ = {
+			isa = PBXGroup;
+			children = (
+				2FA5E2FF2119834800A4406E /* TokenStorage.swift */,
+			);
+			path = Storage;
 			sourceTree = "<group>";
 		};
 		59FCCE122EF5FD25E3AB61B4 /* Pods */ = {
@@ -696,6 +707,7 @@
 				2F72E28C2116E6DF001EAA2B /* AddTokenViewController.swift in Sources */,
 				2F0EFC7F21063937003EF740 /* WalletHomeViewController.swift in Sources */,
 				2F0EFCCC21072E38003EF740 /* TransactionViewController.swift in Sources */,
+				2FA5E3002119834800A4406E /* TokenStorage.swift in Sources */,
 				2F6CBD622109005B0026C858 /* WalletCardViewController.swift in Sources */,
 				2F0EFCC62106FE6F003EF740 /* EtherWallet+Account.swift in Sources */,
 				2F11AA7D210C9F7A00790BAF /* WalletDisplayContainer.swift in Sources */,

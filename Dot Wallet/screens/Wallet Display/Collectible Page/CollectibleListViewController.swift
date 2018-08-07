@@ -50,10 +50,10 @@ class CollectibleListViewController:UIViewController, UICollectionViewDelegate, 
         print("Load Tokens")
         EtherWallet.tokens.getERC721Tokens(address: ("0xe307C2d3236bE4706E5D7601eE39F16d796d8195"), tokenAddress:"0x06012c8cf97BEaD5deAe237070F9587f8E7A266d", page: page) { (jsonResult) in
             if jsonResult == nil {
-                //print(jsonResult)
                 return
             }
             for element in jsonResult! {
+                
                 self.buildTokenObject(element: element.rawString()!)
             }
         }
@@ -64,7 +64,9 @@ class CollectibleListViewController:UIViewController, UICollectionViewDelegate, 
         let data = element.data(using: .utf8)!
         do {
             let element = try JSONDecoder().decode(OErc721Token.self, from: data)
-
+            if element.image_url == nil {
+                return
+            }
             self.tokens.append(element)
             
         } catch {

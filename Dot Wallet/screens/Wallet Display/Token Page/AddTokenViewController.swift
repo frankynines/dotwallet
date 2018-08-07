@@ -48,39 +48,26 @@ class AddTokenViewController:UIViewController, UITableViewDelegate, UITableViewD
     }
     
     func loadCacheTokens(){
+        
+        self.tokens.removeAll()
     
         let userStorage = try? Storage(
             diskConfig: DiskConfig(name: "userERC20"),
             memoryConfig: MemoryConfig(expiry: .never, countLimit: 10, totalCostLimit: 10),
-            transformer: TransformerFactory.forCodable(ofType: [OERC20Token].self)
+            transformer: TransformerFactory.forCodable(ofType: [String : OERC20Token].self)
         )
     
         do {
-            self.tokens = (try userStorage?.object(forKey:EtherWallet.account.address!))!
-            print(self.tokens.count)
+            let dictionary = try userStorage?.object(forKey:(EtherWallet.account.address?.lowercased())!)
+            for value in dictionary! {
+                self.tokens.append(value.value)
+            }
             self.ibo_tableView?.reloadData()
 
         } catch {
-            print("No Tokens")
             print(error.localizedDescription)
         }
         
-    }
-
-    @IBAction func iba_clearCache(){
-        
-        let userStorage = try? Storage(
-            diskConfig: DiskConfig(name: "userERC20"),
-            memoryConfig: MemoryConfig(expiry: .never, countLimit: 10, totalCostLimit: 10),
-            transformer: TransformerFactory.forCodable(ofType: [OERC20Token].self)
-        )
-        
-        print("Clear Cache")
-        do {
-            try? userStorage?.removeObject(forKey: EtherWallet.account.address!)
-        } catch {
-            print(error.localizedDescription)
-        }
     }
     
     func buildTokenObject(element:String) {
@@ -133,7 +120,6 @@ class AddTokenViewController:UIViewController, UITableViewDelegate, UITableViewD
             loadCacheTokens()
             
         } else {
-            print("Some Searching for some reason")
             self.ibo_tableView?.reloadData()
             self.searchFilter = self.allTokens.filter({ (ercToken:OERC20Token) -> Bool in
             return (ercToken.name?.lowercased().contains(searchText.lowercased()))!
@@ -194,6 +180,26 @@ class TokenListCell:UITableViewCell {
         
     }
     func removeTokenObject(){
+        let userStorage = try? Storage(
+            diskConfig: DiskConfig(name: "userERC20"),
+            memoryConfig: MemoryConfig(expiry: .never, countLimit: 10, totalCostLimit: 10),
+            transformer: TransformerFactory.forCodable(ofType: [String : OERC20Token].self)
+        )
+        
+        var array = [String : OERC20Token]()
+        
+        do {
+            
+            var tokenArray = try userStorage?.object(forKey:(EtherWallet.account.address?.lowercased())!)
+            tokenArray?.removeValue(forKey: (self._token.address?.lowercased())!)
+            try userStorage?.setObject(tokenArray!, forKey:EtherWallet.account.address!.lowercased())
+            
+        } catch {
+            print(error.localizedDescription)
+
+        }
+    
+
      
     }
     
@@ -201,21 +207,22 @@ class TokenListCell:UITableViewCell {
         let userStorage = try? Storage(
             diskConfig: DiskConfig(name: "userERC20"),
             memoryConfig: MemoryConfig(expiry: .never, countLimit: 10, totalCostLimit: 10),
-            transformer: TransformerFactory.forCodable(ofType: [OERC20Token].self)
+            transformer: TransformerFactory.forCodable(ofType: [String : OERC20Token].self)
         )
         
-        var array = [OERC20Token]()
-        
         do {
-            let tokenArray = try userStorage?.object(forKey:EtherWallet.account.address!)
-            array = tokenArray!
-        } catch { print(error.localizedDescription)}
+            var tokenArray = try userStorage?.object(forKey:(EtherWallet.account.address?.lowercased())!)
+            tokenArray?.updateValue(self._token, forKey: (self._token.address?.lowercased())!)
+            try userStorage?.setObject(tokenArray!, forKey:(EtherWallet.account.address?.lowercased())!)
+        } catch { print(error.localizedDescription)
+            do {
+                try userStorage?.setObject([(self._token.address?.lowercased())! : self._token], forKey:EtherWallet.account.address!.lowercased())
+            } catch {
+                print(error.localizedDescription)
+            }
+            
+        }
         
-        do {
-            array.append(self._token)
-            print("ADD TO STORAGE")
-            try userStorage?.setObject(array, forKey:EtherWallet.account.address!)
-        } catch { }
     }
     
     

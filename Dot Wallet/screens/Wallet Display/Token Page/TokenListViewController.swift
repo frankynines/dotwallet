@@ -29,36 +29,13 @@ class TokenListViewController:UIViewController, UITableViewDelegate, UITableView
     
         DispatchQueue.main.async {
             
-            let userStorage = try? Storage(
-                diskConfig: DiskConfig(name: "userERC20"),
-                memoryConfig: MemoryConfig(expiry: .never, countLimit: 10, totalCostLimit: 10),
-                transformer: TransformerFactory.forCodable(ofType: [OERC20Token].self)
-            )
-            
-            do {
-                let tokenArray = try userStorage?.object(forKey:EtherWallet.account.address!)
-                
-                self.tokens = tokenArray!
-                print(self.tokens.count)
-                self.ibo_tableHeader?.text = "\(self.tokens.count) Tokens"
-                
-            } catch {
-                print("No Tokens")
-                print(error.localizedDescription)
-            }
-            
-            
-            self.ibo_tokenTableView.reloadData()
+            self.updateTokens()
         }
-        print("view loaded")
         self.ibo_tokenTableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 50, right: 0)
-
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        print("view")
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -74,33 +51,40 @@ class TokenListViewController:UIViewController, UITableViewDelegate, UITableView
         self.present(vc, animated: true, completion: nil)
     }
     
-    
-    
     func tokenManagementControllerSaved(vc:AddTokenViewController) {
-        print("UPDATE TOKENS")
-        print(self.tokens.count)
+
+        vc.dismiss(animated: true) {
+            self.updateTokens()
+        }
+        
+    }
+    
+    func updateTokens(){
+        
+        self.tokens.removeAll()
         
         let userStorage = try? Storage(
             diskConfig: DiskConfig(name: "userERC20"),
             memoryConfig: MemoryConfig(expiry: .never, countLimit: 10, totalCostLimit: 10),
-            transformer: TransformerFactory.forCodable(ofType: [OERC20Token].self)
+            transformer: TransformerFactory.forCodable(ofType: [String : OERC20Token].self)
         )
-    
-        vc.dismiss(animated: true) {
-            do {
-                
-                self.tokens = (try userStorage?.object(forKey:EtherWallet.account.address!))!
-                print(self.tokens.count)
-                self.ibo_tableHeader?.text = "\(self.tokens.count) Tokens"
-                self.ibo_tokenTableView.reloadData()
-
-            } catch {
-                print(error.localizedDescription)
+        
+        
+        do {
+            let key = EtherWallet.account.address?.lowercased()
+            let tokenArray = try userStorage?.object(forKey:key!)
+            for v in tokenArray! {
+                self.tokens.append(v.value)
             }
+            self.ibo_tableHeader?.text = "\(self.tokens.count) Tokens"
             
-
+        } catch {
+            print(error.localizedDescription)
         }
         
+        self.ibo_tokenTableView.reloadData()
+
+    
     }
 
     func loadToken(index:Int){
@@ -153,7 +137,14 @@ class TokenListViewController:UIViewController, UITableViewDelegate, UITableView
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        //self.delegate?.tokenDidSelectERC20(token: self.tokens[indexPath.row])
+        let alert = UIAlertController(title: "Some Token", message: "Need to build UI here...", preferredStyle: .alert)
+        
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (action) in
+            //
+        }))
+        
+        self.present(alert, animated: true, completion: nil)
+        
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
@@ -170,21 +161,30 @@ class WalletTokenCell:UITableViewCell {
     @IBOutlet var iboTokenBalance:UILabel?
     @IBOutlet var iboTokenFiat:UILabel?
     
+    var  token:OERC20Token?
     
     func setupCell(token:OERC20Token){
     
         self.iboTokenName?.text = token.name
         self.iboTokenSymbol?.text = token.symbol
         
+        self.token = token
         EtherWallet.tokens.getTokenImage(contractAddress: (token.address?.lowercased())!) { (image) in
             self.iboTokenImage?.image = image
         }
+        
+        self.syncTokenBalance(_tokenAddress: token.address)
+        
     }
 
     func syncTokenBalance(_tokenAddress:String!){
-        EtherWallet.balance.tokenBalance(contractAddress: _tokenAddress) { (balance) in
-            self.iboTokenBalance?.text = balance
-        }
+        
+            DispatchQueue.main.async {
+                EtherWallet.balance.tokenBalance(contractAddress: _tokenAddress) { (balance) in
+                    self.iboTokenBalance?.text = EtherWallet.balance.WeiToValue(wei: balance!, dec: (self.token?.decimals)!)
+                }
+            }
+
     }
 }
 

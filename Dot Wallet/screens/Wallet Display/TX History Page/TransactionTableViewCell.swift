@@ -22,7 +22,7 @@ class TransactionTableCell:UITableViewCell {
     func setupCell(transaction:GeneralTransactionData!) {
         self.transaction = transaction
         
-        var amount = EtherWallet.balance.WeiToValue(wei: transaction.value)
+        var amount = EtherWallet.balance.WeiToValue(wei: transaction.value, dec: 16)
 
         let date = Date(timeIntervalSince1970: Double.init(transaction.timestamp)!)
         let dayTimePeriodFormatter = DateFormatter()

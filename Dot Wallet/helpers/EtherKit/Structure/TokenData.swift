@@ -74,6 +74,7 @@ struct OERC20Token: Codable {
     let website:String?
     let address:String?
     let symbol:String?
+    var isCache:Bool?
     
     enum CodingKeys:String, CodingKey {
         case decimals
@@ -82,6 +83,7 @@ struct OERC20Token: Codable {
         case website
         case address
         case symbol
+        case isCache
     }
 }
 

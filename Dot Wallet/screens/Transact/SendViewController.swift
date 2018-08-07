@@ -19,21 +19,27 @@ class SendViewController: UIViewController, QRCodeReaderViewControllerDelegate {
     @IBOutlet weak var ibo_sendAmount:UITextField?
     @IBOutlet weak var ibo_addressField:UITextField?
     
+    var token:OERC20Token?
+    
     var balance:String!
     
     var delegate:ModalSlideOverViewcontrollerDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.syncbalance()
+        
         self.ibo_sendAmount?.text = ""
         self.ibo_addressField?.text = ""
         self.automaticallyAdjustsScrollViewInsets = false
+        if token != nil {
+            self.ibo_walletName?.text = "\(token?.symbol) blance"
+        }
+        self.syncbalance()
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -52,6 +58,7 @@ class SendViewController: UIViewController, QRCodeReaderViewControllerDelegate {
                 self.ibo_balance?.text = "0.00"
             }
             //UPDATE UI
+            
             DispatchQueue.main.async {
                 self.balance = balance
                 self.ibo_balance?.text = balance
@@ -73,28 +80,13 @@ class SendViewController: UIViewController, QRCodeReaderViewControllerDelegate {
         let receiptAddress = ibo_addressField?.text
         let amount = ibo_sendAmount?.text
         
-        let alertView = UIAlertController.init(title: "Confirm Send", message: "Sign your transaction using your Pincode", preferredStyle: .alert)
+        let alertView = UIAlertController.init(title: "Confirm Send ", message: "⚠️ NOTE THIS IS ONLY SENDING ROPSTEN NETWORK ETH. ", preferredStyle: .alert)
         
-        alertView.addTextField { (inputField) in
-            inputField.tag = 0
-            inputField.placeholder = "Pincode"
-        }
         
         alertView.addAction(UIAlertAction(title: "Enter", style: .default, handler: { (action) in
             
-            var pass = String()
             
-            for inputField in alertView.textFields! {
-                let field = inputField
-                
-                switch field.tag {
-                case 0:
-                    pass = field.text!
-                default: break
-                }
-            }
-            
-            EtherWallet.transaction.sendEther(to: receiptAddress!, amount: amount!, password: pass) { (status) in
+            EtherWallet.transaction.sendEther(to: receiptAddress!, amount: amount!, password: "") { (status) in
                 //status is transaction hash
                 if status != nil {
                     self.showAlert(title: "Success", message: "Transaction has been sent!", completion: true)

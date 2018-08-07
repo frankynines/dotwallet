@@ -12,7 +12,7 @@ import Cache
 
 public protocol TokenService {
     func getTokenMetaData(contractAddress: String, completion: @escaping (ERC20Token) -> ())
-    func getERC721Tokens(address:String, tokenAddress:String, page:String, completion: @escaping ([JSON]?) -> ())
+    func getERC721Tokens(address:String, tokenAddress:String?, page:String, completion: @escaping ([JSON]?) -> ())
     func getTokenImage(contractAddress:String, completion: @escaping (UIImage) -> ())
     
     func getERC20TokenList(url:String, completion: @escaping ([JSON]?) -> ())
@@ -106,14 +106,16 @@ extension EtherWallet: TokenService {
         }
     }
     
-    public func getERC721Tokens(address:String, tokenAddress:String, page:String, completion: @escaping ([JSON]?) -> ()){
+    public func getERC721Tokens(address:String, tokenAddress:String?, page:String, completion: @escaping ([JSON]?) -> ()){
         
         let urlString = "https://api.opensea.io/api/v1/assets/"
         let parameters = ["owner":address,
-                          "asset_contract_address":tokenAddress,
                           "order_by": "token_id",
+                          "asset_contract_address":tokenAddress,
                           "offset":page,
                           "limit":"20"]
+        
+       
         let headers = ["X-API-KEY": "1a4288c7a6114fcd85f3d88aa37af0cc"]
 
         var urlComponents = URLComponents(string: urlString)

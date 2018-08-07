@@ -25,7 +25,7 @@
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Iwv-NX-ll0" customClass="GradientView" customModule="Dot_Wallet" customModuleProvider="target">
-                                                <rect key="frame" x="20" y="58.5" width="335" height="550"/>
+                                                <rect key="frame" x="20" y="43.5" width="335" height="580"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Send Ether" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Q4-EJ-M6Q">
                                                         <rect key="frame" x="119.5" y="25" width="96" height="22"/>
@@ -44,7 +44,7 @@
                                                         </connections>
                                                     </button>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eRQ-F3-YnI">
-                                                        <rect key="frame" x="0.0" y="70" width="335" height="470"/>
+                                                        <rect key="frame" x="0.0" y="50" width="335" height="510"/>
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Rck-AC-2EM" customClass="RoundedRectangleView" customModule="Dot_Wallet" customModuleProvider="target">

@@ -6,7 +6,7 @@ public protocol BalanceService {
     func etherBalance(completion: @escaping (String?) -> ())
     func tokenBalanceSync(contractAddress: String) throws -> String
     func tokenBalance(contractAddress: String, completion: @escaping (String?) -> ())
-    func WeiToValue(wei:String) -> String?
+    func WeiToValue(wei:String, dec:Int) -> String?
 
 }
 
@@ -57,9 +57,10 @@ extension EtherWallet: BalanceService {
         }
     }
     
-    public func WeiToValue(wei:String) -> String? {
+    public func WeiToValue(wei:String, dec:Int) -> String? {
         let value = BigInt.init(wei)
-        let amount = Web3.Utils.formatToPrecision(value!)
+        let amount = Web3.Utils.formatToPrecision(value!, numberDecimals: dec, formattingDecimals: 6, decimalSeparator: ".", fallbackToScientific: false)
+        //let amount = Web3.Utils.formatToEthereumUnits(value!, toUnits: Web3.Utils.Units.eth, decimals: 6, decimalSeparator: ".")
         return amount
     }
     

@@ -2,14 +2,14 @@ import web3swift
 import BigInt
 import Cache
 public class EtherWallet {
-    private static let shared = EtherWallet()
+    public static let shared = EtherWallet()
     public static let account: AccountService = EtherWallet.shared
     public static let balance: BalanceService = EtherWallet.shared
     public static let transaction: TransactionService = EtherWallet.shared
     public static let tokens: TokenService = EtherWallet.shared
     
-    public let web3Main = Web3.InfuraRopstenWeb3() // Change to MainNet when Launch
-    let etherscanURL = "https://api-ropsten.etherscan.io" // Change to MainNet when Launch
+    public var web3Main = Web3.InfuraRopstenWeb3() // Change to MainNet when Launch
+    public var etherscanURL = "https://api-ropsten.etherscan.io" // Change to MainNet when Launch
     let tokenImageSrcURL = "https://raw.githubusercontent.com/trustwallet/tokens/master/images/"
     let keystoreDirectoryName = "/keystore"
     let keystoreFileName = "/key.json"
@@ -32,6 +32,16 @@ public class EtherWallet {
 
         setupOptionsFrom()
 
+    }
+    
+    public func setToMainNet(){
+        web3Main = Web3.InfuraMainnetWeb3()
+        etherscanURL = "https://api.etherscan.io"
+    }
+    
+    public func setToRopsten(){
+        web3Main = Web3.InfuraRopstenWeb3()
+        etherscanURL = "https://api-ropsten.etherscan.io"
     }
     
     func setupOptionsFrom() {

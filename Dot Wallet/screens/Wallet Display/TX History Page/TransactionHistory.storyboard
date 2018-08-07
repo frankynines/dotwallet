@@ -21,7 +21,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Uup-8j-Crx" customClass="GradientView" customModule="Dot_Wallet" customModuleProvider="target">
                                 <rect key="frame" x="10" y="30" width="355" height="637"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="15 Transactions" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fSR-s3-H5j">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Transactions" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fSR-s3-H5j">
                                         <rect key="frame" x="20" y="20" width="315" height="14"/>
                                         <fontDescription key="fontDescription" name="Menlo-Regular" family="Menlo" pointSize="12"/>
                                         <nil key="textColor"/>
@@ -56,7 +56,7 @@
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <tableView clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" delaysContentTouches="NO" dataMode="prototypes" style="plain" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="20" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="OuK-r3-NPO">
-                                <rect key="frame" x="10" y="70" width="355" height="597"/>
+                                <rect key="frame" x="10" y="80" width="355" height="587"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="sectionIndexBackgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
@@ -117,7 +117,7 @@
                             <constraint firstItem="NzM-Xm-7t0" firstAttribute="trailing" secondItem="Uup-8j-Crx" secondAttribute="trailing" constant="10" id="LTS-dg-TQQ"/>
                             <constraint firstItem="Uup-8j-Crx" firstAttribute="bottom" secondItem="NzM-Xm-7t0" secondAttribute="bottom" id="NFE-tI-2dD"/>
                             <constraint firstItem="Uup-8j-Crx" firstAttribute="leading" secondItem="NzM-Xm-7t0" secondAttribute="leading" constant="10" id="biN-M7-oG9"/>
-                            <constraint firstItem="OuK-r3-NPO" firstAttribute="top" secondItem="NzM-Xm-7t0" secondAttribute="top" constant="50" id="dGU-Qf-MJ0"/>
+                            <constraint firstItem="OuK-r3-NPO" firstAttribute="top" secondItem="NzM-Xm-7t0" secondAttribute="top" constant="60" id="dGU-Qf-MJ0"/>
                             <constraint firstItem="Uup-8j-Crx" firstAttribute="top" secondItem="NzM-Xm-7t0" secondAttribute="top" constant="10" id="orU-zY-wrR"/>
                             <constraint firstItem="NzM-Xm-7t0" firstAttribute="bottom" secondItem="OuK-r3-NPO" secondAttribute="bottom" id="pgX-aE-Ylb"/>
                             <constraint firstItem="OuK-r3-NPO" firstAttribute="leading" secondItem="NzM-Xm-7t0" secondAttribute="leading" constant="10" id="xbt-Vq-frd"/>

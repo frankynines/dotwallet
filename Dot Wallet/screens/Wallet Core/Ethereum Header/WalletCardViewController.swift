@@ -11,6 +11,7 @@ import UIKit
 import QRCode
 import Hero
 import web3swift
+
 class WalletCardViewController:UIViewController, UIScrollViewDelegate, ModalSlideOverViewcontrollerDelegate{
     
     //HEADER
@@ -20,6 +21,8 @@ class WalletCardViewController:UIViewController, UIScrollViewDelegate, ModalSlid
     @IBOutlet var iboBalance: UILabel?
     @IBOutlet var qrCodeView:UIImageView?
     @IBOutlet var iboCardView:UIView?
+    
+    @IBOutlet var ibo_dot:UIView?
 
     let impact = UIImpactFeedbackGenerator()
     var impactDetected = false
@@ -43,6 +46,12 @@ class WalletCardViewController:UIViewController, UIScrollViewDelegate, ModalSlid
             self.refreshBalance()
         }
         self.repeatableTimer.resume()
+        
+        if  UserDefaults.standard.bool(forKey: "ISLIVE") == true {
+            self.ibo_dot?.backgroundColor = UIColor.green
+        } else {
+            self.ibo_dot?.backgroundColor = UIColor.orange
+        }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -74,16 +83,7 @@ class WalletCardViewController:UIViewController, UIScrollViewDelegate, ModalSlid
         let vc = UIStoryboard(name: "WalletDetail", bundle: nil).instantiateViewController(withIdentifier: "sb_WalletDisplayViewController") as! WalletDisplayViewController
         self.present(vc, animated: true) {}
     }
-    
-    @IBAction func iba_killwallet(){
-        do {
-            try EtherWallet.account.killKeystore()
-            let vc = self.storyboard?.instantiateViewController(withIdentifier: "sb_CreateWalletViewController")
-            self.navigationController?.setViewControllers([vc!], animated: true)
-        } catch {
-            print(error.localizedDescription)
-        }
-    }
+
     
     @IBAction func refreshBalance(){
         
@@ -95,6 +95,12 @@ class WalletCardViewController:UIViewController, UIScrollViewDelegate, ModalSlid
             UserDefaults.standard.set(networkbalance, forKey: userBalanceKey)
             self.iboBalance?.text = balance
         }
+    }
+    
+    @IBAction func iba_walletSettings(){
+        let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "sb_WalletSettingViewController") as! WalletSettingViewController
+        
+        self.navigationController?.pushViewController(vc, animated: true)
     }
     
     @IBAction func iba_shareAddress(){

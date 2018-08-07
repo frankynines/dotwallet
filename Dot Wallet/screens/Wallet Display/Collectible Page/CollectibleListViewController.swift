@@ -32,6 +32,10 @@ class CollectibleListViewController:UIViewController, UICollectionViewDelegate, 
     override func viewDidLoad() {
         super.viewDidLoad()
         self.loadTokens(page: String(pageIndex))
+        
+        self.ibo_collectionView?.backgroundColor = UIColor(patternImage: UIImage(named: "bg_transparent")!)
+        
+        self.ibo_collectionView?.contentInset = UIEdgeInsetsMake(20, 0, 40, 0)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -48,12 +52,20 @@ class CollectibleListViewController:UIViewController, UICollectionViewDelegate, 
     
     func loadTokens(page:String){
         print("Load Tokens")
-        EtherWallet.tokens.getERC721Tokens(address: ("0xe307C2d3236bE4706E5D7601eE39F16d796d8195"), tokenAddress:"0x06012c8cf97BEaD5deAe237070F9587f8E7A266d", page: page) { (jsonResult) in
+        var testAddress:String?
+        var token:String?
+        if  UserDefaults.standard.bool(forKey: "ISLIVE") == true {
+            testAddress = EtherWallet.account.address
+            token = nil
+        } else {
+            testAddress = "0xe307C2d3236bE4706E5D7601eE39F16d796d8195"
+            token = "0x06012c8cf97BEaD5deAe237070F9587f8E7A266d"
+        }
+        EtherWallet.tokens.getERC721Tokens(address: testAddress!, tokenAddress:token, page: page) { (jsonResult) in
             if jsonResult == nil {
                 return
             }
             for element in jsonResult! {
-                
                 self.buildTokenObject(element: element.rawString()!)
             }
         }
@@ -64,7 +76,8 @@ class CollectibleListViewController:UIViewController, UICollectionViewDelegate, 
         let data = element.data(using: .utf8)!
         do {
             let element = try JSONDecoder().decode(OErc721Token.self, from: data)
-            if element.image_url == nil {
+            
+            if (element.image_url?.isEmpty)! {
                 return
             }
             self.tokens.append(element)
@@ -95,7 +108,7 @@ class CollectibleListViewController:UIViewController, UICollectionViewDelegate, 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! CollectableViewCell
         
-        if let imageURL = self.tokens[indexPath.row].image_url {
+        if let imageURL = self.tokens[indexPath.row].image_preview_url {
             DispatchQueue.global(qos: .background).async {
                 // Call your background task
                 DispatchQueue.main.async {
@@ -108,11 +121,11 @@ class CollectibleListViewController:UIViewController, UICollectionViewDelegate, 
     }
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-            if indexPath.item == self.tokens.count - 2 && !isWating {
-                isWating = true
-                self.pageIndex += 1
-                self.loadTokens(page: String(self.pageIndex))
-            }
+//            if indexPath.item == self.tokens.count - 2 && !isWating {
+//                isWating = true
+//                self.pageIndex += 1
+//                self.loadTokens(page: String(self.pageIndex))
+//            }
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
@@ -132,7 +145,7 @@ class CollectableViewCell:UICollectionViewCell {
         self.ibo_webViewDisplay?.scrollView.isScrollEnabled = false
         self.ibo_webViewDisplay?.contentMode = .scaleAspectFit
         self.ibo_webViewDisplay?.scalesPageToFit = true
-       
+        self.ibo_webViewDisplay?.isOpaque = false
         guard let imageURL = url?.replacingOccurrences(of: "'\'", with: "") else {return}
        
         self.drawImage(url:imageURL)

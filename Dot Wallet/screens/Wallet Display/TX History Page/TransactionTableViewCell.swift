@@ -17,7 +17,10 @@ class TransactionTableCell:UITableViewCell {
     @IBOutlet var ibo_timestamp:UILabel?
     @IBOutlet var ibo_direction:UILabel?
     
+    public var transaction:GeneralTransactionData!
+    
     func setupCell(transaction:GeneralTransactionData!) {
+        self.transaction = transaction
         
         var amount = EtherWallet.balance.WeiToValue(wei: transaction.value)
 

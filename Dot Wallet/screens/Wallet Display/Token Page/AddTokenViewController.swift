@@ -22,7 +22,8 @@ class AddTokenViewController:UIViewController, UITableViewDelegate, UITableViewD
     
     var delegate:AddTokenViewControllerDelegate?
     var tokens = [OERC20Token]()
-    var searched: [OERC20Token] = []
+    var allTokens: [OERC20Token] = []
+    var searchFilter: [OERC20Token] = []
     
     var searchActive:Bool = false
     
@@ -37,6 +38,7 @@ class AddTokenViewController:UIViewController, UITableViewDelegate, UITableViewD
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        self.loadCacheTokens()
         
         EtherWallet.tokens.getERC20TokenList(url: erc20TokenListURL) { (result) in
             for token in result! {
@@ -45,8 +47,26 @@ class AddTokenViewController:UIViewController, UITableViewDelegate, UITableViewD
         }
     }
     
+    func loadCacheTokens(){
     
+        let userStorage = try? Storage(
+            diskConfig: DiskConfig(name: "userERC20"),
+            memoryConfig: MemoryConfig(expiry: .never, countLimit: 10, totalCostLimit: 10),
+            transformer: TransformerFactory.forCodable(ofType: [OERC20Token].self)
+        )
     
+        do {
+            self.tokens = (try userStorage?.object(forKey:EtherWallet.account.address!))!
+            print(self.tokens.count)
+            self.ibo_tableView?.reloadData()
+
+        } catch {
+            print("No Tokens")
+            print(error.localizedDescription)
+        }
+        
+    }
+
     @IBAction func iba_clearCache(){
         
         let userStorage = try? Storage(
@@ -67,7 +87,7 @@ class AddTokenViewController:UIViewController, UITableViewDelegate, UITableViewD
         let data = element.data(using: .utf8)!
         do {
             let element = try JSONDecoder().decode(OERC20Token.self, from: data)
-            self.tokens.append(element)
+            self.allTokens.append(element)
         } catch {
             return
         }
@@ -75,46 +95,50 @@ class AddTokenViewController:UIViewController, UITableViewDelegate, UITableViewD
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.searched.count
+        if section == 0 && !searchActive {
+            return self.tokens.count
+        }
+        return self.searchFilter.count
+    }
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 2
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        if indexPath.section == 0 && !searchActive{
+            let cell = tableView.dequeueReusableCell(withIdentifier: "cell") as! TokenListCell
+            cell.setupCell(token: self.tokens[indexPath.row])
+            cell.iboSwitch?.isOn = true
+            return cell
+        }
+        
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell") as! TokenListCell
-            cell.setupCell(token: self.searched[indexPath.row])
+        cell.setupCell(token: self.searchFilter[indexPath.row])
+        cell.iboSwitch?.isOn = false
         return cell
     }
     
     // SEARCH BAR
-    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
-        searchActive = true;
-    }
-    
-    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
-        searchActive = false;
-    }
-    
-    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        searchActive = false;
-    }
-    
-    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        searchActive = false;
-    }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        
-        self.ibo_tableView?.reloadData()
-        
-        searched = self.tokens.filter({ (ercToken:OERC20Token) -> Bool in
-            return (ercToken.name?.lowercased().contains(searchText.lowercased()))!
-        })
-        
-        if(searched.count == 0){
-            searchActive = false;
+        if (searchText == ""){
+            
+            self.searchActive = false;
+            self.searchFilter.removeAll()
+            loadCacheTokens()
+            
         } else {
+            print("Some Searching for some reason")
+            self.ibo_tableView?.reloadData()
+            self.searchFilter = self.allTokens.filter({ (ercToken:OERC20Token) -> Bool in
+            return (ercToken.name?.lowercased().contains(searchText.lowercased()))!
+            })
             searchActive = true;
+            self.ibo_tableView?.reloadData()
+            
         }
-        self.ibo_tableView?.reloadData()
     }
     
 }
@@ -156,27 +180,37 @@ class TokenListCell:UITableViewCell {
     
     @IBAction func switchToken(swtch:UISwitch) {
         
+        if swtch.isOn {
+            self.saveTokenToCache()
+        } else {
+            self.removeTokenObject()
+        }
+        
+        
+    }
+    func removeTokenObject(){
+     
+    }
+    
+    func saveTokenToCache(){
         let userStorage = try? Storage(
             diskConfig: DiskConfig(name: "userERC20"),
             memoryConfig: MemoryConfig(expiry: .never, countLimit: 10, totalCostLimit: 10),
             transformer: TransformerFactory.forCodable(ofType: [OERC20Token].self)
         )
         
-        print("Is On \(swtch.isOn)")
-        
         var array = [OERC20Token]()
         
         do {
-            let tokenArray = try userStorage?.object(forKey:"UserTokens")
+            let tokenArray = try userStorage?.object(forKey:EtherWallet.account.address!)
             array = tokenArray!
         } catch { print(error.localizedDescription)}
         
         do {
             array.append(self._token)
             print("ADD TO STORAGE")
-            try userStorage?.setObject(array, forKey:"UserTokens")
+            try userStorage?.setObject(array, forKey:EtherWallet.account.address!)
         } catch { }
-        
     }
     
     

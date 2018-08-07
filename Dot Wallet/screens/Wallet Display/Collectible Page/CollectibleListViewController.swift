@@ -1,5 +1,5 @@
 //
-//  CollectableListViewController.swift
+//  CollectibleListViewController.swift
 //  Dot Wallet
 //
 //  Created by Franky Aguilar on 7/28/18.
@@ -8,7 +8,7 @@
 
 import Foundation
 import UIKit
-class CollectableListViewController:UIViewController, UICollectionViewDelegate, UICollectionViewDataSource{
+class CollectibleListViewController:UIViewController, UICollectionViewDelegate, UICollectionViewDataSource{
     
     @IBOutlet var ibo_collectionView:UICollectionView?
     @IBOutlet var ibo_tableHeader:UILabel?

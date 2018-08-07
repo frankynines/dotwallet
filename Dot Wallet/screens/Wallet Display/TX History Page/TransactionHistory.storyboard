@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Transactions-->
+        <scene sceneID="Kcj-ju-R8V">
+            <objects>
+                <viewController storyboardIdentifier="sb_TransactionViewController" id="CTR-mL-ibp" customClass="TransactionViewController" customModule="Dot_Wallet" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="a2j-nv-vsX">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Uup-8j-Crx" customClass="GradientView" customModule="Dot_Wallet" customModuleProvider="target">
+                                <rect key="frame" x="10" y="30" width="355" height="637"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="15 Transactions" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fSR-s3-H5j">
+                                        <rect key="frame" x="20" y="20" width="315" height="14"/>
+                                        <fontDescription key="fontDescription" name="Menlo-Regular" family="Menlo" pointSize="12"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="fSR-s3-H5j" secondAttribute="trailing" constant="20" id="Yoj-mv-OnM"/>
+                                    <constraint firstItem="fSR-s3-H5j" firstAttribute="leading" secondItem="Uup-8j-Crx" secondAttribute="leading" constant="20" id="cqm-h2-eYE"/>
+                                    <constraint firstItem="fSR-s3-H5j" firstAttribute="top" secondItem="Uup-8j-Crx" secondAttribute="top" constant="20" id="efR-qB-wJX"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="20"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="topColor">
+                                        <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="bottomColor">
+                                        <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="shadowColor">
+                                        <color key="value" red="0.28235294119999998" green="0.0" blue="1" alpha="0.20000000000000001" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="shadowBlur">
+                                        <real key="value" value="6"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="shadowY">
+                                        <real key="value" value="2"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                            <tableView clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" delaysContentTouches="NO" dataMode="prototypes" style="plain" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="20" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="OuK-r3-NPO">
+                                <rect key="frame" x="10" y="70" width="355" height="597"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="sectionIndexBackgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <prototypes>
+                                    <tableViewCell clearsContextBeforeDrawing="NO" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cell" rowHeight="100" id="84j-px-35I" customClass="TransactionTableCell" customModule="Dot_Wallet" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="20" width="355" height="100"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="84j-px-35I" id="7w4-Oz-xfC">
+                                            <rect key="frame" x="0.0" y="0.0" width="355" height="99.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="etg-Ts-oYz">
+                                                    <rect key="frame" x="44" y="28" width="204" height="16"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="0" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oys-7n-6K3">
+                                                    <rect key="frame" x="251" y="39" width="84" height="22"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mld-fQ-gq0">
+                                                    <rect key="frame" x="44" y="47" width="204" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" name="Menlo-Regular" family="Menlo" pointSize="10"/>
+                                                    <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="⇡" textAlignment="center" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fiE-SA-0UW">
+                                                    <rect key="frame" x="15" y="38" width="21" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                                    <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <connections>
+                                            <outlet property="ibo_address" destination="mld-fQ-gq0" id="vWk-44-hu9"/>
+                                            <outlet property="ibo_direction" destination="fiE-SA-0UW" id="xfu-ER-XLx"/>
+                                            <outlet property="ibo_timestamp" destination="etg-Ts-oYz" id="ymh-fD-nFK"/>
+                                            <outlet property="ibo_value" destination="oys-7n-6K3" id="5Th-i8-NhZ"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="CTR-mL-ibp" id="JRe-Ou-Otq"/>
+                                    <outlet property="delegate" destination="CTR-mL-ibp" id="UaN-zI-yzS"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="NzM-Xm-7t0" firstAttribute="trailing" secondItem="OuK-r3-NPO" secondAttribute="trailing" constant="10" id="EiD-CK-LUy"/>
+                            <constraint firstItem="NzM-Xm-7t0" firstAttribute="trailing" secondItem="Uup-8j-Crx" secondAttribute="trailing" constant="10" id="LTS-dg-TQQ"/>
+                            <constraint firstItem="Uup-8j-Crx" firstAttribute="bottom" secondItem="NzM-Xm-7t0" secondAttribute="bottom" id="NFE-tI-2dD"/>
+                            <constraint firstItem="Uup-8j-Crx" firstAttribute="leading" secondItem="NzM-Xm-7t0" secondAttribute="leading" constant="10" id="biN-M7-oG9"/>
+                            <constraint firstItem="OuK-r3-NPO" firstAttribute="top" secondItem="NzM-Xm-7t0" secondAttribute="top" constant="50" id="dGU-Qf-MJ0"/>
+                            <constraint firstItem="Uup-8j-Crx" firstAttribute="top" secondItem="NzM-Xm-7t0" secondAttribute="top" constant="10" id="orU-zY-wrR"/>
+                            <constraint firstItem="NzM-Xm-7t0" firstAttribute="bottom" secondItem="OuK-r3-NPO" secondAttribute="bottom" id="pgX-aE-Ylb"/>
+                            <constraint firstItem="OuK-r3-NPO" firstAttribute="leading" secondItem="NzM-Xm-7t0" secondAttribute="leading" constant="10" id="xbt-Vq-frd"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="NzM-Xm-7t0"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Transactions" id="sxL-gq-sjB"/>
+                    <nil key="simulatedTopBarMetrics"/>
+                    <connections>
+                        <outlet property="ibo_tableHeader" destination="fSR-s3-H5j" id="EsA-LR-WdY"/>
+                        <outlet property="ibo_tableView" destination="OuK-r3-NPO" id="Ho8-37-ZlK"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="teq-JR-urR" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2208.8000000000002" y="1223.8380809595203"/>
+        </scene>
+    </scenes>
+</document>

@@ -28,9 +28,9 @@ class WalletPageViewController: UIPageViewController{
     
     lazy var pages: [UIViewController] = {
         return [
-            self.getViewController(withIdentifier: "sb_TokenListViewController"),
-            self.getViewController(withIdentifier: "sb_CollectableListViewController"),
-            self.getViewController(withIdentifier: "sb_TransactionViewController")
+             UIStoryboard(name: "ERC20Tokens", bundle: nil).instantiateViewController(withIdentifier: "sb_TokenListViewController"),
+            UIStoryboard(name: "Collectibles", bundle: nil).instantiateViewController(withIdentifier: "sb_CollectibleListViewController"),
+            UIStoryboard(name: "TransactionHistory", bundle: nil).instantiateViewController(withIdentifier: "sb_TransactionViewController")
         ]
     }()
     
@@ -42,7 +42,10 @@ class WalletPageViewController: UIPageViewController{
         self.dataSource = self
         self.delegate   = self
         
-        
+        if let firstVC = pages.first {
+            setViewControllers([firstVC], direction: .forward, animated: true, completion: nil)
+            pageIndex = 0
+        }
     }
     
     fileprivate func getViewController(withIdentifier identifier: String) -> UIViewController {
@@ -55,15 +58,12 @@ class WalletPageViewController: UIPageViewController{
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        if let firstVC = pages.first {
-            setViewControllers([firstVC], direction: .forward, animated: true, completion: nil)
-            pageIndex = 0
-        }
+        
         
         let tokenVC = self.pages[PageViews.TokenPage.rawValue] as! TokenListViewController
         tokenVC.delegate = childDelegate
         
-        let collectionVC = self.pages[PageViews.CollectiblePage.rawValue] as! CollectableListViewController
+        let collectionVC = self.pages[PageViews.CollectiblePage.rawValue] as! CollectibleListViewController
         collectionVC.delegate = childDelegate
     }
     

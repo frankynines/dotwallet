@@ -71,7 +71,7 @@ class WalletCardViewController:UIViewController, UIScrollViewDelegate, ModalSlid
     }
     
     @IBAction func iba_showWalletDetails(){
-        let vc = storyboard?.instantiateViewController(withIdentifier: "sb_WalletDisplayViewController") as! WalletDisplayViewController
+        let vc = UIStoryboard(name: "WalletDetail", bundle: nil).instantiateViewController(withIdentifier: "sb_WalletDisplayViewController") as! WalletDisplayViewController
         self.present(vc, animated: true) {}
     }
     
@@ -91,7 +91,8 @@ class WalletCardViewController:UIViewController, UIScrollViewDelegate, ModalSlid
             guard let networkbalance = balance else {
                 return
             }
-            UserDefaults.standard.set(networkbalance, forKey: "ETHBalance")
+            let userBalanceKey = "balance:\(EtherWallet.account.address!)"
+            UserDefaults.standard.set(networkbalance, forKey: userBalanceKey)
             self.iboBalance?.text = balance
         }
     }
@@ -149,7 +150,7 @@ class WalletCardViewController:UIViewController, UIScrollViewDelegate, ModalSlid
         }
        
         self.slideModalController = ModalSlideOverViewcontroller()
-        self.slideModalController = self.storyboard?.instantiateViewController(withIdentifier: "sb_ModalSlideOverViewcontroller") as! ModalSlideOverViewcontroller
+        self.slideModalController = UIStoryboard(name: "ModalControllers", bundle: nil).instantiateViewController(withIdentifier: "sb_ModalSlideOverViewcontroller") as! ModalSlideOverViewcontroller
         self.slideModalController.modalTitle = "Send Ethereum"
         self.slideModalController.view.frame = self.view.frame
         self.slideModalController.delegate = self

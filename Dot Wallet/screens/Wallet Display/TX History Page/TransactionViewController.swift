@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 import web3swift
 import BigInt
-
+import SafariServices
 class TransactionViewController: UIViewController, UITabBarDelegate, UITableViewDataSource, UITableViewDelegate {
     
     @IBOutlet var ibo_tokenImage:UIImageView?
@@ -117,7 +117,25 @@ class TransactionViewController: UIViewController, UITabBarDelegate, UITableView
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        self.delegate?.txRowSelected(row: indexPath.row, transaction: self.transactions[indexPath.row])
+        
+        let cell = tableView.cellForRow(at: indexPath) as! TransactionTableCell
+        
+        
+        let alert = UIAlertController(title: "Transaction", message: cell.transaction.hash, preferredStyle: .alert)
+        
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (action) in
+            //
+        }))
+        
+        alert.addAction(UIAlertAction(title: "View on Etherscan", style: .default, handler: { (action) in
+            let url = URL(string: "https://ropsten.etherscan.io/tx/\(cell.transaction.hash)")
+            let vc = SFSafariViewController(url: url!)
+            self.present(vc, animated: true, completion: nil)
+        }))
+        
+        self.present(alert, animated: true, completion: nil)
+        
+        
     }
     
 }

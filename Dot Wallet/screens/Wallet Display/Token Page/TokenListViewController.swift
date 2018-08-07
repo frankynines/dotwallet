@@ -36,7 +36,7 @@ class TokenListViewController:UIViewController, UITableViewDelegate, UITableView
             )
             
             do {
-                let tokenArray = try userStorage?.object(forKey:"UserTokens")
+                let tokenArray = try userStorage?.object(forKey:EtherWallet.account.address!)
                 
                 self.tokens = tokenArray!
                 print(self.tokens.count)
@@ -69,7 +69,7 @@ class TokenListViewController:UIViewController, UITableViewDelegate, UITableView
     }
     
     @IBAction func iba_manageTokens(){
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "sb_AddTokenViewController") as! AddTokenViewController
+        let vc = UIStoryboard(name: "ERC20Tokens", bundle: nil).instantiateViewController(withIdentifier: "sb_AddTokenViewController") as! AddTokenViewController
         vc.delegate = self
         self.present(vc, animated: true, completion: nil)
     }
@@ -89,7 +89,7 @@ class TokenListViewController:UIViewController, UITableViewDelegate, UITableView
         vc.dismiss(animated: true) {
             do {
                 
-                self.tokens = (try userStorage?.object(forKey:"UserTokens"))!
+                self.tokens = (try userStorage?.object(forKey:EtherWallet.account.address!))!
                 print(self.tokens.count)
                 self.ibo_tableHeader?.text = "\(self.tokens.count) Tokens"
                 self.ibo_tokenTableView.reloadData()

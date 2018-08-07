@@ -14,7 +14,7 @@ enum PageViews:Int {
     case CollectiblePage = 1
     case TXHistory = 2
 }
-class WalletDisplayViewController:UIViewController, UIPageViewControllerDelegate, UIScrollViewDelegate, WalletPageViewControllerDelegate, PopOverViewcontrollerDelegate, TokenDelegate{
+class WalletDisplayViewController:UIViewController, UIPageViewControllerDelegate, UIScrollViewDelegate, WalletPageViewControllerDelegate, PopOverViewcontrollerDelegate{
     func tokenDidSelectERC20(token: ERC20Token) {
         //
     }
@@ -66,7 +66,8 @@ class WalletDisplayViewController:UIViewController, UIPageViewControllerDelegate
             guard let networkbalance = balance else {
                 return
             }
-            UserDefaults.standard.set(networkbalance, forKey: "ETHBalance")
+            let userBalanceKey = "balance:\(EtherWallet.account.address!)"
+            UserDefaults.standard.set(networkbalance, forKey: userBalanceKey)
             self.iboBalance?.text = balance
         }
     }
@@ -127,7 +128,7 @@ class WalletDisplayViewController:UIViewController, UIPageViewControllerDelegate
     
     //TOKEN SELECT
     lazy var tokenDetail: TokenDetailViewController = {
-        return storyboard?.instantiateViewController(withIdentifier: "sb_TokenDetailViewController") as! TokenDetailViewController
+        return UIStoryboard(name: "Collectibles", bundle: nil).instantiateViewController(withIdentifier: "sb_TokenDetailViewController") as! TokenDetailViewController
     }()
     
     
@@ -146,7 +147,7 @@ class WalletDisplayViewController:UIViewController, UIPageViewControllerDelegate
         }
         
         self.popModalController = PopOverViewcontroller()
-        self.popModalController = self.storyboard?.instantiateViewController(withIdentifier: "sb_PopOverViewcontroller") as! PopOverViewcontroller
+        self.popModalController = UIStoryboard(name: "ModalControllers", bundle: nil).instantiateViewController(withIdentifier: "sb_PopOverViewcontroller") as! PopOverViewcontroller
         self.popModalController.modalTitle = "Collectible"
         self.popModalController.view.frame = self.view.frame
         self.popModalController.delegate = self

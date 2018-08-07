@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		06D26DBAE46EA9359F86AD05 /* Pods_Dot_Wallet.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5DDA9268F31B9E29C4F2A18 /* Pods_Dot_Wallet.framework */; };
+		2F0793A6211A35EE005E479E /* DotBrowserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F0793A5211A35EE005E479E /* DotBrowserViewController.swift */; };
+		2F0793A8211A3601005E479E /* DappBrowser.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2F0793A7211A3601005E479E /* DappBrowser.storyboard */; };
 		2F0EFC7D21063937003EF740 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F0EFC7C21063937003EF740 /* AppDelegate.swift */; };
 		2F0EFC7F21063937003EF740 /* WalletHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F0EFC7E21063937003EF740 /* WalletHomeViewController.swift */; };
 		2F0EFC8221063937003EF740 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2F0EFC8021063937003EF740 /* Main.storyboard */; };
@@ -39,6 +41,12 @@
 		2F2F74B72109C48F00612CF4 /* icon_token_erc20.png in Resources */ = {isa = PBXBuildFile; fileRef = 2F2F74B62109C48F00612CF4 /* icon_token_erc20.png */; };
 		2F3B3D252111064D00A4E651 /* ModalSlideOverViewcontroller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F3B3D242111064D00A4E651 /* ModalSlideOverViewcontroller.swift */; };
 		2F443A5A2119B57D00512BB8 /* ImportSingleton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F443A592119B57D00512BB8 /* ImportSingleton.swift */; };
+		2F4D31BE211A398D0046BC61 /* btn_moveDown@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2F4D31BC211A398C0046BC61 /* btn_moveDown@2x.png */; };
+		2F4D31BF211A398D0046BC61 /* btn_moveUp@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2F4D31BD211A398D0046BC61 /* btn_moveUp@2x.png */; };
+		2F4D31C2211A3ABB0046BC61 /* btn_moveUp@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2F4D31C0211A3ABB0046BC61 /* btn_moveUp@3x.png */; };
+		2F4D31C3211A3ABB0046BC61 /* btn_moveDown@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2F4D31C1211A3ABB0046BC61 /* btn_moveDown@3x.png */; };
+		2F4D31C6211A3AF60046BC61 /* btn_moveUp.png in Resources */ = {isa = PBXBuildFile; fileRef = 2F4D31C4211A3AF60046BC61 /* btn_moveUp.png */; };
+		2F4D31C7211A3AF60046BC61 /* btn_moveDown.png in Resources */ = {isa = PBXBuildFile; fileRef = 2F4D31C5211A3AF60046BC61 /* btn_moveDown.png */; };
 		2F679D282111D10500FDC1DB /* PopOverModalController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F679D272111D10500FDC1DB /* PopOverModalController.swift */; };
 		2F6CBD5B2108B7FC0026C858 /* EtherWallet+Tokens.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F6CBD5A2108B7FC0026C858 /* EtherWallet+Tokens.swift */; };
 		2F6CBD622109005B0026C858 /* WalletCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F6CBD612109005B0026C858 /* WalletCardViewController.swift */; };
@@ -62,7 +70,6 @@
 		2FE75052210BFD9200AAD6E6 /* icon_send.png in Resources */ = {isa = PBXBuildFile; fileRef = 2FE7504B210BFD9100AAD6E6 /* icon_send.png */; };
 		2FE75053210BFD9200AAD6E6 /* icon_circledot.png in Resources */ = {isa = PBXBuildFile; fileRef = 2FE7504C210BFD9100AAD6E6 /* icon_circledot.png */; };
 		2FE75054210BFD9200AAD6E6 /* icon_dot.png in Resources */ = {isa = PBXBuildFile; fileRef = 2FE7504D210BFD9100AAD6E6 /* icon_dot.png */; };
-		2FE75055210BFD9200AAD6E6 /* 80676-200.png in Resources */ = {isa = PBXBuildFile; fileRef = 2FE7504E210BFD9100AAD6E6 /* 80676-200.png */; };
 		2FE75056210BFD9200AAD6E6 /* icon_transactions.png in Resources */ = {isa = PBXBuildFile; fileRef = 2FE7504F210BFD9100AAD6E6 /* icon_transactions.png */; };
 		2FF4A303210F210800C9EB89 /* StringHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FF4A302210F210800C9EB89 /* StringHelpers.swift */; };
 		DFBF12152ACF0C100AFAA0C4 /* Pods_Dot_WalletUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 17873D468537B1C8CB4EF2DF /* Pods_Dot_WalletUITests.framework */; };
@@ -90,6 +97,8 @@
 		12E973F732A1E95934408745 /* Pods-Dot Wallet.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Dot Wallet.release.xcconfig"; path = "Pods/Target Support Files/Pods-Dot Wallet/Pods-Dot Wallet.release.xcconfig"; sourceTree = "<group>"; };
 		17873D468537B1C8CB4EF2DF /* Pods_Dot_WalletUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Dot_WalletUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2C40B5E0169C1479E5C9125A /* Pods-Dot WalletUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Dot WalletUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Dot WalletUITests/Pods-Dot WalletUITests.release.xcconfig"; sourceTree = "<group>"; };
+		2F0793A5211A35EE005E479E /* DotBrowserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DotBrowserViewController.swift; sourceTree = "<group>"; };
+		2F0793A7211A3601005E479E /* DappBrowser.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = DappBrowser.storyboard; sourceTree = "<group>"; };
 		2F0EFC7921063937003EF740 /* Dot Wallet.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Dot Wallet.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2F0EFC7C21063937003EF740 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2F0EFC7E21063937003EF740 /* WalletHomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletHomeViewController.swift; sourceTree = "<group>"; };
@@ -127,6 +136,12 @@
 		2F2F74B62109C48F00612CF4 /* icon_token_erc20.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_token_erc20.png; sourceTree = "<group>"; };
 		2F3B3D242111064D00A4E651 /* ModalSlideOverViewcontroller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModalSlideOverViewcontroller.swift; sourceTree = "<group>"; };
 		2F443A592119B57D00512BB8 /* ImportSingleton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportSingleton.swift; sourceTree = "<group>"; };
+		2F4D31BC211A398C0046BC61 /* btn_moveDown@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_moveDown@2x.png"; sourceTree = "<group>"; };
+		2F4D31BD211A398D0046BC61 /* btn_moveUp@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_moveUp@2x.png"; sourceTree = "<group>"; };
+		2F4D31C0211A3ABB0046BC61 /* btn_moveUp@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_moveUp@3x.png"; sourceTree = "<group>"; };
+		2F4D31C1211A3ABB0046BC61 /* btn_moveDown@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_moveDown@3x.png"; sourceTree = "<group>"; };
+		2F4D31C4211A3AF60046BC61 /* btn_moveUp.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_moveUp.png; sourceTree = "<group>"; };
+		2F4D31C5211A3AF60046BC61 /* btn_moveDown.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_moveDown.png; sourceTree = "<group>"; };
 		2F679D272111D10500FDC1DB /* PopOverModalController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopOverModalController.swift; sourceTree = "<group>"; };
 		2F6CBD5A2108B7FC0026C858 /* EtherWallet+Tokens.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EtherWallet+Tokens.swift"; sourceTree = "<group>"; };
 		2F6CBD612109005B0026C858 /* WalletCardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletCardViewController.swift; sourceTree = "<group>"; };
@@ -150,7 +165,6 @@
 		2FE7504B210BFD9100AAD6E6 /* icon_send.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_send.png; sourceTree = "<group>"; };
 		2FE7504C210BFD9100AAD6E6 /* icon_circledot.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_circledot.png; sourceTree = "<group>"; };
 		2FE7504D210BFD9100AAD6E6 /* icon_dot.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_dot.png; sourceTree = "<group>"; };
-		2FE7504E210BFD9100AAD6E6 /* 80676-200.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "80676-200.png"; sourceTree = "<group>"; };
 		2FE7504F210BFD9100AAD6E6 /* icon_transactions.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_transactions.png; sourceTree = "<group>"; };
 		2FF4A302210F210800C9EB89 /* StringHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringHelpers.swift; sourceTree = "<group>"; };
 		43B940DA664FC791F17688AD /* Pods-Dot Wallet.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Dot Wallet.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Dot Wallet/Pods-Dot Wallet.debug.xcconfig"; sourceTree = "<group>"; };
@@ -189,6 +203,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2F0793A4211A35CA005E479E /* DappBrowser */ = {
+			isa = PBXGroup;
+			children = (
+				2F0793A5211A35EE005E479E /* DotBrowserViewController.swift */,
+				2F0793A7211A3601005E479E /* DappBrowser.storyboard */,
+			);
+			path = DappBrowser;
+			sourceTree = "<group>";
+		};
 		2F0EFC7021063937003EF740 = {
 			isa = PBXGroup;
 			children = (
@@ -253,6 +276,7 @@
 				2F7678E6210B833F00919059 /* Wallet Display */,
 				2F6CBD5C2108FF9B0026C858 /* Transact */,
 				2F85FCF521199C6B002E988A /* Wallet Manage */,
+				2F0793A4211A35CA005E479E /* DappBrowser */,
 				2F443A592119B57D00512BB8 /* ImportSingleton.swift */,
 			);
 			path = screens;
@@ -304,11 +328,16 @@
 		2F2F74B52109C38F00612CF4 /* images */ = {
 			isa = PBXGroup;
 			children = (
+				2F4D31C1211A3ABB0046BC61 /* btn_moveDown@3x.png */,
+				2F4D31C5211A3AF60046BC61 /* btn_moveDown.png */,
+				2F4D31C4211A3AF60046BC61 /* btn_moveUp.png */,
+				2F4D31C0211A3ABB0046BC61 /* btn_moveUp@3x.png */,
+				2F4D31BC211A398C0046BC61 /* btn_moveDown@2x.png */,
+				2F4D31BD211A398D0046BC61 /* btn_moveUp@2x.png */,
 				2F85FCF121199830002E988A /* bg_transparent@2x.png */,
 				2F2055702112FD54006C768E /* icon_qr.png */,
 				2F2055712112FD55006C768E /* icon_settings.png */,
 				2F11AA7E210CEA7A00790BAF /* icon_close_button.png */,
-				2FE7504E210BFD9100AAD6E6 /* 80676-200.png */,
 				2FE7504C210BFD9100AAD6E6 /* icon_circledot.png */,
 				2FE7504D210BFD9100AAD6E6 /* icon_dot.png */,
 				2FE75049210BFD9000AAD6E6 /* icon_plus.png */,
@@ -576,9 +605,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2F4D31C6211A3AF60046BC61 /* btn_moveUp.png in Resources */,
 				2FA5E2FD211981B900A4406E /* ERC20Tokens.storyboard in Resources */,
 				2F2055722112FD55006C768E /* icon_qr.png in Resources */,
 				2FE75050210BFD9200AAD6E6 /* icon_plus.png in Resources */,
+				2F4D31C3211A3ABB0046BC61 /* btn_moveDown@3x.png in Resources */,
+				2F4D31BF211A398D0046BC61 /* btn_moveUp@2x.png in Resources */,
 				2FE75056210BFD9200AAD6E6 /* icon_transactions.png in Resources */,
 				2FE75054210BFD9200AAD6E6 /* icon_dot.png in Resources */,
 				2FE75052210BFD9200AAD6E6 /* icon_send.png in Resources */,
@@ -587,14 +619,17 @@
 				2F0EFC8721063938003EF740 /* LaunchScreen.storyboard in Resources */,
 				2FA5E2FB21197D8600A4406E /* Collectibles.storyboard in Resources */,
 				2F11AA7F210CEA7A00790BAF /* icon_close_button.png in Resources */,
+				2F0793A8211A3601005E479E /* DappBrowser.storyboard in Resources */,
 				2FE75051210BFD9200AAD6E6 /* icon_tokens.png in Resources */,
 				2F0EFC8421063938003EF740 /* Assets.xcassets in Resources */,
-				2FE75055210BFD9200AAD6E6 /* 80676-200.png in Resources */,
 				2F0EFC8221063937003EF740 /* Main.storyboard in Resources */,
 				2FA5E2F621197ABF00A4406E /* TransactionHistory.storyboard in Resources */,
 				2FE75053210BFD9200AAD6E6 /* icon_circledot.png in Resources */,
+				2F4D31C2211A3ABB0046BC61 /* btn_moveUp@3x.png in Resources */,
 				2FA5E2F921197B6900A4406E /* ModalControllers.storyboard in Resources */,
 				2F2F74B72109C48F00612CF4 /* icon_token_erc20.png in Resources */,
+				2F4D31C7211A3AF60046BC61 /* btn_moveDown.png in Resources */,
+				2F4D31BE211A398D0046BC61 /* btn_moveDown@2x.png in Resources */,
 				2FA5E2F421197A8F00A4406E /* WalletDetail.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -731,6 +766,7 @@
 				2FA5E3002119834800A4406E /* TokenStorage.swift in Sources */,
 				2F6CBD622109005B0026C858 /* WalletCardViewController.swift in Sources */,
 				2F0EFCC62106FE6F003EF740 /* EtherWallet+Account.swift in Sources */,
+				2F0793A6211A35EE005E479E /* DotBrowserViewController.swift in Sources */,
 				2F11AA7D210C9F7A00790BAF /* WalletDisplayContainer.swift in Sources */,
 				2F77A33821136C0400D06DB4 /* TokenDetailViewController.swift in Sources */,
 				2F85FCF421199C67002E988A /* WalletSettingsViewController.swift in Sources */,

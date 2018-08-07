@@ -137,14 +137,20 @@ class TokenListViewController:UIViewController, UITableViewDelegate, UITableView
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        print("Tap")
+        self.presentAlert()
+        
+    }
+    
+    func presentAlert(){
         let alert = UIAlertController(title: "Some Token", message: "Need to build UI here...", preferredStyle: .alert)
-        
+    
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (action) in
-            //
-        }))
-        
-        self.present(alert, animated: true, completion: nil)
-        
+        //
+        })
+    )
+    
+    self.present(alert, animated: true, completion: nil)
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {

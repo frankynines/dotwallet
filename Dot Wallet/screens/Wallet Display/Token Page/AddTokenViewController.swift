@@ -18,6 +18,7 @@ class AddTokenViewController:UIViewController, UITableViewDelegate, UITableViewD
     
     @IBOutlet var ibo_tableView:UITableView?
     
+    //LIST OF ERC20 TOKENS
     var erc20TokenListURL = "https://raw.githubusercontent.com/MyEtherWallet/ethereum-lists/master/tokens/tokens-eth.json"
     
     var delegate:AddTokenViewControllerDelegate?
@@ -26,7 +27,6 @@ class AddTokenViewController:UIViewController, UITableViewDelegate, UITableViewD
     var searchFilter: [OERC20Token] = []
     
     var searchActive:Bool = false
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -50,23 +50,8 @@ class AddTokenViewController:UIViewController, UITableViewDelegate, UITableViewD
     func loadCacheTokens(){
         
         self.tokens.removeAll()
-    
-        let userStorage = try? Storage(
-            diskConfig: DiskConfig(name: "userERC20"),
-            memoryConfig: MemoryConfig(expiry: .never, countLimit: 10, totalCostLimit: 10),
-            transformer: TransformerFactory.forCodable(ofType: [String : OERC20Token].self)
-        )
-    
-        do {
-            let dictionary = try userStorage?.object(forKey:(EtherWallet.account.address?.lowercased())!)
-            for value in dictionary! {
-                self.tokens.append(value.value)
-            }
-            self.ibo_tableView?.reloadData()
-
-        } catch {
-            print(error.localizedDescription)
-        }
+        self.tokens = TokenCacheManager.shared.loadCachedTokens()
+        self.ibo_tableView?.reloadData()
         
     }
     
@@ -143,8 +128,6 @@ class TokenListCell:UITableViewCell {
     var tokenAddress:String!
     var _token:OERC20Token!
     
-    
-
     func setupCell(token:OERC20Token){
         
         self.iboTokenName?.text = token.name
@@ -172,58 +155,13 @@ class TokenListCell:UITableViewCell {
     @IBAction func switchToken(swtch:UISwitch) {
         
         if swtch.isOn {
-            self.saveTokenToCache()
+            TokenCacheManager.shared.saveTokenToCache(token: self._token)
         } else {
-            self.removeTokenObject()
+            TokenCacheManager.shared.removeTokenToCache(tokenAddress: self._token.address!)
         }
-        
-        
-    }
-    func removeTokenObject(){
-        let userStorage = try? Storage(
-            diskConfig: DiskConfig(name: "userERC20"),
-            memoryConfig: MemoryConfig(expiry: .never, countLimit: 10, totalCostLimit: 10),
-            transformer: TransformerFactory.forCodable(ofType: [String : OERC20Token].self)
-        )
-        
-        var array = [String : OERC20Token]()
-        
-        do {
-            
-            var tokenArray = try userStorage?.object(forKey:(EtherWallet.account.address?.lowercased())!)
-            tokenArray?.removeValue(forKey: (self._token.address?.lowercased())!)
-            try userStorage?.setObject(tokenArray!, forKey:EtherWallet.account.address!.lowercased())
-            
-        } catch {
-            print(error.localizedDescription)
 
-        }
-    
-
-     
     }
-    
-    func saveTokenToCache(){
-        let userStorage = try? Storage(
-            diskConfig: DiskConfig(name: "userERC20"),
-            memoryConfig: MemoryConfig(expiry: .never, countLimit: 10, totalCostLimit: 10),
-            transformer: TransformerFactory.forCodable(ofType: [String : OERC20Token].self)
-        )
-        
-        do {
-            var tokenArray = try userStorage?.object(forKey:(EtherWallet.account.address?.lowercased())!)
-            tokenArray?.updateValue(self._token, forKey: (self._token.address?.lowercased())!)
-            try userStorage?.setObject(tokenArray!, forKey:(EtherWallet.account.address?.lowercased())!)
-        } catch { print(error.localizedDescription)
-            do {
-                try userStorage?.setObject([(self._token.address?.lowercased())! : self._token], forKey:EtherWallet.account.address!.lowercased())
-            } catch {
-                print(error.localizedDescription)
-            }
-            
-        }
-        
-    }
+   
     
     
 

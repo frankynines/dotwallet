@@ -8,13 +8,14 @@
 
 import Foundation
 import UIKit
+import SafariServices
 
 enum PageViews:Int {
     case TokenPage = 0
     case CollectiblePage = 1
     case TXHistory = 2
 }
-class WalletDisplayViewController:UIViewController, UIPageViewControllerDelegate, UIScrollViewDelegate, WalletPageViewControllerDelegate, PopOverViewcontrollerDelegate{
+class WalletDisplayViewController:UIViewController, UIPageViewControllerDelegate, UIScrollViewDelegate, WalletPageViewControllerDelegate, PopOverViewcontrollerDelegate, TokenDetailDelegate{
     func tokenDidSelectERC20(token: ERC20Token) {
         //
     }
@@ -127,9 +128,6 @@ class WalletDisplayViewController:UIViewController, UIPageViewControllerDelegate
     }
     
     //TOKEN SELECT
-    var tokenDetail: TokenDetailViewController!
-    
-    
     func tokenDidSelectERC721(token:OErc721Token) {
         print(token)
         self.presentPopView( token:token)
@@ -137,7 +135,8 @@ class WalletDisplayViewController:UIViewController, UIPageViewControllerDelegate
     
     // DISPLAY POPUP
     var popModalController:PopOverViewcontroller!
-    
+    var tokenDetail: TokenDetailViewController!
+
     func presentPopView(token:OErc721Token){
         
         guard popModalController == nil else {
@@ -145,18 +144,25 @@ class WalletDisplayViewController:UIViewController, UIPageViewControllerDelegate
         }
         
         self.popModalController = PopOverViewcontroller()
-        self.popModalController = UIStoryboard(name: "ModalControllers", bundle: nil).instantiateViewController(withIdentifier: "sb_PopOverViewcontroller") as! PopOverViewcontroller
+        self.popModalController = (UIStoryboard(name: "ModalControllers", bundle: nil).instantiateViewController(withIdentifier: "sb_PopOverViewcontroller") as! PopOverViewcontroller)
         self.popModalController.modalTitle = "Collectible"
         self.popModalController.view.frame = self.view.frame
         self.popModalController.delegate = self
-        self.tokenDetail = UIStoryboard(name: "Collectibles", bundle: nil).instantiateViewController(withIdentifier: "sb_TokenDetailViewController") as! TokenDetailViewController
-        self.tokenDetail.erc721Token = token
-        //Assign Child Class
-        self.popModalController.viewController = self.tokenDetail
         
+        
+        self.tokenDetail = (UIStoryboard(name: "Collectibles", bundle: nil).instantiateViewController(withIdentifier: "sb_TokenDetailViewController") as! TokenDetailViewController)
+        self.tokenDetail.erc721Token = token
+        self.tokenDetail.delegate = self
+        self.popModalController.viewController = self.tokenDetail
         self.view.addSubview(self.popModalController.view)
         
     }
+    
+    func openURL(url: String) {
+        let vc = SFSafariViewController(url: URL(string: url)!)
+        self.present(vc, animated: true, completion: nil)
+    }
+    
     func popOverDismiss() {
         self.popModalController.animateModalOut {
             self.popModalController.view.removeFromSuperview()

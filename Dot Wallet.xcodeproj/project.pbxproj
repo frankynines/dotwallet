@@ -35,6 +35,7 @@
 		2F11AA7D210C9F7A00790BAF /* WalletDisplayContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F11AA7C210C9F7A00790BAF /* WalletDisplayContainer.swift */; };
 		2F11AA7F210CEA7A00790BAF /* icon_close_button.png in Resources */ = {isa = PBXBuildFile; fileRef = 2F11AA7E210CEA7A00790BAF /* icon_close_button.png */; };
 		2F11AA81210CEBA400790BAF /* ServiceTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F11AA80210CEBA400790BAF /* ServiceTimer.swift */; };
+		2F1FB663211C671D00F2BB57 /* sofa-web3.js in Resources */ = {isa = PBXBuildFile; fileRef = 2F1FB662211C671D00F2BB57 /* sofa-web3.js */; };
 		2F2055722112FD55006C768E /* icon_qr.png in Resources */ = {isa = PBXBuildFile; fileRef = 2F2055702112FD54006C768E /* icon_qr.png */; };
 		2F2055732112FD55006C768E /* icon_settings.png in Resources */ = {isa = PBXBuildFile; fileRef = 2F2055712112FD55006C768E /* icon_settings.png */; };
 		2F2F74B321091E8200612CF4 /* TokenListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F2F74B221091E8200612CF4 /* TokenListViewController.swift */; };
@@ -130,6 +131,7 @@
 		2F11AA7C210C9F7A00790BAF /* WalletDisplayContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletDisplayContainer.swift; sourceTree = "<group>"; };
 		2F11AA7E210CEA7A00790BAF /* icon_close_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_close_button.png; sourceTree = "<group>"; };
 		2F11AA80210CEBA400790BAF /* ServiceTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceTimer.swift; sourceTree = "<group>"; };
+		2F1FB662211C671D00F2BB57 /* sofa-web3.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = "sofa-web3.js"; sourceTree = "<group>"; };
 		2F2055702112FD54006C768E /* icon_qr.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_qr.png; sourceTree = "<group>"; };
 		2F2055712112FD55006C768E /* icon_settings.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_settings.png; sourceTree = "<group>"; };
 		2F2F74B221091E8200612CF4 /* TokenListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenListViewController.swift; sourceTree = "<group>"; };
@@ -206,6 +208,7 @@
 		2F0793A4211A35CA005E479E /* DappBrowser */ = {
 			isa = PBXGroup;
 			children = (
+				2F1FB662211C671D00F2BB57 /* sofa-web3.js */,
 				2F0793A5211A35EE005E479E /* DotBrowserViewController.swift */,
 				2F0793A7211A3601005E479E /* DappBrowser.storyboard */,
 			);
@@ -610,6 +613,7 @@
 				2F2055722112FD55006C768E /* icon_qr.png in Resources */,
 				2FE75050210BFD9200AAD6E6 /* icon_plus.png in Resources */,
 				2F4D31C3211A3ABB0046BC61 /* btn_moveDown@3x.png in Resources */,
+				2F1FB663211C671D00F2BB57 /* sofa-web3.js in Resources */,
 				2F4D31BF211A398D0046BC61 /* btn_moveUp@2x.png in Resources */,
 				2FE75056210BFD9200AAD6E6 /* icon_transactions.png in Resources */,
 				2FE75054210BFD9200AAD6E6 /* icon_dot.png in Resources */,

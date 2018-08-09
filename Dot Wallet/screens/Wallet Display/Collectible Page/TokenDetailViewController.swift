@@ -8,6 +8,11 @@
 
 import Foundation
 import UIKit
+import SafariServices
+
+protocol TokenDetailDelegate {
+    func openURL(url:String)
+}
 
 class TokenDetailViewController:UIViewController {
     
@@ -18,6 +23,8 @@ class TokenDetailViewController:UIViewController {
     @IBOutlet var ibo_webview:UIWebView?
     @IBOutlet var ibo_description:UILabel?
     
+    var delegate:TokenDetailDelegate?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
     }
@@ -25,7 +32,6 @@ class TokenDetailViewController:UIViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewDidAppear(animated)
         print("View will disapeear")
-        self.ibo_webview?.loadHTMLString("about:blank", baseURL: nil)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -74,8 +80,16 @@ class TokenDetailViewController:UIViewController {
     }
     
     @IBAction func iba_openAsset(){
-        
+        let url = self.erc721Token?.external_link
+        self.openURL(url: url!)
     }
     
+    func openURL(url:String) {
+        let tokenSmartContract = self.erc721Token?.asset_contract?.address!
+        let tokenID = self.erc721Token?.token_id!
+        let openSeaURL = "https://opensea.io/assets/" + tokenSmartContract! + "/" + tokenID!
+        print(openSeaURL)
+        self.delegate?.openURL(url: openSeaURL)
+    }
     
 }

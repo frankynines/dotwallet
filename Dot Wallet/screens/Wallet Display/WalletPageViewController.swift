@@ -10,19 +10,14 @@ import Foundation
 import UIKit
 
 protocol WalletPageViewControllerDelegate {
+    
     func walletPageCurrentPage(index:Int)
     func tokenDidSelectERC721(token:OErc721Token)
     func tokenDidSelectERC20(token:ERC20Token)
+    
 }
 
 class WalletPageViewController: UIPageViewController{
-//    func tokenDidSelectERC20(token: ERC20Token) {
-//        print("Tapped Token")
-//    }
-//    
-//    func tokenDidSelectERC721(token: OErc721Token) {
-//        print("Tapp from PageViewController")
-//    }
     
     var childDelegate:WalletPageViewControllerDelegate?
     
@@ -58,7 +53,6 @@ class WalletPageViewController: UIPageViewController{
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
         
         let tokenVC = self.pages[PageViews.TokenPage.rawValue] as! TokenListViewController
         tokenVC.delegate = childDelegate

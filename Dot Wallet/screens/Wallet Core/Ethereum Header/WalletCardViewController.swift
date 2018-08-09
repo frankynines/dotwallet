@@ -105,6 +105,11 @@ class WalletCardViewController:UIViewController, UIScrollViewDelegate, ModalSlid
     
     @IBAction func iba_shareAddress(){
         
+        let vc = UIStoryboard(name: "DappBrowser", bundle: nil).instantiateViewController(withIdentifier: "sb_DotBrowserViewController") as! DotBrowserViewController
+        self.present(vc, animated: true, completion: nil)
+        
+        return
+        
         // set up activity view controller
         let textToShare = [ "Send me some Eth: ", EtherWallet.account.address ]
         let activityViewController = UIActivityViewController(activityItems: textToShare, applicationActivities: nil)

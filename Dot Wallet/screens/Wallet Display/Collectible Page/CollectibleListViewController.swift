@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import SafariServices
 class CollectibleListViewController:UIViewController, UICollectionViewDelegate, UICollectionViewDataSource{
     
     @IBOutlet var ibo_collectionView:UICollectionView?
@@ -131,8 +132,6 @@ class CollectibleListViewController:UIViewController, UICollectionViewDelegate, 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         self.delegate?.tokenDidSelectERC721(token: self.tokens[indexPath.item])
     }
-
-    
     
 }
 
@@ -154,21 +153,6 @@ class CollectableViewCell:UICollectionViewCell {
             self.ibo_webViewDisplay?.contentMode = .scaleAspectFit
             self.ibo_webViewDisplay?.scalesPageToFit = false
         }
-//
-//            for view in (self.ibo_webViewDisplay?.subviews)! {
-//                if view.superclass == UIImageView.self {
-//                    view.removeFromSuperview()
-//                }
-//            }
-//
-//            self.drawSVG(url:imageURL)
-//
-//        } else {
-//
-//
-//
-//        }
-        
     }
     
     func drawImage(url:String?) {

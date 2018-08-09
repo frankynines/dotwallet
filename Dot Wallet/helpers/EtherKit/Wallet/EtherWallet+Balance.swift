@@ -44,7 +44,6 @@ extension EtherWallet: BalanceService {
         let balanceOfCallResult = contractMethod?.call(options: nil)
         guard case .success(let balanceInfo)? = balanceOfCallResult, let balance = balanceInfo["0"] as? BigUInt else { throw WalletError.networkFailure
         }
-        
         return "\(balance)"
     }
     
@@ -60,7 +59,6 @@ extension EtherWallet: BalanceService {
     public func WeiToValue(wei:String, dec:Int) -> String? {
         let value = BigInt.init(wei)
         let amount = Web3.Utils.formatToPrecision(value!, numberDecimals: dec, formattingDecimals: 6, decimalSeparator: ".", fallbackToScientific: false)
-        //let amount = Web3.Utils.formatToEthereumUnits(value!, toUnits: Web3.Utils.Units.eth, decimals: 6, decimalSeparator: ".")
         return amount
     }
     

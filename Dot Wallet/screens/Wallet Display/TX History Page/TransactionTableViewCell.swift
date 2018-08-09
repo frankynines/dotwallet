@@ -22,8 +22,10 @@ class TransactionTableCell:UITableViewCell {
     func setupCell(transaction:GeneralTransactionData!) {
         self.transaction = transaction
         
-        var amount = EtherWallet.balance.WeiToValue(wei: transaction.value, dec: 16)
-
+        let wei = BigInt(transaction.value)
+        var amount = Web3.Utils.formatToEthereumUnits(wei!)
+        
+        
         let date = Date(timeIntervalSince1970: Double.init(transaction.timestamp)!)
         let dayTimePeriodFormatter = DateFormatter()
         dayTimePeriodFormatter.dateFormat = "MMM dd YYYY"

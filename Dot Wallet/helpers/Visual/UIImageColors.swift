@@ -6,7 +6,7 @@
 //
 import UIKit
 import Accelerate
-
+import AVFoundation
 public struct UIImageColors {
     public var background: UIColor!
     public var primary: UIColor!
@@ -322,9 +322,11 @@ extension UIImage {
 }
 
 
-// IMAGE RESIZE
+// IMAGE RESIZE/ROTATE
 
-extension UIImage{
+extension UIImage {
+    
+    
     func resizeImageUsingVImage(size:CGSize) -> UIImage? {
         let cgImage = self.cgImage!
         var format = vImage_CGImageFormat(bitsPerComponent: 8, bitsPerPixel: 32, colorSpace: nil, bitmapInfo: CGBitmapInfo(rawValue: CGImageAlphaInfo.first.rawValue), version: 0, decode: nil, renderingIntent: CGColorRenderingIntent.defaultIntent)
@@ -356,4 +358,5 @@ extension UIImage{
         destCGImage = nil
         return resizedImage
     }
+    
 }

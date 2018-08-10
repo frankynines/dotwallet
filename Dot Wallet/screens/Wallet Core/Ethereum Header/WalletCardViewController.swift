@@ -72,6 +72,11 @@ class WalletCardViewController:UIViewController, UIScrollViewDelegate, ModalSlid
            
             let qrCode = QRCode(EtherWallet.account.address!)
             qrCodeView?.image = qrCode?.image
+            qrCodeView?.layer.borderColor = UIColor.white.cgColor
+            qrCodeView?.layer.shadowColor = UIColor.black.cgColor
+            qrCodeView?.layer.shadowRadius = 4
+            qrCodeView?.layer.shadowOffset = CGSize(width: 0, height: 2)
+            qrCodeView?.layer.shadowOpacity = 0.25
         }
     }
     

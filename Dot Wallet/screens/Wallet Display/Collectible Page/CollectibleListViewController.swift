@@ -25,7 +25,6 @@ class CollectibleListViewController:UIViewController, UICollectionViewDelegate, 
                                "CryptoBots" : "0xF7a6E15dfD5cdD9ef12711Bd757a9b6021ABf643",
                                "John Orion Young" : "0x96313f2c374f901e3831ea6de67b1165c4f39a54",
                                "Digital Art Chain" : "0x323a3e1693e7a0959f65972f3bf2dfcb93239dfe",
-                               
                                ]
     
     var pageIndex = 0

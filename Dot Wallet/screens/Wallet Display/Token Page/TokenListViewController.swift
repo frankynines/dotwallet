@@ -13,7 +13,7 @@ import Cache
 class TokenListViewController:UIViewController, UITableViewDelegate, UITableViewDataSource, AddTokenViewControllerDelegate {
     
     var delegate:WalletPageViewControllerDelegate?
-    
+
     @IBOutlet var ibo_tableHeader:UILabel?
     @IBOutlet var ibo_tokenTableView:UITableView!
 
@@ -21,6 +21,8 @@ class TokenListViewController:UIViewController, UITableViewDelegate, UITableView
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.ibo_tokenTableView.delaysContentTouches = false
     
         DispatchQueue.main.async {
             self.loadTokens()
@@ -40,9 +42,11 @@ class TokenListViewController:UIViewController, UITableViewDelegate, UITableView
     }
     
     @IBAction func iba_manageTokens(){
+
         let vc = UIStoryboard(name: "ERC20Tokens", bundle: nil).instantiateViewController(withIdentifier: "sb_AddTokenViewController") as! AddTokenViewController
         vc.delegate = self
         self.present(vc, animated: true, completion: nil)
+        
     }
     
     func tokenManagementControllerSaved(vc:AddTokenViewController) {
@@ -65,7 +69,6 @@ class TokenListViewController:UIViewController, UITableViewDelegate, UITableView
         self.ibo_tableHeader?.text = String(self.tokens.count) + " Tokens"
     }
     
-    //TABLE VIEW
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.tokens.count
     }
@@ -75,8 +78,14 @@ class TokenListViewController:UIViewController, UITableViewDelegate, UITableView
         return cell
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    func tableView(_ tableView: UITableView, didHighlightRowAt indexPath: IndexPath) {
+        let token = self.tokens[indexPath.row]
+        let vc = UIStoryboard.init(name: "ERC20Tokens", bundle: nil).instantiateViewController(withIdentifier: "sb_ERC20TokenDetailViewController") as! ERC20TokenDetailViewController
+        vc.erc20Token = token
+        self.present(vc , animated: true, completion: nil)
     }
+    
+
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
     }
@@ -102,7 +111,6 @@ class WalletTokenCell:UITableViewCell {
         EtherWallet.tokens.getTokenImage(contractAddress: (token.address?.lowercased())!) { (image) in
             self.iboTokenImage?.image = image
         }
-        
         self.syncTokenBalance(_tokenAddress: token.address)
         
     }

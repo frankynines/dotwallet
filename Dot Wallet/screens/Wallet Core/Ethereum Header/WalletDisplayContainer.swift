@@ -16,10 +16,6 @@ enum PageViews:Int {
     case TXHistory = 2
 }
 class WalletDisplayViewController:UIViewController, UIPageViewControllerDelegate, UIScrollViewDelegate, WalletPageViewControllerDelegate, PopOverViewcontrollerDelegate, TokenDetailDelegate{
-    func tokenDidSelectERC20(token: ERC20Token) {
-        //
-    }
-    
     
     @IBOutlet weak var ibo_walletName:UILabel?
     @IBOutlet weak var iboBalance: UILabel?
@@ -131,6 +127,27 @@ class WalletDisplayViewController:UIViewController, UIPageViewControllerDelegate
     func tokenDidSelectERC721(token:OErc721Token) {
         print(token)
         self.presentPopView( token:token)
+    }
+    
+    func tokenDidSelectERC20(token: OERC20Token) {
+
+       
+    }
+    
+    func tokenDidSelectTransaction(transaction: GeneralTransactionData) {
+        let alert = UIAlertController(title: "Transaction", message: transaction.hash, preferredStyle: .alert)
+        
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (action) in
+            //
+        }))
+        
+        alert.addAction(UIAlertAction(title: "View on Etherscan", style: .default, handler: { (action) in
+            let url = URL(string: "https://ropsten.etherscan.io/tx/\(transaction.hash)")
+            let vc = SFSafariViewController(url: url!)
+            self.present(vc, animated: true, completion: nil)
+        }))
+        
+        self.present(alert, animated: true, completion: nil)
     }
     
     // DISPLAY POPUP

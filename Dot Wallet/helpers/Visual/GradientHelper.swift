@@ -142,7 +142,7 @@ class BackgroundView: UIView {
     }
     override func layoutSubviews() {
         self.gradientLayer = self.layer as? CAGradientLayer
-        self.gradientLayer.colors = [UIColor(hexString: "99C4FF").cgColor, UIColor(hexString:"C19DFF").cgColor]
+        self.gradientLayer.colors = [UIColor(hexString: "CCD1FF").cgColor, UIColor(hexString:"A26EFF").cgColor]
         self.gradientLayer.startPoint = CGPoint(x: 0.5, y: 0)
         self.gradientLayer.endPoint = CGPoint(x: 0, y: 1)
     }

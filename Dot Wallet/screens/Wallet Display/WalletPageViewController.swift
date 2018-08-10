@@ -10,11 +10,10 @@ import Foundation
 import UIKit
 
 protocol WalletPageViewControllerDelegate {
-    
     func walletPageCurrentPage(index:Int)
     func tokenDidSelectERC721(token:OErc721Token)
-    func tokenDidSelectERC20(token:ERC20Token)
-    
+    func tokenDidSelectERC20(token:OERC20Token)
+    func tokenDidSelectTransaction(transaction:GeneralTransactionData)
 }
 
 class WalletPageViewController: UIPageViewController{
@@ -54,11 +53,15 @@ class WalletPageViewController: UIPageViewController{
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
+        // ASSIGN DELEGATES
         let tokenVC = self.pages[PageViews.TokenPage.rawValue] as! TokenListViewController
         tokenVC.delegate = childDelegate
         
         let collectionVC = self.pages[PageViews.CollectiblePage.rawValue] as! CollectibleListViewController
         collectionVC.delegate = childDelegate
+        
+        let transactionVC = self.pages[PageViews.TXHistory.rawValue] as! TransactionViewController
+        transactionVC.delegate = childDelegate
     }
     
 }

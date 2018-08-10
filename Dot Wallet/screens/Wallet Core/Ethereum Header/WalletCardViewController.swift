@@ -72,6 +72,11 @@ class WalletCardViewController:UIViewController, UIScrollViewDelegate, ModalSlid
            
             let qrCode = QRCode(EtherWallet.account.address!)
             qrCodeView?.image = qrCode?.image
+            qrCodeView?.layer.borderColor = UIColor.white.cgColor
+            qrCodeView?.layer.shadowColor = UIColor.black.cgColor
+            qrCodeView?.layer.shadowRadius = 4
+            qrCodeView?.layer.shadowOffset = CGSize(width: 0, height: 2)
+            qrCodeView?.layer.shadowOpacity = 0.25
         }
     }
     
@@ -105,10 +110,10 @@ class WalletCardViewController:UIViewController, UIScrollViewDelegate, ModalSlid
     
     @IBAction func iba_shareAddress(){
         
-        let vc = UIStoryboard(name: "DappBrowser", bundle: nil).instantiateViewController(withIdentifier: "sb_DotBrowserViewController") as! DotBrowserViewController
-        self.present(vc, animated: true, completion: nil)
-        
-        return
+//        let vc = UIStoryboard(name: "DappBrowser", bundle: nil).instantiateViewController(withIdentifier: "sb_DotBrowserViewController") as! DotBrowserViewController
+//        self.present(vc, animated: true, completion: nil)
+//        
+//        return
         
         // set up activity view controller
         let textToShare = [ "Send me some Eth: ", EtherWallet.account.address ]

@@ -25,7 +25,6 @@ class TransactionTableCell:UITableViewCell {
         let wei = BigInt(transaction.value)
         var amount = Web3.Utils.formatToEthereumUnits(wei!)
         
-        
         let date = Date(timeIntervalSince1970: Double.init(transaction.timestamp)!)
         let dayTimePeriodFormatter = DateFormatter()
         dayTimePeriodFormatter.dateFormat = "MMM dd YYYY"
@@ -46,7 +45,7 @@ class TransactionTableCell:UITableViewCell {
         
         self.ibo_value?.text = amount!
         self.ibo_timestamp?.text = dateString
-        
+
     }
     
     func isSent(to:String) -> Bool {

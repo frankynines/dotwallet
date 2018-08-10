@@ -22,6 +22,8 @@ class TransactionViewController: UIViewController, UITabBarDelegate, UITableView
     
     @IBOutlet var ibo_tableView:UITableView!
     
+    var delegate:WalletPageViewControllerDelegate?
+    
     var contractAddress:String!
     var transactions = [GeneralTransactionData]()
     
@@ -117,25 +119,8 @@ class TransactionViewController: UIViewController, UITabBarDelegate, UITableView
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-        let cell = tableView.cellForRow(at: indexPath) as! TransactionTableCell
-        
-        
-        let alert = UIAlertController(title: "Transaction", message: cell.transaction.hash, preferredStyle: .alert)
-        
-        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (action) in
-            //
-        }))
-        
-        alert.addAction(UIAlertAction(title: "View on Etherscan", style: .default, handler: { (action) in
-            let url = URL(string: "https://ropsten.etherscan.io/tx/\(cell.transaction.hash)")
-            let vc = SFSafariViewController(url: url!)
-            self.present(vc, animated: true, completion: nil)
-        }))
-        
-        self.present(alert, animated: true, completion: nil)
-        
-        
+        print("SELECTED")
+        self.delegate!.tokenDidSelectTransaction(transaction: self.transactions[indexPath.row])
     }
     
 }

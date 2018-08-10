@@ -157,7 +157,7 @@ class CreateWalletViewController: UIViewController {
         }
         
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "sb_WalletHomeViewController")
-        self.navigationController?.setViewControllers([vc!], animated: true)
+        self.navigationController?.setViewControllers([vc!], animated: false)
        
     
     }

@@ -37,10 +37,13 @@ class TransactionTableCell:UITableViewCell {
             self.ibo_address?.text = "to: " + transaction.to
             amount = "- " + amount!
             self.ibo_direction?.text = "⇡"
+            self.ibo_value?.textColor = UIColor.black
+
         } else {
             amount = "+ " + amount!
-            self.ibo_address?.text = "from: " + transaction.to
+            self.ibo_address?.text = "from: " + transaction.from
             self.ibo_direction?.text = "⇣"
+            self.ibo_value?.textColor = UIColor(hexString: "40E252")
         }
         
         self.ibo_value?.text = amount!
@@ -51,10 +54,10 @@ class TransactionTableCell:UITableViewCell {
     func isSent(to:String) -> Bool {
         if to.lowercased() == EtherWallet.account.address?.lowercased() {
             print("TO")
-            return true
+            return false
         } else {
             print("FROM")
-            return false
+            return true
         }
     }
 }

@@ -11,14 +11,14 @@ import UIKit
 import QRCode
 import Hero
 import web3swift
-
+import EFCountingLabel
 class WalletCardViewController:UIViewController, UIScrollViewDelegate, ModalSlideOverViewcontrollerDelegate{
     
     //HEADER
     @IBOutlet var ibo_scrollview:UIScrollView?
     
     @IBOutlet var iboPublicKey: UILabel?
-    @IBOutlet var iboBalance: UILabel?
+    @IBOutlet var iboBalance: EFCountingLabel?
     @IBOutlet var qrCodeView:UIImageView?
     @IBOutlet var iboCardView:UIView?
     
@@ -35,13 +35,17 @@ class WalletCardViewController:UIViewController, UIScrollViewDelegate, ModalSlid
         self.ibo_scrollview?.delegate = self
         self.ibo_scrollview?.canCancelContentTouches = true
         self.setupHeaderView()
+        
+        self.iboBalance?.animationDuration = 0
+        self.refreshBalance()
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.refreshBalance()
         
-        self.repeatableTimer = RepeatingTimer(timeInterval: 3)
+       
+        self.repeatableTimer = RepeatingTimer(timeInterval: 5)
         self.repeatableTimer.eventHandler = {
             self.refreshBalance()
         }
@@ -64,11 +68,7 @@ class WalletCardViewController:UIViewController, UIScrollViewDelegate, ModalSlid
         if (EtherWallet.account.hasAccount == true) {
             self.iboPublicKey?.text = EtherWallet.account.address
             
-            if let cacheBalance = UserDefaults.standard.value(forKey: "ETHBalance") {
-                self.iboBalance?.text = cacheBalance as? String
-            } else {
-                self.refreshBalance()
-            }
+            
            
             let qrCode = QRCode(EtherWallet.account.address!)
             qrCodeView?.image = qrCode?.image
@@ -92,13 +92,18 @@ class WalletCardViewController:UIViewController, UIScrollViewDelegate, ModalSlid
     
     @IBAction func refreshBalance(){
         
+        self.iboBalance?.animationDuration = 1
+        
+        print("REFRESH BALANCE")
         EtherWallet.balance.etherBalance { balance in
             guard let networkbalance = balance else {
                 return
             }
             let userBalanceKey = "balance:\(EtherWallet.account.address!)"
-            UserDefaults.standard.set(networkbalance, forKey: userBalanceKey)
-            self.iboBalance?.text = balance
+            UserDefaults.standard.set(networkbalance, forKey: userBalanceKey) // SET
+            
+            let nformat = NumberFormatter().number(from: balance!)
+            self.iboBalance?.countFromCurrentValueTo( CGFloat(truncating: nformat!) )
         }
     }
     

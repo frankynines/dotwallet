@@ -14,7 +14,7 @@ target 'Dot Wallet' do
   pod 'CryptoCurrencyKit'
 
   pod 'Hero'
-  pod 'BulletinBoard'
+  pod 'EFCountingLabel'
 
   # Pods for Dot Wallet
 

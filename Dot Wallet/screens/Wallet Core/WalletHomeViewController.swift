@@ -16,7 +16,7 @@ class WalletHomeViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        print(EtherWallet.account.address!)
     }
     
     override func viewWillAppear(_ animated: Bool) {

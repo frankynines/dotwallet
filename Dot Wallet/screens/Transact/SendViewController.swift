@@ -95,9 +95,9 @@ class SendViewController: UIViewController, QRCodeReaderViewControllerDelegate {
     @IBAction func iba_sendTransaction () {
         
         if token == nil {
-            
+            self.sendEthereumTransaction()
         } else {
-            
+            self.sendTokenTransaction()
         }
     }
     

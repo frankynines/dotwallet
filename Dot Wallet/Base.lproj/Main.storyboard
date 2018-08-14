@@ -416,7 +416,7 @@
                                     <constraint firstAttribute="height" constant="20" id="dfv-62-iFh"/>
                                 </constraints>
                             </stackView>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceHorizontal="YES" delaysContentTouches="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Q1s-80-yoT">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceHorizontal="YES" delaysContentTouches="NO" keyboardDismissMode="onDrag" translatesAutoresizingMaskIntoConstraints="NO" id="Q1s-80-yoT">
                                 <rect key="frame" x="0.0" y="290" width="375" height="80"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7aG-MG-lJi">
@@ -735,7 +735,7 @@
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IYy-oE-MXf" userLabel="Card Back" customClass="RoundedRectangleView" customModule="Dot_Wallet" customModuleProvider="target">
                                                 <rect key="frame" x="40" y="113.5" width="295" height="400"/>
-                                                <color key="backgroundColor" red="0.58039215690000001" green="0.2156862745" blue="1" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <color key="backgroundColor" red="0.56862745100000001" green="0.50588235290000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="400" id="kaf-V8-VJj"/>
                                                 </constraints>
@@ -770,7 +770,7 @@
                                                             <userDefinedRuntimeAttribute type="string" keyPath="heroID" value="walletCardName"/>
                                                         </userDefinedRuntimeAttributes>
                                                     </label>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0.00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" highlighted="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Rf-XA-1LN">
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0.00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" highlighted="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Rf-XA-1LN" customClass="EFCountingLabel" customModule="EFCountingLabel">
                                                         <rect key="frame" x="130" y="59.5" width="75" height="36.5"/>
                                                         <fontDescription key="fontDescription" name="Verdana-Bold" family="Verdana" pointSize="30"/>
                                                         <nil key="highlightedColor"/>
@@ -803,7 +803,7 @@
                                                         </connections>
                                                     </button>
                                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ojc-K7-D0o">
-                                                        <rect key="frame" x="78" y="137.5" width="175" height="175"/>
+                                                        <rect key="frame" x="78" y="127.5" width="175" height="175"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" secondItem="ojc-K7-D0o" secondAttribute="height" multiplier="1:1" id="gnP-dW-ob5"/>
                                                         </constraints>
@@ -876,10 +876,10 @@
                                                 <constraints>
                                                     <constraint firstAttribute="trailing" secondItem="vmG-zv-lGX" secondAttribute="trailing" constant="15" id="3Nk-b9-umd"/>
                                                     <constraint firstItem="8hc-MN-6Zd" firstAttribute="centerX" secondItem="Fpg-gR-D0u" secondAttribute="centerX" id="A7j-9I-X1k"/>
-                                                    <constraint firstItem="g6F-Xx-75o" firstAttribute="top" secondItem="ojc-K7-D0o" secondAttribute="bottom" constant="20" id="BES-I0-cJ4"/>
+                                                    <constraint firstItem="g6F-Xx-75o" firstAttribute="top" secondItem="ojc-K7-D0o" secondAttribute="bottom" constant="30" id="BES-I0-cJ4"/>
                                                     <constraint firstItem="ojc-K7-D0o" firstAttribute="centerX" secondItem="Fpg-gR-D0u" secondAttribute="centerX" constant="-2" id="Ffr-jd-BdX"/>
                                                     <constraint firstItem="oXA-Ee-gcZ" firstAttribute="top" secondItem="Fpg-gR-D0u" secondAttribute="top" constant="20" id="FiL-oN-Mpo"/>
-                                                    <constraint firstItem="ojc-K7-D0o" firstAttribute="centerY" secondItem="Fpg-gR-D0u" secondAttribute="centerY" id="GQ8-Fi-HZ1"/>
+                                                    <constraint firstItem="ojc-K7-D0o" firstAttribute="centerY" secondItem="Fpg-gR-D0u" secondAttribute="centerY" constant="-10" id="GQ8-Fi-HZ1"/>
                                                     <constraint firstAttribute="trailing" secondItem="g6F-Xx-75o" secondAttribute="trailing" constant="20" id="GWl-Jh-HLt"/>
                                                     <constraint firstItem="oXA-Ee-gcZ" firstAttribute="leading" secondItem="Fpg-gR-D0u" secondAttribute="leading" constant="20" id="P6M-Bl-8bN"/>
                                                     <constraint firstItem="ojc-K7-D0o" firstAttribute="leading" secondItem="Fpg-gR-D0u" secondAttribute="leading" constant="78" id="PnH-LL-D2N"/>

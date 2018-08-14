@@ -16,6 +16,7 @@ PODS:
   - secp256k1_ios (0.1.3)
   - SipHash (1.2.2)
   - SwiftyJSON (4.1.0)
+  - Toast-Swift (3.0.1)
   - web3swift (0.8.1):
     - Alamofire (~> 4.7)
     - Alamofire-Synchronous (~> 4.0)
@@ -33,6 +34,7 @@ DEPENDENCIES:
   - QRCode
   - QRCodeReader.swift (~> 8.2.0)
   - SwiftyJSON
+  - Toast-Swift (~> 3.0.1)
   - web3swift (~> 0.8.0)
 
 SPEC REPOS:
@@ -52,6 +54,7 @@ SPEC REPOS:
     - secp256k1_ios
     - SipHash
     - SwiftyJSON
+    - Toast-Swift
     - web3swift
 
 SPEC CHECKSUMS:
@@ -70,8 +73,9 @@ SPEC CHECKSUMS:
   secp256k1_ios: ac9ef04e761f43c58012b28548afa91493761f17
   SipHash: fad90a4683e420c52ef28063063dbbce248ea6d4
   SwiftyJSON: c29297daf073d2aa016295d5809cdd68045c39b3
+  Toast-Swift: ba0b01b095aada709d915f9beb1d38184a2721c3
   web3swift: 79f72b48005f1b28e73191eaf78194d6cf5f8a35
 
-PODFILE CHECKSUM: 18b7a595c50d9fb854612543567cef4231c25bab
+PODFILE CHECKSUM: 2c9ae8c08ab605072c5e48450bef7576c9eeba3a
 
 COCOAPODS: 1.5.3

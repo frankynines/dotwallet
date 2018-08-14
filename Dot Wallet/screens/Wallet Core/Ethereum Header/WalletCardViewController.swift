@@ -34,9 +34,15 @@ class WalletCardViewController:UIViewController, UIScrollViewDelegate, ModalSlid
         
         self.ibo_scrollview?.delegate = self
         self.ibo_scrollview?.canCancelContentTouches = true
+        
         self.setupHeaderView()
         
-        self.iboBalance?.animationDuration = 0
+        // USER BALANCE
+        let userBalanceKey = "balance:\(EtherWallet.account.address!)"
+        if let balance = UserDefaults.standard.value(forKey: userBalanceKey) {
+            let nformat = NumberFormatter().number(from: balance as! String)
+            self.iboBalance?.countFromCurrentValueTo( CGFloat(truncating: nformat!), withDuration: 0.001)
+        }
         self.refreshBalance()
         
     }
@@ -44,7 +50,6 @@ class WalletCardViewController:UIViewController, UIScrollViewDelegate, ModalSlid
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-       
         self.repeatableTimer = RepeatingTimer(timeInterval: 5)
         self.repeatableTimer.eventHandler = {
             self.refreshBalance()
@@ -67,9 +72,6 @@ class WalletCardViewController:UIViewController, UIScrollViewDelegate, ModalSlid
         
         if (EtherWallet.account.hasAccount == true) {
             self.iboPublicKey?.text = EtherWallet.account.address
-            
-            
-           
             let qrCode = QRCode(EtherWallet.account.address!)
             qrCodeView?.image = qrCode?.image
             qrCodeView?.layer.borderColor = UIColor.white.cgColor
@@ -90,11 +92,9 @@ class WalletCardViewController:UIViewController, UIScrollViewDelegate, ModalSlid
     }
 
     
-    @IBAction func refreshBalance(){
+    func refreshBalance(){
         
         self.iboBalance?.animationDuration = 1
-        
-        print("REFRESH BALANCE")
         EtherWallet.balance.etherBalance { balance in
             guard let networkbalance = balance else {
                 return
@@ -105,24 +105,18 @@ class WalletCardViewController:UIViewController, UIScrollViewDelegate, ModalSlid
             let nformat = NumberFormatter().number(from: balance!)
             self.iboBalance?.countFromCurrentValueTo( CGFloat(truncating: nformat!) )
         }
+        
     }
     
     @IBAction func iba_walletSettings(){
         let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "sb_WalletSettingViewController") as! WalletSettingViewController
-        
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
     @IBAction func iba_shareAddress(){
-        
-//        let vc = UIStoryboard(name: "DappBrowser", bundle: nil).instantiateViewController(withIdentifier: "sb_DotBrowserViewController") as! DotBrowserViewController
-//        self.present(vc, animated: true, completion: nil)
-//        
-//        return
-        
         // set up activity view controller
-        let textToShare = [ "Send me some Eth: ", EtherWallet.account.address ]
-        let activityViewController = UIActivityViewController(activityItems: textToShare, applicationActivities: nil)
+        let textToShare = [EtherWallet.account.address ]
+        let activityViewController = UIActivityViewController(activityItems: textToShare as [Any], applicationActivities: nil)
         activityViewController.popoverPresentationController?.sourceView = self.view // so that iPads won't crash
         
         // exclude some activity types from the list (optional)
@@ -158,10 +152,7 @@ class WalletCardViewController:UIViewController, UIScrollViewDelegate, ModalSlid
     }
     
     // MODAL FOR SEND
-    lazy var sendVC: SendViewController = {
-        return storyboard?.instantiateViewController(withIdentifier: "sb_SendViewController") as! SendViewController
-    }()
-    
+    var sendVC: SendViewController!
     var slideModalController:ModalSlideOverViewcontroller!
     
     @IBAction func iba_presentSendView(){
@@ -170,16 +161,18 @@ class WalletCardViewController:UIViewController, UIScrollViewDelegate, ModalSlid
             return
         }
        
+       
         self.slideModalController = ModalSlideOverViewcontroller()
-        self.slideModalController = UIStoryboard(name: "ModalControllers", bundle: nil).instantiateViewController(withIdentifier: "sb_ModalSlideOverViewcontroller") as! ModalSlideOverViewcontroller
+        self.slideModalController = (UIStoryboard(name: "ModalControllers", bundle: nil).instantiateViewController(withIdentifier: "sb_ModalSlideOverViewcontroller") as! ModalSlideOverViewcontroller)
         self.slideModalController.modalTitle = "Send Ethereum"
         self.slideModalController.view.frame = self.view.frame
         self.slideModalController.delegate = self
         
         //Assign Child Class
-        self.slideModalController.viewController = sendVC
+         self.sendVC = (UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "sb_SendViewController") as! SendViewController)
         sendVC.delegate = self
         
+        self.slideModalController.viewController = sendVC
         self.view.addSubview(self.slideModalController.view)
         
     }
@@ -188,19 +181,9 @@ class WalletCardViewController:UIViewController, UIScrollViewDelegate, ModalSlid
             self.slideModalController.view.removeFromSuperview()
             self.slideModalController.removeFromParentViewController()
             self.slideModalController = nil
+            self.sendVC = nil
         }
     }
-    
-    
-
-    
-    
-    
-    
-    
-    
-    
-
     
 }
 

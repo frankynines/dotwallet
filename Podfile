@@ -15,6 +15,7 @@ target 'Dot Wallet' do
 
   pod 'Hero'
   pod 'EFCountingLabel'
+  pod 'Toast-Swift', '~> 3.0.1'
 
   # Pods for Dot Wallet
 

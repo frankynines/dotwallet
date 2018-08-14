@@ -10,9 +10,9 @@ import Foundation
 import UIKit
 import QRCodeReader
 import AVFoundation
+import Toast_Swift
 
 class SendViewController: UIViewController, QRCodeReaderViewControllerDelegate {
-    
     
     @IBOutlet weak var ibo_balance:UILabel?
     @IBOutlet weak var ibo_walletName:UILabel?
@@ -31,11 +31,7 @@ class SendViewController: UIViewController, QRCodeReaderViewControllerDelegate {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-        self.ibo_sendAmount?.text = ""
-        self.ibo_addressField?.text = ""
-        self.automaticallyAdjustsScrollViewInsets = false
-       
+               
         //CHECK IF ERC20 TOKEN
         if token == nil {
             self.ibo_walletName?.text = "ETH" + " Balance"
@@ -144,8 +140,8 @@ class SendViewController: UIViewController, QRCodeReaderViewControllerDelegate {
         
         
         alertView.addAction(UIAlertAction(title: "Enter", style: .default, handler: { (action) in
-            
-            
+            //SHOW ACTIVITY MONITOR
+            self.view.makeToastActivity(.center)
             EtherWallet.transaction.sendEther(to: receiptAddress!, amount: amount!, password: "") { (status) in
                 //status is transaction hash
                 if status != nil {
@@ -161,6 +157,8 @@ class SendViewController: UIViewController, QRCodeReaderViewControllerDelegate {
     }
     
     func showAlert(title:String, message:String, completion:Bool) {
+        self.view.hideAllToasts()
+
         let alertView = UIAlertController.init(title: title, message: message, preferredStyle: .alert)
         
         alertView.addAction(UIAlertAction(title: "Ok", style: .default, handler: { (action) in

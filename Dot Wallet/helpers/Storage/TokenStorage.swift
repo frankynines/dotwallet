@@ -13,9 +13,7 @@ class TokenCacheManager {
     
     static let shared = TokenCacheManager()
     let storageKey = EtherWallet.account.address?.lowercased()
-    
-    // USER ERC20 TOKEN STORAGE
-    
+        
     func userStorage() -> Storage<[String? :OERC20Token?]>? {
         do  {
             let storage = try Storage(
@@ -70,6 +68,11 @@ class TokenCacheManager {
             
         }
         
+    }
+
+    //KILL
+    func killStorage(){
+         try? self.userStorage()?.removeAll()
     }
     
 }

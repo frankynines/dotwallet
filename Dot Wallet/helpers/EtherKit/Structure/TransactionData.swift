@@ -43,7 +43,7 @@ struct TokenTransactionData: Decodable {
     }
 }
 
-struct GeneralTransactionData: Decodable {
+struct GeneralTransactionData: Codable {
     let timestamp: String
     let hash: String
     let from: String

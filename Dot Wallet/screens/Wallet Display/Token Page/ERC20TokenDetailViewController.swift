@@ -53,15 +53,17 @@ class ERC20TokenDetailViewController:UIViewController, UIScrollViewDelegate, Mod
         
         let image = self.ibo_tokenImage?.image
         self.ibo_tokenBackground!.backgroundColor = UIColor(patternImage: image!)
-        self.ibo_tokenBackground?.alpha = 1
+        self.ibo_tokenBackground?.alpha = 0.75
         
     }
     
     func syncTokenBalance(){
         
         DispatchQueue.main.async {
-            EtherWallet.balance.tokenBalance(contractAddress: self.erc20Token!.address!) { (balance) in
-                self.ibo_balance?.text = EtherWallet.balance.WeiToValue(wei: balance!, dec: (self.erc20Token!.decimals)!)
+            EtherWallet.balance.tokenBalance(contractAddress: self.erc20Token!.address!) { (result) in
+                if let balance = result {
+                    self.ibo_balance?.text = EtherWallet.balance.WeiToValue(wei: balance, dec: (self.erc20Token!.decimals)!)
+                }
             }
         }
         

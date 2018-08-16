@@ -122,8 +122,11 @@ class WalletTokenCell:UITableViewCell {
     func syncTokenBalance(_tokenAddress:String!){
         
         DispatchQueue.main.async {
-            EtherWallet.balance.tokenBalance(contractAddress: _tokenAddress) { (balance) in
-                self.iboTokenBalance?.text = EtherWallet.balance.WeiToValue(wei: balance!, dec: (self.token?.decimals)!)
+            EtherWallet.balance.tokenBalance(contractAddress: _tokenAddress) { (result) in
+                if let balance = result {
+                    self.iboTokenBalance?.text = EtherWallet.balance.WeiToValue(wei: balance, dec: (self.token?.decimals)!)
+                }
+                
             }
         }
 

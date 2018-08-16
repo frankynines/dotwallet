@@ -46,9 +46,10 @@ class WalletDisplayViewController:UIViewController, UIPageViewControllerDelegate
     }
     
     func syncBalance(){
+        
         if (EtherWallet.account.hasAccount == true) {
             
-            if let cacheBalance = UserDefaults.standard.value(forKey: "ETHBalance") {
+            if let cacheBalance = UserDefaults.standard.value(forKey: "balance:\(EtherWallet.account.address!)") {
                 self.iboBalance?.text = cacheBalance as? String
             } else {
                 self.refreshBalance()

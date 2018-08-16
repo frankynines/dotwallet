@@ -14,8 +14,7 @@ class CreateWalletViewController: UIViewController {
     var testPKeys = ["8037f8912d60c7813ba0144da9598e183e523c29912c940a36b29ce94e9fe511",
                      "5298699e698f9f6b5f5a385a4f99299b511e0b2457ad5c6094b62e32ff9dec08",
                      "f308cae045da27517efe44275ad23c44cce8d523cc9a3ad9e7aaba678dec52f2",
-                     "1b5c152c59aa3b08ea070191d3396e169e66206782ac7be89c9a1bc91f68ee07"
-                     ]
+                     "1b5c152c59aa3b08ea070191d3396e169e66206782ac7be89c9a1bc91f68ee07"]
     
     override func viewDidLoad() {
         super.viewDidLoad()

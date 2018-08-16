@@ -17,6 +17,4 @@ class WalletManagerShared {
     private init(isLiveNet: Bool) {
         self.isLive = isLiveNet
     }
-
-    
 }

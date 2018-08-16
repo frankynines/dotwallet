@@ -12,7 +12,7 @@ import QRCodeReader
 import AVFoundation
 import Toast_Swift
 
-class SendViewController: UIViewController, QRCodeReaderViewControllerDelegate {
+class SendViewController: UIViewController, QRCodeReaderViewControllerDelegate, UITextFieldDelegate {
     
     @IBOutlet weak var ibo_balance:UILabel?
     @IBOutlet weak var ibo_walletName:UILabel?
@@ -27,6 +27,14 @@ class SendViewController: UIViewController, QRCodeReaderViewControllerDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.ibo_sendAmount?.delegate = self
+        self.ibo_addressField?.delegate = self
+        
+        let userBalanceKey = "balance:\(EtherWallet.account.address!)"
+        if let balance = UserDefaults.standard.value(forKey: userBalanceKey) {
+            self.ibo_balance?.text = (balance as! String)
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -47,6 +55,11 @@ class SendViewController: UIViewController, QRCodeReaderViewControllerDelegate {
         super.viewDidAppear(animated)
     }
     
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        self.view.endEditing(true)
+        return false
+    }
+    
     func syncEtherBalance(){
         var balance:String!
         
@@ -54,14 +67,16 @@ class SendViewController: UIViewController, QRCodeReaderViewControllerDelegate {
             // Call your background task
             do {
                 balance = try EtherWallet.balance.etherBalanceSync()
+                
+                //UPDATE UI
+                DispatchQueue.main.async {
+                    self.balance = balance
+                    self.ibo_balance?.text = balance
+                }
             } catch {
-                self.ibo_balance?.text = "0.00"
+                self.balance = nil
             }
-            //UPDATE UI
-            DispatchQueue.main.async {
-                self.balance = balance
-                self.ibo_balance?.text = balance
-            }
+            
         }
     }
     
@@ -108,11 +123,12 @@ class SendViewController: UIViewController, QRCodeReaderViewControllerDelegate {
         
         let alertView = UIAlertController.init(title: "Confirm Send ", message: "⚠️ NOTE THIS IS ONLY SENDING ROPSTEN NETWORK ETH. ", preferredStyle: .alert)
         
-        
         alertView.addAction(UIAlertAction(title: "Enter", style: .default, handler: { (action) in
-            
+            //SHOW ACTIVITY MONITOR
+            self.view.makeToastActivity(.center)
+            //TRANSACTION
             EtherWallet.transaction.sendToken(to: receiptAddress!, contractAddress: (self.token?.address)!, amount: amount!, password: "", decimal: (self.token?.decimals)!, completion: { (status) in
-                
+                self.view.hideAllToasts()
                 if status != nil {
                     self.showAlert(title: "Success", message: "Transaction has been sent!", completion: true)
                 } else {
@@ -128,6 +144,10 @@ class SendViewController: UIViewController, QRCodeReaderViewControllerDelegate {
     }
     
     func sendEthereumTransaction(){
+        if balance == nil{
+            self.showAlert(title: "Oops", message: "Seem to be offline", completion: false)
+            return
+        }
         if Float(balance)! <= Float(0.00) {
             self.showAlert(title: "Oops", message: "You do not have enough ETH to send this transaction", completion: false)
             return
@@ -142,8 +162,10 @@ class SendViewController: UIViewController, QRCodeReaderViewControllerDelegate {
         alertView.addAction(UIAlertAction(title: "Enter", style: .default, handler: { (action) in
             //SHOW ACTIVITY MONITOR
             self.view.makeToastActivity(.center)
+            //TRANSACTION
             EtherWallet.transaction.sendEther(to: receiptAddress!, amount: amount!, password: "") { (status) in
                 //status is transaction hash
+                self.view.hideAllToasts()
                 if status != nil {
                     self.showAlert(title: "Success", message: "Transaction has been sent!", completion: true)
                 } else {
@@ -157,7 +179,6 @@ class SendViewController: UIViewController, QRCodeReaderViewControllerDelegate {
     }
     
     func showAlert(title:String, message:String, completion:Bool) {
-        self.view.hideAllToasts()
 
         let alertView = UIAlertController.init(title: title, message: message, preferredStyle: .alert)
         
@@ -170,7 +191,6 @@ class SendViewController: UIViewController, QRCodeReaderViewControllerDelegate {
                 }
             }
         }))
-        
         self.present(alertView, animated: true)
     }
     
@@ -206,9 +226,7 @@ class SendViewController: UIViewController, QRCodeReaderViewControllerDelegate {
                 self.ibo_addressField?.text = ethereumURL.replacingOccurrences(of: "ethereum:", with: "")
             }
             
-           // guard (urlQuery?.queryParameters?.isEmpty)! else { return  }
             if let amount = urlQuery?.queryParameters?["amount"] {
-//                let value = EtherWallet.balance.WeiToValue(wei: String(amount))!
                 self.ibo_sendAmount?.text = amount
             }
 
@@ -220,7 +238,6 @@ class SendViewController: UIViewController, QRCodeReaderViewControllerDelegate {
     
     func reader(_ reader: QRCodeReaderViewController, didScanResult result: QRCodeReaderResult) {
         reader.stopScanning()
-        
         dismiss(animated: true, completion: nil)
     }
     

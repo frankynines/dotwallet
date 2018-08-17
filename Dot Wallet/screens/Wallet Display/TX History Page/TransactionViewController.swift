@@ -11,12 +11,9 @@ import UIKit
 import web3swift
 import BigInt
 import SafariServices
+
 class TransactionViewController: UIViewController, UITabBarDelegate, UITableViewDataSource, UITableViewDelegate {
     
-    @IBOutlet var ibo_tokenImage:UIImageView?
-    @IBOutlet var ibo_tokenName:UILabel?
-    @IBOutlet var ibo_tokenSymbol:UILabel?
-    @IBOutlet var ibo_value:UILabel?
     
     @IBOutlet var ibo_tableHeader:UILabel?
     
@@ -33,13 +30,8 @@ class TransactionViewController: UIViewController, UITabBarDelegate, UITableView
         self.ibo_tableView.addSubview(self.refreshControl)
         self.ibo_tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 50, right: 0)
         self.navigationController?.isNavigationBarHidden = false
-        if let cacheBalance = UserDefaults.standard.value(forKey: "ETHBalance") as? String {
-            self.ibo_value?.text = cacheBalance
-        }
-       
-        
-        self.requestTransactionHistory()
-        self.refreshBalance()
+      
+        self.loadTXHistory()
 
     }
     
@@ -49,7 +41,6 @@ class TransactionViewController: UIViewController, UITabBarDelegate, UITableView
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        print(self.contractAddress)
     }
     
     func tableView(_ tableView: UITableView,
@@ -57,28 +48,10 @@ class TransactionViewController: UIViewController, UITabBarDelegate, UITableView
         return 70
     }
     
-    func requestTransactionHistory(){
-        
-        EtherWallet.transaction.getTransactionHistory(address: EtherWallet.account.address!) { (jsonResult) in
-            for transaction in jsonResult! {
-                let generalTransaction = transaction.rawString()
-                self.buildTransactionItem(transaction: generalTransaction!)
-            }
-            
-            self.transactions.reverse()
+    func loadTXHistory(){
+        TXHistoryCacheManager.shared.getTXHistory { (tx) in
+            self.transactions = tx.reversed()
             self.ibo_tableView.reloadData()
-            self.ibo_tableHeader?.text = String(self.transactions.count) + " Transactions"
-        }
-    }
-    
-    func buildTransactionItem(transaction:String) {
-        let data = transaction.data(using: .utf8)!
-        do {
-            let generalTransaction = try JSONDecoder().decode(GeneralTransactionData.self, from: data)
-            self.transactions.append(generalTransaction)
-            self.ibo_tableView.reloadData()
-        } catch {
-            print("Failed to Build Transaction Item")
         }
     }
     
@@ -93,19 +66,19 @@ class TransactionViewController: UIViewController, UITabBarDelegate, UITableView
     
     //REFRESH HANDLER
     @objc func handleRefresh(_ refreshControl: UIRefreshControl) {
-        self.transactions.removeAll()
-        self.ibo_tableView.reloadData()
-        self.requestTransactionHistory()
-        self.refreshBalance()
         refreshControl.endRefreshing()
+        
+        TXHistoryCacheManager.shared.loadTXHistory { (result) in
+            if result.isEmpty == true {
+                return
+            }
+            self.transactions.removeAll()
+            self.transactions = result.reversed()
+            self.ibo_tableView.reloadData()
+        }
+        
     }
     
-    func refreshBalance(){
-        EtherWallet.balance.etherBalance { balance in
-            UserDefaults.standard.set(balance, forKey: "ETHBalance")
-            self.ibo_value?.text = balance
-        }
-    }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.transactions.count
@@ -119,8 +92,7 @@ class TransactionViewController: UIViewController, UITabBarDelegate, UITableView
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print("SELECTED")
-        self.delegate!.tokenDidSelectTransaction(transaction: self.transactions[indexPath.row])
+        self.delegate!.didSelectTXItem(transaction: self.transactions[indexPath.row])
     }
     
 }

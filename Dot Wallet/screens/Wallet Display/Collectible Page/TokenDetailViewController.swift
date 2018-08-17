@@ -88,7 +88,6 @@ class TokenDetailViewController:UIViewController {
         let tokenSmartContract = self.erc721Token?.asset_contract?.address!
         let tokenID = self.erc721Token?.token_id!
         let openSeaURL = "https://opensea.io/assets/" + tokenSmartContract! + "/" + tokenID!
-        print(openSeaURL)
         self.delegate?.openURL(url: openSeaURL)
     }
     

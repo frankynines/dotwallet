@@ -53,7 +53,7 @@ class ERC20TokenDetailViewController:UIViewController, UIScrollViewDelegate, Mod
         
         let image = self.ibo_tokenImage?.image
         self.ibo_tokenBackground!.backgroundColor = UIColor(patternImage: image!)
-        self.ibo_tokenBackground?.alpha = 0.75
+        self.ibo_tokenBackground?.alpha = 1
         
     }
     
@@ -88,7 +88,7 @@ class ERC20TokenDetailViewController:UIViewController, UIScrollViewDelegate, Mod
         
         self.slideModalController = ModalSlideOverViewcontroller()
         self.slideModalController = (UIStoryboard(name: "ModalControllers", bundle: nil).instantiateViewController(withIdentifier: "sb_ModalSlideOverViewcontroller") as! ModalSlideOverViewcontroller)
-        self.slideModalController.modalTitle = "Send " + (self.erc20Token?.name)!
+        self.slideModalController.modalTitle = self.ibo_balance?.text
         self.slideModalController.view.frame = self.ibo_scrollview!.frame
         self.slideModalController.delegate = self
         

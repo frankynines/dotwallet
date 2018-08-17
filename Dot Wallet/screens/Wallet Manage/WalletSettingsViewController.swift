@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 import SafariServices
 import Cache
-
+import Toast_Swift
 class WalletSettingViewController:UITableViewController {
     
     @IBOutlet var ibo_publicAddress:UILabel?
@@ -59,20 +59,13 @@ class WalletSettingViewController:UITableViewController {
     }
     
     @IBAction func iba_killCache(){
+        self.view.makeToast("Cache has been cleared.")
+
         UserDefaults.standard.removeObject(forKey: "ETHBalance")
+        TXHistoryCacheManager.shared.killStorage()
+        TokenCacheManager.shared.killStorage()
         
-        let userStorage = try? Storage(
-            diskConfig: DiskConfig(name: "userERC20"),
-            memoryConfig: MemoryConfig(expiry: .never, countLimit: 10, totalCostLimit: 10),
-            transformer: TransformerFactory.forCodable(ofType: [OERC20Token].self)
-        )
         
-        print("Clear Cache")
-        do {
-            try? userStorage?.removeAll()
-        } catch {
-            print(error.localizedDescription)
-        }
     }
     
     @IBAction func iba_killwallet(){

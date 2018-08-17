@@ -16,7 +16,8 @@ class SendViewController: UIViewController, QRCodeReaderViewControllerDelegate, 
     
     @IBOutlet weak var ibo_balance:UILabel?
     @IBOutlet weak var ibo_walletName:UILabel?
-    
+    @IBOutlet weak var ibo_tokenSymbol:UILabel?
+
     @IBOutlet weak var ibo_sendAmount:UITextField?
     @IBOutlet weak var ibo_addressField:UITextField?
     
@@ -43,9 +44,11 @@ class SendViewController: UIViewController, QRCodeReaderViewControllerDelegate, 
         //CHECK IF ERC20 TOKEN
         if token == nil {
             self.ibo_walletName?.text = "ETH" + " Balance"
+            self.ibo_tokenSymbol?.text = "ETH"
             self.syncEtherBalance()
         } else {
             self.ibo_walletName?.text = (token?.symbol)! + " Balance"
+            self.ibo_tokenSymbol?.text = (token?.symbol)!
             self.syncTokenBalance()
         }
         
@@ -61,23 +64,13 @@ class SendViewController: UIViewController, QRCodeReaderViewControllerDelegate, 
     }
     
     func syncEtherBalance(){
-        var balance:String!
         
-        DispatchQueue.global(qos: .background).async {
-            // Call your background task
             do {
-                balance = try EtherWallet.balance.etherBalanceSync()
-                
-                //UPDATE UI
-                DispatchQueue.main.async {
-                    self.balance = balance
-                    self.ibo_balance?.text = balance
-                }
+                let balance = try EtherWallet.balance.etherBalanceSync()
+                self.balance = balance
             } catch {
                 self.balance = nil
             }
-            
-        }
     }
     
     func syncTokenBalance(){

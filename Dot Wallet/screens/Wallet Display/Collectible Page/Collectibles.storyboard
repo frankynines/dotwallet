@@ -132,37 +132,20 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <webView userInteractionEnabled="NO" contentMode="scaleAspectFit" scalesPageToFit="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wp6-nb-RiQ">
-                                <rect key="frame" x="49.5" y="45" width="276" height="275"/>
+                                <rect key="frame" x="40" y="75" width="295" height="294"/>
                                 <color key="backgroundColor" red="1" green="0.49327188729999999" blue="0.47399842739999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="wp6-nb-RiQ" secondAttribute="height" multiplier="1:1" constant="1" id="VlD-CC-ffD"/>
                                 </constraints>
                             </webView>
-                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XNa-k2-9GX" customClass="RoundButton" customModule="Dot_Wallet" customModuleProvider="target">
-                                <rect key="frame" x="40" y="440" width="295" height="40"/>
-                                <color key="backgroundColor" red="0.56862745100000001" green="0.50588235290000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="40" id="t5V-sH-edO"/>
-                                </constraints>
-                                <state key="normal" title="Share">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </state>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                        <real key="value" value="20"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="boolean" keyPath="hasBorder" value="NO"/>
-                                </userDefinedRuntimeAttributes>
-                                <connections>
-                                    <action selector="iba_share" destination="5In-Li-uvu" eventType="touchUpInside" id="ayU-rK-m9K"/>
-                                </connections>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gjr-SD-IsD" customClass="RoundButton" customModule="Dot_Wallet" customModuleProvider="target">
-                                <rect key="frame" x="40" y="490" width="295" height="40"/>
+                                <rect key="frame" x="40" y="500" width="295" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="YbL-oh-ktw"/>
                                 </constraints>
-                                <state key="normal" title="View on Opensea.io"/>
+                                <state key="normal" title="View on Opensea.io">
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="hasBorder" value="NO"/>
                                     <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
@@ -173,41 +156,36 @@
                                     <action selector="iba_openAsset" destination="5In-Li-uvu" eventType="touchUpInside" id="Sm2-zD-fCn"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="This is some important information about this token" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hUF-yh-30l">
-                                <rect key="frame" x="20" y="330" width="335" height="100"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="100" id="Yo7-se-0hZ"/>
-                                </constraints>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="This is some important information about this token" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hUF-yh-30l">
+                                <rect key="frame" x="20" y="379" width="335" height="106"/>
                                 <fontDescription key="fontDescription" name="Verdana" family="Verdana" pointSize="12"/>
                                 <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ethereum" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="22" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nDM-QJ-YD8">
-                                <rect key="frame" x="20" y="25" width="335" height="40"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ethereum" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nDM-QJ-YD8">
+                                <rect key="frame" x="20" y="15" width="335" height="80"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="40" id="2M8-nP-jNC"/>
+                                    <constraint firstAttribute="height" constant="80" id="2M8-nP-jNC"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" name="Verdana" family="Verdana" pointSize="28"/>
+                                <fontDescription key="fontDescription" name="Verdana" family="Verdana" pointSize="24"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
                         <constraints>
                             <constraint firstItem="t9h-ya-NsC" firstAttribute="trailing" secondItem="gjr-SD-IsD" secondAttribute="trailing" constant="40" id="3Lz-3D-gwF"/>
-                            <constraint firstItem="wp6-nb-RiQ" firstAttribute="centerX" secondItem="rsK-mg-GhW" secondAttribute="centerX" id="7Ox-Tz-o4e"/>
-                            <constraint firstItem="XNa-k2-9GX" firstAttribute="leading" secondItem="t9h-ya-NsC" secondAttribute="leading" constant="40" id="C2M-qI-j6J"/>
-                            <constraint firstItem="hUF-yh-30l" firstAttribute="top" secondItem="wp6-nb-RiQ" secondAttribute="bottom" constant="10" id="GQf-sb-AwC"/>
+                            <constraint firstItem="wp6-nb-RiQ" firstAttribute="leading" secondItem="t9h-ya-NsC" secondAttribute="leading" constant="40" id="Ebi-rU-UBe"/>
+                            <constraint firstItem="gjr-SD-IsD" firstAttribute="top" secondItem="hUF-yh-30l" secondAttribute="bottom" constant="15" id="JMt-uN-j17"/>
                             <constraint firstItem="wp6-nb-RiQ" firstAttribute="top" secondItem="nDM-QJ-YD8" secondAttribute="bottom" constant="-20" id="Qsn-I5-gaV"/>
                             <constraint firstItem="t9h-ya-NsC" firstAttribute="trailing" secondItem="hUF-yh-30l" secondAttribute="trailing" constant="20" id="REi-8p-yiv"/>
-                            <constraint firstItem="XNa-k2-9GX" firstAttribute="top" secondItem="hUF-yh-30l" secondAttribute="bottom" constant="10" id="SgZ-tC-7eR"/>
-                            <constraint firstItem="nDM-QJ-YD8" firstAttribute="top" secondItem="t9h-ya-NsC" secondAttribute="top" constant="5" id="WU9-fM-fN3"/>
+                            <constraint firstItem="nDM-QJ-YD8" firstAttribute="top" secondItem="t9h-ya-NsC" secondAttribute="top" constant="-5" id="WU9-fM-fN3"/>
                             <constraint firstItem="hUF-yh-30l" firstAttribute="leading" secondItem="t9h-ya-NsC" secondAttribute="leading" constant="20" id="XX5-IX-bj1"/>
                             <constraint firstItem="gjr-SD-IsD" firstAttribute="leading" secondItem="t9h-ya-NsC" secondAttribute="leading" constant="40" id="aut-aN-NH5"/>
-                            <constraint firstItem="t9h-ya-NsC" firstAttribute="bottom" secondItem="gjr-SD-IsD" secondAttribute="bottom" constant="20" id="g4z-p0-lEc"/>
-                            <constraint firstItem="gjr-SD-IsD" firstAttribute="top" secondItem="XNa-k2-9GX" secondAttribute="bottom" constant="10" id="giP-AD-Cgb"/>
+                            <constraint firstItem="t9h-ya-NsC" firstAttribute="bottom" secondItem="gjr-SD-IsD" secondAttribute="bottom" constant="10" id="g4z-p0-lEc"/>
                             <constraint firstItem="t9h-ya-NsC" firstAttribute="trailing" secondItem="nDM-QJ-YD8" secondAttribute="trailing" constant="20" id="hnm-fF-hFu"/>
-                            <constraint firstItem="t9h-ya-NsC" firstAttribute="trailing" secondItem="XNa-k2-9GX" secondAttribute="trailing" constant="40" id="nIC-Wc-Qz6"/>
+                            <constraint firstItem="hUF-yh-30l" firstAttribute="top" secondItem="wp6-nb-RiQ" secondAttribute="bottom" constant="10" id="orz-29-42D"/>
                             <constraint firstItem="nDM-QJ-YD8" firstAttribute="leading" secondItem="t9h-ya-NsC" secondAttribute="leading" constant="20" id="u8v-ZE-2Rq"/>
+                            <constraint firstItem="t9h-ya-NsC" firstAttribute="trailing" secondItem="wp6-nb-RiQ" secondAttribute="trailing" constant="40" id="zKL-cX-7wS"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="t9h-ya-NsC"/>
                     </view>
@@ -223,7 +201,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vHu-bI-FwB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2340" y="1224"/>
+            <point key="canvasLocation" x="2340" y="1223.3883058470765"/>
         </scene>
     </scenes>
 </document>

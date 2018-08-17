@@ -49,8 +49,8 @@ class TXHistoryCacheManager {
     }
     
     func loadTXHistory(completion: @escaping ([GeneralTransactionData]) -> ()) {
+        
         self.requestHistory { (result) in
-            
             self.saveTXHistoryCache(transactions: result!)
             DispatchQueue.main.async {
                 completion(result!)

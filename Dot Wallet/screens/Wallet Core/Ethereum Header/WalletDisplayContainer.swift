@@ -15,7 +15,7 @@ enum PageViews:Int {
     case CollectiblePage = 1
     case TXHistory = 2
 }
-class WalletDisplayViewController:UIViewController, UIPageViewControllerDelegate, UIScrollViewDelegate, WalletPageViewControllerDelegate, PopOverViewcontrollerDelegate, TokenDetailDelegate{
+class WalletDisplayViewController:UIViewController, UIPageViewControllerDelegate, UIScrollViewDelegate, WalletPageViewControllerDelegate, PopOverViewcontrollerDelegate, TokenDetailDelegate, ModalSlideOverViewcontrollerDelegate{
     
     @IBOutlet weak var ibo_walletName:UILabel?
     @IBOutlet weak var iboBalance: UILabel?
@@ -34,6 +34,9 @@ class WalletDisplayViewController:UIViewController, UIPageViewControllerDelegate
         self.ibo_walletCardScrollView.delegate = self
         
         self.syncBalance()
+        
+        TXHistoryCacheManager.shared.loadTXHistory { (results) in
+        }
     }
     
     @IBAction func iba_dismiss(){
@@ -124,38 +127,29 @@ class WalletDisplayViewController:UIViewController, UIPageViewControllerDelegate
         }
     }
     
-    //TOKEN SELECT
-    func tokenDidSelectERC721(token:OErc721Token) {
-        print(token)
-        self.presentPopView( token:token)
-    }
-    
-    func tokenDidSelectERC20(token: OERC20Token) {
-
-       
-    }
-    
-    func tokenDidSelectTransaction(transaction: GeneralTransactionData) {
-        let alert = UIAlertController(title: "Transaction", message: transaction.hash, preferredStyle: .alert)
-        
-        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (action) in
-            //
-        }))
-        
-        alert.addAction(UIAlertAction(title: "View on Etherscan", style: .default, handler: { (action) in
-            let url = URL(string: "https://ropsten.etherscan.io/tx/\(transaction.hash)")
-            let vc = SFSafariViewController(url: url!)
-            self.present(vc, animated: true, completion: nil)
-        }))
-        
-        self.present(alert, animated: true, completion: nil)
-    }
-    
     // DISPLAY POPUP
     var popModalController:PopOverViewcontroller!
     var tokenDetail: TokenDetailViewController!
+    var transactionDetail: TransactionDetailViewController!
+    
+    //TOKEN SELECT
+    func tokenDidSelectERC721(token:OErc721Token) {
+        
+        self.tokenDetail = (UIStoryboard(name: "Collectibles", bundle: nil).instantiateViewController(withIdentifier: "sb_TokenDetailViewController") as! TokenDetailViewController)
+        self.tokenDetail.delegate = self
+        self.tokenDetail.erc721Token = token
+        self.presentPopView(vc: self.tokenDetail, title: "Collectible")
+    }
+    
+    func didSelectTXItem(transaction: GeneralTransactionData) {
+        self.transactionDetail = (UIStoryboard(name: "TransactionHistory", bundle: nil).instantiateViewController(withIdentifier: "sb_TransactionDetailViewController") as! TransactionDetailViewController)
+        self.transactionDetail.transaction = transaction
+         self.transactionDetail.delegate = self
+        self.presentSlideView(vc: self.transactionDetail, title: "Completed", size: .Compact)
 
-    func presentPopView(token:OErc721Token){
+    }
+    
+    func presentPopView(vc:UIViewController?, title:String){
         
         guard popModalController == nil else {
             return
@@ -163,15 +157,12 @@ class WalletDisplayViewController:UIViewController, UIPageViewControllerDelegate
         
         self.popModalController = PopOverViewcontroller()
         self.popModalController = (UIStoryboard(name: "ModalControllers", bundle: nil).instantiateViewController(withIdentifier: "sb_PopOverViewcontroller") as! PopOverViewcontroller)
-        self.popModalController.modalTitle = "Collectible"
+        self.popModalController.modalTitle = title
         self.popModalController.view.frame = self.view.frame
         self.popModalController.delegate = self
         
         
-        self.tokenDetail = (UIStoryboard(name: "Collectibles", bundle: nil).instantiateViewController(withIdentifier: "sb_TokenDetailViewController") as! TokenDetailViewController)
-        self.tokenDetail.erc721Token = token
-        self.tokenDetail.delegate = self
-        self.popModalController.viewController = self.tokenDetail
+        self.popModalController.viewController = vc
         self.view.addSubview(self.popModalController.view)
         
     }
@@ -182,11 +173,43 @@ class WalletDisplayViewController:UIViewController, UIPageViewControllerDelegate
     }
     
     func popOverDismiss() {
+        
         self.popModalController.animateModalOut {
+            
             self.popModalController.view.removeFromSuperview()
             self.popModalController.removeFromParentViewController()
             self.popModalController = nil
+            
             self.tokenDetail = nil
+            self.transactionDetail = nil
+        }
+    }
+    
+    // MODAL FOR SEND
+    var slideModalController:ModalSlideOverViewcontroller!
+    
+    func presentSlideView(vc:UIViewController?, title:String, size:SlideSize){
+        
+        guard slideModalController == nil else {
+            return
+        }
+        
+        self.slideModalController = ModalSlideOverViewcontroller()
+        self.slideModalController = (UIStoryboard(name: "ModalControllers", bundle: nil).instantiateViewController(withIdentifier: "sb_ModalSlideOverViewcontroller") as! ModalSlideOverViewcontroller)
+        self.slideModalController.size = size
+        self.slideModalController.modalTitle = title
+        self.slideModalController.view.frame = self.view.frame
+        self.slideModalController.delegate = self
+        self.slideModalController.viewController = vc
+        self.view.addSubview(self.slideModalController.view)
+        
+    }
+    
+    func modalSlideDismiss() {
+        self.slideModalController.animateModalOut {
+            self.slideModalController.view.removeFromSuperview()
+            self.slideModalController.removeFromParentViewController()
+            self.slideModalController = nil
         }
     }
     

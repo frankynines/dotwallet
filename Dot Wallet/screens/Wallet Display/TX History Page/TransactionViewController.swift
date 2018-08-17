@@ -41,7 +41,6 @@ class TransactionViewController: UIViewController, UITabBarDelegate, UITableView
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        print(self.contractAddress)
     }
     
     func tableView(_ tableView: UITableView,
@@ -51,8 +50,7 @@ class TransactionViewController: UIViewController, UITabBarDelegate, UITableView
     
     func loadTXHistory(){
         TXHistoryCacheManager.shared.getTXHistory { (tx) in
-            print(tx)
-            self.transactions = tx
+            self.transactions = tx.reversed()
             self.ibo_tableView.reloadData()
         }
     }
@@ -68,10 +66,17 @@ class TransactionViewController: UIViewController, UITabBarDelegate, UITableView
     
     //REFRESH HANDLER
     @objc func handleRefresh(_ refreshControl: UIRefreshControl) {
-        self.transactions.removeAll()
-        self.ibo_tableView.reloadData()
-        self.loadTXHistory()
         refreshControl.endRefreshing()
+        
+        TXHistoryCacheManager.shared.loadTXHistory { (result) in
+            if result.isEmpty == true {
+                return
+            }
+            self.transactions.removeAll()
+            self.transactions = result.reversed()
+            self.ibo_tableView.reloadData()
+        }
+        
     }
     
     
@@ -87,8 +92,7 @@ class TransactionViewController: UIViewController, UITabBarDelegate, UITableView
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print("SELECTED")
-        self.delegate!.tokenDidSelectTransaction(transaction: self.transactions[indexPath.row])
+        self.delegate!.didSelectTXItem(transaction: self.transactions[indexPath.row])
     }
     
 }

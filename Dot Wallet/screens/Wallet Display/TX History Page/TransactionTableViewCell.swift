@@ -32,17 +32,16 @@ class TransactionTableCell:UITableViewCell {
 
         let dateString = dayTimePeriodFormatter.string(from: date)
         
-        
         if isSent(to: transaction.to) {
-            self.ibo_address?.text = "to: " + transaction.to
+            self.ibo_address?.text = "Sent"
             amount = "- " + amount!
-            self.ibo_direction?.text = "⇡"
+            self.ibo_direction?.text = "☝️"
             self.ibo_value?.textColor = UIColor.black
 
         } else {
             amount = "+ " + amount!
-            self.ibo_address?.text = "from: " + transaction.from
-            self.ibo_direction?.text = "⇣"
+            self.ibo_address?.text = "Received"
+            self.ibo_direction?.text = "📥"
             self.ibo_value?.textColor = UIColor(hexString: "40E252")
         }
         
@@ -53,10 +52,8 @@ class TransactionTableCell:UITableViewCell {
     
     func isSent(to:String) -> Bool {
         if to.lowercased() == EtherWallet.account.address?.lowercased() {
-            print("TO")
             return false
         } else {
-            print("FROM")
             return true
         }
     }

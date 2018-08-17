@@ -12,8 +12,7 @@ import UIKit
 protocol WalletPageViewControllerDelegate {
     func walletPageCurrentPage(index:Int)
     func tokenDidSelectERC721(token:OErc721Token)
-    func tokenDidSelectERC20(token:OERC20Token)
-    func tokenDidSelectTransaction(transaction:GeneralTransactionData)
+    func didSelectTXItem(transaction:GeneralTransactionData)
 }
 
 class WalletPageViewController: UIPageViewController{

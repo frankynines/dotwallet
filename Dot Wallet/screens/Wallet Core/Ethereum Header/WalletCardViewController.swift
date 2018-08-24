@@ -18,7 +18,7 @@ class WalletCardViewController:UIViewController, UIScrollViewDelegate, ModalSlid
     //HEADER
     @IBOutlet var ibo_scrollview:UIScrollView?
     
-    @IBOutlet var iboPublicKey: UILabel?
+    @IBOutlet var iboPublicKey: UIButton?
     @IBOutlet var iboBalance: EFCountingLabel?
     @IBOutlet var qrCodeView:UIImageView?
     @IBOutlet var iboCardView:UIView?
@@ -73,7 +73,7 @@ class WalletCardViewController:UIViewController, UIScrollViewDelegate, ModalSlid
     func setupHeaderView(){
         
         if (EtherWallet.account.hasAccount == true) {
-            self.iboPublicKey?.text = EtherWallet.account.address
+            self.iboPublicKey?.setTitle(EtherWallet.account.address, for: .normal)
             let qrCode = QRCode(EtherWallet.account.address!)
             qrCodeView?.image = qrCode?.image
             qrCodeView?.layer.borderColor = UIColor.white.cgColor

@@ -128,13 +128,13 @@
                                 <rect key="frame" x="20" y="108.5" width="335" height="450"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="dot.wallet" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vQh-Ej-NgS">
-                                        <rect key="frame" x="0.0" y="0.0" width="335" height="29"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="335" height="24.5"/>
                                         <fontDescription key="fontDescription" name="Verdana-Bold" family="Verdana" pointSize="17"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fky-pb-KCp">
-                                        <rect key="frame" x="0.0" y="39" width="335" height="121"/>
+                                        <rect key="frame" x="0.0" y="34.5" width="335" height="125.5"/>
                                         <string key="text">Welcome to the beta-test version of Dot Wallet. To maximize testing for transacting, here are some test wallets you can use to send and receive TEST ETH.
 
 ⚠️ Do not send REAL ETH to any of these addresses. </string>
@@ -484,7 +484,7 @@ https://t.me/mydotwallet</string>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <label key="tableFooterView" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Dot.Wallet V1.0 - Test Build" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Rc5-Gc-wXa">
-                            <rect key="frame" x="0.0" y="384" width="375" height="435"/>
+                            <rect key="frame" x="0.0" y="428" width="375" height="435"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" red="0.96862745098039216" green="0.96862745098039216" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <fontDescription key="fontDescription" name="Menlo-Regular" family="Menlo" pointSize="12"/>
@@ -546,8 +546,44 @@ https://t.me/mydotwallet</string>
                                             </subviews>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="MIi-ow-AhM" style="IBUITableViewCellStyleDefault" id="JP3-4e-vkm">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="YLH-ER-abi">
                                         <rect key="frame" x="0.0" y="148" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="YLH-ER-abi" id="of4-Fk-eqv">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jhJ-d6-bjp">
+                                                    <rect key="frame" x="341.5" y="10" width="23.5" height="23.5"/>
+                                                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" secondItem="jhJ-d6-bjp" secondAttribute="height" multiplier="1:1" id="nU3-Cg-uuK"/>
+                                                    </constraints>
+                                                </view>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jew-n2-j9T">
+                                                    <rect key="frame" x="20" y="0.0" width="355" height="43.5"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                    <state key="normal" title="Custom">
+                                                        <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="iba_chooseColor" destination="n2N-F7-Ozg" eventType="touchUpInside" id="7ZJ-FC-bgR"/>
+                                                    </connections>
+                                                </button>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="trailing" secondItem="jhJ-d6-bjp" secondAttribute="trailing" constant="10" id="BJU-YB-kZ2"/>
+                                                <constraint firstAttribute="bottom" secondItem="jhJ-d6-bjp" secondAttribute="bottom" constant="10" id="Hqx-dM-a38"/>
+                                                <constraint firstItem="jhJ-d6-bjp" firstAttribute="top" secondItem="of4-Fk-eqv" secondAttribute="top" constant="10" id="L2f-kU-JOX"/>
+                                                <constraint firstAttribute="bottom" secondItem="Jew-n2-j9T" secondAttribute="bottom" id="R1U-wg-N9h"/>
+                                                <constraint firstItem="Jew-n2-j9T" firstAttribute="top" secondItem="of4-Fk-eqv" secondAttribute="top" id="bHM-ve-2ic"/>
+                                                <constraint firstItem="Jew-n2-j9T" firstAttribute="leading" secondItem="of4-Fk-eqv" secondAttribute="leading" constant="20" id="j6T-3h-HOP"/>
+                                                <constraint firstAttribute="trailing" secondItem="Jew-n2-j9T" secondAttribute="trailing" id="pXx-6b-ron"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="MIi-ow-AhM" style="IBUITableViewCellStyleDefault" id="JP3-4e-vkm">
+                                        <rect key="frame" x="0.0" y="192" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="JP3-4e-vkm" id="QJI-4z-an6">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
@@ -576,7 +612,7 @@ https://t.me/mydotwallet</string>
                             <tableViewSection headerTitle=" " id="Uzi-Ar-a5q">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="5cU-99-Hgt" style="IBUITableViewCellStyleDefault" id="4tk-EY-THp">
-                                        <rect key="frame" x="0.0" y="222" width="375" height="44"/>
+                                        <rect key="frame" x="0.0" y="266" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="4tk-EY-THp" id="8RT-Nk-dHw">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
@@ -605,7 +641,7 @@ https://t.me/mydotwallet</string>
                             <tableViewSection headerTitle=" " id="Yfu-nd-viW">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="Z4r-vx-c1x" style="IBUITableViewCellStyleDefault" id="ZFp-ZD-61P">
-                                        <rect key="frame" x="0.0" y="296" width="375" height="44"/>
+                                        <rect key="frame" x="0.0" y="340" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ZFp-ZD-61P" id="w1F-99-aMg">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
@@ -630,7 +666,7 @@ https://t.me/mydotwallet</string>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="fMG-uh-P48" style="IBUITableViewCellStyleDefault" id="tq5-WV-hRg">
-                                        <rect key="frame" x="0.0" y="340" width="375" height="44"/>
+                                        <rect key="frame" x="0.0" y="384" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="tq5-WV-hRg" id="6sh-uQ-CJO">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
@@ -663,6 +699,7 @@ https://t.me/mydotwallet</string>
                         </connections>
                     </tableView>
                     <connections>
+                        <outlet property="ibo_colorView" destination="jhJ-d6-bjp" id="f9E-Jh-FhD"/>
                         <outlet property="ibo_network" destination="uGO-fL-CYt" id="1Qh-n8-D5c"/>
                         <outlet property="ibo_publicAddress" destination="52A-TQ-VOc" id="tze-G2-Vlv"/>
                     </connections>
@@ -670,6 +707,58 @@ https://t.me/mydotwallet</string>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PEs-3y-ZLt" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-87.200000000000003" y="1236.4317841079462"/>
+        </scene>
+        <!--Color View Controller-->
+        <scene sceneID="yF0-WH-8dw">
+            <objects>
+                <viewController storyboardIdentifier="sb_ColorViewController" id="7do-bE-Ybp" customClass="ColorViewController" customModule="Dot_Wallet" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="ydu-i9-oWS">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="300"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" delaysContentTouches="NO" canCancelContentTouches="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Ghu-od-SfL">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="300"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="e2y-tB-h2U">
+                                    <size key="itemSize" width="90" height="90"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="20" minY="0.0" maxX="20" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="cell" id="0TL-tf-bVB" customClass="ColorViewCell" customModule="Dot_Wallet" customModuleProvider="target">
+                                        <rect key="frame" x="20" y="0.0" width="90" height="90"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
+                                            <rect key="frame" x="0.0" y="0.0" width="90" height="90"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </view>
+                                    </collectionViewCell>
+                                </cells>
+                                <connections>
+                                    <outlet property="dataSource" destination="7do-bE-Ybp" id="G5u-ve-sJE"/>
+                                    <outlet property="delegate" destination="7do-bE-Ybp" id="exX-zF-ciX"/>
+                                </connections>
+                            </collectionView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="RW4-5w-tgy" firstAttribute="trailing" secondItem="Ghu-od-SfL" secondAttribute="trailing" id="0V7-tF-38J"/>
+                            <constraint firstItem="Ghu-od-SfL" firstAttribute="top" secondItem="RW4-5w-tgy" secondAttribute="top" id="BOs-7K-oNG"/>
+                            <constraint firstItem="Ghu-od-SfL" firstAttribute="leading" secondItem="RW4-5w-tgy" secondAttribute="leading" id="IpG-6u-4q5"/>
+                            <constraint firstItem="RW4-5w-tgy" firstAttribute="bottom" secondItem="Ghu-od-SfL" secondAttribute="bottom" id="rq7-Yd-kJo"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="RW4-5w-tgy"/>
+                    </view>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="375" height="300"/>
+                    <connections>
+                        <outlet property="ibo_collectionView" destination="Ghu-od-SfL" id="scT-Us-hdb"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="RKc-eU-Cej" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="674.39999999999998" y="1236.4317841079462"/>
         </scene>
         <!--Wallet Card View Controller-->
         <scene sceneID="II3-Mh-qkw">
@@ -685,17 +774,14 @@ https://t.me/mydotwallet</string>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Bn9-6N-cFs" userLabel="Content View">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="627"/>
                                         <subviews>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IYy-oE-MXf" userLabel="Card Back" customClass="RoundedRectangleView" customModule="Dot_Wallet" customModuleProvider="target">
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IYy-oE-MXf" userLabel="Card Back" customClass="CardBackgroundView" customModule="Dot_Wallet" customModuleProvider="target">
                                                 <rect key="frame" x="40" y="113.5" width="295" height="400"/>
-                                                <color key="backgroundColor" red="0.56862745100000001" green="0.50588235290000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="400" id="kaf-V8-VJj"/>
                                                 </constraints>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="string" keyPath="heroID" value="cardBack"/>
-                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                        <real key="value" value="20"/>
-                                                    </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9wo-5G-LXA" userLabel="Card Back" customClass="RoundedRectangleView" customModule="Dot_Wallet" customModuleProvider="target">
@@ -778,15 +864,6 @@ https://t.me/mydotwallet</string>
                                                             </userDefinedRuntimeAttribute>
                                                         </userDefinedRuntimeAttributes>
                                                     </view>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0xCe5fd6c2f44643924b89c2D481c4296186A935f8" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="g6F-Xx-75o">
-                                                        <rect key="frame" x="30" y="345" width="275" height="14"/>
-                                                        <fontDescription key="fontDescription" name="Menlo-Regular" family="Menlo" pointSize="12"/>
-                                                        <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        <nil key="highlightedColor"/>
-                                                        <userDefinedRuntimeAttributes>
-                                                            <userDefinedRuntimeAttribute type="string" keyPath="heroID" value="walletCardAddress"/>
-                                                        </userDefinedRuntimeAttributes>
-                                                    </label>
                                                     <button opaque="NO" alpha="0.5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vmG-zv-lGX">
                                                         <rect key="frame" x="295" y="15" width="25" height="25"/>
                                                         <constraints>
@@ -809,23 +886,33 @@ https://t.me/mydotwallet</string>
                                                             <userDefinedRuntimeAttribute type="string" keyPath="heroID" value="walletBalance"/>
                                                         </userDefinedRuntimeAttributes>
                                                     </label>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="T0Z-U6-qj8">
+                                                        <rect key="frame" x="20" y="335" width="295" height="26"/>
+                                                        <fontDescription key="fontDescription" name="Menlo-Regular" family="Menlo" pointSize="12"/>
+                                                        <state key="normal" title="0x...">
+                                                            <color key="titleColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
+                                                        </state>
+                                                        <connections>
+                                                            <action selector="iba_copyPublicAddress" destination="JAl-VO-36y" eventType="touchUpInside" id="5Mg-cw-x0p"/>
+                                                        </connections>
+                                                    </button>
                                                 </subviews>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
-                                                    <constraint firstItem="g6F-Xx-75o" firstAttribute="top" secondItem="ojc-K7-D0o" secondAttribute="bottom" constant="30" id="0Cw-Va-Gga"/>
+                                                    <constraint firstItem="T0Z-U6-qj8" firstAttribute="leading" secondItem="Fpg-gR-D0u" secondAttribute="leading" constant="20" id="0SK-uk-OFR"/>
                                                     <constraint firstAttribute="trailing" secondItem="vmG-zv-lGX" secondAttribute="trailing" constant="15" id="3Nk-b9-umd"/>
                                                     <constraint firstItem="1Rf-XA-1LN" firstAttribute="top" secondItem="8hc-MN-6Zd" secondAttribute="bottom" constant="30" id="3aY-gf-i2i"/>
                                                     <constraint firstItem="1Rf-XA-1LN" firstAttribute="centerX" secondItem="Fpg-gR-D0u" secondAttribute="centerX" id="9m9-dM-1cd"/>
                                                     <constraint firstItem="8hc-MN-6Zd" firstAttribute="centerX" secondItem="Fpg-gR-D0u" secondAttribute="centerX" id="A7j-9I-X1k"/>
+                                                    <constraint firstAttribute="trailing" secondItem="T0Z-U6-qj8" secondAttribute="trailing" constant="20" id="FQC-XF-R4P"/>
                                                     <constraint firstItem="ojc-K7-D0o" firstAttribute="centerX" secondItem="Fpg-gR-D0u" secondAttribute="centerX" constant="-2" id="Ffr-jd-BdX"/>
                                                     <constraint firstItem="oXA-Ee-gcZ" firstAttribute="top" secondItem="Fpg-gR-D0u" secondAttribute="top" constant="20" id="FiL-oN-Mpo"/>
                                                     <constraint firstItem="ojc-K7-D0o" firstAttribute="centerY" secondItem="Fpg-gR-D0u" secondAttribute="centerY" id="GQ8-Fi-HZ1"/>
-                                                    <constraint firstItem="g6F-Xx-75o" firstAttribute="leading" secondItem="Fpg-gR-D0u" secondAttribute="leading" constant="30" id="NhS-7j-24c"/>
                                                     <constraint firstItem="oXA-Ee-gcZ" firstAttribute="leading" secondItem="Fpg-gR-D0u" secondAttribute="leading" constant="20" id="P6M-Bl-8bN"/>
                                                     <constraint firstItem="NGv-ch-FpH" firstAttribute="top" secondItem="1Rf-XA-1LN" secondAttribute="bottom" id="QmA-Cd-eya"/>
                                                     <constraint firstItem="XZR-TX-MZ6" firstAttribute="leading" secondItem="Fpg-gR-D0u" secondAttribute="leading" constant="50" id="Rck-e0-6Cz"/>
-                                                    <constraint firstAttribute="trailing" secondItem="g6F-Xx-75o" secondAttribute="trailing" constant="30" id="WXm-PO-FpO"/>
                                                     <constraint firstItem="NGv-ch-FpH" firstAttribute="centerX" secondItem="Fpg-gR-D0u" secondAttribute="centerX" id="dHi-gO-7fm"/>
+                                                    <constraint firstItem="T0Z-U6-qj8" firstAttribute="top" secondItem="ojc-K7-D0o" secondAttribute="bottom" constant="20" id="iLU-Lk-U0b"/>
                                                     <constraint firstItem="8hc-MN-6Zd" firstAttribute="top" secondItem="Fpg-gR-D0u" secondAttribute="top" constant="10" id="oOW-uW-vlp"/>
                                                     <constraint firstAttribute="bottom" secondItem="XZR-TX-MZ6" secondAttribute="bottom" constant="30" id="qqm-lN-imS"/>
                                                     <constraint firstItem="vmG-zv-lGX" firstAttribute="top" secondItem="Fpg-gR-D0u" secondAttribute="top" constant="15" id="riA-o8-Eiv"/>
@@ -888,7 +975,7 @@ https://t.me/mydotwallet</string>
                                     <constraint firstAttribute="trailing" secondItem="Bn9-6N-cFs" secondAttribute="trailing" id="q8R-VV-UAP"/>
                                 </constraints>
                             </scrollView>
-                            <button opaque="NO" alpha="0.75" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="10Y-7b-n6r">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="10Y-7b-n6r">
                                 <rect key="frame" x="137.5" y="592" width="100" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="Ygz-8C-7ej"/>
@@ -903,7 +990,7 @@ https://t.me/mydotwallet</string>
                                     <action selector="iba_showWalletDetails" destination="JAl-VO-36y" eventType="touchUpInside" id="QId-Rt-dv1"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" alpha="0.75" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Kc2-RG-n4e">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Kc2-RG-n4e">
                                 <rect key="frame" x="137.5" y="25" width="100" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="QjD-z6-QE7"/>
@@ -938,7 +1025,7 @@ https://t.me/mydotwallet</string>
                     <connections>
                         <outlet property="iboBalance" destination="1Rf-XA-1LN" id="PQc-XF-E7E"/>
                         <outlet property="iboCardView" destination="Fpg-gR-D0u" id="pX2-A8-1H6"/>
-                        <outlet property="iboPublicKey" destination="g6F-Xx-75o" id="mjM-pA-Od7"/>
+                        <outlet property="iboPublicKey" destination="T0Z-U6-qj8" id="r0U-jA-xw9"/>
                         <outlet property="ibo_dot" destination="oXA-Ee-gcZ" id="3Sb-DL-jPN"/>
                         <outlet property="ibo_scrollview" destination="HaV-W9-ka1" id="cRa-PV-O5W"/>
                         <outlet property="qrCodeView" destination="ojc-K7-D0o" id="WHQ-Wo-INC"/>

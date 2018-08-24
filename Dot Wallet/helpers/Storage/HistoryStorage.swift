@@ -102,6 +102,4 @@ class TXHistoryCacheManager {
     func killStorage(){
          try? self.userStorage()?.removeAll()
     }
-    
-    
 }

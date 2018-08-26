@@ -20,7 +20,7 @@ class TokenDetailViewController:UIViewController {
     var erc721Token:OErc721Token?
     
     @IBOutlet var ibo_name:UILabel?
-    @IBOutlet var ibo_webview:UIWebView?
+    @IBOutlet var ibo_previewImageView:UIImageView?
     @IBOutlet var ibo_description:UILabel?
     
     var delegate:TokenDetailDelegate?
@@ -40,16 +40,13 @@ class TokenDetailViewController:UIViewController {
         if erc721Token != nil {
             self.ibo_name?.text = erc721Token?.name
             self.ibo_description?.text = erc721Token?.description
-            self.drawImage(url: erc721Token?.image_url)
+            self.drawImage(url: erc721Token?.image_preview_url)
         }
-        ibo_webview?.backgroundColor = UIColor.clear
-        ibo_webview?.scrollView.backgroundColor = UIColor.clear
-        ibo_webview?.isOpaque = false
         
     }
     override func viewDidAppear(_ animated: Bool) {
         
-        self.ibo_webview?.transform = CGAffineTransform(scaleX: 0.5, y: 0.5)
+        self.ibo_previewImageView?.transform = CGAffineTransform(scaleX: 0.5, y: 0.5)
         
         UIView.animate(withDuration: 1,
                        delay: 0,
@@ -57,21 +54,29 @@ class TokenDetailViewController:UIViewController {
                        initialSpringVelocity: CGFloat(1.2),
                        options: UIViewAnimationOptions.allowUserInteraction,
                        animations: {
-                        self.ibo_webview?.transform = CGAffineTransform.identity
+                        self.ibo_previewImageView?.transform = CGAffineTransform.identity
         },
                        completion: { Void in()  }
         )
         
     }
     func drawImage(url:String?) {
-        if (url?.isEmpty)! {
-            return
-        }
-        let displayURL = URL(string: url!)!
         
-        let request: NSURLRequest = NSURLRequest(url: displayURL)
-        ibo_webview?.loadRequest(request as URLRequest)
-        ibo_webview?.isHidden = false
+        guard let imageURL = url?.replacingOccurrences(of: "'\'", with: "") else {return}
+        
+        DispatchQueue.global(qos: .background).async {
+            do {
+                let image = try UIImage(data: Data(contentsOf: URL(string: imageURL)!))
+                DispatchQueue.main.async {
+                    self.ibo_previewImageView?.image = image
+                }
+            } catch {
+                
+            }
+            
+        }
+        
+       
     }
     
     
@@ -80,8 +85,16 @@ class TokenDetailViewController:UIViewController {
     }
     
     @IBAction func iba_openAsset(){
-        let url = self.erc721Token?.external_link
-        self.openURL(url: url!)
+        var openURL:String?
+        if let url = self.erc721Token?.external_link {
+            openURL = url
+        } else {
+            let assetID = self.erc721Token?.token_id
+            let assetAddress = self.erc721Token?.asset_contract?.address
+            let urlString = "https://opensea.io/assets/\(assetAddress)/\(assetID)"
+            openURL = urlString
+        }
+        self.openURL(url: openURL!)
     }
     
     func openURL(url:String) {

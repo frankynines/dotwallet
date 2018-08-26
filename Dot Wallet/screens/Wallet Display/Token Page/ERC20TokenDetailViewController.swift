@@ -88,7 +88,9 @@ class ERC20TokenDetailViewController:UIViewController, UIScrollViewDelegate, Mod
         
         self.slideModalController = ModalSlideOverViewcontroller()
         self.slideModalController = (UIStoryboard(name: "ModalControllers", bundle: nil).instantiateViewController(withIdentifier: "sb_ModalSlideOverViewcontroller") as! ModalSlideOverViewcontroller)
-        self.slideModalController.modalTitle = self.ibo_balance?.text
+        let balance = self.ibo_balance?.text
+        
+        self.slideModalController.modalTitle = balance!.appending(" " + (self.erc20Token?.symbol)!)
         self.slideModalController.view.frame = self.ibo_scrollview!.frame
         self.slideModalController.delegate = self
         

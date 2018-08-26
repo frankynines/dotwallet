@@ -168,7 +168,7 @@ class WalletCardViewController:UIViewController, UIScrollViewDelegate, ModalSlid
         self.slideModalController = ModalSlideOverViewcontroller()
         self.slideModalController = (UIStoryboard(name: "ModalControllers", bundle: nil).instantiateViewController(withIdentifier: "sb_ModalSlideOverViewcontroller") as! ModalSlideOverViewcontroller)
         self.slideModalController.size = .Full
-        self.slideModalController.modalTitle = self.iboBalance?.text
+        self.slideModalController.modalTitle = self.iboBalance?.text?.appending(" ETH")
         self.slideModalController.view.frame = self.view.frame
         self.slideModalController.delegate = self
         

@@ -9,7 +9,8 @@
 import Foundation
 import UIKit
 import SafariServices
-class CollectibleListViewController:UIViewController, UICollectionViewDelegate, UICollectionViewDataSource{
+class CollectibleListViewController:UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout
+{
     
     @IBOutlet var ibo_collectionView:UICollectionView?
     @IBOutlet var ibo_tableHeader:UILabel?
@@ -17,29 +18,37 @@ class CollectibleListViewController:UIViewController, UICollectionViewDelegate, 
     var delegate:WalletPageViewControllerDelegate?
 
     var tokens = [OErc721Token]()
-    
-    var whiteSmartContracts = ["CryptoKitties" : "0x06012c8cf97BEaD5deAe237070F9587f8E7A266d",
-                               "CryptoPunks" : "0xb47e3cd837ddf8e4c57f05d70ab865de6e193bbb",
-                               "CryptoCrystals" : "0xcfbc9103362aec4ce3089f155c2da2eea1cb7602",
-                               "Etheremon" : "0xb2c0782ae4a299f7358758b2d15da9bf29e1dd99",
-                               "CryptoBots" : "0xF7a6E15dfD5cdD9ef12711Bd757a9b6021ABf643",
-                               "John Orion Young" : "0x96313f2c374f901e3831ea6de67b1165c4f39a54",
-                               "Digital Art Chain" : "0x323a3e1693e7a0959f65972f3bf2dfcb93239dfe",
+
+    var blackListContracts = [ "Decentraland" : "0xf87e31492faf9a91b02ee0deaad50d51d56d5d4d"
                                ]
-    
     var pageIndex = 0
     var isWating = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.loadTokens(page: String(pageIndex))
         
         self.ibo_collectionView?.backgroundColor = UIColor(patternImage: UIImage(named: "bg_transparent")!)
-        
         self.ibo_collectionView?.contentInset = UIEdgeInsetsMake(20, 0, 40, 0)
+        
+        //
+        
+        let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .vertical
+        
+        let padding:CGFloat = 5
+        let width = (self.ibo_collectionView?.frame.size.width)! / 2
+        layout.itemSize = CGSize(width: width - (padding * 2), height: width)
+        layout.sectionInset = UIEdgeInsets(top: 0, left: padding, bottom: 0, right: padding)
+        layout.minimumLineSpacing = padding
+        layout.minimumInteritemSpacing = padding
+        self.ibo_collectionView?.setCollectionViewLayout(layout, animated: false)
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        
+        
         
     }
     
@@ -51,15 +60,13 @@ class CollectibleListViewController:UIViewController, UICollectionViewDelegate, 
     }
     
     func loadTokens(page:String){
-        print("Load Tokens")
         var testAddress:String?
         var token:String?
         if  UserDefaults.standard.bool(forKey: "ISLIVE") == true {
             testAddress = EtherWallet.account.address
             token = nil
         } else {
-            testAddress = "0xe307C2d3236bE4706E5D7601eE39F16d796d8195"
-            token = "0x06012c8cf97BEaD5deAe237070F9587f8E7A266d"
+            testAddress = "0xef07a57c4cf84eed6739cf3ffd5edf40237431da"
         }
         EtherWallet.tokens.getERC721Tokens(address: testAddress!, tokenAddress:token, page: page) { (jsonResult) in
             if jsonResult == nil {
@@ -73,11 +80,15 @@ class CollectibleListViewController:UIViewController, UICollectionViewDelegate, 
     }
     
     func buildTokenObject(element:String) {
+        
         let data = element.data(using: .utf8)!
         do {
             let element = try JSONDecoder().decode(OErc721Token.self, from: data)
             
             if (element.image_url?.isEmpty)! {
+                return
+            }
+            if (element.asset_contract?.address == "0xf87e31492faf9a91b02ee0deaad50d51d56d5d4d") {
                 return
             }
             self.tokens.append(element)
@@ -86,7 +97,6 @@ class CollectibleListViewController:UIViewController, UICollectionViewDelegate, 
             print(error.localizedDescription)
         }
         
-
         self.ibo_collectionView?.reloadData()
         self.ibo_tableHeader?.text = String(self.tokens.count) + " Collectibles"
 
@@ -120,6 +130,15 @@ class CollectibleListViewController:UIViewController, UICollectionViewDelegate, 
         return cell
     }
     
+    func collectionView(collectionView: UICollectionView,
+                        layout collectionViewLayout: UICollectionViewLayout,
+                        sizeForItemAtIndexPath indexPath: IndexPath) -> CGSize {
+
+        let width = ((self.ibo_collectionView?.frame.size.width)!/2)
+        return CGSize(width: width, height: width)
+
+    }
+    
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
 //            if indexPath.item == self.tokens.count - 2 && !isWating {
 //                isWating = true
@@ -130,41 +149,30 @@ class CollectibleListViewController:UIViewController, UICollectionViewDelegate, 
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         self.delegate?.tokenDidSelectERC721(token: self.tokens[indexPath.item])
+        print(self.tokens[indexPath.item])
     }
     
 }
 
 class CollectableViewCell:UICollectionViewCell {
-    @IBOutlet var ibo_webViewDisplay:UIWebView?
+    @IBOutlet var ibo_previewImage:UIImageView?
+    @IBOutlet var ibo_activityView:UIActivityIndicatorView?
     
-    func setupCell(url:String?){
-        //print(url)
-        self.ibo_webViewDisplay?.backgroundColor = UIColor.clear
-        self.ibo_webViewDisplay?.scrollView.isScrollEnabled = false
-        self.ibo_webViewDisplay?.contentMode = .scaleAspectFit
-        self.ibo_webViewDisplay?.scalesPageToFit = true
-        self.ibo_webViewDisplay?.isOpaque = false
+    func setupCell(url:String?) {
+        self.ibo_previewImage!.image = nil
+        self.ibo_activityView?.startAnimating()
+        
         guard let imageURL = url?.replacingOccurrences(of: "'\'", with: "") else {return}
-       
-        self.drawImage(url:imageURL)
-        
-        if imageURL.range(of:"svg") != nil {
-            self.ibo_webViewDisplay?.contentMode = .scaleAspectFit
-            self.ibo_webViewDisplay?.scalesPageToFit = false
+        DispatchQueue.global(qos: .userInitiated).async {
+            do {
+                let image = try UIImage(data: Data(contentsOf: URL(string: imageURL)!))
+                DispatchQueue.main.async {
+                    self.ibo_previewImage?.image = image
+                    self.ibo_activityView?.stopAnimating()
+                }
+            } catch {
+            }
         }
     }
-    
-    func drawImage(url:String?) {
-        if (url?.isEmpty)! {
-            return
-        }
-        let displayURL = URL(string: url!)!
-        
-        let request: NSURLRequest = NSURLRequest(url: displayURL)
-        self.ibo_webViewDisplay?.loadRequest(request as URLRequest)
-        self.ibo_webViewDisplay?.isHidden = false
-    }
-    
-   
-    
+
 }

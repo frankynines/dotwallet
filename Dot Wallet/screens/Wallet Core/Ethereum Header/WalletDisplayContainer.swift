@@ -138,7 +138,7 @@ class WalletDisplayViewController:UIViewController, UIPageViewControllerDelegate
         self.tokenDetail = (UIStoryboard(name: "Collectibles", bundle: nil).instantiateViewController(withIdentifier: "sb_TokenDetailViewController") as! TokenDetailViewController)
         self.tokenDetail.delegate = self
         self.tokenDetail.erc721Token = token
-        self.presentPopView(vc: self.tokenDetail, title: "Collectible")
+        self.presentPopView(vc: self.tokenDetail, title: "")
     }
     
     func didSelectTXItem(transaction: GeneralTransactionData) {

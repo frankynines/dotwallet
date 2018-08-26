@@ -16,6 +16,8 @@ class WalletSettingViewController:UITableViewController {
     @IBOutlet var ibo_publicAddress:UILabel?
     @IBOutlet var ibo_network:UILabel?
     
+    @IBOutlet var ibo_colorView:UIView?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "Settings"
@@ -26,11 +28,39 @@ class WalletSettingViewController:UITableViewController {
         } else {
             self.ibo_network?.text = "Ropsten Test Net"
         }
+        
+        var walletColor:String?
+        do {
+            if let color = try UserPreferenceManager.shared.getKeyObject(key: "walletColor"){
+                walletColor = color
+            } else {
+                walletColor = "FFFFFF"
+            }
+        } catch {
+            
+        }
+        self.ibo_colorView?.backgroundColor = UIColor(hexString: walletColor!)
+        
+    }
+    override func viewDidAppear(_ animated: Bool) {
+        self.navigationController?.isNavigationBarHidden = false
     }
     
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
         ibo_publicAddress?.text = EtherWallet.account.address
+        
+        var walletColor:String?
+        do {
+            if let color = try UserPreferenceManager.shared.getKeyObject(key: "walletColor"){
+                walletColor = color
+            } else {
+                walletColor = "FFFFFF"
+            }
+        } catch {
+            
+        }
+        self.ibo_colorView?.backgroundColor = UIColor(hexString: walletColor!)
     }
     
     //community
@@ -84,6 +114,18 @@ class WalletSettingViewController:UITableViewController {
             print(error.localizedDescription)
         }
     }
+    
+    var colorPicker:ColorViewController!
+    
+    @IBAction func iba_chooseColor(){
+        
+        self.colorPicker = (self.storyboard?.instantiateViewController(withIdentifier: "sb_ColorViewController") as! ColorViewController)
+        
+        self.navigationController?.pushViewController(self.colorPicker, animated: true)
+    
+    }
+    
+    
     
     
     

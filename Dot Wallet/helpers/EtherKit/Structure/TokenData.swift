@@ -7,6 +7,7 @@
 //
 
 struct OErc721Token: Decodable {
+    
     let token_id:String?
     let image_url:String?
     let image_preview_url:String?
@@ -15,8 +16,7 @@ struct OErc721Token: Decodable {
     let external_link:String?
     let asset_contract:ERC721Contract?
     
-    enum CodingKeys: String, CodingKey {
-        
+    enum CodingKeys: CodingKey {
         case token_id
         case image_url
         case image_preview_url
@@ -24,7 +24,6 @@ struct OErc721Token: Decodable {
         case description
         case external_link
         case asset_contract
-        
     }
 }
 
@@ -50,6 +49,7 @@ struct ERC721Contract:Decodable {
     
 }
 public struct ERC20Token:Codable {
+    
     let name:String?
     let symbol:String?
     let contractAddress:String?

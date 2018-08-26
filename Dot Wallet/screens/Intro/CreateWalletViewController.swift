@@ -16,6 +16,7 @@ class CreateWalletViewController: UIViewController {
                      "f308cae045da27517efe44275ad23c44cce8d523cc9a3ad9e7aaba678dec52f2",
                      "1b5c152c59aa3b08ea070191d3396e169e66206782ac7be89c9a1bc91f68ee07"]
     
+    var testColors = ["#AE88FF", "#40E252", "#6FB1FF", "#FFC15A"]
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.isNavigationBarHidden = true
@@ -24,14 +25,12 @@ class CreateWalletViewController: UIViewController {
             if  UserDefaults.standard.bool(forKey: "ISLIVE") == true {
                 EtherWallet.shared.setToMainNet()
             }
-
+            do {
+                try UserPreferenceManager.shared.getKeyObject(key: "walletColor")
+            } catch {
+                
+            }
             self.pushWalletHomeScreen()
-        }
-        
-        do {
-           let pKEY = try EtherWallet.account.privateKey(password: "")
-        } catch {
-            
         }
         
     }
@@ -66,11 +65,11 @@ class CreateWalletViewController: UIViewController {
         self.present(alertView, animated: true, completion: nil)
 
     }
+    
     @IBAction func iba_useTestWallet(button:UIButton) {
-        
         let pkey = self.testPKeys[button.tag]
         self.importWallet(pKey: pkey, pass: "")
-        
+        UserPreferenceManager.shared.setKey(key: "walletColor", object: self.testColors[button.tag])
     }
     
     @IBAction func iba_importWallet(){
@@ -110,17 +109,13 @@ class CreateWalletViewController: UIViewController {
     func createWallet(pass:String){
         do {
             try EtherWallet.account.generateAccount(password: pass)
-            let pKey = try EtherWallet.account.privateKey(password: pass)
-            self.pushWalletHomeScreen();
-            
+            self.pushWalletHomeScreen()
         } catch {
             self.alertError(error: error)
         }
     }
     
     func importWalletLive(pKey:String, pass:String) {
-        
-        
         do {
             try EtherWallet.account.importAccount(privateKey: pKey, password: pass)
             UserDefaults.standard.set(true, forKey: "ISLIVE")
@@ -130,9 +125,6 @@ class CreateWalletViewController: UIViewController {
         } catch {
             self.alertError(error: error)
         }
-        
-        
-
     }
     
     func importWallet(pKey:String, pass:String){
@@ -150,7 +142,7 @@ class CreateWalletViewController: UIViewController {
     }
     
     func pushWalletHomeScreen(){
-        print("WALLET \(WalletManagerShared.shared.isLive)")
+
         EtherWallet.balance.etherBalance { balance in
             UserDefaults.standard.set(balance, forKey: "ETHBalance")
         }
@@ -158,7 +150,6 @@ class CreateWalletViewController: UIViewController {
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "sb_WalletHomeViewController")
         self.navigationController?.setViewControllers([vc!], animated: false)
        
-    
     }
     
     func alertError(error:Error){

@@ -64,6 +64,7 @@ extension EtherWallet: TokenService {
         
         let request = URLRequest(url: URL(string: url)!)
         URLSession.shared.dataTask(with: request, completionHandler: {(data, response, error) -> Void in
+            print(error)
             if data == nil {
                 return
             }
@@ -113,7 +114,8 @@ extension EtherWallet: TokenService {
                           "order_by": "token_id",
                           "asset_contract_address":tokenAddress,
                           "offset":page,
-                          "limit":"20"]
+                          "limit":"50"
+        ]
         
        
         let headers = ["X-API-KEY": "1a4288c7a6114fcd85f3d88aa37af0cc"]
@@ -140,36 +142,8 @@ extension EtherWallet: TokenService {
             }
             if (try? JSONSerialization.jsonObject(with: data!, options: .allowFragments) as? NSDictionary) != nil {
                 let json = JSON(data!)
-
+                print(json)
                 let result = json["assets"].arrayValue
-                DispatchQueue.main.async {
-                    completion(result)
-                }
-            }
-        }).resume()
-
-        return
-//
-        // Code for Rarebits <3
-        var url = URLComponents(string: "https://api.rarebits.io/v1/addresses/"+"0x482bf6B13e31E11f9FdA36e86e3B4Cd313F109CC"+"/token_items")
-        
-        url?.queryItems = [
-            URLQueryItem(name: "api_key", value: "cc0a1c99-069c-4955-9ddd-a2f450aaa0f2"),
-            URLQueryItem(name: "page-size", value: "20"),
-            URLQueryItem(name: "page", value: page),
-        ]
-        
-
-        URLSession.shared.dataTask(with: (url?.url as URL?)!, completionHandler: {(data, response, error) -> Void in
-            if data == nil {
-                return
-            }
-            if (try? JSONSerialization.jsonObject(with: data!, options: .allowFragments) as? NSDictionary) != nil {
-                let json = JSON(data!)
-                print(json["total_entries"].numberValue)
-                print()
-                let result = json["entries"].arrayValue
-                print(result.count)
                 DispatchQueue.main.async {
                     completion(result)
                 }

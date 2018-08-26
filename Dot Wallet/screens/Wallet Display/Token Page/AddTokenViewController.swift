@@ -19,7 +19,7 @@ class AddTokenViewController:UIViewController, UITableViewDelegate, UITableViewD
     @IBOutlet var ibo_tableView:UITableView?
     
     //LIST OF ERC20 TOKENS
-    var erc20TokenListURL = "https://raw.githubusercontent.com/MyEtherWallet/ethereum-lists/master/tokens/tokens-eth.json"
+    var erc20TokenListURL = "https://raw.githubusercontent.com/FrankyAguilar/TokenList/master/ERC20/tokens-eth.json"
     
     var delegate:AddTokenViewControllerDelegate?
     var tokens = [OERC20Token]()

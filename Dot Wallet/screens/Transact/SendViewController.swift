@@ -64,13 +64,16 @@ class SendViewController: UIViewController, QRCodeReaderViewControllerDelegate, 
     }
     
     func syncEtherBalance(){
-        
+         DispatchQueue.global(qos: .background).async {
             do {
                 let balance = try EtherWallet.balance.etherBalanceSync()
-                self.balance = balance
+                DispatchQueue.main.async {
+                    self.balance = balance
+                }
             } catch {
                 self.balance = nil
             }
+        }
     }
     
     func syncTokenBalance(){

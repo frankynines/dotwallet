@@ -19,13 +19,13 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ahP-ji-iyw">
-                                <rect key="frame" x="0.0" y="20" width="375" height="75"/>
+                                <rect key="frame" x="0.0" y="20" width="375" height="105"/>
                                 <subviews>
                                     <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="f7g-Pv-G3Y">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="75"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="105"/>
                                         <subviews>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9Ln-rI-0Kl" customClass="RoundedRectangleView" customModule="Dot_Wallet" customModuleProvider="target">
-                                                <rect key="frame" x="10" y="30" width="355" height="800"/>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9Ln-rI-0Kl" customClass="CardBackgroundView" customModule="Dot_Wallet" customModuleProvider="target">
+                                                <rect key="frame" x="10" y="5" width="355" height="800"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="🐢...........................................................🐇" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="U7t-0t-8fW">
                                                         <rect key="frame" x="20" y="666" width="315" height="39"/>
@@ -34,25 +34,69 @@
                                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0x" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" highlighted="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Yc0-e1-nFS" customClass="EFCountingLabel" customModule="EFCountingLabel">
-                                                        <rect key="frame" x="20" y="18" width="315" height="19"/>
-                                                        <fontDescription key="fontDescription" name="Menlo-Regular" family="Menlo" pointSize="16"/>
-                                                        <color key="textColor" white="1" alpha="0.40384203767123289" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <button opaque="NO" alpha="0.75" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hwi-hZ-yvh">
+                                                        <rect key="frame" x="117.5" y="5" width="120" height="50"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="50" id="EmK-5I-5T2"/>
+                                                            <constraint firstAttribute="width" constant="120" id="K5j-wU-8Zb"/>
+                                                        </constraints>
+                                                        <fontDescription key="fontDescription" name="Menlo-Bold" family="Menlo" pointSize="14"/>
+                                                        <inset key="titleEdgeInsets" minX="-100" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                                        <state key="normal" image="btn_moveDown.png">
+                                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        </state>
+                                                        <connections>
+                                                            <action selector="iba_dismiss" destination="l3g-bD-nMK" eventType="touchUpInside" id="6ys-0v-YUY"/>
+                                                        </connections>
+                                                    </button>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9Gx-9L-tJs" customClass="RoundButton" customModule="Dot_Wallet" customModuleProvider="target">
+                                                        <rect key="frame" x="20" y="30" width="315" height="65"/>
+                                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="65" id="6e2-EQ-Ulf"/>
+                                                        </constraints>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                <real key="value" value="10"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                            <userDefinedRuntimeAttribute type="boolean" keyPath="hasBorder" value="NO"/>
+                                                        </userDefinedRuntimeAttributes>
+                                                        <connections>
+                                                            <action selector="iba_dismiss" destination="l3g-bD-nMK" eventType="touchUpInside" id="5V8-SU-OUB"/>
+                                                        </connections>
+                                                    </button>
+                                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_qr.png" translatesAutoresizingMaskIntoConstraints="NO" id="Q8r-CT-enr">
+                                                        <rect key="frame" x="40" y="47.5" width="30" height="30"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" constant="30" id="jh5-EC-Bck"/>
+                                                            <constraint firstAttribute="height" constant="30" id="mXH-aW-e5J"/>
+                                                        </constraints>
+                                                    </imageView>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="VIX-SU-K7Y">
+                                                        <rect key="frame" x="80" y="52.5" width="235" height="20"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="20" id="4Na-Pk-d3h"/>
+                                                        </constraints>
+                                                        <fontDescription key="fontDescription" name="Menlo-Regular" family="Menlo" pointSize="12"/>
+                                                        <color key="textColor" red="0.43529412150000002" green="0.4431372583" blue="0.47450980539999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                 </subviews>
-                                                <color key="backgroundColor" red="0.58039215686274503" green="0.21568627450980393" blue="1" alpha="0.50377247431506844" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
-                                                    <constraint firstItem="Yc0-e1-nFS" firstAttribute="leading" secondItem="9Ln-rI-0Kl" secondAttribute="leading" constant="20" id="N3B-5x-aqz"/>
-                                                    <constraint firstAttribute="trailing" secondItem="Yc0-e1-nFS" secondAttribute="trailing" constant="20" id="cNH-Xp-EdC"/>
-                                                    <constraint firstItem="Yc0-e1-nFS" firstAttribute="centerX" secondItem="9Ln-rI-0Kl" secondAttribute="centerX" id="fe6-Ch-0f4"/>
-                                                    <constraint firstItem="Yc0-e1-nFS" firstAttribute="top" secondItem="9Ln-rI-0Kl" secondAttribute="top" constant="18" id="m6J-R2-dQN"/>
+                                                    <constraint firstItem="Q8r-CT-enr" firstAttribute="leading" secondItem="9Ln-rI-0Kl" secondAttribute="leading" constant="40" id="0te-gy-ay8"/>
+                                                    <constraint firstItem="Q8r-CT-enr" firstAttribute="centerY" secondItem="9Gx-9L-tJs" secondAttribute="centerY" id="9MD-e0-y98"/>
+                                                    <constraint firstAttribute="trailing" secondItem="VIX-SU-K7Y" secondAttribute="trailing" constant="40" id="QXE-0M-Kkd"/>
+                                                    <constraint firstItem="Hwi-hZ-yvh" firstAttribute="top" secondItem="9Ln-rI-0Kl" secondAttribute="top" constant="5" id="Qwq-pK-wkm"/>
+                                                    <constraint firstAttribute="trailing" secondItem="9Gx-9L-tJs" secondAttribute="trailing" constant="20" id="THk-yZ-pjb"/>
+                                                    <constraint firstItem="9Gx-9L-tJs" firstAttribute="top" secondItem="9Ln-rI-0Kl" secondAttribute="top" constant="30" id="VWh-x6-bip"/>
+                                                    <constraint firstItem="9Gx-9L-tJs" firstAttribute="leading" secondItem="9Ln-rI-0Kl" secondAttribute="leading" constant="20" id="bwJ-mm-RuX"/>
+                                                    <constraint firstItem="Hwi-hZ-yvh" firstAttribute="centerX" secondItem="9Ln-rI-0Kl" secondAttribute="centerX" id="kOy-6U-1Ub"/>
+                                                    <constraint firstItem="VIX-SU-K7Y" firstAttribute="leading" secondItem="Q8r-CT-enr" secondAttribute="trailing" constant="10" id="mlr-HT-5n9"/>
+                                                    <constraint firstItem="VIX-SU-K7Y" firstAttribute="centerY" secondItem="Q8r-CT-enr" secondAttribute="centerY" id="yIr-lb-a6i"/>
                                                     <constraint firstAttribute="height" constant="800" id="zEI-wC-Ubp"/>
                                                 </constraints>
                                                 <userDefinedRuntimeAttributes>
-                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                        <real key="value" value="20"/>
-                                                    </userDefinedRuntimeAttribute>
                                                     <userDefinedRuntimeAttribute type="string" keyPath="heroID" value="cardBack"/>
                                                 </userDefinedRuntimeAttributes>
                                             </view>
@@ -60,7 +104,7 @@
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="trailing" secondItem="9Ln-rI-0Kl" secondAttribute="trailing" constant="10" id="P9s-SG-Hs7"/>
-                                            <constraint firstItem="9Ln-rI-0Kl" firstAttribute="top" secondItem="f7g-Pv-G3Y" secondAttribute="top" constant="30" id="gIf-tB-BoU"/>
+                                            <constraint firstItem="9Ln-rI-0Kl" firstAttribute="top" secondItem="f7g-Pv-G3Y" secondAttribute="top" constant="5" id="gIf-tB-BoU"/>
                                             <constraint firstItem="9Ln-rI-0Kl" firstAttribute="leading" secondItem="f7g-Pv-G3Y" secondAttribute="leading" constant="10" id="pef-4v-ov8"/>
                                         </constraints>
                                     </view>
@@ -73,11 +117,11 @@
                                     <constraint firstAttribute="trailing" secondItem="f7g-Pv-G3Y" secondAttribute="trailing" id="Pdf-ER-CoC"/>
                                     <constraint firstItem="f7g-Pv-G3Y" firstAttribute="top" secondItem="ahP-ji-iyw" secondAttribute="top" id="Wxo-6y-p7j"/>
                                     <constraint firstAttribute="bottom" secondItem="f7g-Pv-G3Y" secondAttribute="bottom" id="cMc-5D-dFT"/>
-                                    <constraint firstAttribute="height" constant="75" id="upW-L1-fVd"/>
+                                    <constraint firstAttribute="height" constant="105" id="upW-L1-fVd"/>
                                 </constraints>
                             </scrollView>
                             <containerView opaque="NO" contentMode="scaleToFill" restorationIdentifier="sb_TokenDisplayViewController" translatesAutoresizingMaskIntoConstraints="NO" id="ndt-tm-Yes">
-                                <rect key="frame" x="0.0" y="95" width="375" height="572"/>
+                                <rect key="frame" x="0.0" y="125" width="375" height="542"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="string" keyPath="heroID" value="cardGuts"/>
@@ -86,21 +130,6 @@
                                     <segue destination="BNW-fg-Gnr" kind="embed" id="25C-IR-weV"/>
                                 </connections>
                             </containerView>
-                            <button opaque="NO" alpha="0.75" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hwi-hZ-yvh">
-                                <rect key="frame" x="127.5" y="20" width="120" height="50"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="EmK-5I-5T2"/>
-                                    <constraint firstAttribute="width" constant="120" id="K5j-wU-8Zb"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="Menlo-Bold" family="Menlo" pointSize="14"/>
-                                <inset key="titleEdgeInsets" minX="-100" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                <state key="normal" image="btn_moveDown.png">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </state>
-                                <connections>
-                                    <action selector="iba_dismiss" destination="l3g-bD-nMK" eventType="touchUpInside" id="6ys-0v-YUY"/>
-                                </connections>
-                            </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="byl-y7-2bI" customClass="GradientView" customModule="Dot_Wallet" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="617" width="375" height="115"/>
                                 <subviews>
@@ -171,7 +200,7 @@
                                 </userDefinedRuntimeAttributes>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="0v5-3j-hhY" firstAttribute="trailing" secondItem="byl-y7-2bI" secondAttribute="trailing" id="19h-Qj-7NY"/>
                             <constraint firstItem="0v5-3j-hhY" firstAttribute="bottom" secondItem="byl-y7-2bI" secondAttribute="bottom" constant="-65" id="2ne-an-SG9"/>
@@ -179,8 +208,6 @@
                             <constraint firstItem="ahP-ji-iyw" firstAttribute="top" secondItem="0v5-3j-hhY" secondAttribute="top" id="AIX-Ys-Ufe"/>
                             <constraint firstItem="ndt-tm-Yes" firstAttribute="trailing" secondItem="0v5-3j-hhY" secondAttribute="trailing" id="Gp7-WO-Wxy"/>
                             <constraint firstItem="ahP-ji-iyw" firstAttribute="leading" secondItem="0v5-3j-hhY" secondAttribute="leading" id="Gsz-1Z-ftD"/>
-                            <constraint firstItem="Hwi-hZ-yvh" firstAttribute="top" secondItem="0v5-3j-hhY" secondAttribute="top" id="H7E-F7-tpg"/>
-                            <constraint firstItem="Hwi-hZ-yvh" firstAttribute="centerX" secondItem="Sus-4t-H14" secondAttribute="centerX" id="Onk-HK-e1r"/>
                             <constraint firstItem="0v5-3j-hhY" firstAttribute="trailing" secondItem="ahP-ji-iyw" secondAttribute="trailing" id="VJo-ni-8zV"/>
                             <constraint firstItem="ndt-tm-Yes" firstAttribute="leading" secondItem="0v5-3j-hhY" secondAttribute="leading" id="jrn-vo-it2"/>
                             <constraint firstItem="byl-y7-2bI" firstAttribute="leading" secondItem="0v5-3j-hhY" secondAttribute="leading" id="oiS-su-FpD"/>
@@ -192,7 +219,7 @@
                         <userDefinedRuntimeAttribute type="boolean" keyPath="isHeroEnabled" value="YES"/>
                     </userDefinedRuntimeAttributes>
                     <connections>
-                        <outlet property="ibo_walletAddress" destination="Yc0-e1-nFS" id="cuj-Nt-qKQ"/>
+                        <outlet property="ibo_walletAddress" destination="VIX-SU-K7Y" id="d1B-cZ-d4e"/>
                         <outlet property="ibo_walletCardScrollView" destination="ahP-ji-iyw" id="5GW-EW-1Eo"/>
                         <outlet property="view" destination="Sus-4t-H14" id="RaS-9A-wsu"/>
                     </connections>
@@ -213,6 +240,7 @@
     <resources>
         <image name="btn_moveDown.png" width="100" height="50"/>
         <image name="icon_circledot.png" width="200" height="200"/>
+        <image name="icon_qr.png" width="58" height="58"/>
         <image name="icon_tokens.png" width="200" height="200"/>
         <image name="icon_transactions.png" width="200" height="200"/>
     </resources>

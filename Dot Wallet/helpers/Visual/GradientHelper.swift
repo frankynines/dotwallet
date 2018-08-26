@@ -141,10 +141,36 @@ class BackgroundView: UIView {
         return CAGradientLayer.self
     }
     override func layoutSubviews() {
+        var coreColor = "#A26EFF"
+        if let color = UserPreferenceManager.shared.coreColor {
+            coreColor = color
+        }
+        
         self.gradientLayer = self.layer as? CAGradientLayer
-        self.gradientLayer.colors = [UIColor(hexString: "CCD1FF").cgColor, UIColor(hexString:"A26EFF").cgColor]
+        
+        self.gradientLayer.colors = [
+            UIColor(hexString:coreColor, alpha:0.5).cgColor,
+            UIColor(hexString:coreColor).cgColor]
         self.gradientLayer.startPoint = CGPoint(x: 0.5, y: 0)
         self.gradientLayer.endPoint = CGPoint(x: 0, y: 1)
+    }
+}
+
+class CardBackgroundView: UIView {
+    
+    private var gradientLayer: CAGradientLayer!
+    
+    override class var layerClass: AnyClass {
+        return CALayer.self
+    }
+    override func layoutSubviews() {
+        var coreColor = "#A26EFF"
+        if let color = UserPreferenceManager.shared.coreColor {
+            coreColor = color
+        }
+        
+        self.backgroundColor = UIColor(hexString: coreColor)
+        self.layer.cornerRadius = 20
     }
 }
 

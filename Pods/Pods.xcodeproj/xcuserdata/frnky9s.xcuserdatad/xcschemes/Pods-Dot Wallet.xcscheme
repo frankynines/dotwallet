@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "AA12F23BA91ED95D5AB792F4E0FB480B"
+               BlueprintIdentifier = "2202054CD09B32448362267F5F878A68"
                BuildableName = "Pods_Dot_Wallet.framework"
                BlueprintName = "Pods-Dot Wallet"
                ReferencedContainer = "container:Pods.xcodeproj">
@@ -45,7 +45,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "AA12F23BA91ED95D5AB792F4E0FB480B"
+            BlueprintIdentifier = "2202054CD09B32448362267F5F878A68"
             BuildableName = "Pods_Dot_Wallet.framework"
             BlueprintName = "Pods-Dot Wallet"
             ReferencedContainer = "container:Pods.xcodeproj">

@@ -15,39 +15,20 @@ class UserPreferenceManager {
     static let shared = UserPreferenceManager()
     let storageKey:String = EtherWallet.account.address!.lowercased()
     
-    func userStorage() -> Storage<String>?{
-        do  {
-            let storage = try Storage(
-                diskConfig: DiskConfig(name: "userPreferences"),
-                memoryConfig: MemoryConfig(expiry: .never, countLimit: 10, totalCostLimit: 10),
-                transformer: TransformerFactory.forCodable(ofType: String.self))
-            return storage
-        } catch {
-            return nil
-        }
-        
-    }
     
     func setKey(key:String, object:String) {
         let keyName = self.storageKey.appending(key)
-        self.coreColor = object
-        do {
-            try self.userStorage()?.setObject(object, forKey: keyName)
-        } catch {
-            print(error.localizedDescription)
-        }
+        UserDefaults.standard.set(object, forKey: keyName)
     }
     
-    func getKeyObject(key:String) throws -> String?{
+    func getKeyObject(key:String) -> String?{
         let keyName = self.storageKey.appending(key)
-        do {
-            let object = try self.userStorage()?.object(forKey: keyName)
-            self.coreColor = object
-            return object!
-        } catch {
-            print(error.localizedDescription)
+        if let color = UserDefaults.standard.object(forKey: keyName) as? String {
+            return color
+        } else {
             return nil
         }
+        
     }
 
     

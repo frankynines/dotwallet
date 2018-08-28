@@ -11,6 +11,8 @@ import UIKit
 import SafariServices
 import Cache
 import Toast_Swift
+import KeychainAccess
+
 class WalletSettingViewController:UITableViewController {
     
     @IBOutlet var ibo_publicAddress:UILabel?
@@ -58,7 +60,7 @@ class WalletSettingViewController:UITableViewController {
                 walletColor = "FFFFFF"
             }
         } catch {
-            
+            print(error.localizedDescription)
         }
         self.ibo_colorView?.backgroundColor = UIColor(hexString: walletColor!)
     }
@@ -94,6 +96,11 @@ class WalletSettingViewController:UITableViewController {
         UserDefaults.standard.removeObject(forKey: "ETHBalance")
         TXHistoryCacheManager.shared.killStorage()
         TokenCacheManager.shared.killStorage()
+        
+        
+        let publicAddress = EtherWallet.account.address?.lowercased()
+        let keychain = Keychain(service: publicAddress!)
+        keychain[publicAddress!] = nil
         
         
     }

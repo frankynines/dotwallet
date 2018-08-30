@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.3.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="dXh-5c-1G8">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.13.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="dXh-5c-1G8">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.1"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.9"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -128,22 +128,20 @@
                                 <rect key="frame" x="20" y="108.5" width="335" height="450"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="dot.wallet" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vQh-Ej-NgS">
-                                        <rect key="frame" x="0.0" y="0.0" width="335" height="26"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="335" height="25"/>
                                         <fontDescription key="fontDescription" name="Verdana-Bold" family="Verdana" pointSize="17"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fky-pb-KCp">
-                                        <rect key="frame" x="0.0" y="36" width="335" height="74"/>
-                                        <string key="text">Welcome to the beta-test version of Dot Wallet. To maximize testing for transacting, here are some test wallets you can use to send and receive TEST ETH.
-
-⚠️ Do not send REAL ETH to any of these addresses. </string>
+                                        <rect key="frame" x="0.0" y="35" width="335" height="25"/>
+                                        <string key="text">Welcome to the beta-test version of Dot Wallet. To maximize testing for transacting, here are some test wallets you can use to send and receive TEST ETH.</string>
                                         <fontDescription key="fontDescription" name="Menlo-Regular" family="Menlo" pointSize="13"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OfD-6P-amv" customClass="RoundButton" customModule="Dot_Wallet" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="120" width="335" height="40"/>
+                                        <rect key="frame" x="0.0" y="70" width="335" height="40"/>
                                         <color key="backgroundColor" white="1" alpha="0.50313035102739723" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="vmi-OW-1rl"/>
@@ -164,7 +162,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DO1-cT-XQ7" customClass="RoundButton" customModule="Dot_Wallet" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="170" width="335" height="40"/>
+                                        <rect key="frame" x="0.0" y="120" width="335" height="40"/>
                                         <color key="backgroundColor" white="1" alpha="0.50313035102739723" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="nDe-oF-uWN"/>
@@ -185,7 +183,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ATa-kv-x68" customClass="RoundButton" customModule="Dot_Wallet" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="220" width="335" height="40"/>
+                                        <rect key="frame" x="0.0" y="170" width="335" height="40"/>
                                         <color key="backgroundColor" white="1" alpha="0.50313035102739723" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="mRh-6V-CW6"/>
@@ -206,7 +204,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vKB-a1-pQ4" customClass="RoundButton" customModule="Dot_Wallet" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="270" width="335" height="40"/>
+                                        <rect key="frame" x="0.0" y="220" width="335" height="40"/>
                                         <color key="backgroundColor" white="1" alpha="0.50313035102739723" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="zYD-aD-tPl"/>
@@ -226,8 +224,8 @@
                                             <action selector="iba_useTestWalletWithButton:" destination="Npw-2J-j6Z" eventType="touchUpInside" id="VBi-Hc-cHg"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NgI-f0-abC" customClass="RoundButton" customModule="Dot_Wallet" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="320" width="335" height="40"/>
+                                    <button opaque="NO" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NgI-f0-abC" customClass="RoundButton" customModule="Dot_Wallet" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="270" width="335" height="40"/>
                                         <color key="backgroundColor" white="1" alpha="0.50313035100000003" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="dcQ-Hd-KOU"/>
@@ -245,6 +243,27 @@
                                         </userDefinedRuntimeAttributes>
                                         <connections>
                                             <action selector="iba_useTestWalletWithButton:" destination="Npw-2J-j6Z" eventType="touchUpInside" id="stS-M3-LYv"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uz4-Tj-Gr0" userLabel="Import Wallet" customClass="RoundButton" customModule="Dot_Wallet" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="320" width="335" height="40"/>
+                                        <color key="backgroundColor" white="1" alpha="0.50313035100000003" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="40" id="NCH-hk-m2i"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
+                                        <size key="titleShadowOffset" width="1" height="1"/>
+                                        <state key="normal" title="Import Private Key">
+                                            <color key="titleColor" red="0.016804177310000001" green="0.19835099580000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                <real key="value" value="2"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="hasBorder" value="YES"/>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="iba_importWallet" destination="Npw-2J-j6Z" eventType="touchUpInside" id="JEH-Et-cYI"/>
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oVR-LU-5dY">

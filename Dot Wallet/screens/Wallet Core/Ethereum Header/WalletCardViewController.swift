@@ -57,12 +57,7 @@ class WalletCardViewController:UIViewController, UIScrollViewDelegate, ModalSlid
             self.refreshBalance()
         }
         self.repeatableTimer.resume()
-        
-        if  UserDefaults.standard.bool(forKey: "ISLIVE") == true {
-            self.ibo_dot?.backgroundColor = UIColor.green
-        } else {
-            self.ibo_dot?.backgroundColor = UIColor.orange
-        }
+        self.ibo_dot?.backgroundColor = UIColor.green
     }
     
     override func viewWillDisappear(_ animated: Bool) {

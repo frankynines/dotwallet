@@ -161,9 +161,6 @@ class TokenListCell:UITableViewCell {
         }
 
     }
-   
-    
-    
 
 }
 

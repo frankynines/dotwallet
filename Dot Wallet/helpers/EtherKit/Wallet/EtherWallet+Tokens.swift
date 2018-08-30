@@ -64,7 +64,6 @@ extension EtherWallet: TokenService {
         
         let request = URLRequest(url: URL(string: url)!)
         URLSession.shared.dataTask(with: request, completionHandler: {(data, response, error) -> Void in
-            print(error)
             if data == nil {
                 return
             }
@@ -85,12 +84,12 @@ extension EtherWallet: TokenService {
         let imageURL = self.getTokenImageURL(contractAddress: contractAddress)
         
         var image = UIImage()
-        //Check if Image has Cache
+
         do {
             image = (try storage.object(forKey: imageURL))
         } catch {
-            //Create Image and Cache
-            do {
+
+            do { // Create Image Cache
                 let imgdata = try Data(contentsOf: URL(string: imageURL)!)
                 image =  UIImage(data: imgdata)!
                 try storage.setObject(image, forKey: imageURL)
@@ -100,11 +99,10 @@ extension EtherWallet: TokenService {
             }
         }
         
-
-        
         DispatchQueue.main.async {
             completion(image)
         }
+        
     }
     
     public func getERC721Tokens(address:String, tokenAddress:String?, page:String, completion: @escaping ([JSON]?) -> ()){
@@ -142,7 +140,6 @@ extension EtherWallet: TokenService {
             }
             if (try? JSONSerialization.jsonObject(with: data!, options: .allowFragments) as? NSDictionary) != nil {
                 let json = JSON(data!)
-                print(json)
                 let result = json["assets"].arrayValue
                 DispatchQueue.main.async {
                     completion(result)

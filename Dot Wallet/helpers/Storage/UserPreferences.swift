@@ -15,7 +15,6 @@ class UserPreferenceManager {
     static let shared = UserPreferenceManager()
     let storageKey:String = EtherWallet.account.address!.lowercased()
     
-    
     func setKey(key:String, object:String) {
         let keyName = self.storageKey.appending(key)
         UserDefaults.standard.set(object, forKey: keyName)
@@ -28,10 +27,7 @@ class UserPreferenceManager {
         } else {
             return nil
         }
-        
     }
-
-    
     
 }
 

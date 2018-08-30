@@ -79,15 +79,12 @@ class TokenListViewController:UIViewController, UITableViewDelegate, UITableView
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print("Row Select")
+
         let token = self.tokens[indexPath.row]
         let vc = UIStoryboard.init(name: "ERC20Tokens", bundle: nil).instantiateViewController(withIdentifier: "sb_ERC20TokenDetailViewController") as! ERC20TokenDetailViewController
         vc.erc20Token = token
         self.present(vc , animated: true, completion: nil)
-    }
-    
-    func tokenSelected() {
-
+        
     }
     
 }
@@ -101,10 +98,6 @@ class WalletTokenCell:UITableViewCell {
     @IBOutlet var iboTokenFiat:UILabel?
     
     var  token:OERC20Token?
-    
-    @IBAction func iba_selectToken(){
-        
-    }
     
     func setupCell(token:OERC20Token){
     

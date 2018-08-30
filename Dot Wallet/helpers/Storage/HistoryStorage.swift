@@ -93,7 +93,7 @@ class TXHistoryCacheManager {
             let generalTransaction = try JSONDecoder().decode(GeneralTransactionData.self, from: data)
             return generalTransaction
         } catch {
-            print("Failed to Build Transaction Item")
+            print(error.localizedDescription)
             return nil
         }
     }

@@ -12,6 +12,7 @@ import SafariServices
 import Cache
 import Toast_Swift
 import KeychainAccess
+import web3swift
 
 class WalletSettingViewController:UITableViewController {
     
@@ -25,25 +26,10 @@ class WalletSettingViewController:UITableViewController {
         self.title = "Settings"
         self.navigationController?.isNavigationBarHidden = false
         
-        if  UserDefaults.standard.bool(forKey: "ISLIVE") == true {
-            self.ibo_network?.text = "Web3 Main Net"
-        } else {
-            self.ibo_network?.text = "Ropsten Test Net"
-        }
-        
-        var walletColor:String?
-        do {
-            if let color = try UserPreferenceManager.shared.getKeyObject(key: "walletColor"){
-                walletColor = color
-            } else {
-                walletColor = "FFFFFF"
-            }
-        } catch {
-            
-        }
-        self.ibo_colorView?.backgroundColor = UIColor(hexString: walletColor!)
-        
+        self.ibo_network?.text = "Main Net"
+        self.userColor()
     }
+    
     override func viewDidAppear(_ animated: Bool) {
         self.navigationController?.isNavigationBarHidden = false
     }
@@ -52,15 +38,16 @@ class WalletSettingViewController:UITableViewController {
         super.viewWillLayoutSubviews()
         ibo_publicAddress?.text = EtherWallet.account.address
         
+        self.userColor()
+        
+    }
+    
+    func userColor(){
         var walletColor:String?
-        do {
-            if let color = try UserPreferenceManager.shared.getKeyObject(key: "walletColor"){
-                walletColor = color
-            } else {
-                walletColor = "FFFFFF"
-            }
-        } catch {
-            print(error.localizedDescription)
+        if let color = UserPreferenceManager.shared.getKeyObject(key: "walletColor"){
+            walletColor = color
+        } else {
+            walletColor = "FFFFFF"
         }
         self.ibo_colorView?.backgroundColor = UIColor(hexString: walletColor!)
     }
@@ -72,22 +59,24 @@ class WalletSettingViewController:UITableViewController {
     }
     
     @IBAction func iba_presentPrivateKey(){
+        
         do {
             let pKey = try EtherWallet.account.privateKey(password: "")
             let alert = UIAlertController(title: "Private Key", message: "This key is temporary for testing.\(pKey)", preferredStyle: .alert)
+            
+            print(pKey) // USED FOR DEBUGGING
+            
             alert.addAction(UIAlertAction(title: "Copy", style: .default, handler: { (action) in
                 UIPasteboard.general.string = pKey
-
             }))
             
-            alert.addAction(UIAlertAction(title: "Close", style: .cancel, handler: { (action) in
-                
-            }))
+            alert.addAction(UIAlertAction(title: "Close", style: .cancel, handler: { (action) in }))
             self.present(alert, animated: true, completion: nil)
+        
         } catch {
-            print("No PKEY")
-            
+            print(error.localizedDescription)
         }
+        
     }
     
     @IBAction func iba_killCache(){
@@ -97,12 +86,9 @@ class WalletSettingViewController:UITableViewController {
         TXHistoryCacheManager.shared.killStorage()
         TokenCacheManager.shared.killStorage()
         
-        
         let publicAddress = EtherWallet.account.address?.lowercased()
         let keychain = Keychain(service: publicAddress!)
         keychain[publicAddress!] = nil
-        
-        
     }
     
     @IBAction func iba_killwallet(){
@@ -111,12 +97,10 @@ class WalletSettingViewController:UITableViewController {
         
         do {
             try EtherWallet.account.killKeystore()
-            let vc = self.storyboard?.instantiateViewController(withIdentifier: "sb_CreateWalletViewController")
             
-            UserDefaults.standard.removeObject(forKey: "ISLIVE")
-
-                
+            let vc = self.storyboard?.instantiateViewController(withIdentifier: "sb_CreateWalletViewController")
             self.navigationController?.setViewControllers([vc!], animated: true)
+        
         } catch {
             print(error.localizedDescription)
         }
@@ -127,14 +111,8 @@ class WalletSettingViewController:UITableViewController {
     @IBAction func iba_chooseColor(){
         
         self.colorPicker = (self.storyboard?.instantiateViewController(withIdentifier: "sb_ColorViewController") as! ColorViewController)
-        
         self.navigationController?.pushViewController(self.colorPicker, animated: true)
     
     }
-    
-    
-    
-    
-    
     
 }

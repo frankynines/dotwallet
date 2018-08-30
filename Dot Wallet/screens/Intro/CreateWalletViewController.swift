@@ -34,8 +34,9 @@ class CreateWalletViewController: UIViewController, PasswordLoginDelegate{
             do {
                 
                 let pass = try keychain.get(publicAddress!)
-                print(pass)
-                // if NO keychain pass FORCE pass
+                print(pass) // FOR DEBUGGING PURPOSES - WILL REMOVE AT LAUNCH
+
+                //If user has not setup a passcode
                 if pass == nil {
                     self.showLoginView(state: .Reset)
                 } else {
@@ -46,10 +47,6 @@ class CreateWalletViewController: UIViewController, PasswordLoginDelegate{
                 print(error.localizedDescription)
             }
             
-            
-            if UserDefaults.standard.bool(forKey: "ISLIVE") == true {
-                EtherWallet.shared.setToMainNet()
-            }
             
         }
         
@@ -103,7 +100,6 @@ class CreateWalletViewController: UIViewController, PasswordLoginDelegate{
             print(error.localizedDescription)
         }
         
-
     }
     
     func setLoginSuccess() {
@@ -116,14 +112,15 @@ class CreateWalletViewController: UIViewController, PasswordLoginDelegate{
             self.iba_createNewWallet()
             return
         }
-        let pkey = self.testPKeys[button.tag]
+        let pkey = self.testPKeys[button.tag - 1]
         self.importWallet(pKey: pkey, pass: "")
-        UserPreferenceManager.shared.setKey(key: "walletColor", object: self.testColors[button.tag])
+        UserPreferenceManager.shared.setKey(key: "walletColor", object: self.testColors[button.tag - 1])
     }
     
     @IBAction func iba_importWallet(){
-        
-        let alertView = UIAlertController.init(title: "Import Wallet", message: "This will import your wallet onto the MAIN-NET.", preferredStyle: .alert)
+        UserPreferenceManager.shared.setKey(key: "walletColor", object: self.testColors[1])
+
+        let alertView = UIAlertController.init(title: "Import Wallet", message: "Provide your private key to import your wallet. This will import on the main-net. Note: we do not save, cache, or monitor your private key entry. Use wisely!", preferredStyle: .alert)
         
         alertView.addTextField { (inputField) in
             inputField.tag = 0
@@ -156,13 +153,13 @@ class CreateWalletViewController: UIViewController, PasswordLoginDelegate{
     }
     
     func createWallet(pass:String){
-        
+        UserPreferenceManager.shared.setKey(key: "walletColor", object: self.testColors[2])
+
         do {
-            
-            try EtherWallet.account.generateAccount(password: pass)
-            
+            try EtherWallet.account.generateAccount(password: "")
             let publicAddress = EtherWallet.account.address?.lowercased()
             let keychain = Keychain(service: publicAddress!)
+            
             do {
                 try keychain.set(pass, key: publicAddress!)
                 self.loginVC?.kPass = pass
@@ -178,11 +175,8 @@ class CreateWalletViewController: UIViewController, PasswordLoginDelegate{
     func importWalletLive(pKey:String, pass:String) {
         
         do {
-            try EtherWallet.account.importAccount(privateKey: pKey, password: pass)
-            UserDefaults.standard.set(true, forKey: "ISLIVE")
-            EtherWallet.shared.setToMainNet()
+            try EtherWallet.account.importAccount(privateKey: pKey, password: "")
             self.pushWalletHomeScreen()
-            
         } catch {
             self.alertError(error: error)
         }
@@ -191,7 +185,6 @@ class CreateWalletViewController: UIViewController, PasswordLoginDelegate{
     func importWallet(pKey:String, pass:String){
         do {
             try EtherWallet.account.importAccount(privateKey: pKey, password: pass)
-            UserDefaults.standard.set(false, forKey: "ISLIVE")
             EtherWallet.shared.setToRopsten()
             self.pushWalletHomeScreen()
             

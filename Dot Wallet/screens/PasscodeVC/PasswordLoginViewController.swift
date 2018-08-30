@@ -47,7 +47,15 @@ class PasswordLoginViewController: UIViewController {
         
         //customize password UI
         passwordContainerView.tintColor = UIColor.gray
-        passwordContainerView.highlightedColor = UIColor.purple
+        
+        var walletColor:String?
+        if let color = UserPreferenceManager.shared.getKeyObject(key: "walletColor"){
+            walletColor = color
+        } else {
+            walletColor = "333333"
+        }
+        
+        passwordContainerView.highlightedColor = UIColor(hexString: walletColor!)
         
         self.ibo_passTitleView?.text = self.modalTitle
     }
@@ -58,22 +66,19 @@ extension PasswordLoginViewController: PasswordInputCompleteProtocol {
     func passwordInputComplete(_ passwordContainerView: PasswordContainerView, input: String) {
         
         if passState == .Create {
+            
             passwordContainerView.clearInput()
-
             self.delegate?.setLoginPasscode(pass: input)
-
             self.ibo_passTitleView?.text = "Verify Password"
             self.passState = .Verify
-            
             return
+            
         }
         
         if passState == .Reset {
             
             passwordContainerView.clearInput()
-            
             self.delegate?.unlockWalletWithPasscode(pass: input)
-            
             self.ibo_passTitleView?.text = "Verify Password"
             self.passState = .Verify
             
@@ -102,6 +107,7 @@ extension PasswordLoginViewController: PasswordInputCompleteProtocol {
             passwordContainerView.clearInput()
         }
     }
+    
 }
 
 private extension PasswordLoginViewController {

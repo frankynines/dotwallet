@@ -116,12 +116,9 @@ extension EtherWallet: AccountService {
                 do {
                     try FileManager.default.removeItem(atPath: userDir + keystoreDirectoryName + keystoreFileName)
                     keystoreCache = nil
-                    print("REMOVE", userDir + keystoreDirectoryName + keystoreFileName)
                 } catch {
                     print(error.localizedDescription)
                 }
-                
-               
             }
         }
         

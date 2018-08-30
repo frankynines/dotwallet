@@ -51,8 +51,6 @@ class PopOverViewcontroller: UIViewController, UIScrollViewDelegate  {
                        completion: { Void in()  }
         )
         
-        
-        print("viewlayedoutsub")
     }
     
     override func viewWillAppear(_ animated: Bool) {

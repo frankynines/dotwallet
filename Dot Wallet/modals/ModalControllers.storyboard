@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.3.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.13.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.1"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.9"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -25,7 +25,7 @@
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Iwv-NX-ll0" customClass="GradientView" customModule="Dot_Wallet" customModuleProvider="target">
-                                                <rect key="frame" x="20" y="83.5" width="335" height="500"/>
+                                                <rect key="frame" x="20" y="33.5" width="335" height="600"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Send Ether" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Q4-EJ-M6Q">
                                                         <rect key="frame" x="119.5" y="25" width="96" height="22"/>
@@ -44,7 +44,7 @@
                                                         </connections>
                                                     </button>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eRQ-F3-YnI">
-                                                        <rect key="frame" x="0.0" y="50" width="335" height="430"/>
+                                                        <rect key="frame" x="0.0" y="50" width="335" height="530"/>
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Rck-AC-2EM" customClass="RoundedRectangleView" customModule="Dot_Wallet" customModuleProvider="target">
@@ -63,7 +63,7 @@
                                                 </subviews>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="500" id="6k3-If-8TW"/>
+                                                    <constraint firstAttribute="height" constant="600" id="6k3-If-8TW"/>
                                                     <constraint firstItem="eRQ-F3-YnI" firstAttribute="leading" secondItem="Iwv-NX-ll0" secondAttribute="leading" id="Aec-lF-cOZ"/>
                                                     <constraint firstItem="5Q4-EJ-M6Q" firstAttribute="centerX" secondItem="Iwv-NX-ll0" secondAttribute="centerX" id="HSQ-ki-zyS"/>
                                                     <constraint firstAttribute="trailing" secondItem="eRQ-F3-YnI" secondAttribute="trailing" id="Qp4-aq-rRC"/>

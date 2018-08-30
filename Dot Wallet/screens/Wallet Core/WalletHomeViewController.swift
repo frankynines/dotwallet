@@ -16,13 +16,12 @@ class WalletHomeViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print(EtherWallet.account.address!)
+        print("Public Address \(EtherWallet.account.address!)")
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.isNavigationBarHidden = true
-
     }
     
     override func viewDidLayoutSubviews() {

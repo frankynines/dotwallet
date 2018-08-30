@@ -33,7 +33,6 @@ class TransactionDetailViewController:UIViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        print("View will disapeear")
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -74,7 +73,7 @@ class TransactionDetailViewController:UIViewController {
     
     @IBAction func iba_viewOnEtherscan(){
         
-        self.delegate?.openURL(url: "https://ropsten.etherscan.io/tx/\(transaction!.hash)")
+        self.delegate?.openURL(url: "https://etherscan.io/tx/\(transaction!.hash)")
     }
     
     func isSent(to:String) -> Bool {

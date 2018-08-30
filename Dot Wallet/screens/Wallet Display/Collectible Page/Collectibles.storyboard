@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.3.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.13.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.1"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.9"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -172,6 +172,13 @@
                                 <rect key="frame" x="20" y="60" width="335" height="365"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </imageView>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cPl-GM-k4b">
+                                <rect key="frame" x="169.5" y="435" width="36" height="30"/>
+                                <state key="normal" title="Send"/>
+                                <connections>
+                                    <action selector="sendToken" destination="5In-Li-uvu" eventType="touchUpInside" id="s5b-eG-xg8"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <constraints>
                             <constraint firstItem="t9h-ya-NsC" firstAttribute="trailing" secondItem="gjr-SD-IsD" secondAttribute="trailing" constant="40" id="3Lz-3D-gwF"/>
@@ -186,6 +193,8 @@
                             <constraint firstItem="gjr-SD-IsD" firstAttribute="leading" secondItem="t9h-ya-NsC" secondAttribute="leading" constant="40" id="aut-aN-NH5"/>
                             <constraint firstItem="t9h-ya-NsC" firstAttribute="bottom" secondItem="gjr-SD-IsD" secondAttribute="bottom" constant="10" id="g4z-p0-lEc"/>
                             <constraint firstItem="t9h-ya-NsC" firstAttribute="trailing" secondItem="nDM-QJ-YD8" secondAttribute="trailing" constant="20" id="hnm-fF-hFu"/>
+                            <constraint firstItem="cPl-GM-k4b" firstAttribute="centerX" secondItem="rsK-mg-GhW" secondAttribute="centerX" id="p2a-na-r3J"/>
+                            <constraint firstItem="cPl-GM-k4b" firstAttribute="top" secondItem="1oU-Kg-FBq" secondAttribute="bottom" constant="10" id="u15-RP-QpX"/>
                             <constraint firstItem="nDM-QJ-YD8" firstAttribute="leading" secondItem="t9h-ya-NsC" secondAttribute="leading" constant="20" id="u8v-ZE-2Rq"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="t9h-ya-NsC"/>

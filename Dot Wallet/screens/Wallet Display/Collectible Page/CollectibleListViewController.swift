@@ -46,10 +46,7 @@ class CollectibleListViewController:UIViewController, UICollectionViewDelegate, 
     }
     
     override func viewWillLayoutSubviews() {
-        super.viewWillLayoutSubviews()
-        
-        
-        
+        super.viewWillLayoutSubviews()  
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -60,15 +57,10 @@ class CollectibleListViewController:UIViewController, UICollectionViewDelegate, 
     }
     
     func loadTokens(page:String){
-        var testAddress:String?
-        var token:String?
-        if  UserDefaults.standard.bool(forKey: "ISLIVE") == true {
-            testAddress = EtherWallet.account.address
-            token = nil
-        } else {
-            testAddress = "0xef07a57c4cf84eed6739cf3ffd5edf40237431da"
-        }
-        EtherWallet.tokens.getERC721Tokens(address: testAddress!, tokenAddress:token, page: page) { (jsonResult) in
+
+        let userAddress = EtherWallet.account.address?.lowercased()
+        
+        EtherWallet.tokens.getERC721Tokens(address: userAddress!, tokenAddress:nil, page: page) { (jsonResult) in
             if jsonResult == nil {
                 return
             }
@@ -149,7 +141,6 @@ class CollectibleListViewController:UIViewController, UICollectionViewDelegate, 
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         self.delegate?.tokenDidSelectERC721(token: self.tokens[indexPath.item])
-        print(self.tokens[indexPath.item])
     }
     
 }

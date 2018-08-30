@@ -14,6 +14,9 @@ public protocol TransactionService {
     
     //TRX History
     func getTransactionHistory(address:String, completion: @escaping ([JSON]?) -> ())
+    
+    func getTokenOwner(fromAddress:String, contractAddress:String, tokenID:String)
+    func sendERC721Token(toAddress:String, contractAddress:String, tokenID:String, completion: @escaping (Bool) -> ())
 
 }
 
@@ -131,6 +134,67 @@ extension EtherWallet: TransactionService {
                 }
             }
         }).resume()
+    }
+    
+    public func getTokenOwner(fromAddress:String, contractAddress:String, tokenID:String){
+        let contractEAddress = EthereumAddress(contractAddress)
+        
+        let web3Main = Web3.InfuraMainnetWeb3() // USED TO GET MAIN NET TOKEN INFO
+        
+        if let contract = web3Main.contract(erc721ABI, at: contractEAddress) {
+            
+            let params = [tokenID] as [AnyObject]
+            let contractMethod = contract.method("ownerOf", parameters: params, extraData: Data(), options: options)
+            
+            let callResult = contractMethod?.call(options: nil)
+            guard case .success(let package)? = callResult else {
+                return
+            }
+            
+            let owner = package["_owner"] as! EthereumAddress
+            print(owner.address)
+        }
+    }
+    
+    public func sendERC721Token(toAddress:String, contractAddress:String, tokenID:String, completion: @escaping (Bool) -> ()){
+        
+        let contractEAddress = EthereumAddress(contractAddress)
+        let web3Main = Web3.InfuraMainnetWeb3() // USED TO GET MAIN NET TOKEN INFO
+        
+        do {
+            let keystore = try loadKeystore()
+            let keystoreManager = KeystoreManager([keystore])
+            web3Main.addKeystoreManager(keystoreManager)
+        } catch {
+            print(error.localizedDescription)
+            return
+        }
+       
+        var options = Web3Options.defaultOptions()
+        options.from = EthereumAddress(address!)
+        options.gasLimit = BigUInt(500000)
+        options.gasPrice = Web3.Utils.parseToBigUInt("3", units: .Gwei)
+        options.to = contractEAddress
+    
+        
+        if let contract = web3Main.contract(erc721ABI, at: contractEAddress) {
+            
+            let params = [ EthereumAddress(address!), EthereumAddress(toAddress), tokenID] as [AnyObject]
+            let contractMethod = contract.method("transferFrom", parameters: params, extraData: Data(), options: options)
+            
+            let contractCall =  contractMethod?.send(password: "", options: options, onBlock: "latest")
+            
+            switch contractCall {
+            case .success(let result)?:
+                print(result["txhash"])
+                completion(true)
+            case .failure(_)?:
+                completion(false)
+                //throw WalletError.networkFailure
+            case .none:
+                completion(false)
+            }
+        }
     }
     
    

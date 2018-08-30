@@ -142,7 +142,7 @@ class BackgroundView: UIView {
     }
     override func layoutSubviews() {
         var coreColor = "#A26EFF"
-        if let color = UserPreferenceManager.shared.coreColor {
+        if let color = UserPreferenceManager.shared.getKeyObject(key:"walletColor") {
             coreColor = color
         }
         
@@ -165,7 +165,7 @@ class CardBackgroundView: UIView {
     }
     override func layoutSubviews() {
         var coreColor = "#A26EFF"
-        if let color = UserPreferenceManager.shared.coreColor {
+        if let color = UserPreferenceManager.shared.getKeyObject(key: "walletColor") {
             coreColor = color
         }
         

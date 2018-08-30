@@ -29,21 +29,16 @@ class TokenDetailViewController:UIViewController {
         super.viewDidLoad()
     }
     
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        print("View will disapeear")
-    }
-    
     override func viewWillAppear(_ animated: Bool) {
-        
         super.viewWillAppear(animated)
+        
         if erc721Token != nil {
             self.ibo_name?.text = erc721Token?.name
             self.ibo_description?.text = erc721Token?.description
             self.drawImage(url: erc721Token?.image_preview_url)
         }
-        
     }
+    
     override func viewDidAppear(_ animated: Bool) {
         
         self.ibo_previewImageView?.transform = CGAffineTransform(scaleX: 0.5, y: 0.5)
@@ -71,15 +66,11 @@ class TokenDetailViewController:UIViewController {
                     self.ibo_previewImageView?.image = image
                 }
             } catch {
-                
+                print(error.localizedDescription)
             }
-            
         }
-        
-       
     }
-    
-    
+
     @IBAction func iba_share(){
         
     }
@@ -102,6 +93,16 @@ class TokenDetailViewController:UIViewController {
         let tokenID = self.erc721Token?.token_id!
         let openSeaURL = "https://opensea.io/assets/" + tokenSmartContract! + "/" + tokenID!
         self.delegate?.openURL(url: openSeaURL)
+    }
+    
+    @IBAction func sendToken(){
+        //RECEIVER 0xB87185D319FB23E3Cc86CB70b7554b08F8571491
+        let tokenSmartContract = self.erc721Token?.asset_contract?.address!
+        let tokenID = self.erc721Token?.token_id!
+
+        EtherWallet.transaction.sendERC721Token(toAddress: "0x2Eb9b439Ffb7dC587198e1534e465a6242192b24", contractAddress: tokenSmartContract!, tokenID: tokenID!) { (done) in
+            print(done)
+        }
     }
     
 }

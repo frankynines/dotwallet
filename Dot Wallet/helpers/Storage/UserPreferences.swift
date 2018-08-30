@@ -13,44 +13,26 @@ class UserPreferenceManager {
     public var coreColor:String?
     
     static let shared = UserPreferenceManager()
-    let storageKey:String = EtherWallet.account.address!.lowercased()
     
-    func userStorage() -> Storage<String>?{
-        do  {
-            let storage = try Storage(
-                diskConfig: DiskConfig(name: "userPreferences"),
-                memoryConfig: MemoryConfig(expiry: .never, countLimit: 10, totalCostLimit: 10),
-                transformer: TransformerFactory.forCodable(ofType: String.self))
-            return storage
-        } catch {
+    func setKey(key:String, object:String) {
+        
+        let storageKey = EtherWallet.account.address!.lowercased()
+        let keyName = storageKey.appending(key)
+        UserDefaults.standard.set(object, forKey: keyName)
+        
+    }
+    
+    func getKeyObject(key:String) -> String?{
+        
+        let storageKey = EtherWallet.account.address!.lowercased()
+        let keyName = storageKey.appending(key)
+        if let color = UserDefaults.standard.object(forKey: keyName) as? String {
+            return color
+        } else {
             return nil
         }
         
     }
-    
-    func setKey(key:String, object:String) {
-        let keyName = self.storageKey.appending(key)
-        self.coreColor = object
-        do {
-            try self.userStorage()?.setObject(object, forKey: keyName)
-        } catch {
-            print(error.localizedDescription)
-        }
-    }
-    
-    func getKeyObject(key:String) throws -> String?{
-        let keyName = self.storageKey.appending(key)
-        do {
-            let object = try self.userStorage()?.object(forKey: keyName)
-            self.coreColor = object
-            return object!
-        } catch {
-            print(error.localizedDescription)
-            return nil
-        }
-    }
-
-    
     
 }
 

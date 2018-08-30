@@ -13,20 +13,25 @@ class UserPreferenceManager {
     public var coreColor:String?
     
     static let shared = UserPreferenceManager()
-    let storageKey:String = EtherWallet.account.address!.lowercased()
     
     func setKey(key:String, object:String) {
-        let keyName = self.storageKey.appending(key)
+        
+        let storageKey = EtherWallet.account.address!.lowercased()
+        let keyName = storageKey.appending(key)
         UserDefaults.standard.set(object, forKey: keyName)
+        
     }
     
     func getKeyObject(key:String) -> String?{
-        let keyName = self.storageKey.appending(key)
+        
+        let storageKey = EtherWallet.account.address!.lowercased()
+        let keyName = storageKey.appending(key)
         if let color = UserDefaults.standard.object(forKey: keyName) as? String {
             return color
         } else {
             return nil
         }
+        
     }
     
 }

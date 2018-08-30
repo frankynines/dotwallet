@@ -114,11 +114,9 @@ class CreateWalletViewController: UIViewController, PasswordLoginDelegate{
         }
         let pkey = self.testPKeys[button.tag - 1]
         self.importWallet(pKey: pkey, pass: "")
-        UserPreferenceManager.shared.setKey(key: "walletColor", object: self.testColors[button.tag - 1])
     }
     
     @IBAction func iba_importWallet(){
-        UserPreferenceManager.shared.setKey(key: "walletColor", object: self.testColors[1])
 
         let alertView = UIAlertController.init(title: "Import Wallet", message: "Provide your private key to import your wallet. This will import on the main-net. Note: we do not save, cache, or monitor your private key entry. Use wisely!", preferredStyle: .alert)
         
@@ -185,7 +183,7 @@ class CreateWalletViewController: UIViewController, PasswordLoginDelegate{
     func importWallet(pKey:String, pass:String){
         do {
             try EtherWallet.account.importAccount(privateKey: pKey, password: pass)
-            EtherWallet.shared.setToRopsten()
+            UserPreferenceManager.shared.setKey(key: "walletColor", object: self.testColors[0])
             self.pushWalletHomeScreen()
             
         } catch {

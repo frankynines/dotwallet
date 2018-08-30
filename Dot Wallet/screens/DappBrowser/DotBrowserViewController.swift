@@ -10,8 +10,6 @@ import Foundation
 import UIKit
 import WebKit
 
-
-
 class DotBrowserViewController:UIViewController, WKNavigationDelegate, WKUIDelegate{
     
     let address = EtherWallet.account.address
@@ -27,6 +25,7 @@ class DotBrowserViewController:UIViewController, WKNavigationDelegate, WKUIDeleg
         case publishTransaction
         case approveTransaction
     }
+    
     func userAgent() -> String {
         let info = Bundle.main.infoDictionary
         let version = info!["CFBundleSHortVersionString"]

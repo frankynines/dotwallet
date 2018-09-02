@@ -124,171 +124,86 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="5Ep-Q0-n66">
-                                <rect key="frame" x="20" y="108.5" width="335" height="450"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AN5-SC-bQj">
+                                <rect key="frame" x="0.0" y="417" width="375" height="250"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="dot.wallet" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vQh-Ej-NgS">
-                                        <rect key="frame" x="0.0" y="0.0" width="335" height="25"/>
-                                        <fontDescription key="fontDescription" name="Verdana-Bold" family="Verdana" pointSize="17"/>
-                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <nil key="highlightedColor"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vcb-9J-Guc" customClass="RoundButton" customModule="Dot_Wallet" customModuleProvider="target">
+                                        <rect key="frame" x="40" y="75" width="295" height="40"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="40" id="5G1-gS-GM8"/>
+                                        </constraints>
+                                        <state key="normal" title="Import Existing">
+                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                <real key="value" value="20"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="hasBorder" value="YES"/>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="iba_importWallet" destination="Npw-2J-j6Z" eventType="touchUpInside" id="Kvm-8h-J0P"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="moE-KG-QzJ" customClass="RoundButton" customModule="Dot_Wallet" customModuleProvider="target">
+                                        <rect key="frame" x="40" y="135" width="295" height="40"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="40" id="YYa-Vz-8T8"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                        <state key="normal" title="Create Empty Wallet">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="hasBorder" value="YES"/>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="iba_createNewWallet" destination="Npw-2J-j6Z" eventType="touchUpInside" id="dra-eX-0jw"/>
+                                        </connections>
+                                    </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="By using Dot Wallet you agree to the Terms of Service." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3tn-Yh-84y">
+                                        <rect key="frame" x="20" y="210" width="335" height="40"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="40" id="PD3-Yl-htq"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="9"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="highlightedColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fky-pb-KCp">
-                                        <rect key="frame" x="0.0" y="35" width="335" height="25"/>
-                                        <string key="text">Welcome to the beta-test version of Dot Wallet. To maximize testing for transacting, here are some test wallets you can use to send and receive TEST ETH.</string>
-                                        <fontDescription key="fontDescription" name="Menlo-Regular" family="Menlo" pointSize="13"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OfD-6P-amv" customClass="RoundButton" customModule="Dot_Wallet" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="70" width="335" height="40"/>
-                                        <color key="backgroundColor" white="1" alpha="0.50313035102739723" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Let's connect your wallet." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d1e-QL-zHV">
+                                        <rect key="frame" x="40" y="0.0" width="295" height="35"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="40" id="vmi-OW-1rl"/>
+                                            <constraint firstAttribute="height" constant="35" id="HKe-IA-ivE"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
-                                        <size key="titleShadowOffset" width="1" height="1"/>
-                                        <state key="normal" title="Create Wallet">
-                                            <color key="titleColor" red="0.016804177310000001" green="0.19835099580000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        </state>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                <real key="value" value="2"/>
-                                            </userDefinedRuntimeAttribute>
-                                            <userDefinedRuntimeAttribute type="boolean" keyPath="hasBorder" value="YES"/>
-                                        </userDefinedRuntimeAttributes>
-                                        <connections>
-                                            <action selector="iba_useTestWalletWithButton:" destination="Npw-2J-j6Z" eventType="touchUpInside" id="TYs-VE-B1L"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DO1-cT-XQ7" customClass="RoundButton" customModule="Dot_Wallet" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="120" width="335" height="40"/>
-                                        <color key="backgroundColor" white="1" alpha="0.50313035102739723" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="40" id="nDe-oF-uWN"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
-                                        <size key="titleShadowOffset" width="1" height="1"/>
-                                        <state key="normal" title="Wallet 01">
-                                            <color key="titleColor" red="0.016804177310000001" green="0.19835099580000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        </state>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                <real key="value" value="2"/>
-                                            </userDefinedRuntimeAttribute>
-                                            <userDefinedRuntimeAttribute type="boolean" keyPath="hasBorder" value="YES"/>
-                                        </userDefinedRuntimeAttributes>
-                                        <connections>
-                                            <action selector="iba_useTestWalletWithButton:" destination="Npw-2J-j6Z" eventType="touchUpInside" id="DVp-j7-1We"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ATa-kv-x68" customClass="RoundButton" customModule="Dot_Wallet" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="170" width="335" height="40"/>
-                                        <color key="backgroundColor" white="1" alpha="0.50313035102739723" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="40" id="mRh-6V-CW6"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
-                                        <size key="titleShadowOffset" width="1" height="1"/>
-                                        <state key="normal" title="Wallet 02">
-                                            <color key="titleColor" red="0.016804177310000001" green="0.19835099580000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        </state>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                <real key="value" value="2"/>
-                                            </userDefinedRuntimeAttribute>
-                                            <userDefinedRuntimeAttribute type="boolean" keyPath="hasBorder" value="YES"/>
-                                        </userDefinedRuntimeAttributes>
-                                        <connections>
-                                            <action selector="iba_useTestWalletWithButton:" destination="Npw-2J-j6Z" eventType="touchUpInside" id="Aka-vZ-sIy"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vKB-a1-pQ4" customClass="RoundButton" customModule="Dot_Wallet" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="220" width="335" height="40"/>
-                                        <color key="backgroundColor" white="1" alpha="0.50313035102739723" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="40" id="zYD-aD-tPl"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
-                                        <size key="titleShadowOffset" width="1" height="1"/>
-                                        <state key="normal" title="Wallet 03">
-                                            <color key="titleColor" red="0.016804177310000001" green="0.19835099580000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        </state>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                <real key="value" value="2"/>
-                                            </userDefinedRuntimeAttribute>
-                                            <userDefinedRuntimeAttribute type="boolean" keyPath="hasBorder" value="YES"/>
-                                        </userDefinedRuntimeAttributes>
-                                        <connections>
-                                            <action selector="iba_useTestWalletWithButton:" destination="Npw-2J-j6Z" eventType="touchUpInside" id="VBi-Hc-cHg"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NgI-f0-abC" customClass="RoundButton" customModule="Dot_Wallet" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="270" width="335" height="40"/>
-                                        <color key="backgroundColor" white="1" alpha="0.50313035100000003" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="40" id="dcQ-Hd-KOU"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
-                                        <size key="titleShadowOffset" width="1" height="1"/>
-                                        <state key="normal" title="Wallet 04">
-                                            <color key="titleColor" red="0.016804177310000001" green="0.19835099580000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        </state>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                <real key="value" value="2"/>
-                                            </userDefinedRuntimeAttribute>
-                                            <userDefinedRuntimeAttribute type="boolean" keyPath="hasBorder" value="YES"/>
-                                        </userDefinedRuntimeAttributes>
-                                        <connections>
-                                            <action selector="iba_useTestWalletWithButton:" destination="Npw-2J-j6Z" eventType="touchUpInside" id="stS-M3-LYv"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uz4-Tj-Gr0" userLabel="Import Wallet" customClass="RoundButton" customModule="Dot_Wallet" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="320" width="335" height="40"/>
-                                        <color key="backgroundColor" white="1" alpha="0.50313035100000003" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="40" id="NCH-hk-m2i"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
-                                        <size key="titleShadowOffset" width="1" height="1"/>
-                                        <state key="normal" title="Import Private Key">
-                                            <color key="titleColor" red="0.016804177310000001" green="0.19835099580000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        </state>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                <real key="value" value="2"/>
-                                            </userDefinedRuntimeAttribute>
-                                            <userDefinedRuntimeAttribute type="boolean" keyPath="hasBorder" value="YES"/>
-                                        </userDefinedRuntimeAttributes>
-                                        <connections>
-                                            <action selector="iba_importWallet" destination="Npw-2J-j6Z" eventType="touchUpInside" id="JEH-Et-cYI"/>
-                                        </connections>
-                                    </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oVR-LU-5dY">
-                                        <rect key="frame" x="0.0" y="370" width="335" height="80"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="80" id="jc8-Ks-dIM"/>
-                                        </constraints>
-                                        <string key="text">Please forward all feedback to our telegram group. 
-
-https://t.me/mydotwallet</string>
-                                        <fontDescription key="fontDescription" name="Menlo-Regular" family="Menlo" pointSize="12"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="highlightedColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </label>
                                 </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="450" id="xPu-GC-oA1"/>
+                                    <constraint firstItem="d1e-QL-zHV" firstAttribute="leading" secondItem="AN5-SC-bQj" secondAttribute="leading" constant="40" id="9A2-Mi-c5w"/>
+                                    <constraint firstItem="d1e-QL-zHV" firstAttribute="top" secondItem="AN5-SC-bQj" secondAttribute="top" id="Dd0-Bu-JS5"/>
+                                    <constraint firstAttribute="trailing" secondItem="d1e-QL-zHV" secondAttribute="trailing" constant="40" id="JAI-EN-teX"/>
+                                    <constraint firstAttribute="trailing" secondItem="3tn-Yh-84y" secondAttribute="trailing" constant="20" id="Pi5-8E-Eb0"/>
+                                    <constraint firstAttribute="trailing" secondItem="moE-KG-QzJ" secondAttribute="trailing" constant="40" id="TU2-wR-GAf"/>
+                                    <constraint firstItem="moE-KG-QzJ" firstAttribute="leading" secondItem="AN5-SC-bQj" secondAttribute="leading" constant="40" id="U5U-xB-22Y"/>
+                                    <constraint firstAttribute="bottom" secondItem="3tn-Yh-84y" secondAttribute="bottom" id="You-0h-AX3"/>
+                                    <constraint firstAttribute="trailing" secondItem="Vcb-9J-Guc" secondAttribute="trailing" constant="40" id="aiF-rk-yIA"/>
+                                    <constraint firstItem="Vcb-9J-Guc" firstAttribute="leading" secondItem="AN5-SC-bQj" secondAttribute="leading" constant="40" id="c1U-iD-Qen"/>
+                                    <constraint firstItem="Vcb-9J-Guc" firstAttribute="top" secondItem="d1e-QL-zHV" secondAttribute="bottom" constant="40" id="diG-ki-FEe"/>
+                                    <constraint firstItem="moE-KG-QzJ" firstAttribute="top" secondItem="Vcb-9J-Guc" secondAttribute="bottom" constant="20" id="fbQ-Vy-Md0"/>
+                                    <constraint firstAttribute="height" constant="250" id="jsV-cv-akh"/>
+                                    <constraint firstItem="3tn-Yh-84y" firstAttribute="leading" secondItem="AN5-SC-bQj" secondAttribute="leading" constant="20" id="oL1-dq-C4d"/>
                                 </constraints>
-                            </stackView>
+                            </view>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" red="0.75294117647058822" green="0.72549019607843135" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="5Ep-Q0-n66" firstAttribute="leading" secondItem="7WK-SE-i88" secondAttribute="leading" constant="20" id="6g8-9v-8Ps"/>
-                            <constraint firstItem="7WK-SE-i88" firstAttribute="trailing" secondItem="5Ep-Q0-n66" secondAttribute="trailing" constant="20" id="rQG-nc-kU2"/>
-                            <constraint firstItem="5Ep-Q0-n66" firstAttribute="centerY" secondItem="1rb-U7-mxg" secondAttribute="centerY" id="wd4-Il-1US"/>
+                            <constraint firstItem="AN5-SC-bQj" firstAttribute="leading" secondItem="7WK-SE-i88" secondAttribute="leading" id="PdD-th-7cf"/>
+                            <constraint firstItem="AN5-SC-bQj" firstAttribute="trailing" secondItem="7WK-SE-i88" secondAttribute="trailing" id="SyN-hx-cD7"/>
+                            <constraint firstItem="AN5-SC-bQj" firstAttribute="bottom" secondItem="7WK-SE-i88" secondAttribute="bottom" id="xFh-cW-bhB"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="7WK-SE-i88"/>
                     </view>
@@ -411,7 +326,7 @@ https://t.me/mydotwallet</string>
                                 </constraints>
                             </stackView>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceHorizontal="YES" delaysContentTouches="NO" keyboardDismissMode="onDrag" translatesAutoresizingMaskIntoConstraints="NO" id="Q1s-80-yoT">
-                                <rect key="frame" x="0.0" y="290" width="375" height="80"/>
+                                <rect key="frame" x="0.0" y="587" width="375" height="80"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7aG-MG-lJi">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="80"/>
@@ -454,11 +369,11 @@ https://t.me/mydotwallet</string>
                                     <constraint firstItem="7aG-MG-lJi" firstAttribute="top" secondItem="Q1s-80-yoT" secondAttribute="top" id="sda-NF-poT"/>
                                 </constraints>
                             </scrollView>
-                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pR1-An-O72">
-                                <rect key="frame" x="-2" y="372" width="377" height="296"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pR1-An-O72">
+                                <rect key="frame" x="0.0" y="270" width="375" height="317"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EOC-gP-cZP" customClass="RoundButton" customModule="Dot_Wallet" customModuleProvider="target">
-                                        <rect key="frame" x="127.5" y="88.5" width="120" height="120"/>
+                                        <rect key="frame" x="127.5" y="98.5" width="120" height="120"/>
                                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="120" id="D8o-1y-f2Z"/>
@@ -490,18 +405,18 @@ https://t.me/mydotwallet</string>
                             <constraint firstItem="4fG-ny-VZV" firstAttribute="leading" secondItem="pNS-ma-Mr7" secondAttribute="leading" constant="20" id="73v-qP-xa7"/>
                             <constraint firstItem="hbj-LM-zYv" firstAttribute="leading" secondItem="pNS-ma-Mr7" secondAttribute="leading" constant="20" id="955-09-tha"/>
                             <constraint firstItem="pNS-ma-Mr7" firstAttribute="trailing" secondItem="hbj-LM-zYv" secondAttribute="trailing" constant="20" id="AXa-FA-tL1"/>
+                            <constraint firstAttribute="bottom" secondItem="Q1s-80-yoT" secondAttribute="bottom" id="Cc0-YO-sKX"/>
                             <constraint firstItem="Q1s-80-yoT" firstAttribute="leading" secondItem="pNS-ma-Mr7" secondAttribute="leading" id="CqW-Wk-1fk"/>
                             <constraint firstItem="ufS-1e-zZv" firstAttribute="top" secondItem="2cU-SB-38A" secondAttribute="top" id="FQh-Ms-Ofo"/>
                             <constraint firstItem="pR1-An-O72" firstAttribute="trailing" secondItem="pNS-ma-Mr7" secondAttribute="trailing" id="JTL-rS-Tg8"/>
                             <constraint firstAttribute="trailing" secondItem="Q1s-80-yoT" secondAttribute="trailing" id="Mgj-Yo-Dyh"/>
-                            <constraint firstAttribute="bottom" secondItem="pR1-An-O72" secondAttribute="bottom" id="P4t-yA-m6d"/>
                             <constraint firstItem="4fG-ny-VZV" firstAttribute="top" secondItem="hbj-LM-zYv" secondAttribute="bottom" constant="10" id="Qnc-WN-FGq"/>
                             <constraint firstItem="hbj-LM-zYv" firstAttribute="top" secondItem="pNS-ma-Mr7" secondAttribute="top" id="QtG-Zi-Ly5"/>
                             <constraint firstItem="pR1-An-O72" firstAttribute="leading" secondItem="2cU-SB-38A" secondAttribute="leading" id="Tha-NC-e3j"/>
-                            <constraint firstItem="pR1-An-O72" firstAttribute="top" secondItem="Q1s-80-yoT" secondAttribute="bottom" id="Xl7-WH-c2H"/>
+                            <constraint firstItem="pR1-An-O72" firstAttribute="top" secondItem="4fG-ny-VZV" secondAttribute="bottom" id="b2b-KK-DEh"/>
                             <constraint firstItem="pNS-ma-Mr7" firstAttribute="trailing" secondItem="4fG-ny-VZV" secondAttribute="trailing" constant="20" id="imy-F0-F1T"/>
+                            <constraint firstItem="Q1s-80-yoT" firstAttribute="top" secondItem="pR1-An-O72" secondAttribute="bottom" id="oih-6Z-RVS"/>
                             <constraint firstItem="ufS-1e-zZv" firstAttribute="leading" secondItem="2cU-SB-38A" secondAttribute="leading" id="pbT-tI-w0N"/>
-                            <constraint firstItem="Q1s-80-yoT" firstAttribute="top" secondItem="4fG-ny-VZV" secondAttribute="bottom" constant="20" id="zHV-87-hY3"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="pNS-ma-Mr7"/>
                     </view>
@@ -524,7 +439,7 @@ https://t.me/mydotwallet</string>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <label key="tableFooterView" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Dot.Wallet V1.0 - Test Build" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Rc5-Gc-wXa">
-                            <rect key="frame" x="0.0" y="428" width="375" height="435"/>
+                            <rect key="frame" x="0.0" y="431" width="375" height="435"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" red="0.96862745098039216" green="0.96862745098039216" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <fontDescription key="fontDescription" name="Menlo-Regular" family="Menlo" pointSize="12"/>
@@ -562,11 +477,11 @@ https://t.me/mydotwallet</string>
                             </tableViewSection>
                             <tableViewSection headerTitle=" " id="2EI-Tb-deV">
                                 <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="Ep2-Oc-DYF" detailTextLabel="52A-TQ-VOc" style="IBUITableViewCellStyleValue1" id="Bw8-JQ-Ma3">
-                                        <rect key="frame" x="0.0" y="104" width="375" height="44"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="Ep2-Oc-DYF" detailTextLabel="52A-TQ-VOc" rowHeight="45" style="IBUITableViewCellStyleValue1" id="Bw8-JQ-Ma3">
+                                        <rect key="frame" x="0.0" y="104" width="375" height="45"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Bw8-JQ-Ma3" id="HKB-Md-gjh">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="44.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Wallet" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Ep2-Oc-DYF">
@@ -586,22 +501,27 @@ https://t.me/mydotwallet</string>
                                             </subviews>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="YLH-ER-abi">
-                                        <rect key="frame" x="0.0" y="148" width="375" height="44"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="45" id="YLH-ER-abi">
+                                        <rect key="frame" x="0.0" y="149" width="375" height="45"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="YLH-ER-abi" id="of4-Fk-eqv">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="44.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jhJ-d6-bjp">
-                                                    <rect key="frame" x="341.5" y="10" width="23.5" height="23.5"/>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jhJ-d6-bjp" customClass="RoundedRectangleView" customModule="Dot_Wallet" customModuleProvider="target">
+                                                    <rect key="frame" x="340.5" y="10" width="24.5" height="24.5"/>
                                                     <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" secondItem="jhJ-d6-bjp" secondAttribute="height" multiplier="1:1" id="nU3-Cg-uuK"/>
                                                     </constraints>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                            <real key="value" value="13"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                    </userDefinedRuntimeAttributes>
                                                 </view>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jew-n2-j9T">
-                                                    <rect key="frame" x="20" y="0.0" width="355" height="43.5"/>
+                                                    <rect key="frame" x="15" y="0.0" width="360" height="44.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                     <state key="normal" title="Custom">
                                                         <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -617,20 +537,20 @@ https://t.me/mydotwallet</string>
                                                 <constraint firstItem="jhJ-d6-bjp" firstAttribute="top" secondItem="of4-Fk-eqv" secondAttribute="top" constant="10" id="L2f-kU-JOX"/>
                                                 <constraint firstAttribute="bottom" secondItem="Jew-n2-j9T" secondAttribute="bottom" id="R1U-wg-N9h"/>
                                                 <constraint firstItem="Jew-n2-j9T" firstAttribute="top" secondItem="of4-Fk-eqv" secondAttribute="top" id="bHM-ve-2ic"/>
-                                                <constraint firstItem="Jew-n2-j9T" firstAttribute="leading" secondItem="of4-Fk-eqv" secondAttribute="leading" constant="20" id="j6T-3h-HOP"/>
+                                                <constraint firstItem="Jew-n2-j9T" firstAttribute="leading" secondItem="of4-Fk-eqv" secondAttribute="leading" constant="15" id="j6T-3h-HOP"/>
                                                 <constraint firstAttribute="trailing" secondItem="Jew-n2-j9T" secondAttribute="trailing" id="pXx-6b-ron"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="MIi-ow-AhM" style="IBUITableViewCellStyleDefault" id="JP3-4e-vkm">
-                                        <rect key="frame" x="0.0" y="192" width="375" height="44"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="MIi-ow-AhM" rowHeight="45" style="IBUITableViewCellStyleDefault" id="JP3-4e-vkm">
+                                        <rect key="frame" x="0.0" y="194" width="375" height="45"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="JP3-4e-vkm" id="QJI-4z-an6">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="44.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Show Private Key" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="MIi-ow-AhM">
-                                                    <rect key="frame" x="16" y="0.0" width="343" height="43.5"/>
+                                                    <rect key="frame" x="16" y="0.0" width="343" height="44.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
@@ -652,7 +572,7 @@ https://t.me/mydotwallet</string>
                             <tableViewSection headerTitle=" " id="Uzi-Ar-a5q">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="5cU-99-Hgt" style="IBUITableViewCellStyleDefault" id="4tk-EY-THp">
-                                        <rect key="frame" x="0.0" y="266" width="375" height="44"/>
+                                        <rect key="frame" x="0.0" y="269" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="4tk-EY-THp" id="8RT-Nk-dHw">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
@@ -681,7 +601,7 @@ https://t.me/mydotwallet</string>
                             <tableViewSection headerTitle=" " id="Yfu-nd-viW">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="Z4r-vx-c1x" style="IBUITableViewCellStyleDefault" id="ZFp-ZD-61P">
-                                        <rect key="frame" x="0.0" y="340" width="375" height="44"/>
+                                        <rect key="frame" x="0.0" y="343" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ZFp-ZD-61P" id="w1F-99-aMg">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
@@ -706,7 +626,7 @@ https://t.me/mydotwallet</string>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="fMG-uh-P48" style="IBUITableViewCellStyleDefault" id="tq5-WV-hRg">
-                                        <rect key="frame" x="0.0" y="384" width="375" height="44"/>
+                                        <rect key="frame" x="0.0" y="387" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="tq5-WV-hRg" id="6sh-uQ-CJO">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
@@ -1015,17 +935,24 @@ https://t.me/mydotwallet</string>
                                     <constraint firstAttribute="trailing" secondItem="Bn9-6N-cFs" secondAttribute="trailing" id="q8R-VV-UAP"/>
                                 </constraints>
                             </scrollView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="10Y-7b-n6r">
-                                <rect key="frame" x="137.5" y="592" width="100" height="50"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="10Y-7b-n6r" customClass="RoundButton" customModule="Dot_Wallet" customModuleProvider="target">
+                                <rect key="frame" x="137.5" y="587" width="100" height="40"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="Ygz-8C-7ej"/>
+                                    <constraint firstAttribute="height" constant="40" id="Ygz-8C-7ej"/>
                                     <constraint firstAttribute="width" constant="100" id="ojq-E2-Ine"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="14"/>
                                 <inset key="titleEdgeInsets" minX="-100" minY="20" maxX="0.0" maxY="0.0"/>
-                                <state key="normal" title="Open Wallet" image="btn_moveDown.png">
+                                <state key="normal" image="btn_home.png">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="20"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="hasBorder" value="NO"/>
+                                </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="iba_showWalletDetails" destination="JAl-VO-36y" eventType="touchUpInside" id="QId-Rt-dv1"/>
                                 </connections>
@@ -1049,7 +976,7 @@ https://t.me/mydotwallet</string>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="HaV-W9-ka1" firstAttribute="leading" secondItem="7rq-g2-p2F" secondAttribute="leading" id="0wR-nx-kfH"/>
-                            <constraint firstAttribute="bottom" secondItem="10Y-7b-n6r" secondAttribute="bottom" constant="5" id="18V-EY-kLP"/>
+                            <constraint firstAttribute="bottom" secondItem="10Y-7b-n6r" secondAttribute="bottom" constant="20" id="18V-EY-kLP"/>
                             <constraint firstItem="7rq-g2-p2F" firstAttribute="trailing" secondItem="HaV-W9-ka1" secondAttribute="trailing" id="AvF-eg-8kG"/>
                             <constraint firstItem="10Y-7b-n6r" firstAttribute="centerX" secondItem="cwu-NE-CW7" secondAttribute="centerX" id="WMR-zu-6D5"/>
                             <constraint firstItem="Kc2-RG-n4e" firstAttribute="centerX" secondItem="cwu-NE-CW7" secondAttribute="centerX" id="lR3-hr-31i"/>
@@ -1117,7 +1044,7 @@ https://t.me/mydotwallet</string>
         </scene>
     </scenes>
     <resources>
-        <image name="btn_moveDown.png" width="100" height="50"/>
+        <image name="btn_home.png" width="25" height="24"/>
         <image name="btn_moveUp.png" width="100" height="50"/>
         <image name="icon_settings.png" width="63" height="63"/>
     </resources>

@@ -21,6 +21,7 @@ class SendViewController: UIViewController, QRCodeReaderViewControllerDelegate, 
     @IBOutlet weak var ibo_sendAmount:UITextField?
     @IBOutlet weak var ibo_addressField:UITextField?
     
+    var collectible:OErc721Token?
     var token:OERC20Token?
     var balance:String!
     
@@ -37,20 +38,26 @@ class SendViewController: UIViewController, QRCodeReaderViewControllerDelegate, 
         if let balance = UserDefaults.standard.value(forKey: userBalanceKey) {
             self.ibo_balance?.text = (balance as! String)
         }
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        
         super.viewWillAppear(animated)
                
         //CHECK IF ERC20 TOKEN
-        if token == nil {
-            self.ibo_walletName?.text = "ETH" + " Balance"
-            self.ibo_tokenSymbol?.text = "ETH"
-            self.syncEtherBalance()
-        } else {
+        if self.token != nil {
+            
             self.ibo_walletName?.text = (token?.symbol)! + " Balance"
             self.ibo_tokenSymbol?.text = (token?.symbol)!
             self.syncTokenBalance()
+            
+        } else {
+            
+            self.ibo_walletName?.text = "ETH" + " Balance"
+            self.ibo_tokenSymbol?.text = "ETH"
+            self.syncEtherBalance()
+            
         }
         
     }
@@ -91,14 +98,20 @@ class SendViewController: UIViewController, QRCodeReaderViewControllerDelegate, 
     
     @IBAction func iba_sendTransaction () {
         
-        if balance == nil{
-            self.showAlert(title: "Oops", message: "Seem to be offline", completion: false)
-            return
+        if self.collectible == nil {
+            
+            if balance == nil{
+                self.showAlert(title: "Oops", message: "Seem to be offline", completion: false)
+                return
+            }
+            if Float(balance)! <= Float(0.00) {
+                self.showAlert(title: "Oops", message: "You do not have enough to send this transaction", completion: false)
+                return
+            }
+            
         }
-        if Float(balance)! <= Float(0.00) {
-            self.showAlert(title: "Oops", message: "You do not have enough to send this transaction", completion: false)
-            return
-        }
+        //TO DO: Clean the above up please.
+        ///
         
         let receiptAddress = ibo_addressField?.text?.lowercased()
         let amount = ibo_sendAmount?.text
@@ -106,12 +119,14 @@ class SendViewController: UIViewController, QRCodeReaderViewControllerDelegate, 
         let alertView = UIAlertController.init(title: "Confirm Send", message: "Are you sure you would like to send this transaction.", preferredStyle: .alert)
         
         alertView.addAction(UIAlertAction(title: "Enter", style: .default, handler: { (action) in
-            
-            if self.token == nil { // ETH TRANSACTION
-                self.sendEthereumTransaction(to: receiptAddress!, amount: amount!)
-            } else {
-                self.sendTokenTransaction(to: receiptAddress!, amount: amount!)
-            }
+              
+                    if self.token != nil { // ETH TRANSACTION
+                        self.sendTokenTransaction(to: receiptAddress!, amount: amount!)
+                    } else if self.collectible != nil {
+                        self.sendCollectible(to: receiptAddress!)
+                    } else {
+                        self.sendEthereumTransaction(to: receiptAddress!, amount: amount!)
+                    }
             
         }))
             
@@ -132,6 +147,24 @@ class SendViewController: UIViewController, QRCodeReaderViewControllerDelegate, 
             }
         })
         
+    }
+    
+    func sendCollectible(to: String){
+        let contractAddy = self.collectible?.asset_contract?.address
+        let tokenID = self.collectible?.token_id
+        
+        EtherWallet.transaction.sendERC721Token(toAddress: to, contractAddress: contractAddy!, tokenID: tokenID!) { (status) in
+            
+            self.view.hideAllToasts()
+
+            if status == false{
+                self.showAlert(title: "Oops", message: "Transaction Failed", completion: false)
+            } else {
+                self.showAlert(title: "Success", message: "Transaction has been sent!", completion: true)
+            }
+            
+        }
+    
     }
     
     func sendEthereumTransaction(to: String, amount:String){

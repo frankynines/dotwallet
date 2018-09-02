@@ -129,16 +129,25 @@ class WalletDisplayViewController:UIViewController, UIPageViewControllerDelegate
     
     // DISPLAY POPUP
     var popModalController:PopOverViewcontroller!
-    var tokenDetail: TokenDetailViewController!
+    //var tokenDetail: TokenDetailViewController!
     var transactionDetail: TransactionDetailViewController!
     
     //TOKEN SELECT
-    func tokenDidSelectERC721(token:OErc721Token) {
+    func tokenDidSelectERC721(token: OErc721Token, tokenImage: UIImage?) {
+ 
         
-        self.tokenDetail = (UIStoryboard(name: "Collectibles", bundle: nil).instantiateViewController(withIdentifier: "sb_TokenDetailViewController") as! TokenDetailViewController)
-        self.tokenDetail.delegate = self
-        self.tokenDetail.erc721Token = token
-        self.presentPopView(vc: self.tokenDetail, title: "")
+        let vc = (UIStoryboard(name: "Collectibles", bundle: nil).instantiateViewController(withIdentifier: "sb_CollectibleDetailViewController") as! CollectibleDetailViewController)
+        vc.erc721Token = token
+        vc.tokenImage = tokenImage
+        present(vc, animated: true) {
+            //
+        }
+        
+//
+//        self.tokenDetail = (UIStoryboard(name: "Collectibles", bundle: nil).instantiateViewController(withIdentifier: "sb_TokenDetailViewController") as! TokenDetailViewController)
+//        self.tokenDetail.delegate = self
+//        self.tokenDetail.erc721Token = token
+//        self.presentPopView(vc: self.tokenDetail, title: "")
     }
     
     func didSelectTXItem(transaction: GeneralTransactionData) {
@@ -180,7 +189,6 @@ class WalletDisplayViewController:UIViewController, UIPageViewControllerDelegate
             self.popModalController.removeFromParentViewController()
             self.popModalController = nil
             
-            self.tokenDetail = nil
             self.transactionDetail = nil
         }
     }

@@ -9,9 +9,13 @@
 import Foundation
 import UIKit
 
+protocol TokenDetailDelegate {
+    func openURL(url:String)
+}
+
 protocol WalletPageViewControllerDelegate {
     func walletPageCurrentPage(index:Int)
-    func tokenDidSelectERC721(token:OErc721Token)
+    func tokenDidSelectERC721(token:OErc721Token, tokenImage:UIImage?)
     func didSelectTXItem(transaction:GeneralTransactionData)
 }
 

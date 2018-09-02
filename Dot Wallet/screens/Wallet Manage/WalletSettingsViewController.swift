@@ -44,10 +44,15 @@ class WalletSettingViewController:UITableViewController {
     
     func userColor(){
         var walletColor:String?
+        
+        if EtherWallet.account.hasAccount == false {
+            return
+        }
+        
         if let color = UserPreferenceManager.shared.getKeyObject(key: "walletColor"){
             walletColor = color
         } else {
-            walletColor = "FFFFFF"
+            walletColor = "666666"
         }
         self.ibo_colorView?.backgroundColor = UIColor(hexString: walletColor!)
     }

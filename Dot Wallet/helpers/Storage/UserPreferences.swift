@@ -24,6 +24,10 @@ class UserPreferenceManager {
     
     func getKeyObject(key:String) -> String?{
         
+        if EtherWallet.account.hasAccount == false {
+            return nil
+        }
+        
         let storageKey = EtherWallet.account.address!.lowercased()
         let keyName = storageKey.appending(key)
         if let color = UserDefaults.standard.object(forKey: keyName) as? String {

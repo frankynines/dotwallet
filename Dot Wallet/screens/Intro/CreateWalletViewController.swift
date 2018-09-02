@@ -10,16 +10,17 @@ import Foundation
 import UIKit
 import KeychainAccess
 
-class CreateWalletViewController: UIViewController, PasswordLoginDelegate{
+class CreateWalletViewController: UIViewController, PasswordLoginDelegate {
    
     var testPKeys = ["8037f8912d60c7813ba0144da9598e183e523c29912c940a36b29ce94e9fe511",
                      "5298699e698f9f6b5f5a385a4f99299b511e0b2457ad5c6094b62e32ff9dec08",
                      "f308cae045da27517efe44275ad23c44cce8d523cc9a3ad9e7aaba678dec52f2",
                      "1b5c152c59aa3b08ea070191d3396e169e66206782ac7be89c9a1bc91f68ee07"]
     
-    var testColors = ["#AE88FF", "#40E252", "#6FB1FF", "#FFC15A"]
+    var testColors = ["998AFF", "64E5FF", "0081FF", "FF5757", "FFB357", "DCF14A", "40E252",  "FF66C7",  "FFF100", "BD10E0", "7E3BA0", ]
     
     var loginVC:PasswordLoginViewController?
+    var inView: Bool?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -50,6 +51,37 @@ class CreateWalletViewController: UIViewController, PasswordLoginDelegate{
             
         }
         
+        self.animateBG()
+        
+    
+    }
+
+    
+    func animateBG() {
+        if inView != true {
+            return
+        }
+        UIView.animate(withDuration: 4, animations: {
+            print(self.randomColor())
+            self.view.backgroundColor = UIColor(hexString: self.randomColor())
+        
+        }) { (done) in
+            self.animateBG()
+        }
+            
+    }
+    func randomColor() -> String {
+        
+        return self.testColors.randomElement()!
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.inView = true
+    }
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        self.inView = false
     }
     
     @IBAction func iba_createNewWallet(){
@@ -113,7 +145,7 @@ class CreateWalletViewController: UIViewController, PasswordLoginDelegate{
             return
         }
         let pkey = self.testPKeys[button.tag - 1]
-        self.importWallet(pKey: pkey, pass: "")
+        self.importWalletLive(pKey: pkey, pass: "")
     }
     
     @IBAction func iba_importWallet(){
@@ -151,10 +183,10 @@ class CreateWalletViewController: UIViewController, PasswordLoginDelegate{
     }
     
     func createWallet(pass:String){
-        UserPreferenceManager.shared.setKey(key: "walletColor", object: self.testColors[2])
 
         do {
             try EtherWallet.account.generateAccount(password: "")
+            UserPreferenceManager.shared.setKey(key: "walletColor", object: self.testColors[2])
             let publicAddress = EtherWallet.account.address?.lowercased()
             let keychain = Keychain(service: publicAddress!)
             
@@ -175,21 +207,13 @@ class CreateWalletViewController: UIViewController, PasswordLoginDelegate{
         do {
             try EtherWallet.account.importAccount(privateKey: pKey, password: "")
             self.pushWalletHomeScreen()
+            UserPreferenceManager.shared.setKey(key: "walletColor", object: self.testColors[0])
+
         } catch {
             self.alertError(error: error)
         }
     }
     
-    func importWallet(pKey:String, pass:String){
-        do {
-            try EtherWallet.account.importAccount(privateKey: pKey, password: pass)
-            UserPreferenceManager.shared.setKey(key: "walletColor", object: self.testColors[0])
-            self.pushWalletHomeScreen()
-            
-        } catch {
-            self.alertError(error: error)
-        }
-    }
     
     func pushWalletHomeScreen(){
 

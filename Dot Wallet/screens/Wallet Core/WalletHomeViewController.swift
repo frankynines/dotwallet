@@ -9,7 +9,6 @@
 import UIKit
 import Foundation
 
-
 class WalletHomeViewController: UIViewController {
     
     @IBOutlet var ibo_walletHeader:WalletCardViewController?

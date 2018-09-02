@@ -29,6 +29,10 @@
 		2F0EFCC92106FE6F003EF740 /* GasStationAPIResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F0EFCBE2106FE6E003EF740 /* GasStationAPIResponse.swift */; };
 		2F0EFCCA2106FE6F003EF740 /* EtherscanAPIResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F0EFCBF2106FE6E003EF740 /* EtherscanAPIResponse.swift */; };
 		2F0EFCCC21072E38003EF740 /* TransactionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F0EFCCB21072E38003EF740 /* TransactionViewController.swift */; };
+		2F0F254A213889260045F2D3 /* CollectibleDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F0F2549213889260045F2D3 /* CollectibleDetailViewController.swift */; };
+		2F0F255021394D7D0045F2D3 /* btn_home.png in Resources */ = {isa = PBXBuildFile; fileRef = 2F0F254D21394D7A0045F2D3 /* btn_home.png */; };
+		2F0F255121394D7D0045F2D3 /* btn_home@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2F0F254E21394D7B0045F2D3 /* btn_home@2x.png */; };
+		2F0F255221394D7D0045F2D3 /* btn_home@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2F0F254F21394D7C0045F2D3 /* btn_home@3x.png */; };
 		2F11AA77210C89D200790BAF /* WalletPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F11AA76210C89D200790BAF /* WalletPageViewController.swift */; };
 		2F11AA79210C8DBF00790BAF /* CollectibleListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F11AA78210C8DBF00790BAF /* CollectibleListViewController.swift */; };
 		2F11AA7B210C95F700790BAF /* TokenData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F11AA7A210C95F700790BAF /* TokenData.swift */; };
@@ -59,7 +63,6 @@
 		2F72E28C2116E6DF001EAA2B /* AddTokenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F72E28B2116E6DF001EAA2B /* AddTokenViewController.swift */; };
 		2F7678E8210B835B00919059 /* TransactionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F7678E7210B835B00919059 /* TransactionTableViewCell.swift */; };
 		2F7678EB210B840300919059 /* GradientHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F7678EA210B840300919059 /* GradientHelper.swift */; };
-		2F77A33821136C0400D06DB4 /* TokenDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F77A33721136C0400D06DB4 /* TokenDetailViewController.swift */; };
 		2F85FCF221199830002E988A /* bg_transparent@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2F85FCF121199830002E988A /* bg_transparent@2x.png */; };
 		2F85FCF421199C67002E988A /* WalletSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F85FCF321199C67002E988A /* WalletSettingsViewController.swift */; };
 		2F85FCF721199C88002E988A /* ColorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F85FCF621199C88002E988A /* ColorViewController.swift */; };
@@ -133,6 +136,10 @@
 		2F0EFCBE2106FE6E003EF740 /* GasStationAPIResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GasStationAPIResponse.swift; sourceTree = "<group>"; };
 		2F0EFCBF2106FE6E003EF740 /* EtherscanAPIResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EtherscanAPIResponse.swift; sourceTree = "<group>"; };
 		2F0EFCCB21072E38003EF740 /* TransactionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionViewController.swift; sourceTree = "<group>"; };
+		2F0F2549213889260045F2D3 /* CollectibleDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectibleDetailViewController.swift; sourceTree = "<group>"; };
+		2F0F254D21394D7A0045F2D3 /* btn_home.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_home.png; sourceTree = "<group>"; };
+		2F0F254E21394D7B0045F2D3 /* btn_home@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_home@2x.png"; sourceTree = "<group>"; };
+		2F0F254F21394D7C0045F2D3 /* btn_home@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_home@3x.png"; sourceTree = "<group>"; };
 		2F11AA76210C89D200790BAF /* WalletPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletPageViewController.swift; sourceTree = "<group>"; };
 		2F11AA78210C8DBF00790BAF /* CollectibleListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectibleListViewController.swift; sourceTree = "<group>"; };
 		2F11AA7A210C95F700790BAF /* TokenData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenData.swift; sourceTree = "<group>"; };
@@ -163,7 +170,6 @@
 		2F72E28B2116E6DF001EAA2B /* AddTokenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTokenViewController.swift; sourceTree = "<group>"; };
 		2F7678E7210B835B00919059 /* TransactionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionTableViewCell.swift; sourceTree = "<group>"; };
 		2F7678EA210B840300919059 /* GradientHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientHelper.swift; sourceTree = "<group>"; };
-		2F77A33721136C0400D06DB4 /* TokenDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenDetailViewController.swift; sourceTree = "<group>"; };
 		2F85FCF121199830002E988A /* bg_transparent@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bg_transparent@2x.png"; sourceTree = "<group>"; };
 		2F85FCF321199C67002E988A /* WalletSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletSettingsViewController.swift; sourceTree = "<group>"; };
 		2F85FCF621199C88002E988A /* ColorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorViewController.swift; sourceTree = "<group>"; };
@@ -349,6 +355,9 @@
 		2F2F74B52109C38F00612CF4 /* images */ = {
 			isa = PBXGroup;
 			children = (
+				2F0F254D21394D7A0045F2D3 /* btn_home.png */,
+				2F0F254E21394D7B0045F2D3 /* btn_home@2x.png */,
+				2F0F254F21394D7C0045F2D3 /* btn_home@3x.png */,
 				2FC9C15A21260085000EB023 /* icon_copy.png */,
 				2F4D31C1211A3ABB0046BC61 /* btn_moveDown@3x.png */,
 				2F4D31C5211A3AF60046BC61 /* btn_moveDown.png */,
@@ -410,7 +419,8 @@
 			isa = PBXGroup;
 			children = (
 				2F0EFC7E21063937003EF740 /* WalletHomeViewController.swift */,
-				2F7678E5210B832400919059 /* Ethereum Header */,
+				2F6CBD612109005B0026C858 /* WalletCardViewController.swift */,
+				2F11AA7C210C9F7A00790BAF /* WalletDisplayContainer.swift */,
 			);
 			path = "Wallet Core";
 			sourceTree = "<group>";
@@ -444,15 +454,6 @@
 				2FC9C158212582C0000EB023 /* TransactionDetailViewController.swift */,
 			);
 			path = "TX History Page";
-			sourceTree = "<group>";
-		};
-		2F7678E5210B832400919059 /* Ethereum Header */ = {
-			isa = PBXGroup;
-			children = (
-				2F6CBD612109005B0026C858 /* WalletCardViewController.swift */,
-				2F11AA7C210C9F7A00790BAF /* WalletDisplayContainer.swift */,
-			);
-			path = "Ethereum Header";
 			sourceTree = "<group>";
 		};
 		2F7678E6210B833F00919059 /* Wallet Display */ = {
@@ -494,7 +495,7 @@
 			children = (
 				2FA5E2FA21197D8600A4406E /* Collectibles.storyboard */,
 				2F11AA78210C8DBF00790BAF /* CollectibleListViewController.swift */,
-				2F77A33721136C0400D06DB4 /* TokenDetailViewController.swift */,
+				2F0F2549213889260045F2D3 /* CollectibleDetailViewController.swift */,
 			);
 			path = "Collectible Page";
 			sourceTree = "<group>";
@@ -650,6 +651,8 @@
 				2F4D31BF211A398D0046BC61 /* btn_moveUp@2x.png in Resources */,
 				2FE75056210BFD9200AAD6E6 /* icon_transactions.png in Resources */,
 				2FE75054210BFD9200AAD6E6 /* icon_dot.png in Resources */,
+				2F0F255221394D7D0045F2D3 /* btn_home@3x.png in Resources */,
+				2F0F255021394D7D0045F2D3 /* btn_home.png in Resources */,
 				2FE75052210BFD9200AAD6E6 /* icon_send.png in Resources */,
 				2F2055732112FD55006C768E /* icon_settings.png in Resources */,
 				2F85FCF221199830002E988A /* bg_transparent@2x.png in Resources */,
@@ -666,6 +669,7 @@
 				2FA5E2F921197B6900A4406E /* ModalControllers.storyboard in Resources */,
 				2F2F74B72109C48F00612CF4 /* icon_token_erc20.png in Resources */,
 				2F4D31C7211A3AF60046BC61 /* btn_moveDown.png in Resources */,
+				2F0F255121394D7D0045F2D3 /* btn_home@2x.png in Resources */,
 				2F4D31BE211A398D0046BC61 /* btn_moveDown@2x.png in Resources */,
 				2FA5E2F421197A8F00A4406E /* WalletDetail.storyboard in Resources */,
 				2FC9C15B21260085000EB023 /* icon_copy.png in Resources */,
@@ -806,6 +810,7 @@
 			files = (
 				2F72E28C2116E6DF001EAA2B /* AddTokenViewController.swift in Sources */,
 				2F0EFC7F21063937003EF740 /* WalletHomeViewController.swift in Sources */,
+				2F0F254A213889260045F2D3 /* CollectibleDetailViewController.swift in Sources */,
 				2F0EFCCC21072E38003EF740 /* TransactionViewController.swift in Sources */,
 				2FA5E3002119834800A4406E /* TokenStorage.swift in Sources */,
 				2F6CBD622109005B0026C858 /* WalletCardViewController.swift in Sources */,
@@ -813,7 +818,6 @@
 				2F0EFCC62106FE6F003EF740 /* EtherWallet+Account.swift in Sources */,
 				2F0793A6211A35EE005E479E /* DotBrowserViewController.swift in Sources */,
 				2F11AA7D210C9F7A00790BAF /* WalletDisplayContainer.swift in Sources */,
-				2F77A33821136C0400D06DB4 /* TokenDetailViewController.swift in Sources */,
 				2F85FCF421199C67002E988A /* WalletSettingsViewController.swift in Sources */,
 				2FC9C1572125710A000EB023 /* HistoryStorage.swift in Sources */,
 				2F0EFCC42106FE6F003EF740 /* EtherWallet+Transaction.swift in Sources */,

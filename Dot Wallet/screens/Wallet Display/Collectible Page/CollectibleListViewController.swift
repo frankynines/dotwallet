@@ -14,13 +14,12 @@ class CollectibleListViewController:UIViewController, UICollectionViewDelegate, 
     
     @IBOutlet var ibo_collectionView:UICollectionView?
     @IBOutlet var ibo_tableHeader:UILabel?
-    
+        
     var delegate:WalletPageViewControllerDelegate?
 
     var tokens = [OErc721Token]()
 
-    var blackListContracts = [ "Decentraland" : "0xf87e31492faf9a91b02ee0deaad50d51d56d5d4d"
-                               ]
+    var blackListContracts = [ "Decentraland" : "0xf87e31492faf9a91b02ee0deaad50d51d56d5d4d" ]
     var pageIndex = 0
     var isWating = false
     
@@ -31,8 +30,6 @@ class CollectibleListViewController:UIViewController, UICollectionViewDelegate, 
         self.ibo_collectionView?.backgroundColor = UIColor(patternImage: UIImage(named: "bg_transparent")!)
         self.ibo_collectionView?.contentInset = UIEdgeInsetsMake(20, 0, 40, 0)
         
-        //
-        
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
         
@@ -42,7 +39,9 @@ class CollectibleListViewController:UIViewController, UICollectionViewDelegate, 
         layout.sectionInset = UIEdgeInsets(top: 0, left: padding, bottom: 0, right: padding)
         layout.minimumLineSpacing = padding
         layout.minimumInteritemSpacing = padding
+        
         self.ibo_collectionView?.setCollectionViewLayout(layout, animated: false)
+        
     }
     
     override func viewWillLayoutSubviews() {
@@ -140,25 +139,32 @@ class CollectibleListViewController:UIViewController, UICollectionViewDelegate, 
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        self.delegate?.tokenDidSelectERC721(token: self.tokens[indexPath.item])
+        let cell = collectionView.cellForItem(at: indexPath) as! CollectableViewCell
+        self.delegate?.tokenDidSelectERC721(token: self.tokens[indexPath.item], tokenImage: cell.tokenImage)
     }
     
 }
 
 class CollectableViewCell:UICollectionViewCell {
+    
+    var tokenImage:UIImage?
+
     @IBOutlet var ibo_previewImage:UIImageView?
     @IBOutlet var ibo_activityView:UIActivityIndicatorView?
     
     func setupCell(url:String?) {
+        
         self.ibo_previewImage!.image = nil
         self.ibo_activityView?.startAnimating()
         
         guard let imageURL = url?.replacingOccurrences(of: "'\'", with: "") else {return}
+       
         DispatchQueue.global(qos: .userInitiated).async {
             do {
                 let image = try UIImage(data: Data(contentsOf: URL(string: imageURL)!))
                 DispatchQueue.main.async {
                     self.ibo_previewImage?.image = image
+                    self.tokenImage = image
                     self.ibo_activityView?.stopAnimating()
                 }
             } catch {

@@ -14,8 +14,6 @@ import web3swift
 
 class TransactionDetailViewController:UIViewController {
     
-    var delegate:TokenDetailDelegate?
-    
     var transaction:GeneralTransactionData?
     
     @IBOutlet var ibo_date:UILabel?
@@ -26,6 +24,7 @@ class TransactionDetailViewController:UIViewController {
     @IBOutlet var ibo_address:UILabel?
     @IBOutlet var ibo_networkFee:UILabel?
     
+    var delegate:TokenDetailDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()

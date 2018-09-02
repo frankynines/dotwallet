@@ -27,6 +27,8 @@ class CollectibleListViewController:UIViewController, UICollectionViewDelegate, 
         super.viewDidLoad()
         self.loadTokens(page: String(pageIndex))
         
+        self.ibo_collectionView?.addSubview(self.refreshControl)
+        
         self.ibo_collectionView?.backgroundColor = UIColor(patternImage: UIImage(named: "bg_transparent")!)
         self.ibo_collectionView?.contentInset = UIEdgeInsetsMake(20, 0, 40, 0)
         
@@ -143,6 +145,23 @@ class CollectibleListViewController:UIViewController, UICollectionViewDelegate, 
         self.delegate?.tokenDidSelectERC721(token: self.tokens[indexPath.item], tokenImage: cell.tokenImage)
     }
     
+    lazy var refreshControl: UIRefreshControl = {
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action:
+            #selector(self.handleRefresh(_:)),
+                                 for: UIControlEvents.valueChanged)
+        return refreshControl
+        
+    }()
+    
+    //REFRESH HANDLER
+    @objc func handleRefresh(_ refreshControl: UIRefreshControl) {
+        refreshControl.endRefreshing()
+        self.loadTokens(page: "0")
+        
+            
+    }
+    
 }
 
 class CollectableViewCell:UICollectionViewCell {
@@ -171,5 +190,7 @@ class CollectableViewCell:UICollectionViewCell {
             }
         }
     }
+    
+    
 
 }

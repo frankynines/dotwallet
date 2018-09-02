@@ -8,8 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		06D26DBAE46EA9359F86AD05 /* Pods_Dot_Wallet.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5DDA9268F31B9E29C4F2A18 /* Pods_Dot_Wallet.framework */; };
-		2F0793A6211A35EE005E479E /* DotBrowserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F0793A5211A35EE005E479E /* DotBrowserViewController.swift */; };
-		2F0793A8211A3601005E479E /* DappBrowser.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2F0793A7211A3601005E479E /* DappBrowser.storyboard */; };
 		2F0EFC7D21063937003EF740 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F0EFC7C21063937003EF740 /* AppDelegate.swift */; };
 		2F0EFC7F21063937003EF740 /* WalletHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F0EFC7E21063937003EF740 /* WalletHomeViewController.swift */; };
 		2F0EFC8221063937003EF740 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2F0EFC8021063937003EF740 /* Main.storyboard */; };
@@ -39,7 +37,6 @@
 		2F11AA7D210C9F7A00790BAF /* WalletDisplayContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F11AA7C210C9F7A00790BAF /* WalletDisplayContainer.swift */; };
 		2F11AA7F210CEA7A00790BAF /* icon_close_button.png in Resources */ = {isa = PBXBuildFile; fileRef = 2F11AA7E210CEA7A00790BAF /* icon_close_button.png */; };
 		2F11AA81210CEBA400790BAF /* ServiceTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F11AA80210CEBA400790BAF /* ServiceTimer.swift */; };
-		2F1FB663211C671D00F2BB57 /* sofa-web3.js in Resources */ = {isa = PBXBuildFile; fileRef = 2F1FB662211C671D00F2BB57 /* sofa-web3.js */; };
 		2F1FB665211CE98100F2BB57 /* ERC20TokenDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F1FB664211CE98100F2BB57 /* ERC20TokenDetailViewController.swift */; };
 		2F1FB667211D855000F2BB57 /* UIImageColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F1FB666211D855000F2BB57 /* UIImageColors.swift */; };
 		2F2055722112FD55006C768E /* icon_qr.png in Resources */ = {isa = PBXBuildFile; fileRef = 2F2055702112FD54006C768E /* icon_qr.png */; };
@@ -109,8 +106,6 @@
 		12E973F732A1E95934408745 /* Pods-Dot Wallet.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Dot Wallet.release.xcconfig"; path = "Pods/Target Support Files/Pods-Dot Wallet/Pods-Dot Wallet.release.xcconfig"; sourceTree = "<group>"; };
 		17873D468537B1C8CB4EF2DF /* Pods_Dot_WalletUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Dot_WalletUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2C40B5E0169C1479E5C9125A /* Pods-Dot WalletUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Dot WalletUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Dot WalletUITests/Pods-Dot WalletUITests.release.xcconfig"; sourceTree = "<group>"; };
-		2F0793A5211A35EE005E479E /* DotBrowserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DotBrowserViewController.swift; sourceTree = "<group>"; };
-		2F0793A7211A3601005E479E /* DappBrowser.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = DappBrowser.storyboard; sourceTree = "<group>"; };
 		2F0EFC7921063937003EF740 /* Dot Wallet.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Dot Wallet.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2F0EFC7C21063937003EF740 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2F0EFC7E21063937003EF740 /* WalletHomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletHomeViewController.swift; sourceTree = "<group>"; };
@@ -146,7 +141,6 @@
 		2F11AA7C210C9F7A00790BAF /* WalletDisplayContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletDisplayContainer.swift; sourceTree = "<group>"; };
 		2F11AA7E210CEA7A00790BAF /* icon_close_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_close_button.png; sourceTree = "<group>"; };
 		2F11AA80210CEBA400790BAF /* ServiceTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceTimer.swift; sourceTree = "<group>"; };
-		2F1FB662211C671D00F2BB57 /* sofa-web3.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = "sofa-web3.js"; sourceTree = "<group>"; };
 		2F1FB664211CE98100F2BB57 /* ERC20TokenDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ERC20TokenDetailViewController.swift; sourceTree = "<group>"; };
 		2F1FB666211D855000F2BB57 /* UIImageColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageColors.swift; sourceTree = "<group>"; };
 		2F2055702112FD54006C768E /* icon_qr.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_qr.png; sourceTree = "<group>"; };
@@ -228,16 +222,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		2F0793A4211A35CA005E479E /* DappBrowser */ = {
-			isa = PBXGroup;
-			children = (
-				2F1FB662211C671D00F2BB57 /* sofa-web3.js */,
-				2F0793A5211A35EE005E479E /* DotBrowserViewController.swift */,
-				2F0793A7211A3601005E479E /* DappBrowser.storyboard */,
-			);
-			path = DappBrowser;
-			sourceTree = "<group>";
-		};
 		2F0EFC7021063937003EF740 = {
 			isa = PBXGroup;
 			children = (
@@ -302,7 +286,6 @@
 				2F7678E6210B833F00919059 /* Wallet Display */,
 				2F6CBD5C2108FF9B0026C858 /* Transact */,
 				2F85FCF521199C6B002E988A /* Wallet Manage */,
-				2F0793A4211A35CA005E479E /* DappBrowser */,
 				2F4C0CE72132D63F00219567 /* PasscodeVC */,
 				2F443A592119B57D00512BB8 /* ImportSingleton.swift */,
 			);
@@ -647,7 +630,6 @@
 				2F2055722112FD55006C768E /* icon_qr.png in Resources */,
 				2FE75050210BFD9200AAD6E6 /* icon_plus.png in Resources */,
 				2F4D31C3211A3ABB0046BC61 /* btn_moveDown@3x.png in Resources */,
-				2F1FB663211C671D00F2BB57 /* sofa-web3.js in Resources */,
 				2F4D31BF211A398D0046BC61 /* btn_moveUp@2x.png in Resources */,
 				2FE75056210BFD9200AAD6E6 /* icon_transactions.png in Resources */,
 				2FE75054210BFD9200AAD6E6 /* icon_dot.png in Resources */,
@@ -659,7 +641,6 @@
 				2F0EFC8721063938003EF740 /* LaunchScreen.storyboard in Resources */,
 				2FA5E2FB21197D8600A4406E /* Collectibles.storyboard in Resources */,
 				2F11AA7F210CEA7A00790BAF /* icon_close_button.png in Resources */,
-				2F0793A8211A3601005E479E /* DappBrowser.storyboard in Resources */,
 				2FE75051210BFD9200AAD6E6 /* icon_tokens.png in Resources */,
 				2F0EFC8421063938003EF740 /* Assets.xcassets in Resources */,
 				2F0EFC8221063937003EF740 /* Main.storyboard in Resources */,
@@ -816,7 +797,6 @@
 				2F6CBD622109005B0026C858 /* WalletCardViewController.swift in Sources */,
 				2F1FB665211CE98100F2BB57 /* ERC20TokenDetailViewController.swift in Sources */,
 				2F0EFCC62106FE6F003EF740 /* EtherWallet+Account.swift in Sources */,
-				2F0793A6211A35EE005E479E /* DotBrowserViewController.swift in Sources */,
 				2F11AA7D210C9F7A00790BAF /* WalletDisplayContainer.swift in Sources */,
 				2F85FCF421199C67002E988A /* WalletSettingsViewController.swift in Sources */,
 				2FC9C1572125710A000EB023 /* HistoryStorage.swift in Sources */,

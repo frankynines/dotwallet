@@ -47,7 +47,6 @@ class TokenListViewController:UIViewController, UITableViewDelegate, UITableView
         let vc = UIStoryboard(name: "ERC20Tokens", bundle: nil).instantiateViewController(withIdentifier: "sb_AddTokenViewController") as! AddTokenViewController
         vc.delegate = self
         self.present(vc, animated: true, completion: nil)
-        
     }
     
     func tokenManagementControllerSaved(vc:AddTokenViewController) {
@@ -73,6 +72,7 @@ class TokenListViewController:UIViewController, UITableViewDelegate, UITableView
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.tokens.count
     }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "token") as! WalletTokenCell
         cell.setupCell(token: self.tokens[indexPath.row])
@@ -100,8 +100,7 @@ class TokenListViewController:UIViewController, UITableViewDelegate, UITableView
     //REFRESH HANDLER
     @objc func handleRefresh(_ refreshControl: UIRefreshControl) {
         refreshControl.endRefreshing()
-        self.ibo_tokenTableView.reloadData()
-        
+        self.loadTokens()
     }
     
 }

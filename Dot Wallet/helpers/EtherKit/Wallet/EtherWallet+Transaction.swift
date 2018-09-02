@@ -16,7 +16,8 @@ public protocol TransactionService {
     func getTransactionHistory(address:String, completion: @escaping ([JSON]?) -> ())
     
     func getTokenOwner(fromAddress:String, contractAddress:String, tokenID:String)
-    func sendERC721Token(toAddress:String, contractAddress:String, tokenID:String, completion: @escaping (Bool?) -> ())
+    func sendERC721Token(toAddress:String, contractAddress:String, tokenID:String, completion: @escaping (Bool?, String?) -> ())
+    
 
 }
 
@@ -156,11 +157,11 @@ extension EtherWallet: TransactionService {
         }
     }
     
-    public func sendERC721Token(toAddress:String, contractAddress:String, tokenID:String, completion: @escaping (Bool?) -> ()){
-        
+
+    public func sendERC721Token(toAddress:String, contractAddress:String, tokenID:String, completion: @escaping (Bool?, String?) -> ()){
+    
         let contractEAddress = EthereumAddress(contractAddress)
-        let web3Main = Web3.InfuraMainnetWeb3() // USED TO GET MAIN NET TOKEN INFO
-        
+     
         do {
             let keystore = try loadKeystore()
             let keystoreManager = KeystoreManager([keystore])
@@ -170,30 +171,37 @@ extension EtherWallet: TransactionService {
             return
         }
        
-        var options = Web3Options.defaultOptions()
-        options.from = EthereumAddress(address!)
-        options.gasLimit = BigUInt(100000)
-        options.gasPrice = Web3.Utils.parseToBigUInt("40", units: .Gwei)
         options.to = contractEAddress
-    
+        options.from = EthereumAddress(address!)
+        
         if let contract = web3Main.contract(erc721ABI, at: contractEAddress) {
             
             let params = [ EthereumAddress(address!), EthereumAddress(toAddress), tokenID] as [AnyObject]
+            print(params)
             let contractMethod = contract.method("transferFrom", parameters: params, extraData: Data(), options: options)
             
+            let gasEstimate = contractMethod?.estimateGas(options: options)
+            print(gasEstimate)
+            switch gasEstimate {
+                case .success(let result)?:
+                    options.gasLimit = BigUInt(result)
+            case .none:
+                print("none")
+            case .failure(let error)?:
+                print(error)
+            }
+
+                    
             let contractCall =  contractMethod?.send(password: "", options: options, onBlock: "latest")
-            print(params)
-            print(contractMethod)
-            print(options)
-            print(contractCall)
+            
             switch contractCall {
             case .success(let result)?:
                 print(result["txhash"])
-                completion(true)
-            case .failure(_)?:
-                completion(false)
+                completion(true, result["txhash"])
+            case .failure(let error)?:
+                completion(false, error.localizedDescription)
             case .none:
-                completion(false)
+                completion(false, nil)
             }
         }
     

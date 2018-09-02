@@ -25,11 +25,9 @@ class CollectibleDetailViewController: UIViewController, UIScrollViewDelegate, M
     
     @IBOutlet var ibo_bottomConstraint:NSLayoutConstraint?
 
-    
     override func viewDidLoad() {
         
         self.ibo_scrollview?.delegate = self
-        
         super.viewDidLoad()
     }
     
@@ -113,15 +111,7 @@ class CollectibleDetailViewController: UIViewController, UIScrollViewDelegate, M
         return UIStoryboard(name: "Collectibles", bundle: nil).instantiateViewController(withIdentifier: "sb_SendViewController") as! SendViewController
     }()
     
-    func iba_sendTokens(){
-        //RECEIVER 0xB87185D319FB23E3Cc86CB70b7554b08F8571491
-        let tokenSmartContract = self.erc721Token?.asset_contract?.address!
-        let tokenID = self.erc721Token?.token_id!
-        
-        EtherWallet.transaction.sendERC721Token(toAddress: "0x2Eb9b439Ffb7dC587198e1534e465a6242192b24", contractAddress: tokenSmartContract!, tokenID: tokenID!) { (done) in
-            print(done)
-        }
-    }
+   
     
     var slideModalController:ModalSlideOverViewcontroller!
     

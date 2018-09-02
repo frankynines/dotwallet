@@ -27,16 +27,13 @@ class CreateWalletViewController: UIViewController, PasswordLoginDelegate {
         self.navigationController?.isNavigationBarHidden = true
 
         if (EtherWallet.account.hasAccount == true) {
-            
-            //Safety Check
+
             let publicAddress = EtherWallet.account.address?.lowercased()
             let keychain = Keychain(service: publicAddress!)
             
             do {
                 
                 let pass = try keychain.get(publicAddress!)
-                print(pass) // FOR DEBUGGING PURPOSES - WILL REMOVE AT LAUNCH
-
                 //If user has not setup a passcode
                 if pass == nil {
                     self.showLoginView(state: .Reset)
@@ -48,36 +45,50 @@ class CreateWalletViewController: UIViewController, PasswordLoginDelegate {
                 print(error.localizedDescription)
             }
             
+        } else {
             
+            self.welcomeMessage()
+            self.animateBG()
+
         }
-        
-        self.animateBG()
-        
+
+    }
     
+    func welcomeMessage(){
+        
+        let alertView = UIAlertController.init(title: "Welcome to Dot Wallet", message: "Wallet is now fully functional on the Main-Net. All test wallets have been switched over, and full send and receive functionality has been activated. Please only test with what you can afford to lose.", preferredStyle: .alert)
+        
+        alertView.addAction(UIAlertAction(title: "Cancel", style: .destructive, handler: nil))
+
+        
+        alertView.addAction(UIAlertAction(title: "Ok", style: .default, handler: { (action) in
+        }))
+        
+        self.present(alertView, animated: true, completion: nil)
+        
     }
 
-    
     func animateBG() {
+        
         if inView != true {
             return
         }
-        UIView.animate(withDuration: 4, animations: {
-            print(self.randomColor())
-            self.view.backgroundColor = UIColor(hexString: self.randomColor())
         
+        UIView.animate(withDuration: 10, delay: 0, options: [.allowUserInteraction], animations: {
+            self.view.backgroundColor = UIColor(hexString: self.randomColor())
         }) { (done) in
             self.animateBG()
         }
-            
     }
+    
     func randomColor() -> String {
-        
         return self.testColors.randomElement()!
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.inView = true
+        self.animateBG()
     }
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)

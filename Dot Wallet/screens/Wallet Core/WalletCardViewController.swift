@@ -42,10 +42,8 @@ class WalletCardViewController:UIViewController, UIScrollViewDelegate, ModalSlid
         let userBalanceKey = "balance:\(EtherWallet.account.address!)"
         if let balance = UserDefaults.standard.value(forKey: userBalanceKey) {
             let nformat = NumberFormatter().number(from: balance as! String)
-            //self.iboBalance?.text = "\()"
             self.iboBalance?.countFromCurrentValueTo(CGFloat(truncating: nformat!) , withDuration: 0.00000001)
         }
-        //self.refreshBalance()
         
     }
     
@@ -82,7 +80,6 @@ class WalletCardViewController:UIViewController, UIScrollViewDelegate, ModalSlid
     @IBAction func iba_copyPublicAddress(){
         UIPasteboard.general.string = EtherWallet.account.address
         self.view.makeToast("Copied to clipboard!")
-        
     }
     
     @IBAction func iba_showWalletDetails(){
@@ -90,7 +87,6 @@ class WalletCardViewController:UIViewController, UIScrollViewDelegate, ModalSlid
         self.present(vc, animated: true) {}
     }
 
-    
     func refreshBalance(){
         
         self.iboBalance?.animationDuration = 1

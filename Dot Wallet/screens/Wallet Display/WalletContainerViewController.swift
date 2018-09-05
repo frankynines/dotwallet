@@ -9,6 +9,4 @@
 import Foundation
 import UIKit
 
-class WalletContainerViewController: UITabBarController {
-    
-}
+class WalletContainerViewController: UITabBarController { }

@@ -22,6 +22,7 @@ class TokenListViewController:UIViewController, UITableViewDelegate, UITableView
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.ibo_tokenTableView.addSubview(self.refreshControl)
         self.ibo_tokenTableView.delaysContentTouches = false
     
         DispatchQueue.main.async {
@@ -46,7 +47,6 @@ class TokenListViewController:UIViewController, UITableViewDelegate, UITableView
         let vc = UIStoryboard(name: "ERC20Tokens", bundle: nil).instantiateViewController(withIdentifier: "sb_AddTokenViewController") as! AddTokenViewController
         vc.delegate = self
         self.present(vc, animated: true, completion: nil)
-        
     }
     
     func tokenManagementControllerSaved(vc:AddTokenViewController) {
@@ -72,6 +72,7 @@ class TokenListViewController:UIViewController, UITableViewDelegate, UITableView
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.tokens.count
     }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "token") as! WalletTokenCell
         cell.setupCell(token: self.tokens[indexPath.row])
@@ -85,6 +86,21 @@ class TokenListViewController:UIViewController, UITableViewDelegate, UITableView
         vc.erc20Token = token
         self.present(vc , animated: true, completion: nil)
         
+    }
+    
+    lazy var refreshControl: UIRefreshControl = {
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action:
+            #selector(self.handleRefresh(_:)),
+                                 for: UIControlEvents.valueChanged)
+        return refreshControl
+        
+    }()
+    
+    //REFRESH HANDLER
+    @objc func handleRefresh(_ refreshControl: UIRefreshControl) {
+        refreshControl.endRefreshing()
+        self.loadTokens()
     }
     
 }

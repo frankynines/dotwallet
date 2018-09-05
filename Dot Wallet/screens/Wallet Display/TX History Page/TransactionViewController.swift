@@ -30,9 +30,7 @@ class TransactionViewController: UIViewController, UITabBarDelegate, UITableView
         self.ibo_tableView.addSubview(self.refreshControl)
         self.ibo_tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 50, right: 0)
         self.navigationController?.isNavigationBarHidden = false
-      
         self.loadTXHistory()
-
     }
     
     @IBAction func iba_dismiss(){
@@ -76,9 +74,7 @@ class TransactionViewController: UIViewController, UITabBarDelegate, UITableView
             self.transactions = result.reversed()
             self.ibo_tableView.reloadData()
         }
-        
     }
-    
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.transactions.count

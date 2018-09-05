@@ -1,6 +1,0 @@
-framework module Pods_Dot_WalletUITests {
-  umbrella header "Pods-Dot WalletUITests-umbrella.h"
-
-  export *
-  module * { export * }
-}

@@ -15,7 +15,7 @@ public class EtherWallet {
     let keystoreDirectoryName = "/keystore"
     let keystoreFileName = "/key.json"
     let defaultGasLimitForTokenTransfer = 100000
-    let defaultGasLimitForCollectibleTransfer = 100000
+    let defaultGasLimitForCollectibleTransfer = 500000
     
     var options: Web3Options
     var keystoreCache: EthereumKeystoreV3?
@@ -41,10 +41,6 @@ public class EtherWallet {
         etherscanURL = "https://api.etherscan.io"
     }
     
-    public func setToRopsten(){
-        web3Main = Web3.InfuraRopstenWeb3()
-        etherscanURL = "https://api-ropsten.etherscan.io"
-    }
     
     func setupOptionsFrom() {
         if let address = address {

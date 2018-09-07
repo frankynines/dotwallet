@@ -40,10 +40,12 @@ class PasswordLoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+       
         //create PasswordContainerView
         passwordContainerView = PasswordContainerView.create(in: passwordStackView, digit: kPasswordDigit)
         passwordContainerView.delegate = self
         passwordContainerView.deleteButtonLocalizedTitle = "Delete"
+        
         
         //customize password UI
         passwordContainerView.tintColor = UIColor.gray
@@ -58,6 +60,12 @@ class PasswordLoginViewController: UIViewController {
         passwordContainerView.highlightedColor = UIColor(hexString: walletColor!)
         
         self.ibo_passTitleView?.text = self.modalTitle
+    }
+    
+    override func viewWillLayoutSubviews() {
+        if passState == .Create || passState == .Verify{
+            self.passwordContainerView.touchAuthenticationEnabled = false;
+        }
     }
     
 }

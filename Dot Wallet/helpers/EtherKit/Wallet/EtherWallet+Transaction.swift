@@ -16,7 +16,7 @@ public protocol TransactionService {
     func getTransactionHistory(address:String, completion: @escaping ([JSON]?) -> ())
     
     func getTokenOwner(fromAddress:String, contractAddress:String, tokenID:String)
-    func sendERC721Token(toAddress:String, contractAddress:String, tokenID:String, completion: @escaping (Bool?, String?) -> ())
+    func sendERC721Token(toAddress:String, contractAddress:String, tokenID:String, pass:String, completion: @escaping (Bool?, String?) -> ())
     
 
 }
@@ -158,7 +158,7 @@ extension EtherWallet: TransactionService {
     }
     
 
-    public func sendERC721Token(toAddress:String, contractAddress:String, tokenID:String, completion: @escaping (Bool?, String?) -> ()){
+    public func sendERC721Token(toAddress:String, contractAddress:String, tokenID:String, pass:String, completion: @escaping (Bool?, String?) -> ()){
     
         let contractEAddress = EthereumAddress(contractAddress)
      
@@ -192,7 +192,7 @@ extension EtherWallet: TransactionService {
             }
 
                     
-            let contractCall =  contractMethod?.send(password: "", options: options, onBlock: "latest")
+            let contractCall =  contractMethod?.send(password: pass, options: options, onBlock: "latest")
             
             switch contractCall {
             case .success(let result)?:

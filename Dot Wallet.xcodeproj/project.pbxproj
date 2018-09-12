@@ -37,6 +37,7 @@
 		2F11AA7D210C9F7A00790BAF /* WalletDisplayContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F11AA7C210C9F7A00790BAF /* WalletDisplayContainer.swift */; };
 		2F11AA7F210CEA7A00790BAF /* icon_close_button.png in Resources */ = {isa = PBXBuildFile; fileRef = 2F11AA7E210CEA7A00790BAF /* icon_close_button.png */; };
 		2F11AA81210CEBA400790BAF /* ServiceTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F11AA80210CEBA400790BAF /* ServiceTimer.swift */; };
+		2F1F4E8821490CFA003FBF7E /* ImportWalletViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F1F4E8721490CFA003FBF7E /* ImportWalletViewController.swift */; };
 		2F1FB665211CE98100F2BB57 /* ERC20TokenDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F1FB664211CE98100F2BB57 /* ERC20TokenDetailViewController.swift */; };
 		2F1FB667211D855000F2BB57 /* UIImageColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F1FB666211D855000F2BB57 /* UIImageColors.swift */; };
 		2F2055722112FD55006C768E /* icon_qr.png in Resources */ = {isa = PBXBuildFile; fileRef = 2F2055702112FD54006C768E /* icon_qr.png */; };
@@ -141,6 +142,7 @@
 		2F11AA7C210C9F7A00790BAF /* WalletDisplayContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletDisplayContainer.swift; sourceTree = "<group>"; };
 		2F11AA7E210CEA7A00790BAF /* icon_close_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_close_button.png; sourceTree = "<group>"; };
 		2F11AA80210CEBA400790BAF /* ServiceTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceTimer.swift; sourceTree = "<group>"; };
+		2F1F4E8721490CFA003FBF7E /* ImportWalletViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportWalletViewController.swift; sourceTree = "<group>"; };
 		2F1FB664211CE98100F2BB57 /* ERC20TokenDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ERC20TokenDetailViewController.swift; sourceTree = "<group>"; };
 		2F1FB666211D855000F2BB57 /* UIImageColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageColors.swift; sourceTree = "<group>"; };
 		2F2055702112FD54006C768E /* icon_qr.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_qr.png; sourceTree = "<group>"; };
@@ -394,6 +396,7 @@
 			isa = PBXGroup;
 			children = (
 				2F0EFCAF2106FDF0003EF740 /* CreateWalletViewController.swift */,
+				2F1F4E8721490CFA003FBF7E /* ImportWalletViewController.swift */,
 			);
 			path = Intro;
 			sourceTree = "<group>";
@@ -799,6 +802,7 @@
 				2F0EFCC62106FE6F003EF740 /* EtherWallet+Account.swift in Sources */,
 				2F11AA7D210C9F7A00790BAF /* WalletDisplayContainer.swift in Sources */,
 				2F85FCF421199C67002E988A /* WalletSettingsViewController.swift in Sources */,
+				2F1F4E8821490CFA003FBF7E /* ImportWalletViewController.swift in Sources */,
 				2FC9C1572125710A000EB023 /* HistoryStorage.swift in Sources */,
 				2F0EFCC42106FE6F003EF740 /* EtherWallet+Transaction.swift in Sources */,
 				2F4C0CEB2132D67A00219567 /* PasswordLoginViewController.swift in Sources */,

@@ -40,7 +40,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aoK-lf-tIy" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-169" y="473"/>
+            <point key="canvasLocation" x="674" y="483"/>
         </scene>
         <!--Receive View Controller-->
         <scene sceneID="Aoh-TL-Lla">
@@ -215,6 +215,74 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="i86-hr-twy" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-962.39999999999998" y="472.71364317841085"/>
+        </scene>
+        <!--Import Wallet View Controller-->
+        <scene sceneID="RnS-QK-gUL">
+            <objects>
+                <viewController storyboardIdentifier="sb_ImportWalletViewController" id="BYh-Ne-Ug7" customClass="ImportWalletViewController" customModule="Dot_Wallet" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="DwE-u7-pdj">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="rfb-k6-mAP">
+                                <rect key="frame" x="43" y="318" width="290" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no" textContentType="password"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Uty-6q-aWX">
+                                <rect key="frame" x="158" y="259" width="46" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Paste"/>
+                                <connections>
+                                    <action selector="iba_pastePKey" destination="BYh-Ne-Ug7" eventType="touchUpInside" id="kXy-D7-Grq"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CCx-C1-LtO" customClass="RoundButton" customModule="Dot_Wallet" customModuleProvider="target">
+                                <rect key="frame" x="40" y="587" width="295" height="40"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="vhB-gP-xWM"/>
+                                </constraints>
+                                <state key="normal" title="Import">
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="20"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="hasBorder" value="YES"/>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="iba_importWallet" destination="Npw-2J-j6Z" eventType="touchUpInside" id="DpE-WK-5mI"/>
+                                    <action selector="importWallet" destination="BYh-Ne-Ug7" eventType="touchUpInside" id="aVq-iM-GZe"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="T7h-4S-l08">
+                                <rect key="frame" x="171" y="363" width="35" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Scan"/>
+                                <connections>
+                                    <action selector="iba_qrReader" destination="BYh-Ne-Ug7" eventType="touchUpInside" id="6l2-TO-XgQ"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" red="0.75294117650000003" green="0.72549019609999998" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="v3c-sM-Gax" firstAttribute="trailing" secondItem="CCx-C1-LtO" secondAttribute="trailing" constant="40" id="YJR-sD-BkI"/>
+                            <constraint firstItem="CCx-C1-LtO" firstAttribute="leading" secondItem="v3c-sM-Gax" secondAttribute="leading" constant="40" id="bAh-VZ-f2A"/>
+                            <constraint firstItem="v3c-sM-Gax" firstAttribute="bottom" secondItem="CCx-C1-LtO" secondAttribute="bottom" constant="40" id="vBb-OB-Nqz"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="v3c-sM-Gax"/>
+                    </view>
+                    <connections>
+                        <outlet property="ibo_pkeyField" destination="rfb-k6-mAP" id="dE5-xb-UGB"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ng9-8j-XAV" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-239.19999999999999" y="472.71364317841085"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="ok6-Pa-fl6">
@@ -431,7 +499,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nbW-4Z-m5U" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-962.39999999999998" y="1138.3808095952024"/>
+            <point key="canvasLocation" x="-962" y="1442"/>
         </scene>
         <!--Wallet Setting View Controller-->
         <scene sceneID="CSZ-tN-9zv">
@@ -669,7 +737,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PEs-3y-ZLt" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-87.200000000000003" y="1236.4317841079462"/>
+            <point key="canvasLocation" x="-89" y="1538"/>
         </scene>
         <!--Color View Controller-->
         <scene sceneID="yF0-WH-8dw">
@@ -838,7 +906,7 @@
                                                             <action selector="iba_walletSettings" destination="JAl-VO-36y" eventType="touchUpInside" id="tTZ-JA-J45"/>
                                                         </connections>
                                                     </button>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0.00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" highlighted="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Rf-XA-1LN" customClass="EFCountingLabel" customModule="EFCountingLabel">
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0.00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" highlighted="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Rf-XA-1LN">
                                                         <rect key="frame" x="121.5" y="45" width="92" height="50"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="50" id="2r4-P2-7U1"/>
@@ -1003,7 +1071,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QuR-Wv-wi9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="568.79999999999995" y="481.70914542728639"/>
+            <point key="canvasLocation" x="1430" y="483"/>
         </scene>
         <!--Password Login View Controller-->
         <scene sceneID="TuT-FI-knH">
@@ -1043,7 +1111,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ViH-bU-rVK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1510" y="411"/>
+            <point key="canvasLocation" x="2528" y="429"/>
         </scene>
     </scenes>
     <resources>

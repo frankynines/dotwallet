@@ -58,6 +58,7 @@ class CollectibleListViewController:UIViewController, UICollectionViewDelegate, 
     }
     
     func loadTokens(page:String){
+        self.tokens.removeAll()
 
         let userAddress = EtherWallet.account.address?.lowercased()
         
@@ -73,7 +74,7 @@ class CollectibleListViewController:UIViewController, UICollectionViewDelegate, 
     }
     
     func buildTokenObject(element:String) {
-        
+
         let data = element.data(using: .utf8)!
         do {
             let element = try JSONDecoder().decode(OErc721Token.self, from: data)

@@ -19,7 +19,7 @@ class WalletCardViewController:UIViewController, UIScrollViewDelegate, ModalSlid
     @IBOutlet var ibo_scrollview:UIScrollView?
     
     @IBOutlet var iboPublicKey: UIButton?
-    @IBOutlet var iboBalance: EFCountingLabel?
+    @IBOutlet var iboBalance: UILabel?
     @IBOutlet var qrCodeView:UIImageView?
     @IBOutlet var iboCardView:UIView?
     
@@ -38,11 +38,31 @@ class WalletCardViewController:UIViewController, UIScrollViewDelegate, ModalSlid
         
         self.setupHeaderView()
         
+//
+//        let formatter = NumberFormatter()
+//        formatter.currencyCode = "EUR"
+//        formatter.numberStyle = NumberFormatter.Style.currencyISOCode
+//
+//
+//        if let formatterStr: String = formatter.string(from: NSNumber(value: amountValue))  {
+//            return formatterStr
+//        }else {
+//            return "0.0"
+//        }
+        
+        
         // USER BALANCE
         let userBalanceKey = "balance:\(EtherWallet.account.address!)"
         if let balance = UserDefaults.standard.value(forKey: userBalanceKey) {
-            let nformat = NumberFormatter().number(from: balance as! String)
-            self.iboBalance?.countFromCurrentValueTo(CGFloat(truncating: nformat!) , withDuration: 0.00000001)
+            
+            self.iboBalance?.text = balance as! String
+
+//            let formatter = NumberFormatter()
+//            formatter.numberStyle = NumberFormatter.Style.currencyISOCode
+//
+//            if let nformat = NumberFormatter().number(from: balance as! String) {
+//                self.iboBalance?.countFromCurrentValueTo(CGFloat(truncating: nformat) , withDuration: 0.00000001)
+//            }
         }
         
     }
@@ -89,16 +109,17 @@ class WalletCardViewController:UIViewController, UIScrollViewDelegate, ModalSlid
 
     func refreshBalance(){
         
-        self.iboBalance?.animationDuration = 1
+        //self.iboBalance?.animationDuration = 1
         EtherWallet.balance.etherBalance { balance in
             guard let networkbalance = balance else {
                 return
             }
             let userBalanceKey = "balance:\(EtherWallet.account.address!)"
             UserDefaults.standard.set(networkbalance, forKey: userBalanceKey) // SET
-            
-            let nformat = NumberFormatter().number(from: balance!)
-            self.iboBalance?.countFromCurrentValueTo( CGFloat(truncating: nformat!) )
+            self.iboBalance?.text = networkbalance
+//            if let nformat = NumberFormatter().number(from: balance!) {
+//                self.iboBalance?.countFromCurrentValueTo( CGFloat(truncating: nformat) )
+//            }
         }
         
     }

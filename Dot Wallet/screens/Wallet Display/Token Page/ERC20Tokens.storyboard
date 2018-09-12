@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.3.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.13.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.1"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.9"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -182,16 +182,16 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Yo2-jz-pOL">
-                                                    <rect key="frame" x="311" y="10" width="14" height="54.5"/>
+                                                    <rect key="frame" x="321" y="10" width="14" height="54.5"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="54.5" id="X7W-PI-mit"/>
                                                     </constraints>
-                                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="22"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="41v-QE-8x4">
-                                                    <rect key="frame" x="20" y="12.5" width="50" height="50"/>
+                                                    <rect key="frame" x="10" y="12.5" width="50" height="50"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="50" id="YwO-N6-45q"/>
                                                         <constraint firstAttribute="width" constant="50" id="hLe-YJ-idr"/>
@@ -214,8 +214,8 @@
                                                 <constraint firstItem="912-3N-tXV" firstAttribute="top" secondItem="SIB-ll-987" secondAttribute="top" constant="20" id="5na-AU-u0F"/>
                                                 <constraint firstItem="Yo2-jz-pOL" firstAttribute="top" secondItem="SIB-ll-987" secondAttribute="top" constant="10" id="DQT-eV-BM8"/>
                                                 <constraint firstItem="rFt-3d-tf9" firstAttribute="leading" secondItem="41v-QE-8x4" secondAttribute="trailing" constant="15" id="EIB-hO-ZAi"/>
-                                                <constraint firstAttribute="trailing" secondItem="Yo2-jz-pOL" secondAttribute="trailing" constant="30" id="eNC-Wf-iKS"/>
-                                                <constraint firstItem="41v-QE-8x4" firstAttribute="leading" secondItem="SIB-ll-987" secondAttribute="leading" constant="20" id="id9-ov-nkp"/>
+                                                <constraint firstAttribute="trailing" secondItem="Yo2-jz-pOL" secondAttribute="trailing" constant="20" id="eNC-Wf-iKS"/>
+                                                <constraint firstItem="41v-QE-8x4" firstAttribute="leading" secondItem="SIB-ll-987" secondAttribute="leading" constant="10" id="id9-ov-nkp"/>
                                                 <constraint firstAttribute="bottom" secondItem="Yo2-jz-pOL" secondAttribute="bottom" constant="10" id="nsR-tL-QA5"/>
                                                 <constraint firstItem="912-3N-tXV" firstAttribute="leading" secondItem="41v-QE-8x4" secondAttribute="trailing" constant="15" id="oGZ-PW-49u"/>
                                                 <constraint firstItem="41v-QE-8x4" firstAttribute="centerY" secondItem="SIB-ll-987" secondAttribute="centerY" id="qBz-Zz-PpN"/>
@@ -477,6 +477,7 @@
                         <outlet property="ibo_symbol" destination="FAi-0o-qgu" id="uOI-CO-EAw"/>
                         <outlet property="ibo_tokenBackground" destination="MKD-ju-DBU" id="T28-Xl-8d7"/>
                         <outlet property="ibo_tokenImage" destination="6as-uN-idd" id="ry5-Ne-z7v"/>
+                        <outlet property="ibo_walletAddress" destination="yVr-lQ-jr4" id="FzW-dz-hUg"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Y3n-x0-K47" userLabel="First Responder" sceneMemberID="firstResponder"/>

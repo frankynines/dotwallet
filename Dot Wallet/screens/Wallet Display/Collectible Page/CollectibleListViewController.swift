@@ -134,11 +134,6 @@ class CollectibleListViewController:UIViewController, UICollectionViewDelegate, 
     }
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-//            if indexPath.item == self.tokens.count - 2 && !isWating {
-//                isWating = true
-//                self.pageIndex += 1
-//                self.loadTokens(page: String(self.pageIndex))
-//            }
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
@@ -158,10 +153,14 @@ class CollectibleListViewController:UIViewController, UICollectionViewDelegate, 
     //REFRESH HANDLER
     @objc func handleRefresh(_ refreshControl: UIRefreshControl) {
         refreshControl.endRefreshing()
-        self.loadTokens(page: "0")
-        
-            
+        //self.loadTokens(page: "0")
     }
+    
+    
+    @IBAction func iba_newToken(){
+        self.delegate?.userCreateNewCollectible()
+    }
+    
     
 }
 

@@ -17,6 +17,7 @@ protocol WalletPageViewControllerDelegate {
     func walletPageCurrentPage(index:Int)
     func tokenDidSelectERC721(token:OErc721Token, tokenImage:UIImage?)
     func didSelectTXItem(transaction:GeneralTransactionData)
+    func userCreateNewCollectible()
 }
 
 class WalletPageViewController: UIPageViewController{

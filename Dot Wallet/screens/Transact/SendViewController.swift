@@ -108,7 +108,8 @@ class SendViewController: UIViewController, QRCodeReaderViewControllerDelegate, 
         do {
             
             let pass = try keychain.get(publicAddress!)
-            self.passcodeVC = (storyboard?.instantiateViewController(withIdentifier: "PasswordLoginViewController") as! PasswordLoginViewController)
+            let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
+            self.passcodeVC = (storyboard.instantiateViewController(withIdentifier: "PasswordLoginViewController") as! PasswordLoginViewController)
             self.passcodeVC!.modalPresentationStyle = .overFullScreen
             self.passcodeVC!.delegate = self
             self.passcodeVC!.passState = .Unlock

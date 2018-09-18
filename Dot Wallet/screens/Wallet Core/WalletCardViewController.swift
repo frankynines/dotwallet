@@ -13,6 +13,9 @@ import Hero
 import web3swift
 import EFCountingLabel
 import Toast_Swift
+
+import Firebase
+
 class WalletCardViewController:UIViewController, UIScrollViewDelegate, ModalSlideOverViewcontrollerDelegate{
     
     //HEADER
@@ -38,31 +41,15 @@ class WalletCardViewController:UIViewController, UIScrollViewDelegate, ModalSlid
         
         self.setupHeaderView()
         
-//
-//        let formatter = NumberFormatter()
-//        formatter.currencyCode = "EUR"
-//        formatter.numberStyle = NumberFormatter.Style.currencyISOCode
-//
-//
-//        if let formatterStr: String = formatter.string(from: NSNumber(value: amountValue))  {
-//            return formatterStr
-//        }else {
-//            return "0.0"
-//        }
-        
+        Auth.auth().signInAnonymously() { (authResult, error) in
+            
+        }
         
         // USER BALANCE
         let userBalanceKey = "balance:\(EtherWallet.account.address!)"
         if let balance = UserDefaults.standard.value(forKey: userBalanceKey) {
             
             self.iboBalance?.text = balance as! String
-
-//            let formatter = NumberFormatter()
-//            formatter.numberStyle = NumberFormatter.Style.currencyISOCode
-//
-//            if let nformat = NumberFormatter().number(from: balance as! String) {
-//                self.iboBalance?.countFromCurrentValueTo(CGFloat(truncating: nformat) , withDuration: 0.00000001)
-//            }
         }
         
     }

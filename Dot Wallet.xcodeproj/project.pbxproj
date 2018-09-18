@@ -82,6 +82,10 @@
 		2FE75054210BFD9200AAD6E6 /* icon_dot.png in Resources */ = {isa = PBXBuildFile; fileRef = 2FE7504D210BFD9100AAD6E6 /* icon_dot.png */; };
 		2FE75056210BFD9200AAD6E6 /* icon_transactions.png in Resources */ = {isa = PBXBuildFile; fileRef = 2FE7504F210BFD9100AAD6E6 /* icon_transactions.png */; };
 		2FF4A303210F210800C9EB89 /* StringHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FF4A302210F210800C9EB89 /* StringHelpers.swift */; };
+		2FF9D47021514B4100A747CB /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2FF9D46F21514B4100A747CB /* GoogleService-Info.plist */; };
+		2FF9D47221514E4500A747CB /* CreateCollectible.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2FF9D47121514E4500A747CB /* CreateCollectible.storyboard */; };
+		2FF9D47521514E6600A747CB /* CreateCollectibleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FF9D47421514E6600A747CB /* CreateCollectibleViewController.swift */; };
+		2FF9D477215151F300A747CB /* MintConfirmViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FF9D476215151F300A747CB /* MintConfirmViewController.swift */; };
 		DFBF12152ACF0C100AFAA0C4 /* Pods_Dot_WalletUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 17873D468537B1C8CB4EF2DF /* Pods_Dot_WalletUITests.framework */; };
 		E450703040B27130D6EDC7AD /* Pods_Dot_WalletTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5BA6F8401712A96C29B862DC /* Pods_Dot_WalletTests.framework */; };
 /* End PBXBuildFile section */
@@ -187,6 +191,10 @@
 		2FE7504D210BFD9100AAD6E6 /* icon_dot.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_dot.png; sourceTree = "<group>"; };
 		2FE7504F210BFD9100AAD6E6 /* icon_transactions.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_transactions.png; sourceTree = "<group>"; };
 		2FF4A302210F210800C9EB89 /* StringHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringHelpers.swift; sourceTree = "<group>"; };
+		2FF9D46F21514B4100A747CB /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		2FF9D47121514E4500A747CB /* CreateCollectible.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = CreateCollectible.storyboard; sourceTree = "<group>"; };
+		2FF9D47421514E6600A747CB /* CreateCollectibleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateCollectibleViewController.swift; sourceTree = "<group>"; };
+		2FF9D476215151F300A747CB /* MintConfirmViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MintConfirmViewController.swift; sourceTree = "<group>"; };
 		43B940DA664FC791F17688AD /* Pods-Dot Wallet.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Dot Wallet.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Dot Wallet/Pods-Dot Wallet.debug.xcconfig"; sourceTree = "<group>"; };
 		5BA6F8401712A96C29B862DC /* Pods_Dot_WalletTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Dot_WalletTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A43F46B778D77C277DDBE130 /* Pods-Dot WalletTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Dot WalletTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Dot WalletTests/Pods-Dot WalletTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -249,6 +257,7 @@
 		2F0EFC7B21063937003EF740 /* Dot Wallet */ = {
 			isa = PBXGroup;
 			children = (
+				2FF9D46F21514B4100A747CB /* GoogleService-Info.plist */,
 				2F0EFC7C21063937003EF740 /* AppDelegate.swift */,
 				2F0EFC8021063937003EF740 /* Main.storyboard */,
 				2F0EFCAC210639E2003EF740 /* screens */,
@@ -479,6 +488,7 @@
 		2FA5E2F721197B3700A4406E /* Collectible Page */ = {
 			isa = PBXGroup;
 			children = (
+				2FF9D47321514E4D00A747CB /* CreateCollectibles */,
 				2FA5E2FA21197D8600A4406E /* Collectibles.storyboard */,
 				2F11AA78210C8DBF00790BAF /* CollectibleListViewController.swift */,
 				2F0F2549213889260045F2D3 /* CollectibleDetailViewController.swift */,
@@ -494,6 +504,16 @@
 				2FB22EEC212D5B4300672F0E /* UserPreferences.swift */,
 			);
 			path = Storage;
+			sourceTree = "<group>";
+		};
+		2FF9D47321514E4D00A747CB /* CreateCollectibles */ = {
+			isa = PBXGroup;
+			children = (
+				2FF9D47121514E4500A747CB /* CreateCollectible.storyboard */,
+				2FF9D47421514E6600A747CB /* CreateCollectibleViewController.swift */,
+				2FF9D476215151F300A747CB /* MintConfirmViewController.swift */,
+			);
+			path = CreateCollectibles;
 			sourceTree = "<group>";
 		};
 		59FCCE122EF5FD25E3AB61B4 /* Pods */ = {
@@ -643,8 +663,10 @@
 				2F85FCF221199830002E988A /* bg_transparent@2x.png in Resources */,
 				2F0EFC8721063938003EF740 /* LaunchScreen.storyboard in Resources */,
 				2FA5E2FB21197D8600A4406E /* Collectibles.storyboard in Resources */,
+				2FF9D47221514E4500A747CB /* CreateCollectible.storyboard in Resources */,
 				2F11AA7F210CEA7A00790BAF /* icon_close_button.png in Resources */,
 				2FE75051210BFD9200AAD6E6 /* icon_tokens.png in Resources */,
+				2FF9D47021514B4100A747CB /* GoogleService-Info.plist in Resources */,
 				2F0EFC8421063938003EF740 /* Assets.xcassets in Resources */,
 				2F0EFC8221063937003EF740 /* Main.storyboard in Resources */,
 				2FA5E2F621197ABF00A4406E /* TransactionHistory.storyboard in Resources */,
@@ -691,6 +713,8 @@
 				"${BUILT_PRODUCTS_DIR}/CryptoCurrencyKit/CryptoCurrencyKit.framework",
 				"${BUILT_PRODUCTS_DIR}/CryptoSwift/CryptoSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/EFCountingLabel/EFCountingLabel.framework",
+				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
 				"${BUILT_PRODUCTS_DIR}/Hero/Hero.framework",
 				"${BUILT_PRODUCTS_DIR}/KeychainAccess/KeychainAccess.framework",
 				"${BUILT_PRODUCTS_DIR}/QRCode/QRCode.framework",
@@ -700,7 +724,9 @@
 				"${BUILT_PRODUCTS_DIR}/SmileLock/SmileLock.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
 				"${BUILT_PRODUCTS_DIR}/Toast-Swift/Toast_Swift.framework",
+				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
 				"${BUILT_PRODUCTS_DIR}/libsodium/libsodium.framework",
+				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 				"${BUILT_PRODUCTS_DIR}/secp256k1_ios/secp256k1_ios.framework",
 				"${BUILT_PRODUCTS_DIR}/web3swift/web3swift.framework",
 			);
@@ -713,6 +739,8 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CryptoCurrencyKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CryptoSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/EFCountingLabel.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Hero.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/KeychainAccess.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/QRCode.framework",
@@ -722,7 +750,9 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SmileLock.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Toast_Swift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/libsodium.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/secp256k1_ios.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/web3swift.framework",
 			);
@@ -805,6 +835,7 @@
 				2F1F4E8821490CFA003FBF7E /* ImportWalletViewController.swift in Sources */,
 				2FC9C1572125710A000EB023 /* HistoryStorage.swift in Sources */,
 				2F0EFCC42106FE6F003EF740 /* EtherWallet+Transaction.swift in Sources */,
+				2FF9D47521514E6600A747CB /* CreateCollectibleViewController.swift in Sources */,
 				2F4C0CEB2132D67A00219567 /* PasswordLoginViewController.swift in Sources */,
 				2F0EFC7D21063937003EF740 /* AppDelegate.swift in Sources */,
 				2F0EFCC32106FE6F003EF740 /* EtherWallet+Balance.swift in Sources */,
@@ -834,6 +865,7 @@
 				2F11AA77210C89D200790BAF /* WalletPageViewController.swift in Sources */,
 				2FB22EED212D5B4300672F0E /* UserPreferences.swift in Sources */,
 				2F0EFCAE210639E2003EF740 /* SendViewController.swift in Sources */,
+				2FF9D477215151F300A747CB /* MintConfirmViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

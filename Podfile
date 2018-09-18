@@ -19,7 +19,11 @@ target 'Dot Wallet' do
   
   pod 'KeychainAccess'
   pod 'SmileLock'
-
+  
+  pod 'Firebase/Core'
+  pod 'Firebase/Database'
+  pod 'Firebase/Storage'
+  pod 'Firebase/Auth'
 
   # Pods for Dot Wallet
 

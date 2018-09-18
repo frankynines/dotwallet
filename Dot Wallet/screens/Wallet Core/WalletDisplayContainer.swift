@@ -40,7 +40,6 @@ class WalletDisplayViewController:UIViewController, UIPageViewControllerDelegate
     }
     
     @IBAction func iba_dismiss(){
-
         self.dismiss(animated: true, completion: nil)
     }
     
@@ -72,7 +71,19 @@ class WalletDisplayViewController:UIViewController, UIPageViewControllerDelegate
             self.iboBalance?.text = balance
         }
     }
+    //NEW TOKEN
+    func userCreateNewCollectible(){
+        
+        let storyboard = UIStoryboard(name: "CreateCollectible", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "UINavController")
+        
+        self.present(vc, animated: true) {
+            //
+        }
+        
+    }
     
+    //TABBAR
     @IBAction func gotoPage(button:UIButton){
         button.transform = CGAffineTransform(scaleX: 0.6, y: 0.6)
         
@@ -139,15 +150,7 @@ class WalletDisplayViewController:UIViewController, UIPageViewControllerDelegate
         let vc = (UIStoryboard(name: "Collectibles", bundle: nil).instantiateViewController(withIdentifier: "sb_CollectibleDetailViewController") as! CollectibleDetailViewController)
         vc.erc721Token = token
         vc.tokenImage = tokenImage
-        present(vc, animated: true) {
-            //
-        }
-        
-//
-//        self.tokenDetail = (UIStoryboard(name: "Collectibles", bundle: nil).instantiateViewController(withIdentifier: "sb_TokenDetailViewController") as! TokenDetailViewController)
-//        self.tokenDetail.delegate = self
-//        self.tokenDetail.erc721Token = token
-//        self.presentPopView(vc: self.tokenDetail, title: "")
+        present(vc, animated: true) { }
     }
     
     func didSelectTXItem(transaction: GeneralTransactionData) {
@@ -170,7 +173,6 @@ class WalletDisplayViewController:UIViewController, UIPageViewControllerDelegate
         self.popModalController.view.frame = self.view.frame
         self.popModalController.delegate = self
         
-        
         self.popModalController.viewController = vc
         self.view.addSubview(self.popModalController.view)
         
@@ -184,11 +186,9 @@ class WalletDisplayViewController:UIViewController, UIPageViewControllerDelegate
     func popOverDismiss() {
         
         self.popModalController.animateModalOut {
-            
             self.popModalController.view.removeFromSuperview()
             self.popModalController.removeFromParentViewController()
             self.popModalController = nil
-            
             self.transactionDetail = nil
         }
     }

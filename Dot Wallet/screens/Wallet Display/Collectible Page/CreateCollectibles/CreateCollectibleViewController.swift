@@ -14,6 +14,7 @@ class CreateCollectibleViewController: UIViewController, UIImagePickerController
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.title = "Mint Collectible"
     }
     
     override func viewDidLayoutSubviews() {
@@ -21,7 +22,6 @@ class CreateCollectibleViewController: UIViewController, UIImagePickerController
         
         let leftButton = UIBarButtonItem(title: "Cancel", style: .done, target: self, action: #selector(iba_dismiss))
         self.navigationItem.leftBarButtonItem = leftButton
-        
     }
     
     @objc func iba_dismiss(){
@@ -64,13 +64,13 @@ class CreateCollectibleViewController: UIViewController, UIImagePickerController
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         
         picker.dismiss(animated: true) {
-            let vc = self.storyboard?.instantiateViewController(withIdentifier: "sb_MintConfirmViewController") as! MintConfirmViewController
+            let vc = self.storyboard?.instantiateViewController(withIdentifier: "sb_InputScreenPageViewController") as! InputScreenPageViewController
             vc.userImage = info[UIImagePickerControllerOriginalImage] as? UIImage
+            vc.inputLabel = "Name your Item"
+            vc.key = "name"
+            vc.tag = 0
             self.navigationController?.pushViewController(vc, animated: true)
         }
     }
 
-    
-
-    
 }

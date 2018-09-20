@@ -57,7 +57,6 @@ class WalletPageViewController: UIPageViewController{
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        // ASSIGN DELEGATES
         let tokenVC = self.pages[PageViews.TokenPage.rawValue] as! TokenListViewController
         tokenVC.delegate = childDelegate
         
@@ -86,7 +85,6 @@ extension WalletPageViewController: UIPageViewControllerDataSource {
     
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
         
-        //Next VC index
         guard let viewControllerIndex = pages.index(of: viewController) else { return nil }
 
         let nextIndex = viewControllerIndex + 1
@@ -95,8 +93,8 @@ extension WalletPageViewController: UIPageViewControllerDataSource {
         guard pages.count > nextIndex else { return nil }
         
         return pages[nextIndex]
-        
     }
+    
 }
 
 extension WalletPageViewController: UIPageViewControllerDelegate {

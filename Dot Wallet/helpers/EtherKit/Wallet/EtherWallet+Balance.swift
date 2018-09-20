@@ -42,7 +42,7 @@ extension EtherWallet: BalanceService {
         let parameters = [address as AnyObject]
         let contractMethod = contract.method("balanceOf", parameters: parameters, extraData: Data(), options: options)
         let balanceOfCallResult = contractMethod?.call(options: nil)
-        guard case .success(let balanceInfo)? = balanceOfCallResult, let balance = balanceInfo["0"] as? BigUInt else { throw WalletError.networkFailure
+        guard case .success(let balanceInfo)? = balanceOfCallResult, let balance = balanceInfo["0"]  else { throw WalletError.networkFailure
         }
         return "\(balance)"
     }

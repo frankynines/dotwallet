@@ -109,8 +109,6 @@ class ImportWalletViewController: UIViewController, QRCodeReaderViewControllerDe
             if let ethereumURL = urlQuery?.absoluteStringByTrimmingQuery(){
 //                self.ibo_addressField?.text = ethereumURL.replacingOccurrences(of: "ethereum:", with: "")
             }
-            
-            
         }
         
         readerVC.modalPresentationStyle = .overFullScreen

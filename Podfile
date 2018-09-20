@@ -10,9 +10,9 @@ target 'Dot Wallet' do
   pod 'SwiftyJSON'
   pod 'Cache'
 
-  pod 'web3swift', '~> 0.8.0'
   pod 'CryptoCurrencyKit'
-
+  pod 'web3swift'
+  
   pod 'Hero'
   pod 'EFCountingLabel'
   pod 'Toast-Swift', '~> 3.0.1'

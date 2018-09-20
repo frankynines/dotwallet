@@ -188,16 +188,16 @@ class SendViewController: UIViewController, QRCodeReaderViewControllerDelegate, 
         let contractAddy = self.collectible?.asset_contract?.address
         let tokenID = self.collectible?.token_id
         
-        EtherWallet.transaction.sendERC721Token(toAddress: to, contractAddress: contractAddy!, tokenID: tokenID!, pass: pass) { (status, result) in
-            
-            self.view.hideToastActivity()
-            
-            if status == true {
-                self.showAlert(title: "Success", message: "Transaction has been sent!", completion: true)
-            } else {
-                self.showAlert(title: "Oops", message: "Transaction Failed \(result)", completion: false)
-            }
-        }
+//        EtherWallet.transaction.sendERC721Token(toAddress: to, contractAddress: contractAddy!, tokenID: tokenID!, pass: pass) { (status, result) in
+//            
+//            self.view.hideToastActivity()
+//            
+//            if status == true {
+//                self.showAlert(title: "Success", message: "Transaction has been sent!", completion: true)
+//            } else {
+//                self.showAlert(title: "Oops", message: "Transaction Failed \(result)", completion: false)
+//            }
+//        }
         
     
     }

@@ -77,9 +77,7 @@ class WalletDisplayViewController:UIViewController, UIPageViewControllerDelegate
         let storyboard = UIStoryboard(name: "CreateCollectible", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: "UINavController")
         
-        self.present(vc, animated: true) {
-            //
-        }
+        self.present(vc, animated: true) {}
         
     }
     

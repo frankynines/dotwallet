@@ -150,17 +150,13 @@ class CollectibleListViewController:UIViewController, UICollectionViewDelegate, 
         
     }()
     
-    //REFRESH HANDLER
     @objc func handleRefresh(_ refreshControl: UIRefreshControl) {
         refreshControl.endRefreshing()
-        //self.loadTokens(page: "0")
     }
-    
-    
+
     @IBAction func iba_newToken(){
         self.delegate?.userCreateNewCollectible()
     }
-    
     
 }
 

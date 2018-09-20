@@ -40,6 +40,7 @@
 		2F1F4E8821490CFA003FBF7E /* ImportWalletViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F1F4E8721490CFA003FBF7E /* ImportWalletViewController.swift */; };
 		2F1FB665211CE98100F2BB57 /* ERC20TokenDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F1FB664211CE98100F2BB57 /* ERC20TokenDetailViewController.swift */; };
 		2F1FB667211D855000F2BB57 /* UIImageColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F1FB666211D855000F2BB57 /* UIImageColors.swift */; };
+		2F2033FA21516BF900428586 /* DotCollectible.json in Resources */ = {isa = PBXBuildFile; fileRef = 2F2033F921516BF900428586 /* DotCollectible.json */; };
 		2F2055722112FD55006C768E /* icon_qr.png in Resources */ = {isa = PBXBuildFile; fileRef = 2F2055702112FD54006C768E /* icon_qr.png */; };
 		2F2055732112FD55006C768E /* icon_settings.png in Resources */ = {isa = PBXBuildFile; fileRef = 2F2055712112FD55006C768E /* icon_settings.png */; };
 		2F2F74B321091E8200612CF4 /* TokenListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F2F74B221091E8200612CF4 /* TokenListViewController.swift */; };
@@ -149,6 +150,7 @@
 		2F1F4E8721490CFA003FBF7E /* ImportWalletViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportWalletViewController.swift; sourceTree = "<group>"; };
 		2F1FB664211CE98100F2BB57 /* ERC20TokenDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ERC20TokenDetailViewController.swift; sourceTree = "<group>"; };
 		2F1FB666211D855000F2BB57 /* UIImageColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageColors.swift; sourceTree = "<group>"; };
+		2F2033F921516BF900428586 /* DotCollectible.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = DotCollectible.json; sourceTree = "<group>"; };
 		2F2055702112FD54006C768E /* icon_qr.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_qr.png; sourceTree = "<group>"; };
 		2F2055712112FD55006C768E /* icon_settings.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_settings.png; sourceTree = "<group>"; };
 		2F2F74B221091E8200612CF4 /* TokenListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenListViewController.swift; sourceTree = "<group>"; };
@@ -257,6 +259,7 @@
 		2F0EFC7B21063937003EF740 /* Dot Wallet */ = {
 			isa = PBXGroup;
 			children = (
+				2F2033F921516BF900428586 /* DotCollectible.json */,
 				2FF9D46F21514B4100A747CB /* GoogleService-Info.plist */,
 				2F0EFC7C21063937003EF740 /* AppDelegate.swift */,
 				2F0EFC8021063937003EF740 /* Main.storyboard */,
@@ -510,8 +513,8 @@
 			isa = PBXGroup;
 			children = (
 				2FF9D47121514E4500A747CB /* CreateCollectible.storyboard */,
-				2FF9D47421514E6600A747CB /* CreateCollectibleViewController.swift */,
 				2FF9D476215151F300A747CB /* MintConfirmViewController.swift */,
+				2FF9D47421514E6600A747CB /* CreateCollectibleViewController.swift */,
 			);
 			path = CreateCollectibles;
 			sourceTree = "<group>";
@@ -652,6 +655,7 @@
 				2FA5E2FD211981B900A4406E /* ERC20Tokens.storyboard in Resources */,
 				2F2055722112FD55006C768E /* icon_qr.png in Resources */,
 				2FE75050210BFD9200AAD6E6 /* icon_plus.png in Resources */,
+				2F2033FA21516BF900428586 /* DotCollectible.json in Resources */,
 				2F4D31C3211A3ABB0046BC61 /* btn_moveDown@3x.png in Resources */,
 				2F4D31BF211A398D0046BC61 /* btn_moveUp@2x.png in Resources */,
 				2FE75056210BFD9200AAD6E6 /* icon_transactions.png in Resources */,
@@ -706,8 +710,6 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-Dot Wallet/Pods-Dot Wallet-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
-				"${BUILT_PRODUCTS_DIR}/Alamofire-Synchronous/Alamofire_Synchronous.framework",
 				"${BUILT_PRODUCTS_DIR}/BigInt/BigInt.framework",
 				"${BUILT_PRODUCTS_DIR}/Cache/Cache.framework",
 				"${BUILT_PRODUCTS_DIR}/CryptoCurrencyKit/CryptoCurrencyKit.framework",
@@ -717,6 +719,7 @@
 				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
 				"${BUILT_PRODUCTS_DIR}/Hero/Hero.framework",
 				"${BUILT_PRODUCTS_DIR}/KeychainAccess/KeychainAccess.framework",
+				"${BUILT_PRODUCTS_DIR}/PromiseKit/PromiseKit.framework",
 				"${BUILT_PRODUCTS_DIR}/QRCode/QRCode.framework",
 				"${BUILT_PRODUCTS_DIR}/QRCodeReader.swift/QRCodeReader.framework",
 				"${BUILT_PRODUCTS_DIR}/Result/Result.framework",
@@ -725,15 +728,13 @@
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
 				"${BUILT_PRODUCTS_DIR}/Toast-Swift/Toast_Swift.framework",
 				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
-				"${BUILT_PRODUCTS_DIR}/libsodium/libsodium.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
+				"${BUILT_PRODUCTS_DIR}/scrypt/scrypt.framework",
 				"${BUILT_PRODUCTS_DIR}/secp256k1_ios/secp256k1_ios.framework",
 				"${BUILT_PRODUCTS_DIR}/web3swift/web3swift.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire_Synchronous.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/BigInt.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Cache.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CryptoCurrencyKit.framework",
@@ -743,6 +744,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Hero.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/KeychainAccess.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PromiseKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/QRCode.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/QRCodeReader.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Result.framework",
@@ -751,8 +753,8 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Toast_Swift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/libsodium.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/scrypt.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/secp256k1_ios.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/web3swift.framework",
 			);

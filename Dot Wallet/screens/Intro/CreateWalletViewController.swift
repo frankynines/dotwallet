@@ -24,7 +24,6 @@ class CreateWalletViewController: UIViewController, PasswordLoginDelegate {
             let publicAddress = EtherWallet.account.address?.lowercased()
             print(publicAddress)
             
-            
             self.pushWalletHomeScreen()
             
 //            let keychain = Keychain(service: publicAddress!)

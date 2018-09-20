@@ -161,7 +161,6 @@ class CollectibleDetailViewController: UIViewController, UIScrollViewDelegate, M
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         
-        //VERTICLE SCROLLING EDGES
         if scrollView.contentOffset.y > 50 {
             iba_sendToken()
         }

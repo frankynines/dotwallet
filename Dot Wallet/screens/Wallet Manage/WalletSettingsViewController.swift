@@ -90,9 +90,7 @@ class WalletSettingViewController:UITableViewController, PasswordLoginDelegate {
         do {
             let pKey = try EtherWallet.account.privateKey(password: pass!)
             let alert = UIAlertController(title: "Private Key", message: "This key is temporary for testing.\(pKey)", preferredStyle: .alert)
-            
-            print(pKey) // USED FOR DEBUGGING
-            
+                        
             alert.addAction(UIAlertAction(title: "Copy", style: .default, handler: { (action) in
                 UIPasteboard.general.string = pKey
             }))

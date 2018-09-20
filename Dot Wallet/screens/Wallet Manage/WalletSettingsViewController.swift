@@ -14,7 +14,7 @@ import Toast_Swift
 import KeychainAccess
 import web3swift
 
-class WalletSettingViewController:UITableViewController {
+class WalletSettingViewController:UITableViewController, PasswordLoginDelegate {
     
     @IBOutlet var ibo_publicAddress:UILabel?
     @IBOutlet var ibo_network:UILabel?
@@ -63,25 +63,44 @@ class WalletSettingViewController:UITableViewController {
         self.present(vc, animated: true, completion: nil)
     }
     
+    var passcodeVC:PasswordLoginViewController!
+    
     @IBAction func iba_presentPrivateKey(){
+
+        let publicAddress = EtherWallet.account.address?.lowercased()
+        let keychain = Keychain(service: publicAddress!)
+            do {
+
+                let pass = try keychain.get(publicAddress!)
+                self.passcodeVC = (storyboard?.instantiateViewController(withIdentifier: "PasswordLoginViewController") as! PasswordLoginViewController)
+                self.passcodeVC!.modalPresentationStyle = .overFullScreen
+                self.passcodeVC!.delegate = self
+                self.passcodeVC!.passState = .Unlock
+                self.passcodeVC!.modalTitle = "Enter Passcode"
+                self.passcodeVC!.kPass = pass
+                present(passcodeVC!, animated: false, completion: nil)
+
+            } catch {
+                print(error.localizedDescription)
+            }
+    }
+    
+    func passcodeVerified(pass:String?) {
         
         do {
-            let pKey = try EtherWallet.account.privateKey(password: "")
+            let pKey = try EtherWallet.account.privateKey(password: pass!)
             let alert = UIAlertController(title: "Private Key", message: "This key is temporary for testing.\(pKey)", preferredStyle: .alert)
-            
-            print(pKey) // USED FOR DEBUGGING
-            
+                        
             alert.addAction(UIAlertAction(title: "Copy", style: .default, handler: { (action) in
                 UIPasteboard.general.string = pKey
             }))
             
             alert.addAction(UIAlertAction(title: "Close", style: .cancel, handler: { (action) in }))
             self.present(alert, animated: true, completion: nil)
-        
+            
         } catch {
             print(error.localizedDescription)
         }
-        
     }
     
     @IBAction func iba_killCache(){

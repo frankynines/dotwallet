@@ -1,6 +1,7 @@
 import web3swift
 import BigInt
 import SwiftyJSON
+import PromiseKit
 
 public protocol TransactionService {
     func sendEtherSync(to address: String, amount: String, password: String) throws -> String
@@ -12,12 +13,9 @@ public protocol TransactionService {
     func sendToken(to toAddress: String, contractAddress: String, amount: String, password: String, decimal:Int, completion: @escaping (String?) -> ())
     func sendToken(to toAddress: String, contractAddress: String, amount: String, password: String, decimal:Int, gasPrice: String?, completion: @escaping (String?) -> ())
     
-    //TRX History
     func getTransactionHistory(address:String, completion: @escaping ([JSON]?) -> ())
     
-    func getTokenOwner(fromAddress:String, contractAddress:String, tokenID:String)
-    func sendERC721Token(toAddress:String, contractAddress:String, tokenID:String, completion: @escaping (Bool?, String?) -> ())
-    
+    func callContractMethod(methodName:String, methodParams:[Any?], pass:String, completion: @escaping (Bool?, String?) -> ())
 
 }
 
@@ -47,8 +45,7 @@ extension EtherWallet: TransactionService {
         let sendResult = intermediateSend.send(password: password)
         switch sendResult {
         case .success(let result):
-            guard let txHash = result["txhash"] else { throw WalletError.networkFailure }
-            return txHash
+            return result.transaction.txhash!
         case .failure(_):
             throw WalletError.networkFailure
         }
@@ -97,8 +94,7 @@ extension EtherWallet: TransactionService {
         let contractCall =  contractMethod.send(password: password, onBlock: "latest")
         switch contractCall {
         case .success(let result):
-            guard let txHash = result["txhash"] else { throw WalletError.networkFailure }
-            return txHash
+            return result.hash
         case .failure(_):
             throw WalletError.networkFailure
         }
@@ -121,7 +117,6 @@ extension EtherWallet: TransactionService {
         print("Get TX History")
         let url = NSURL(string: etherscanURL + "/api?module=account&action=txlist&address="+address+"&startblock=0&endblock=99999999&page=1&offset=100&sort=asc&apikey=Y2DRKI11G7A6NY61TKRYKVJ2HFXVAFHKRE")
         
-        //fetching the data from the url
         URLSession.shared.dataTask(with: (url as URL?)!, completionHandler: {(data, response, error) -> Void in
             if data == nil {
                 return
@@ -137,31 +132,10 @@ extension EtherWallet: TransactionService {
         }).resume()
     }
     
-    public func getTokenOwner(fromAddress:String, contractAddress:String, tokenID:String){
-        let contractEAddress = EthereumAddress(contractAddress)
+    public func callContractMethod(methodName:String, methodParams:[Any?], pass:String, completion: @escaping (Bool?, String?) -> ()){
         
-        let web3Main = Web3.InfuraMainnetWeb3() // USED TO GET MAIN NET TOKEN INFO
+        let contractEAddress = EthereumAddress("0xc48ebaaa50cbdf7ebee5abce9eb7a35746f82805")
         
-        if let contract = web3Main.contract(erc721ABI, at: contractEAddress) {
-            
-            let params = [tokenID] as [AnyObject]
-            let contractMethod = contract.method("ownerOf", parameters: params, extraData: Data(), options: options)
-            
-            let callResult = contractMethod?.call(options: nil)
-            guard case .success(let package)? = callResult else {
-                return
-            }
-            
-            let owner = package["_owner"] as! EthereumAddress
-            print(owner.address)
-        }
-    }
-    
-
-    public func sendERC721Token(toAddress:String, contractAddress:String, tokenID:String, completion: @escaping (Bool?, String?) -> ()){
-    
-        let contractEAddress = EthereumAddress(contractAddress)
-     
         do {
             let keystore = try loadKeystore()
             let keystoreManager = KeystoreManager([keystore])
@@ -170,45 +144,57 @@ extension EtherWallet: TransactionService {
             print(error.localizedDescription)
             return
         }
-       
-        options.to = contractEAddress
+
         options.from = EthereumAddress(address!)
         
-        if let contract = web3Main.contract(erc721ABI, at: contractEAddress) {
-            
-            let params = [ EthereumAddress(address!), EthereumAddress(toAddress), tokenID] as [AnyObject]
-            print(params)
-            let contractMethod = contract.method("transferFrom", parameters: params, extraData: Data(), options: options)
-            
-            let gasEstimate = contractMethod?.estimateGas(options: options)
-            print(gasEstimate)
-            switch gasEstimate {
-                case .success(let result)?:
-                    options.gasLimit = BigUInt(result)
-            case .none:
-                print("none")
-            case .failure(let error)?:
-                print(error)
-            }
-
-                    
-            let contractCall =  contractMethod?.send(password: "", options: options, onBlock: "latest")
-            
-            switch contractCall {
-            case .success(let result)?:
-                print(result["txhash"])
-                completion(true, result["txhash"])
-            case .failure(let error)?:
-                completion(false, error.localizedDescription)
-            case .none:
-                completion(false, nil)
-            }
+        guard let contractABI = try! self.getContractABI() else {
+            completion(false, "Invalid Contract ABI")
+            return
         }
-    
+        
+        guard let contract = web3Main.contract(contractABI, at: contractEAddress) else {
+            completion(false, "Contract INIT fail")
+            return
+        }
+            
+        guard let contractMethod = contract.method(methodName, parameters: methodParams as [AnyObject], extraData: Data(), options: options) else {
+            completion(false, "Contract Method Failed, Check Parameters")
+            return
+        }
+            
+        let contractCall = contractMethod.send(password: pass, options: options, onBlock: "latest")
+        
+        switch contractCall {
+            case .success(let result):
+                self.getTXFromHash(tx: result.hash)
+                completion(true, result.hash)
+            case .failure(let error):
+                completion(false, error.localizedDescription)
+        }
+        
     }
     
-   
+    internal func getTXFromHash(tx:String) {
+        do {
+            let txCall = try web3Main.eth.getTransactionDetailsPromise(tx).wait()
+            print(txCall)
+        } catch {
+            print("WAT")
+        }
+    }
     
-    
+    internal func getContractABI()throws -> String?{
+        
+        if let path = Bundle.main.path(forResource: "DotCollectible", ofType: "json") {
+            do {
+                let data = try Data(contentsOf: URL(fileURLWithPath: path), options: .mappedIfSafe)
+                let json = try! JSON(data: data)
+                return json.rawString() // RETURN
+            } catch {
+                throw error
+            }
+        }
+        return WalletError.networkFailure.localizedDescription
+    }
     
 }

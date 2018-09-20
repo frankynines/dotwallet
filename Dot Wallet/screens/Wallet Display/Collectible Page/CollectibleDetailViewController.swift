@@ -111,12 +111,9 @@ class CollectibleDetailViewController: UIViewController, UIScrollViewDelegate, M
         return UIStoryboard(name: "Collectibles", bundle: nil).instantiateViewController(withIdentifier: "sb_SendViewController") as! SendViewController
     }()
     
-   
-    
     var slideModalController:ModalSlideOverViewcontroller!
     
     @IBAction func iba_sendToken(){
-        
         
         guard slideModalController == nil else {
             return
@@ -164,7 +161,6 @@ class CollectibleDetailViewController: UIViewController, UIScrollViewDelegate, M
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         
-        //VERTICLE SCROLLING EDGES
         if scrollView.contentOffset.y > 50 {
             iba_sendToken()
         }

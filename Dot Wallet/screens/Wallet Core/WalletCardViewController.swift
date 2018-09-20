@@ -13,13 +13,16 @@ import Hero
 import web3swift
 import EFCountingLabel
 import Toast_Swift
+
+import Firebase
+
 class WalletCardViewController:UIViewController, UIScrollViewDelegate, ModalSlideOverViewcontrollerDelegate{
     
     //HEADER
     @IBOutlet var ibo_scrollview:UIScrollView?
     
     @IBOutlet var iboPublicKey: UIButton?
-    @IBOutlet var iboBalance: EFCountingLabel?
+    @IBOutlet var iboBalance: UILabel?
     @IBOutlet var qrCodeView:UIImageView?
     @IBOutlet var iboCardView:UIView?
     
@@ -38,11 +41,14 @@ class WalletCardViewController:UIViewController, UIScrollViewDelegate, ModalSlid
         
         self.setupHeaderView()
         
-        // USER BALANCE
+        Auth.auth().signInAnonymously() { (authResult, error) in
+            
+        }
+        
         let userBalanceKey = "balance:\(EtherWallet.account.address!)"
         if let balance = UserDefaults.standard.value(forKey: userBalanceKey) {
-            let nformat = NumberFormatter().number(from: balance as! String)
-            self.iboBalance?.countFromCurrentValueTo(CGFloat(truncating: nformat!) , withDuration: 0.00000001)
+            
+            self.iboBalance?.text = balance as! String
         }
         
     }
@@ -89,16 +95,17 @@ class WalletCardViewController:UIViewController, UIScrollViewDelegate, ModalSlid
 
     func refreshBalance(){
         
-        self.iboBalance?.animationDuration = 1
+        //self.iboBalance?.animationDuration = 1
         EtherWallet.balance.etherBalance { balance in
             guard let networkbalance = balance else {
                 return
             }
             let userBalanceKey = "balance:\(EtherWallet.account.address!)"
             UserDefaults.standard.set(networkbalance, forKey: userBalanceKey) // SET
-            
-            let nformat = NumberFormatter().number(from: balance!)
-            self.iboBalance?.countFromCurrentValueTo( CGFloat(truncating: nformat!) )
+            self.iboBalance?.text = networkbalance
+//            if let nformat = NumberFormatter().number(from: balance!) {
+//                self.iboBalance?.countFromCurrentValueTo( CGFloat(truncating: nformat) )
+//            }
         }
         
     }
@@ -109,21 +116,17 @@ class WalletCardViewController:UIViewController, UIScrollViewDelegate, ModalSlid
     }
     
     @IBAction func iba_shareAddress(){
-        // set up activity view controller
+
         let textToShare = [EtherWallet.account.address ]
         let activityViewController = UIActivityViewController(activityItems: textToShare as [Any], applicationActivities: nil)
-        activityViewController.popoverPresentationController?.sourceView = self.view // so that iPads won't crash
-        
-        // exclude some activity types from the list (optional)
+        activityViewController.popoverPresentationController?.sourceView = self.view
         activityViewController.excludedActivityTypes = [ UIActivityType.airDrop, UIActivityType.postToFacebook ]
         
-        // present the view controller
         self.present(activityViewController, animated: true, completion: nil)
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         
-        //VERTICLE SCROLLING EDGES
         if scrollView.contentOffset.y > 50 {
             if impactDetected == false {
                 impact.impactOccurred()

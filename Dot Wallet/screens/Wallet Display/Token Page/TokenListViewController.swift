@@ -97,7 +97,6 @@ class TokenListViewController:UIViewController, UITableViewDelegate, UITableView
         
     }()
     
-    //REFRESH HANDLER
     @objc func handleRefresh(_ refreshControl: UIRefreshControl) {
         refreshControl.endRefreshing()
         self.loadTokens()

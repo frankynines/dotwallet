@@ -10,16 +10,20 @@ target 'Dot Wallet' do
   pod 'SwiftyJSON'
   pod 'Cache'
 
-  pod 'web3swift', '~> 0.8.0'
   pod 'CryptoCurrencyKit'
-
+  pod 'web3swift'
+  
   pod 'Hero'
   pod 'EFCountingLabel'
   pod 'Toast-Swift', '~> 3.0.1'
   
   pod 'KeychainAccess'
   pod 'SmileLock'
-
+  
+  pod 'Firebase/Core'
+  pod 'Firebase/Database'
+  pod 'Firebase/Storage'
+  pod 'Firebase/Auth'
 
   # Pods for Dot Wallet
 

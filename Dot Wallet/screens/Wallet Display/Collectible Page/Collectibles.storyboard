@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.13.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.9"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -100,9 +100,30 @@
                                     <outlet property="delegate" destination="eX6-Ro-DKb" id="HI8-je-KUC"/>
                                 </connections>
                             </collectionView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rLt-GP-mBb" customClass="RoundButton" customModule="Dot_Wallet" customModuleProvider="target">
+                                <rect key="frame" x="40" y="547" width="295" height="40"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="as1-Fy-ehg"/>
+                                </constraints>
+                                <state key="normal" title="New Collectible">
+                                    <color key="titleColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="hasBorder" value="YES"/>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="20"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="iba_newToken" destination="eX6-Ro-DKb" eventType="touchUpInside" id="Lzd-47-rWO"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="tE2-Rk-YlT" firstAttribute="trailing" secondItem="rLt-GP-mBb" secondAttribute="trailing" constant="40" id="1nI-lx-Sv4"/>
+                            <constraint firstItem="rLt-GP-mBb" firstAttribute="leading" secondItem="tE2-Rk-YlT" secondAttribute="leading" constant="40" id="24I-DW-T3m"/>
                             <constraint firstItem="GW8-8K-ari" firstAttribute="leading" secondItem="tE2-Rk-YlT" secondAttribute="leading" constant="10" id="3Hs-2Z-j9v"/>
                             <constraint firstItem="tE2-Rk-YlT" firstAttribute="trailing" secondItem="xZU-P6-vKr" secondAttribute="trailing" constant="10" id="DyN-6Y-Xnx"/>
                             <constraint firstItem="xZU-P6-vKr" firstAttribute="leading" secondItem="tE2-Rk-YlT" secondAttribute="leading" constant="10" id="FID-89-6VQ"/>
@@ -111,6 +132,7 @@
                             <constraint firstItem="tE2-Rk-YlT" firstAttribute="trailing" secondItem="GW8-8K-ari" secondAttribute="trailing" constant="10" id="ehw-QI-hqt"/>
                             <constraint firstItem="GW8-8K-ari" firstAttribute="bottom" secondItem="tE2-Rk-YlT" secondAttribute="bottom" id="it1-hK-d3G"/>
                             <constraint firstItem="tE2-Rk-YlT" firstAttribute="bottom" secondItem="xZU-P6-vKr" secondAttribute="bottom" id="pe3-kc-vjH"/>
+                            <constraint firstItem="tE2-Rk-YlT" firstAttribute="bottom" secondItem="rLt-GP-mBb" secondAttribute="bottom" constant="80" id="uKb-Lr-HvI"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="tE2-Rk-YlT"/>
                     </view>

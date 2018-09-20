@@ -17,6 +17,7 @@ class ERC20TokenDetailViewController:UIViewController, UIScrollViewDelegate, Mod
     @IBOutlet var ibo_name:UILabel?
     @IBOutlet var ibo_symbol:UILabel?
     @IBOutlet var ibo_balance:UILabel?
+    @IBOutlet var ibo_walletAddress:UILabel?
     
     @IBOutlet var ibo_tokenImage:UIImageView?
     @IBOutlet var ibo_tokenBackground:UIImageView?
@@ -50,6 +51,8 @@ class ERC20TokenDetailViewController:UIViewController, UIScrollViewDelegate, Mod
         ibo_qrCode?.layer.shadowRadius = 4
         ibo_qrCode?.layer.shadowOffset = CGSize(width: 0, height: 2)
         ibo_qrCode?.layer.shadowOpacity = 0.25
+        
+        self.ibo_walletAddress?.text = EtherWallet.account.address!
         
         let image = self.ibo_tokenImage?.image
         self.ibo_tokenBackground!.backgroundColor = UIColor(patternImage: image!)

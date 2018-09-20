@@ -12,15 +12,15 @@ import KeychainAccess
 
 enum PassState {
     case Create
+    case Import
     case Verify
     case Unlock
     case Reset
 }
 
-protocol PasswordLoginDelegate {
-    func setLoginPasscode(pass:String?)
-    func unlockWalletWithPasscode(pass:String?)
-    func setLoginSuccess()
+@objc protocol PasswordLoginDelegate {
+    @objc optional func createWalletWithPasscode(pass:String?)
+    @objc optional func passcodeVerified(pass:String?)
 }
 
 class PasswordLoginViewController: UIViewController {
@@ -46,7 +46,6 @@ class PasswordLoginViewController: UIViewController {
         passwordContainerView.delegate = self
         passwordContainerView.deleteButtonLocalizedTitle = "Delete"
         
-        
         //customize password UI
         passwordContainerView.tintColor = UIColor.gray
         
@@ -63,8 +62,10 @@ class PasswordLoginViewController: UIViewController {
     }
     
     override func viewWillLayoutSubviews() {
-        if passState == .Create || passState == .Verify{
+        if passState == .Create || passState == .Verify || passState == .Reset{
             self.passwordContainerView.touchAuthenticationEnabled = false;
+        } else {
+            self.passwordContainerView.touchAuthenticationEnabled = true;
         }
     }
     
@@ -76,27 +77,16 @@ extension PasswordLoginViewController: PasswordInputCompleteProtocol {
         if passState == .Create {
             
             passwordContainerView.clearInput()
-            self.delegate?.setLoginPasscode(pass: input)
             self.ibo_passTitleView?.text = "Verify Password"
+            self.kPass = input
             self.passState = .Verify
-            return
-            
-        }
-        
-        if passState == .Reset {
-            
-            passwordContainerView.clearInput()
-            self.delegate?.unlockWalletWithPasscode(pass: input)
-            self.ibo_passTitleView?.text = "Verify Password"
-            self.passState = .Verify
-            
             return
         }
         
         if validation(input) {
             
             if passState == .Verify {
-                validationSuccess()
+                newValidationSuccess()
             }
             
             if passState == .Unlock {
@@ -124,13 +114,20 @@ private extension PasswordLoginViewController {
         return input == kPass
     }
     
-    func validationSuccess() {
-        dismiss(animated: false) {
-            self.delegate?.setLoginSuccess()
-        }
-    }
-    
     func validationFail() {
         passwordContainerView.wrongPassword()
     }
+    
+    func validationSuccess() {
+        dismiss(animated: false) {
+            self.delegate!.passcodeVerified!(pass: self.kPass)
+        }
+    }
+    //CREATE NEW WALLET
+    func newValidationSuccess(){
+        dismiss(animated: false) {
+            self.delegate!.createWalletWithPasscode!(pass: self.kPass)
+        }
+    }
+
 }

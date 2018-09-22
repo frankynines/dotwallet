@@ -158,6 +158,13 @@ class CollectibleListViewController:UIViewController, UICollectionViewDelegate, 
         self.delegate?.userCreateNewCollectible()
     }
     
+    @IBAction func iba_openOpenSea(){
+        let url = URL(string: "https://rinkeby.opensea.io/assets/dottestcollectible")
+        let vc = SFSafariViewController(url: url!)
+        self.present(vc, animated: true) {
+        }
+    }
+    
 }
 
 class CollectableViewCell:UICollectionViewCell {

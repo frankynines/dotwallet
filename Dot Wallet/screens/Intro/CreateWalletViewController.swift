@@ -52,13 +52,11 @@ class CreateWalletViewController: UIViewController, PasswordLoginDelegate {
     
     func welcomeMessage(){
         
-        let alertView = UIAlertController.init(title: "Welcome to Dot Wallet", message: "Wallet is now fully functional on the Main-Net. All test wallets have been switched over, and full send and receive functionality has been activated. Please only test with what you can afford to lose.", preferredStyle: .alert)
+        let alertView = UIAlertController.init(title: "Welcome to Dot Wallet", message: "This version of the wallet has been modified for RINKEBY testnet. Please only test with what you can afford to lose.", preferredStyle: .alert)
         
-        alertView.addAction(UIAlertAction(title: "Cancel", style: .destructive, handler: nil))
+        alertView.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
 
-        
-        alertView.addAction(UIAlertAction(title: "Ok", style: .default, handler: { (action) in
-        }))
+        alertView.addAction(UIAlertAction(title: "Cancel", style: .destructive, handler: nil))
         
         self.present(alertView, animated: true, completion: nil)
         

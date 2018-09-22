@@ -161,9 +161,9 @@ class CollectibleDetailViewController: UIViewController, UIScrollViewDelegate, M
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         
-        if scrollView.contentOffset.y > 50 {
-            iba_sendToken()
-        }
+//        if scrollView.contentOffset.y > 50 {
+//            iba_sendToken()
+//        }
     
     }
     

@@ -21,7 +21,7 @@ class SendViewController: UIViewController, QRCodeReaderViewControllerDelegate, 
 
     @IBOutlet weak var ibo_sendAmount:UITextField?
     @IBOutlet weak var ibo_addressField:UITextField?
-    
+    @IBOutlet weak var ibo_gasFee:UILabel?
     
     var collectible:OErc721Token?
     var token:OERC20Token?
@@ -61,9 +61,29 @@ class SendViewController: UIViewController, QRCodeReaderViewControllerDelegate, 
             self.ibo_walletName?.text = "ETH" + " Balance"
             self.ibo_tokenSymbol?.text = "ETH"
             self.syncEtherBalance()
-            
         }
         
+        
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        DispatchQueue.main.async {
+            self.updateGas()
+        }
+    }
+    
+    func updateGas(){
+        
+        var gas:String?
+        
+        do {
+            gas = try EtherWallet.gas.gasForSendingEth(to: "0x2Eb9b439Ffb7dC587198e1534e465a6242192b24", amount: "0.5") // TEMP VALUES
+        } catch {
+            gas = "1000000"
+        }
+        gas = EtherWallet.balance.WeiToValue(wei: gas!, dec: 9)
+        ibo_gasFee!.text = "\(gas!) ETH"
     }
 
     func syncEtherBalance(){

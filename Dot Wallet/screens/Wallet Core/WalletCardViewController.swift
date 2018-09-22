@@ -61,7 +61,7 @@ class WalletCardViewController:UIViewController, UIScrollViewDelegate, ModalSlid
             self.refreshBalance()
         }
         self.repeatableTimer.resume()
-        self.ibo_dot?.backgroundColor = UIColor.green
+        self.ibo_dot?.backgroundColor = UIColor.orange
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -95,7 +95,6 @@ class WalletCardViewController:UIViewController, UIScrollViewDelegate, ModalSlid
 
     func refreshBalance(){
         
-        //self.iboBalance?.animationDuration = 1
         EtherWallet.balance.etherBalance { balance in
             guard let networkbalance = balance else {
                 return

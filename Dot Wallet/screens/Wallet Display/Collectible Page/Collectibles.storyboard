@@ -27,6 +27,15 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="trailing" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mQh-ia-ZHf">
+                                        <rect key="frame" x="92" y="5" width="255" height="40"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <state key="normal" title="View OpenSea "/>
+                                        <connections>
+                                            <action selector="iba_openOpenSea" destination="eX6-Ro-DKb" eventType="touchUpInside" id="vDk-Pp-Uf6"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
@@ -301,7 +310,7 @@
                                     <constraint firstAttribute="trailing" secondItem="fR7-AN-ZWp" secondAttribute="trailing" id="xCs-uE-4wr"/>
                                 </constraints>
                             </scrollView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="D81-H1-dBv">
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="D81-H1-dBv">
                                 <rect key="frame" x="137.5" y="30" width="100" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="LE2-Ll-Y5F"/>

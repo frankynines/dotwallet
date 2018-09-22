@@ -26,7 +26,7 @@ class WalletSettingViewController:UITableViewController, PasswordLoginDelegate {
         self.title = "Settings"
         self.navigationController?.isNavigationBarHidden = false
         
-        self.ibo_network?.text = "Main Net"
+        self.ibo_network?.text = "RINKEBY"
         self.userColor()
     }
     

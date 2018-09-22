@@ -35,8 +35,7 @@ class WalletDisplayViewController:UIViewController, UIPageViewControllerDelegate
         
         self.syncBalance()
         
-        TXHistoryCacheManager.shared.loadTXHistory { (results) in
-        }
+        TXHistoryCacheManager.shared.loadTXHistory { (results) in }
     }
     
     @IBAction func iba_dismiss(){
@@ -56,8 +55,8 @@ class WalletDisplayViewController:UIViewController, UIPageViewControllerDelegate
             } else {
                 self.refreshBalance()
             }
-
         }
+        
     }
     
     func refreshBalance(){
@@ -71,6 +70,7 @@ class WalletDisplayViewController:UIViewController, UIPageViewControllerDelegate
             self.iboBalance?.text = balance
         }
     }
+    
     //NEW TOKEN
     func userCreateNewCollectible(){
         
@@ -78,7 +78,6 @@ class WalletDisplayViewController:UIViewController, UIPageViewControllerDelegate
         let vc = storyboard.instantiateViewController(withIdentifier: "UINavController")
         
         self.present(vc, animated: true) {}
-        
     }
     
     //TABBAR
@@ -138,13 +137,10 @@ class WalletDisplayViewController:UIViewController, UIPageViewControllerDelegate
     
     // DISPLAY POPUP
     var popModalController:PopOverViewcontroller!
-    //var tokenDetail: TokenDetailViewController!
     var transactionDetail: TransactionDetailViewController!
     
     //TOKEN SELECT
     func tokenDidSelectERC721(token: OErc721Token, tokenImage: UIImage?) {
- 
-        
         let vc = (UIStoryboard(name: "Collectibles", bundle: nil).instantiateViewController(withIdentifier: "sb_CollectibleDetailViewController") as! CollectibleDetailViewController)
         vc.erc721Token = token
         vc.tokenImage = tokenImage
@@ -156,7 +152,6 @@ class WalletDisplayViewController:UIViewController, UIPageViewControllerDelegate
         self.transactionDetail.transaction = transaction
          self.transactionDetail.delegate = self
         self.presentSlideView(vc: self.transactionDetail, title: "Completed", size: .Compact)
-
     }
     
     func presentPopView(vc:UIViewController?, title:String){

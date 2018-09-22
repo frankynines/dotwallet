@@ -57,39 +57,20 @@
         "constant": false,
         "inputs": [
             {
-                "name": "_tokenId",
-                "type": "uint256"
-            },
-            {
-                "name": "_to",
-                "type": "address"
-            }
-        ],
-        "name": "giftCollectible",
-        "outputs": [],
-        "payable": true,
-        "stateMutability": "payable",
-        "type": "function"
-    },
-    {
-        "constant": false,
-        "inputs": [
-            {
                 "name": "_to",
                 "type": "address"
             },
             {
                 "name": "_tokenURI",
                 "type": "string"
+            },
+            {
+                "name": "_uniqueID",
+                "type": "string"
             }
         ],
         "name": "mintCollectible",
-        "outputs": [
-            {
-                "name": "_newTokenId",
-                "type": "uint256"
-            }
-        ],
+        "outputs": [],
         "payable": false,
         "stateMutability": "nonpayable",
         "type": "function"
@@ -107,6 +88,23 @@
         "payable": false,
         "stateMutability": "nonpayable",
         "type": "function"
+    },
+    {
+        "anonymous": false,
+        "inputs": [
+            {
+                "indexed": true,
+                "name": "previousOwner",
+                "type": "address"
+            },
+            {
+                "indexed": true,
+                "name": "newOwner",
+                "type": "address"
+            }
+        ],
+        "name": "OwnershipTransferred",
+        "type": "event"
     },
     {
         "constant": false,
@@ -149,23 +147,6 @@
             }
         ],
         "name": "OwnershipRenounced",
-        "type": "event"
-    },
-    {
-        "anonymous": false,
-        "inputs": [
-            {
-                "indexed": true,
-                "name": "previousOwner",
-                "type": "address"
-            },
-            {
-                "indexed": true,
-                "name": "newOwner",
-                "type": "address"
-            }
-        ],
-        "name": "OwnershipTransferred",
         "type": "event"
     },
     {
@@ -353,6 +334,20 @@
         "type": "function"
     },
     {
+        "constant": false,
+        "inputs": [
+            {
+                "name": "value",
+                "type": "uint256"
+            }
+        ],
+        "name": "withdraw",
+        "outputs": [],
+        "payable": false,
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
         "inputs": [
             {
                 "name": "_name",
@@ -366,20 +361,6 @@
         "payable": false,
         "stateMutability": "nonpayable",
         "type": "constructor"
-    },
-    {
-        "constant": false,
-        "inputs": [
-            {
-                "name": "value",
-                "type": "uint256"
-            }
-        ],
-        "name": "withdraw",
-        "outputs": [],
-        "payable": false,
-        "stateMutability": "nonpayable",
-        "type": "function"
     },
     {
         "constant": true,
@@ -402,6 +383,10 @@
             {
                 "name": "value",
                 "type": "uint256"
+            },
+            {
+                "name": "uniqueID",
+                "type": "string"
             }
         ],
         "payable": false,
@@ -482,6 +467,25 @@
             {
                 "name": "",
                 "type": "uint256[]"
+            }
+        ],
+        "payable": false,
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "constant": true,
+        "inputs": [
+            {
+                "name": "_uniqueID",
+                "type": "string"
+            }
+        ],
+        "name": "getAPITokenId",
+        "outputs": [
+            {
+                "name": "",
+                "type": "uint256"
             }
         ],
         "payable": false,

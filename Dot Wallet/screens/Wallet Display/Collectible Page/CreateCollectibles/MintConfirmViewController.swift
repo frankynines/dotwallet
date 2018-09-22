@@ -11,14 +11,18 @@ import UIKit
 import Firebase
 import Toast_Swift
 import SafariServices
+import KeychainAccess
 
-class MintConfirmViewController : UIViewController {
+
+class MintConfirmViewController : UIViewController, PasswordLoginDelegate {
     
     @IBOutlet weak var ibo_selectedImage:UIImageView!
     var userImage:UIImage?
     
     @IBOutlet weak var ibo_itemName:UILabel?
     @IBOutlet weak var ibo_itemDescription:UILabel?
+    
+    @IBOutlet weak var ibo_gasFee:UILabel?
     
     var package = [String:Any]()
     
@@ -27,24 +31,72 @@ class MintConfirmViewController : UIViewController {
         
         let rightButton = UIBarButtonItem(title: "Mint", style: .done, target: self, action: #selector(iba_mintItem))
         self.navigationItem.rightBarButtonItem = rightButton
+        
+        EtherWallet.balance.etherBalance { (balance) in
+            self.title = "Balance: \(balance!)"
+        }
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         self.ibo_selectedImage.image = userImage
         
-        self.ibo_itemName?.text = self.package["name"] as! String
-        self.ibo_itemDescription?.text = self.package["description"] as! String
+        self.ibo_itemName?.text = self.package["name"] as? String
+        self.ibo_itemDescription?.text = self.package["description"] as? String
+        
+        self.updateGas()
     }
+    
+    func updateGas(){
+        
+        let params = [EtherWallet.account.address!, "https://storage.googleapis.com/dotwallet.appspot.com/o12345DotWalletCollectibleI.png", "12345DotWalletCollectibleI"] as [Any]
+        
+        var gas:String?
+        
+        do {
+             gas = try EtherWallet.gas.gasForContractMethod(contractAddress: "0xa12d5111cb7fd6c285faa81530eb5c4dfcea51e7", methodName: "mintCollectible", methodParams: params)
+            
+        } catch {
+            gas = "1000000"
+        }
+        gas = EtherWallet.balance.WeiToValue(wei: gas!, dec: 9)
+        ibo_gasFee!.text = "Gas Estimate: \(gas!)"
+    }
+    
+    var passcodeVC:PasswordLoginViewController!
+
     
     @objc func iba_mintItem(){
         
+        //SECURITY CHECK
+        let publicAddress = EtherWallet.account.address?.lowercased()
+        let keychain = Keychain(service: publicAddress!)
+        do {
+            
+            let pass = try keychain.get(publicAddress!)
+            let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
+            self.passcodeVC = (storyboard.instantiateViewController(withIdentifier: "PasswordLoginViewController") as! PasswordLoginViewController)
+            self.passcodeVC!.modalPresentationStyle = .overFullScreen
+            self.passcodeVC!.delegate = self
+            self.passcodeVC!.passState = .Unlock
+            self.passcodeVC!.modalTitle = "Enter Passcode"
+            self.passcodeVC!.kPass = pass
+            present(passcodeVC!, animated: false, completion: nil)
+            
+        } catch {
+            print(error.localizedDescription)
+        }
+        
+    }
+    
+    func passcodeVerified(pass:String?) {
+        
         self.view.makeToastActivity(.center)
-
+        
         let storage = Storage.storage()
         var storageRef = storage.reference()
-
-        let timestamp = Date().timeIntervalSinceNow
+        
+        let timestamp = Date().timeIntervalSince1970
         let fileName = "dwc\(timestamp)image.png"
         let storagePath = "gs://dotwallet.appspot.com/\(fileName)"
         
@@ -53,16 +105,16 @@ class MintConfirmViewController : UIViewController {
         let imagedata = UIImagePNGRepresentation(userImage!)
         
         storageRef.putData(imagedata!, metadata: nil) { (metadata, error) in
-
+            
             storageRef.downloadURL { (url, error) in
                 let cleanurl = "https://storage.googleapis.com/dotwallet.appspot.com/\(fileName)"
-                self.addItemToAPI(fileURL: cleanurl)
+                self.addItemToAPI(fileURL: cleanurl, pass:pass!)
             }
         }
         
     }
     
-    func addItemToAPI(fileURL:String){
+    func addItemToAPI(fileURL:String, pass:String){
         
         var ref: DatabaseReference!
         let _package:[String:Any] = [
@@ -84,17 +136,16 @@ class MintConfirmViewController : UIViewController {
                 self.showAlert(title:"Oops", message: (error?.localizedDescription)!)
                 return
             }
-            
             let blobURL = "\(reference).json"
-            self.updateBlock(tokenURI: blobURL)
+            self.updateBlock(tokenURI: blobURL, key:reference.key, pass:pass)
         }
     }
     
-    func updateBlock(tokenURI:String){
+    func updateBlock(tokenURI:String, key:String, pass:String){
         
-        let params = [EtherWallet.account.address, tokenURI]
+        let params = [EtherWallet.account.address, tokenURI, key]
         
-        EtherWallet.transaction.callContractMethod(methodName: "mintCollectible", methodParams: params, pass: "1111") { (completion, result) in
+        EtherWallet.transaction.sendContractMethod(methodName: "mintCollectible", methodParams: params, pass: pass) { (completion, result) in
             self.showAlert(title: "Completed", message: result!)
         }
         

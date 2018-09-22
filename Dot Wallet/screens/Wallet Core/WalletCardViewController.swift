@@ -41,14 +41,11 @@ class WalletCardViewController:UIViewController, UIScrollViewDelegate, ModalSlid
         
         self.setupHeaderView()
         
-        Auth.auth().signInAnonymously() { (authResult, error) in
-            
-        }
+        Auth.auth().signInAnonymously() { (authResult, error) in }
         
         let userBalanceKey = "balance:\(EtherWallet.account.address!)"
         if let balance = UserDefaults.standard.value(forKey: userBalanceKey) {
-            
-            self.iboBalance?.text = balance as! String
+            self.iboBalance?.text = balance as? String
         }
         
     }
@@ -61,7 +58,7 @@ class WalletCardViewController:UIViewController, UIScrollViewDelegate, ModalSlid
             self.refreshBalance()
         }
         self.repeatableTimer.resume()
-        self.ibo_dot?.backgroundColor = UIColor.green
+        self.ibo_dot?.backgroundColor = UIColor.orange
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -95,7 +92,6 @@ class WalletCardViewController:UIViewController, UIScrollViewDelegate, ModalSlid
 
     func refreshBalance(){
         
-        //self.iboBalance?.animationDuration = 1
         EtherWallet.balance.etherBalance { balance in
             guard let networkbalance = balance else {
                 return
@@ -167,13 +163,13 @@ class WalletCardViewController:UIViewController, UIScrollViewDelegate, ModalSlid
         self.slideModalController.delegate = self
         
         //Assign Child Class
-         self.sendVC = (UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "sb_SendViewController") as! SendViewController)
+         self.sendVC = (UIStoryboard(name: "SendView", bundle: nil).instantiateViewController(withIdentifier: "sb_SendViewController") as! SendViewController)
         sendVC.delegate = self
         
         self.slideModalController.viewController = sendVC
         self.view.addSubview(self.slideModalController.view)
-        
     }
+    
     func modalSlideDismiss() {
         self.slideModalController.animateModalOut {
             self.slideModalController.view.removeFromSuperview()

@@ -107,7 +107,7 @@ extension EtherWallet: TokenService {
     
     public func getERC721Tokens(address:String, tokenAddress:String?, page:String, completion: @escaping ([JSON]?) -> ()){
         
-        let urlString = "https://api.opensea.io/api/v1/assets/"
+        let urlString = "https://rinkeby-api.opensea.io/api/v1/assets/"
         let parameters = ["owner":address,
                           "order_by": "token_id",
                           "asset_contract_address":tokenAddress,
@@ -115,7 +115,6 @@ extension EtherWallet: TokenService {
                           "limit":"50"
         ]
         
-       
         let headers = ["X-API-KEY": "1a4288c7a6114fcd85f3d88aa37af0cc"]
 
         var urlComponents = URLComponents(string: urlString)

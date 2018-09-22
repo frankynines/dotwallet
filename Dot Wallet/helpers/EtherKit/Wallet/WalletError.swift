@@ -9,3 +9,12 @@ public enum WalletError: Error {
     case notEnoughBalance
     case contractFailure
 }
+
+public enum ContractError: Error {
+    case invalidABI
+    case invalidMethodParams
+    case invalidAddress
+    case malformedKeystore
+    case networkFailure
+    case contractFailure
+}

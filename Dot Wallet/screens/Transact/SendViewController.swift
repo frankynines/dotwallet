@@ -21,7 +21,9 @@ class SendViewController: UIViewController, QRCodeReaderViewControllerDelegate, 
 
     @IBOutlet weak var ibo_sendAmount:UITextField?
     @IBOutlet weak var ibo_addressField:UITextField?
+    @IBOutlet weak var ibo_gasFee:UILabel?
     
+    @IBOutlet var ibo_keyboardRestraint:NSLayoutConstraint?
     
     var collectible:OErc721Token?
     var token:OERC20Token?
@@ -29,7 +31,6 @@ class SendViewController: UIViewController, QRCodeReaderViewControllerDelegate, 
     
     var delegate:ModalSlideOverViewcontrollerDelegate?
     var passcodeVC:PasswordLoginViewController!
-
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,27 +44,58 @@ class SendViewController: UIViewController, QRCodeReaderViewControllerDelegate, 
             self.ibo_balance?.text = (balance as! String)
         }
         
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardShown), name:NSNotification.Name.UIKeyboardWillShow, object: nil)
+        
+    }
+    
+    @objc func keyboardShown(notification: NSNotification) {
+        let info = notification.userInfo!
+        let keyboardFrame: CGRect = (info[UIKeyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
+        self.ibo_keyboardRestraint?.constant = keyboardFrame.height
     }
     
     override func viewWillAppear(_ animated: Bool) {
         
         super.viewWillAppear(animated)
-               
+        
         //CHECK IF ERC20 TOKEN
         if self.token != nil {
-            
             self.ibo_walletName?.text = (token?.symbol)! + " Balance"
             self.ibo_tokenSymbol?.text = (token?.symbol)!
             self.syncTokenBalance()
-            
         } else {
-            
             self.ibo_walletName?.text = "ETH" + " Balance"
             self.ibo_tokenSymbol?.text = "ETH"
             self.syncEtherBalance()
             
+            DispatchQueue.global(qos: .background).async {
+                self.updateGas()
+            }
         }
         
+        
+    }
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        DispatchQueue.main.async {
+            self.ibo_sendAmount?.becomeFirstResponder()
+        }
+    }
+    
+    func updateGas(){
+        
+        var gas:String?
+        
+        do {
+            gas = try EtherWallet.gas.gasForSendingEth(to: "0x2Eb9b439Ffb7dC587198e1534e465a6242192b24", amount: "0.1") // TEMP VALUES
+        } catch {
+            gas = "1000000"
+        }
+        gas = EtherWallet.balance.WeiToValue(wei: gas!, dec: 9)
+        DispatchQueue.main.async {
+            self.ibo_gasFee!.text = "\(gas!) ETH"
+        }
     }
 
     func syncEtherBalance(){

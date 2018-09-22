@@ -49,7 +49,6 @@ class ImportWalletViewController: UIViewController, QRCodeReaderViewControllerDe
     }
     
     func createWalletWithPasscode(pass: String?) {
-        
         self.importWalletWith(pass: pass!)
     }
     
@@ -82,9 +81,7 @@ class ImportWalletViewController: UIViewController, QRCodeReaderViewControllerDe
         }
         
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "sb_WalletHomeViewController")
-        
         self.navigationController?.setViewControllers([vc!], animated: false)
-        
     }
     
     

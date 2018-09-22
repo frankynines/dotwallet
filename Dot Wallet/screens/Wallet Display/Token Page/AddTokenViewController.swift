@@ -111,7 +111,6 @@ class AddTokenViewController:UIViewController, UITableViewDelegate, UITableViewD
             })
             searchActive = true;
             self.ibo_tableView?.reloadData()
-            
         }
     }
     
@@ -135,13 +134,10 @@ class TokenListCell:UITableViewCell {
         self.iboTokenImage?.image = nil
         self.iboTokenAddress?.text = token.address
         self.tokenAddress = token.address
-        
         iboSwitch?.isOn = false
-        
         _token = token
         
         DispatchQueue.global(qos: .background).async {
-            
             EtherWallet.tokens.getTokenImage(contractAddress: (token.address?.lowercased())!) { (image) in
             
                 DispatchQueue.main.async {

@@ -89,7 +89,7 @@ class CollectibleDetailViewController: UIViewController, UIScrollViewDelegate, M
         } else {
             let assetID = self.erc721Token?.token_id
             let assetAddress = self.erc721Token?.asset_contract?.address
-            let urlString = "https://opensea.io/assets/\(assetAddress)/\(assetID)"
+            let urlString = "https://opensea.io/assets/\(assetAddress!)/\(assetID!)"
             openURL = urlString
         }
         self.openURL(url: openURL!)
@@ -161,9 +161,9 @@ class CollectibleDetailViewController: UIViewController, UIScrollViewDelegate, M
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         
-        if scrollView.contentOffset.y > 50 {
-            iba_sendToken()
-        }
+//        if scrollView.contentOffset.y > 50 {
+//            iba_sendToken()
+//        }
     
     }
     

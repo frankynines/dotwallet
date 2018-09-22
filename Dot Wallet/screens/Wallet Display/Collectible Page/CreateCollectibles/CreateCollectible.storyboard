@@ -24,9 +24,15 @@
                                     <constraint firstAttribute="width" constant="100" id="0Nu-WR-cPx"/>
                                     <constraint firstAttribute="height" constant="100" id="u1P-z4-sgZ"/>
                                 </constraints>
-                                <state key="normal" title="+"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                <state key="normal" title="+">
+                                    <color key="titleColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="hasBorder" value="YES"/>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="50"/>
+                                    </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="iba_selectImage" destination="4JA-DA-e6a" eventType="touchUpInside" id="gQd-4X-gCP"/>
@@ -135,14 +141,23 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nia-Cp-hJV">
+                                <rect key="frame" x="20" y="443.5" width="335" height="19.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="Nia-Cp-hJV" firstAttribute="leading" secondItem="qOm-UH-wb7" secondAttribute="leading" constant="20" id="E01-AI-b2v"/>
                             <constraint firstItem="mwr-as-rBR" firstAttribute="top" secondItem="XFh-lr-KRw" secondAttribute="bottom" constant="40" id="Efu-ez-wJf"/>
                             <constraint firstItem="XFh-lr-KRw" firstAttribute="centerX" secondItem="X2g-gb-rkZ" secondAttribute="centerX" id="IF2-5R-0zb"/>
                             <constraint firstItem="qOm-UH-wb7" firstAttribute="trailing" secondItem="QiX-IJ-xNz" secondAttribute="trailing" constant="20" id="KNn-qI-lyU"/>
                             <constraint firstItem="XFh-lr-KRw" firstAttribute="top" secondItem="qOm-UH-wb7" secondAttribute="top" constant="20" id="cEj-NA-Ez7"/>
+                            <constraint firstItem="Nia-Cp-hJV" firstAttribute="top" secondItem="QiX-IJ-xNz" secondAttribute="bottom" constant="20" id="d2c-et-uHZ"/>
                             <constraint firstItem="qOm-UH-wb7" firstAttribute="trailing" secondItem="mwr-as-rBR" secondAttribute="trailing" constant="20" id="k7H-ot-886"/>
+                            <constraint firstItem="qOm-UH-wb7" firstAttribute="trailing" secondItem="Nia-Cp-hJV" secondAttribute="trailing" constant="20" id="mHc-mO-YpC"/>
                             <constraint firstItem="QiX-IJ-xNz" firstAttribute="top" secondItem="mwr-as-rBR" secondAttribute="bottom" constant="10" id="vMV-sD-td4"/>
                             <constraint firstItem="QiX-IJ-xNz" firstAttribute="leading" secondItem="qOm-UH-wb7" secondAttribute="leading" constant="20" id="wmP-fg-NyA"/>
                             <constraint firstItem="mwr-as-rBR" firstAttribute="leading" secondItem="qOm-UH-wb7" secondAttribute="leading" constant="20" id="zhW-BW-0cC"/>
@@ -150,6 +165,7 @@
                         <viewLayoutGuide key="safeArea" id="qOm-UH-wb7"/>
                     </view>
                     <connections>
+                        <outlet property="ibo_gasFee" destination="Nia-Cp-hJV" id="b2a-YD-Aje"/>
                         <outlet property="ibo_itemDescription" destination="QiX-IJ-xNz" id="qRy-M6-v6R"/>
                         <outlet property="ibo_itemName" destination="mwr-as-rBR" id="dS4-Fw-4DI"/>
                         <outlet property="ibo_selectedImage" destination="XFh-lr-KRw" id="vk8-9e-o3f"/>

@@ -15,7 +15,9 @@ public protocol TransactionService {
     
     func getTransactionHistory(address:String, completion: @escaping ([JSON]?) -> ())
     
-    func callContractMethod(methodName:String, methodParams:[Any?], pass:String, completion: @escaping (Bool?, String?) -> ())
+    func getEthereumContract(contractAddress:String, methodName:String, methodParams:[Any?]) throws -> web3.web3contract?
+    
+    func sendContractMethod(methodName:String, methodParams:[Any?], pass:String, completion: @escaping (Bool?, String?) -> ())
 
 }
 
@@ -42,6 +44,7 @@ extension EtherWallet: TransactionService {
         options.value = Web3.Utils.parseToBigUInt(amount, units: .eth)
         
         let intermediateSend = web3Main.contract(Web3.Utils.coldWalletABI, at: toAddress, abiVersion: 2)!.method(options: options)!
+        
         let sendResult = intermediateSend.send(password: password)
         switch sendResult {
         case .success(let result):
@@ -114,7 +117,7 @@ extension EtherWallet: TransactionService {
     }
     
     public func getTransactionHistory(address:String, completion: @escaping ([JSON]?) -> ()){
-        print("Get TX History")
+
         let url = NSURL(string: etherscanURL + "/api?module=account&action=txlist&address="+address+"&startblock=0&endblock=99999999&page=1&offset=100&sort=asc&apikey=Y2DRKI11G7A6NY61TKRYKVJ2HFXVAFHKRE")
         
         URLSession.shared.dataTask(with: (url as URL?)!, completionHandler: {(data, response, error) -> Void in
@@ -124,7 +127,6 @@ extension EtherWallet: TransactionService {
             if (try? JSONSerialization.jsonObject(with: data!, options: .allowFragments) as? NSDictionary) != nil {
                 let json = JSON(data!)
                 let result = json["result"].arrayValue
-                print(result.count)
                 DispatchQueue.main.async {
                     completion(result)
                 }
@@ -132,36 +134,55 @@ extension EtherWallet: TransactionService {
         }).resume()
     }
     
-    public func callContractMethod(methodName:String, methodParams:[Any?], pass:String, completion: @escaping (Bool?, String?) -> ()){
+    public func getEthereumContract(contractAddress:String, methodName:String, methodParams:[Any?]) throws -> web3.web3contract?{
         
-        let contractEAddress = EthereumAddress("0xc48ebaaa50cbdf7ebee5abce9eb7a35746f82805")
+        let contractEAddress = EthereumAddress(contractAddress)
         
         do {
             let keystore = try loadKeystore()
             let keystoreManager = KeystoreManager([keystore])
             web3Main.addKeystoreManager(keystoreManager)
         } catch {
-            print(error.localizedDescription)
-            return
-        }
+            throw ContractError.malformedKeystore
 
+        }
+        
         options.from = EthereumAddress(address!)
         
         guard let contractABI = try! self.getContractABI() else {
-            completion(false, "Invalid Contract ABI")
+            throw ContractError.invalidABI
+        }
+        
+        if let contract = web3Main.contract(contractABI, at: contractEAddress){
+            return contract
+        }
+        
+        throw ContractError.networkFailure
+    }
+
+    
+    public func sendContractMethod(methodName:String, methodParams:[Any?], pass:String, completion: @escaping (Bool?, String?) -> ()){
+        
+        let contractAddress = "0xa12d5111cb7fd6c285faa81530eb5c4dfcea51e7"
+        
+        guard let contract = try! self.getEthereumContract(contractAddress: contractAddress, methodName: methodName, methodParams: methodParams) else {
+            completion(false, "Contract Failed")
             return
         }
         
-        guard let contract = web3Main.contract(contractABI, at: contractEAddress) else {
-            completion(false, "Contract INIT fail")
-            return
-        }
-            
         guard let contractMethod = contract.method(methodName, parameters: methodParams as [AnyObject], extraData: Data(), options: options) else {
             completion(false, "Contract Method Failed, Check Parameters")
             return
         }
-            
+        
+        guard let gas = try? self.gasForContractMethod(contractAddress: contractAddress, methodName: methodName, methodParams: methodParams) else {
+            completion(false, "Failed to Check Gas for Method")
+            return
+        }
+        
+        options.gasLimit = BigUInt(stringLiteral: gas!)
+        options.gasPrice = 2
+
         let contractCall = contractMethod.send(password: pass, options: options, onBlock: "latest")
         
         switch contractCall {
@@ -177,9 +198,8 @@ extension EtherWallet: TransactionService {
     internal func getTXFromHash(tx:String) {
         do {
             let txCall = try web3Main.eth.getTransactionDetailsPromise(tx).wait()
-            print(txCall)
         } catch {
-            print("WAT")
+            print(error.localizedDescription)
         }
     }
     

@@ -115,7 +115,6 @@ class ERC20TokenDetailViewController:UIViewController, UIScrollViewDelegate, Mod
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         
-        //VERTICLE SCROLLING EDGES
         if scrollView.contentOffset.y > 50 {
             if impactDetected == false {
                 impact.impactOccurred()

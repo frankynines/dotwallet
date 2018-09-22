@@ -115,7 +115,6 @@ extension EtherWallet: TokenService {
                           "limit":"50"
         ]
         
-       
         let headers = ["X-API-KEY": "1a4288c7a6114fcd85f3d88aa37af0cc"]
 
         var urlComponents = URLComponents(string: urlString)

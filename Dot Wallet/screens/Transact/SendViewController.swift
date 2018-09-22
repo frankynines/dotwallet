@@ -49,10 +49,8 @@ class SendViewController: UIViewController, QRCodeReaderViewControllerDelegate, 
     }
     
     @objc func keyboardShown(notification: NSNotification) {
-        print("Keyboard")
         let info = notification.userInfo!
         let keyboardFrame: CGRect = (info[UIKeyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
-        print(keyboardFrame)
         self.ibo_keyboardRestraint?.constant = keyboardFrame.height
     }
     

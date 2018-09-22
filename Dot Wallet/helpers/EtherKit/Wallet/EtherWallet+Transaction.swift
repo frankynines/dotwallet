@@ -117,7 +117,7 @@ extension EtherWallet: TransactionService {
     }
     
     public func getTransactionHistory(address:String, completion: @escaping ([JSON]?) -> ()){
-        print("Get TX History")
+
         let url = NSURL(string: etherscanURL + "/api?module=account&action=txlist&address="+address+"&startblock=0&endblock=99999999&page=1&offset=100&sort=asc&apikey=Y2DRKI11G7A6NY61TKRYKVJ2HFXVAFHKRE")
         
         URLSession.shared.dataTask(with: (url as URL?)!, completionHandler: {(data, response, error) -> Void in
@@ -127,7 +127,6 @@ extension EtherWallet: TransactionService {
             if (try? JSONSerialization.jsonObject(with: data!, options: .allowFragments) as? NSDictionary) != nil {
                 let json = JSON(data!)
                 let result = json["result"].arrayValue
-                print(result.count)
                 DispatchQueue.main.async {
                     completion(result)
                 }
@@ -199,9 +198,8 @@ extension EtherWallet: TransactionService {
     internal func getTXFromHash(tx:String) {
         do {
             let txCall = try web3Main.eth.getTransactionDetailsPromise(tx).wait()
-            print(txCall)
         } catch {
-            print("WAT")
+            print(error.localizedDescription)
         }
     }
     

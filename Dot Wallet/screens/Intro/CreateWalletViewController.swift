@@ -51,15 +51,11 @@ class CreateWalletViewController: UIViewController, PasswordLoginDelegate {
     }
     
     func welcomeMessage(){
-        
         let alertView = UIAlertController.init(title: "Welcome to Dot Wallet", message: "This version of the wallet has been modified for RINKEBY testnet. Please only test with what you can afford to lose.", preferredStyle: .alert)
         
         alertView.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
-
         alertView.addAction(UIAlertAction(title: "Cancel", style: .destructive, handler: nil))
-        
         self.present(alertView, animated: true, completion: nil)
-        
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -77,14 +73,11 @@ class CreateWalletViewController: UIViewController, PasswordLoginDelegate {
     }
     
     @IBAction func iba_importWallet(){
-        
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "sb_ImportWalletViewController") as! ImportWalletViewController
         self.navigationController?.pushViewController(vc, animated: true)
-        
     }
     
     func showLoginView(state:PassState) {
-        
         self.loginVC = (storyboard?.instantiateViewController(withIdentifier: "PasswordLoginViewController") as! PasswordLoginViewController)
         self.loginVC!.modalPresentationStyle = .overFullScreen
         self.loginVC!.delegate = self
@@ -96,8 +89,7 @@ class CreateWalletViewController: UIViewController, PasswordLoginDelegate {
     func createWalletWithPasscode(pass: String?) {
         self.createWallet(pass: pass!)
     }
-    
-    
+
     //WALLET CORE
     func createWallet(pass:String){
 
@@ -134,17 +126,12 @@ class CreateWalletViewController: UIViewController, PasswordLoginDelegate {
     }
     
     func alertError(error:Error){
-        
         let alertView = UIAlertController.init(title: "Oops", message: error.localizedDescription, preferredStyle: .alert)
-        
         alertView.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
-        
         self.present(alertView, animated: true, completion: nil)
-        
     }
     
     func animateBG() {
-        
         if inView != true {
             return
         }
@@ -178,8 +165,5 @@ class CreateWalletViewController: UIViewController, PasswordLoginDelegate {
     func randomColor() -> String {
         return self.testColors.randomElement()!
     }
-       
     
 }
-
-

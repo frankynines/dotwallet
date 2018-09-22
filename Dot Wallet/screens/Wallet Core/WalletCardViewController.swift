@@ -41,14 +41,11 @@ class WalletCardViewController:UIViewController, UIScrollViewDelegate, ModalSlid
         
         self.setupHeaderView()
         
-        Auth.auth().signInAnonymously() { (authResult, error) in
-            
-        }
+        Auth.auth().signInAnonymously() { (authResult, error) in }
         
         let userBalanceKey = "balance:\(EtherWallet.account.address!)"
         if let balance = UserDefaults.standard.value(forKey: userBalanceKey) {
-            
-            self.iboBalance?.text = balance as! String
+            self.iboBalance?.text = balance as? String
         }
         
     }
@@ -171,8 +168,8 @@ class WalletCardViewController:UIViewController, UIScrollViewDelegate, ModalSlid
         
         self.slideModalController.viewController = sendVC
         self.view.addSubview(self.slideModalController.view)
-        
     }
+    
     func modalSlideDismiss() {
         self.slideModalController.animateModalOut {
             self.slideModalController.view.removeFromSuperview()

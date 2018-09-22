@@ -32,7 +32,6 @@ public class EtherWallet {
         options = Web3Options.defaultOptions()
         options.gasLimit = BigUInt(defaultGasLimitForTokenTransfer)
         storage = (imageStorage?.transformImage())!
-
         setupOptionsFrom()
     }
     

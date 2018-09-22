@@ -78,7 +78,7 @@ class ERC20TokenDetailViewController:UIViewController, UIScrollViewDelegate, Mod
     
     // MODAL FOR SEND
     lazy var sendVC: SendViewController = {
-        return UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "sb_SendViewController") as! SendViewController
+        return UIStoryboard(name: "SendView", bundle: nil).instantiateViewController(withIdentifier: "sb_SendViewController") as! SendViewController
     }()
     
     var slideModalController:ModalSlideOverViewcontroller!

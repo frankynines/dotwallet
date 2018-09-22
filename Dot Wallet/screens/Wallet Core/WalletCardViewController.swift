@@ -166,7 +166,7 @@ class WalletCardViewController:UIViewController, UIScrollViewDelegate, ModalSlid
         self.slideModalController.delegate = self
         
         //Assign Child Class
-         self.sendVC = (UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "sb_SendViewController") as! SendViewController)
+         self.sendVC = (UIStoryboard(name: "SendView", bundle: nil).instantiateViewController(withIdentifier: "sb_SendViewController") as! SendViewController)
         sendVC.delegate = self
         
         self.slideModalController.viewController = sendVC

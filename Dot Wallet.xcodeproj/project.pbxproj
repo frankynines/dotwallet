@@ -76,6 +76,7 @@
 		2FC9C159212582C0000EB023 /* TransactionDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC9C158212582C0000EB023 /* TransactionDetailViewController.swift */; };
 		2FC9C15B21260085000EB023 /* icon_copy.png in Resources */ = {isa = PBXBuildFile; fileRef = 2FC9C15A21260085000EB023 /* icon_copy.png */; };
 		2FE495D021569141007D2AD7 /* EtherWallet+GasEstimates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FE495CF21569141007D2AD7 /* EtherWallet+GasEstimates.swift */; };
+		2FE495D221569BD4007D2AD7 /* SendView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2FE495D121569BD4007D2AD7 /* SendView.storyboard */; };
 		2FE75048210BC78C00AAD6E6 /* RoundButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FE75047210BC78C00AAD6E6 /* RoundButton.swift */; };
 		2FE75050210BFD9200AAD6E6 /* icon_plus.png in Resources */ = {isa = PBXBuildFile; fileRef = 2FE75049210BFD9000AAD6E6 /* icon_plus.png */; };
 		2FE75051210BFD9200AAD6E6 /* icon_tokens.png in Resources */ = {isa = PBXBuildFile; fileRef = 2FE7504A210BFD9000AAD6E6 /* icon_tokens.png */; };
@@ -187,6 +188,7 @@
 		2FC9C158212582C0000EB023 /* TransactionDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionDetailViewController.swift; sourceTree = "<group>"; };
 		2FC9C15A21260085000EB023 /* icon_copy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_copy.png; sourceTree = "<group>"; };
 		2FE495CF21569141007D2AD7 /* EtherWallet+GasEstimates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EtherWallet+GasEstimates.swift"; sourceTree = "<group>"; };
+		2FE495D121569BD4007D2AD7 /* SendView.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SendView.storyboard; sourceTree = "<group>"; };
 		2FE75047210BC78C00AAD6E6 /* RoundButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundButton.swift; sourceTree = "<group>"; };
 		2FE75049210BFD9000AAD6E6 /* icon_plus.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_plus.png; sourceTree = "<group>"; };
 		2FE7504A210BFD9000AAD6E6 /* icon_tokens.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_tokens.png; sourceTree = "<group>"; };
@@ -403,6 +405,7 @@
 			isa = PBXGroup;
 			children = (
 				2F0EFCAD210639E2003EF740 /* SendViewController.swift */,
+				2FE495D121569BD4007D2AD7 /* SendView.storyboard */,
 			);
 			path = Transact;
 			sourceTree = "<group>";
@@ -664,6 +667,7 @@
 				2FE75056210BFD9200AAD6E6 /* icon_transactions.png in Resources */,
 				2FE75054210BFD9200AAD6E6 /* icon_dot.png in Resources */,
 				2F0F255221394D7D0045F2D3 /* btn_home@3x.png in Resources */,
+				2FE495D221569BD4007D2AD7 /* SendView.storyboard in Resources */,
 				2F0F255021394D7D0045F2D3 /* btn_home.png in Resources */,
 				2FE75052210BFD9200AAD6E6 /* icon_send.png in Resources */,
 				2F2055732112FD55006C768E /* icon_settings.png in Resources */,

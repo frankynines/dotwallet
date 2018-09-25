@@ -41,9 +41,16 @@ class WalletCardViewController:UIViewController, UIScrollViewDelegate, ModalSlid
         
         self.setupHeaderView()
         
-        Auth.auth().signInAnonymously() { (authResult, error) in }
+        Auth.auth().signInAnonymously() { (authResult, error) in
+            let userID = authResult?.user.uid
+            DotAPI.shared.userID = userID
+            DotAPI.users.updateUserValue(userID: userID!,
+                                         key: "public_address",
+                                         value: EtherWallet.account.address!)
+        }
         
         let userBalanceKey = "balance:\(EtherWallet.account.address!)"
+        
         if let balance = UserDefaults.standard.value(forKey: userBalanceKey) {
             self.iboBalance?.text = balance as? String
         }

@@ -73,6 +73,7 @@
 		2FA5E3002119834800A4406E /* TokenStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FA5E2FF2119834800A4406E /* TokenStorage.swift */; };
 		2FB22EED212D5B4300672F0E /* UserPreferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FB22EEC212D5B4300672F0E /* UserPreferences.swift */; };
 		2FBBDF20215AA73B00FC751D /* DotAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FBBDF1F215AA73B00FC751D /* DotAPI.swift */; };
+		2FBBDF22215AAF8100FC751D /* ConfigKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FBBDF21215AAF8100FC751D /* ConfigKeys.swift */; };
 		2FC9C1572125710A000EB023 /* HistoryStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC9C1562125710A000EB023 /* HistoryStorage.swift */; };
 		2FC9C159212582C0000EB023 /* TransactionDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC9C158212582C0000EB023 /* TransactionDetailViewController.swift */; };
 		2FC9C15B21260085000EB023 /* icon_copy.png in Resources */ = {isa = PBXBuildFile; fileRef = 2FC9C15A21260085000EB023 /* icon_copy.png */; };
@@ -186,6 +187,7 @@
 		2FA5E2FF2119834800A4406E /* TokenStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenStorage.swift; sourceTree = "<group>"; };
 		2FB22EEC212D5B4300672F0E /* UserPreferences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPreferences.swift; sourceTree = "<group>"; };
 		2FBBDF1F215AA73B00FC751D /* DotAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DotAPI.swift; sourceTree = "<group>"; };
+		2FBBDF21215AAF8100FC751D /* ConfigKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigKeys.swift; sourceTree = "<group>"; };
 		2FC9C1562125710A000EB023 /* HistoryStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryStorage.swift; sourceTree = "<group>"; };
 		2FC9C158212582C0000EB023 /* TransactionDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionDetailViewController.swift; sourceTree = "<group>"; };
 		2FC9C15A21260085000EB023 /* icon_copy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_copy.png; sourceTree = "<group>"; };
@@ -265,6 +267,7 @@
 		2F0EFC7B21063937003EF740 /* Dot Wallet */ = {
 			isa = PBXGroup;
 			children = (
+				2FBBDF21215AAF8100FC751D /* ConfigKeys.swift */,
 				2F2033F921516BF900428586 /* DotCollectible.json */,
 				2FF9D46F21514B4100A747CB /* GoogleService-Info.plist */,
 				2F0EFC7C21063937003EF740 /* AppDelegate.swift */,
@@ -855,6 +858,7 @@
 				2F1F4E8821490CFA003FBF7E /* ImportWalletViewController.swift in Sources */,
 				2FC9C1572125710A000EB023 /* HistoryStorage.swift in Sources */,
 				2FE495D021569141007D2AD7 /* EtherWallet+GasEstimates.swift in Sources */,
+				2FBBDF22215AAF8100FC751D /* ConfigKeys.swift in Sources */,
 				2F0EFCC42106FE6F003EF740 /* EtherWallet+Transaction.swift in Sources */,
 				2FF9D47521514E6600A747CB /* CreateCollectibleViewController.swift in Sources */,
 				2F4C0CEB2132D67A00219567 /* PasswordLoginViewController.swift in Sources */,

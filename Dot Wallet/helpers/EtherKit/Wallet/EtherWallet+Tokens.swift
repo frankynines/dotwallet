@@ -105,33 +105,15 @@ extension EtherWallet: TokenService {
         
     }
     
+    public func getERC721TokenTotal(address:String, tokenAddress:String?, page:String, completion: @escaping (Int) -> ()){
+        
+    }
+    
+    
+    
     public func getERC721Tokens(address:String, tokenAddress:String?, page:String, completion: @escaping ([JSON]?) -> ()){
         
-        let urlString = "https://rinkeby-api.opensea.io/api/v1/assets/"
-        let parameters = ["owner":address,
-                          "order_by": "token_id",
-                          "asset_contract_address":tokenAddress,
-                          "offset":page,
-                          "limit":"50"
-        ]
-        
-        let headers = ["X-API-KEY": "1a4288c7a6114fcd85f3d88aa37af0cc"]
-
-        var urlComponents = URLComponents(string: urlString)
-
-        var queryItems = [URLQueryItem]()
-        for (key, value) in parameters {
-            queryItems.append(URLQueryItem(name: key, value: value))
-        }
-
-        urlComponents?.queryItems = queryItems
-
-        var request = URLRequest(url: (urlComponents?.url)!)
-        request.httpMethod = "GET"
-
-        for (key, value) in headers {
-            request.setValue(value, forHTTPHeaderField: key)
-        }
+        let request = self.openSeaURLRequest(address: address, tokenAddress: tokenAddress, page: page)
 
         URLSession.shared.dataTask(with: request, completionHandler: {(data, response, error) -> Void in
             if data == nil {
@@ -139,6 +121,7 @@ extension EtherWallet: TokenService {
             }
             if (try? JSONSerialization.jsonObject(with: data!, options: .allowFragments) as? NSDictionary) != nil {
                 let json = JSON(data!)
+                print(json)
                 let result = json["assets"].arrayValue
                 DispatchQueue.main.async {
                     completion(result)
@@ -147,6 +130,35 @@ extension EtherWallet: TokenService {
         }).resume()
     }
     
+    internal func openSeaURLRequest(address:String, tokenAddress:String?, page:String) -> URLRequest{
+        
+        let urlString = "https://rinkeby-api.opensea.io/api/v1/assets/"
+        let parameters = ["owner":address,
+                          "order_by": "token_id",
+                          "asset_contract_address":tokenAddress
+        ]
+        
+        let headers = ["X-API-KEY": _CONFIG_openSeaAPIKey]
+        
+        var urlComponents = URLComponents(string: urlString)
+        
+        var queryItems = [URLQueryItem]()
+        for (key, value) in parameters {
+            queryItems.append(URLQueryItem(name: key, value: value))
+        }
+        
+        urlComponents?.queryItems = queryItems
+        
+        var request = URLRequest(url: (urlComponents?.url)!)
+        request.httpMethod = "GET"
+        
+        for (key, value) in headers {
+            request.setValue(value, forHTTPHeaderField: key)
+        }
+        
+        return request
+        
+    }
     
 }
 

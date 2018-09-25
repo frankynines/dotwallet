@@ -19,7 +19,6 @@ class CollectibleListViewController:UIViewController, UICollectionViewDelegate, 
 
     var tokens = [OErc721Token]()
 
-    var blackListContracts = [ "Decentraland" : "0xf87e31492faf9a91b02ee0deaad50d51d56d5d4d" ]
     var pageIndex = 0
     var isWating = false
     

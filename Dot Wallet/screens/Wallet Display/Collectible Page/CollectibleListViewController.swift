@@ -20,29 +20,29 @@ class CollectibleListViewController:UIViewController, UICollectionViewDelegate, 
     var tokens = [OErc721Token]()
 
     var pageIndex = 0
-    var isWating = false
+    var pageOffset = 20
+    
+    var isWaiting = false
+    var isOverLoad = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.loadTokens(page: String(pageIndex))
         
         self.ibo_collectionView?.addSubview(self.refreshControl)
-        
         self.ibo_collectionView?.backgroundColor = UIColor(patternImage: UIImage(named: "bg_transparent")!)
         self.ibo_collectionView?.contentInset = UIEdgeInsetsMake(20, 0, 40, 0)
         
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
-        
         let padding:CGFloat = 5
         let width = (self.ibo_collectionView?.frame.size.width)! / 2
         layout.itemSize = CGSize(width: width - (padding * 2), height: width)
         layout.sectionInset = UIEdgeInsets(top: 0, left: padding, bottom: 0, right: padding)
         layout.minimumLineSpacing = padding
         layout.minimumInteritemSpacing = padding
-        
         self.ibo_collectionView?.setCollectionViewLayout(layout, animated: false)
-        
+        self.loadTokens(page: "0")
+    
     }
     
     override func viewWillLayoutSubviews() {
@@ -51,25 +51,25 @@ class CollectibleListViewController:UIViewController, UICollectionViewDelegate, 
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        if self.tokens.count > 0 {
-            self.ibo_collectionView?.scrollToItem(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
-        }
     }
     
     func loadTokens(page:String){
-        self.tokens.removeAll()
 
-        let userAddress = EtherWallet.account.address?.lowercased()
+        let userAddress = EtherWallet.account.address!
+        if self.isOverLoad {
+            return
+        }
         
-        EtherWallet.tokens.getERC721Tokens(address: userAddress!, tokenAddress:nil, page: page) { (jsonResult) in
-            if jsonResult == nil {
-                return
+        EtherWallet.tokens.getERC721Tokens(address: userAddress, tokenAddress:nil, page: page, pageOffset: String(self.pageOffset)) { (result) in
+            let json = result?.dictionaryValue
+            if (json!["assets"]?.arrayValue.count)! <= 0{
+                self.isOverLoad = true
             }
-            for element in jsonResult! {
+            for element in (json!["assets"]?.arrayValue)! {
                 self.buildTokenObject(element: element.rawString()!)
             }
+            self.isWaiting = false
         }
-        isWating = false
     }
     
     func buildTokenObject(element:String) {
@@ -77,11 +77,7 @@ class CollectibleListViewController:UIViewController, UICollectionViewDelegate, 
         let data = element.data(using: .utf8)!
         do {
             let element = try JSONDecoder().decode(OErc721Token.self, from: data)
-            
             if (element.image_url?.isEmpty)! {
-                return
-            }
-            if (element.asset_contract?.address == "0xf87e31492faf9a91b02ee0deaad50d51d56d5d4d") {
                 return
             }
             self.tokens.append(element)
@@ -89,10 +85,7 @@ class CollectibleListViewController:UIViewController, UICollectionViewDelegate, 
         } catch {
             print(error.localizedDescription)
         }
-        
         self.ibo_collectionView?.reloadData()
-        self.ibo_tableHeader?.text = String(self.tokens.count) + " Collectibles"
-
     }
     
     private func append(_ objectsToAdd: [OErc721Token]) {
@@ -113,17 +106,17 @@ class CollectibleListViewController:UIViewController, UICollectionViewDelegate, 
         
         if let imageURL = self.tokens[indexPath.row].image_preview_url {
             DispatchQueue.global(qos: .background).async {
-                // Call your background task
                 DispatchQueue.main.async {
                    cell.setupCell(url: imageURL)
                 }
             }
-            
+        } else {
+            cell.ibo_previewImage!.image = nil
         }
         return cell
     }
     
-    func collectionView(collectionView: UICollectionView,
+    private func collectionView(collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAtIndexPath indexPath: IndexPath) -> CGSize {
 
@@ -133,6 +126,16 @@ class CollectibleListViewController:UIViewController, UICollectionViewDelegate, 
     }
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        if (self.isWaiting){ return }
+        
+        if indexPath.item == self.tokens.count - 1 {
+            self.isWaiting = true
+            self.pageIndex += 1
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                self.loadTokens(page: String(self.pageIndex * self.pageOffset))
+            }
+        }
+        
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
@@ -189,6 +192,7 @@ class CollectableViewCell:UICollectionViewCell {
                     self.ibo_activityView?.stopAnimating()
                 }
             } catch {
+                print(error.localizedDescription)
             }
         }
     }

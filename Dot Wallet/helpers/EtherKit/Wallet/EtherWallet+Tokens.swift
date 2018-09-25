@@ -11,11 +11,15 @@ import SwiftyJSON
 import Cache
 
 public protocol TokenService {
+    
+    //ERC20
+    func getERC20TokenList(url:String, completion: @escaping ([JSON]?) -> ())
     func getTokenMetaData(contractAddress: String, completion: @escaping (ERC20Token) -> ())
-    func getERC721Tokens(address:String, tokenAddress:String?, page:String, completion: @escaping ([JSON]?) -> ())
+    
+    //ERC721
+    func getERC721Tokens(address:String, tokenAddress:String?, page:String, pageOffset:String, completion: @escaping (JSON?) -> ())
     func getTokenImage(contractAddress:String, completion: @escaping (UIImage) -> ())
     
-    func getERC20TokenList(url:String, completion: @escaping ([JSON]?) -> ())
 }
 
 extension EtherWallet: TokenService {
@@ -23,7 +27,6 @@ extension EtherWallet: TokenService {
     public func getTokenMetaData(contractAddress: String, completion: @escaping (ERC20Token) -> ()) {
         DispatchQueue.global().async {
 
-            
             let name = try? self.tokenMetaData(contractAddress: contractAddress, param: "name")
             let symbol = try? self.tokenMetaData(contractAddress: contractAddress, param: "symbol")
             let decimal = try? self.tokenMetaData(contractAddress: contractAddress, param: "decimals")
@@ -105,37 +108,31 @@ extension EtherWallet: TokenService {
         
     }
     
-    public func getERC721TokenTotal(address:String, tokenAddress:String?, page:String, completion: @escaping (Int) -> ()){
+    public func getERC721Tokens(address:String, tokenAddress:String?, page:String, pageOffset:String, completion: @escaping (JSON?) -> ()){
         
-    }
-    
-    
-    
-    public func getERC721Tokens(address:String, tokenAddress:String?, page:String, completion: @escaping ([JSON]?) -> ()){
-        
-        let request = self.openSeaURLRequest(address: address, tokenAddress: tokenAddress, page: page)
+        let request = self.openSeaURLRequest(address: address, page: page, pageOffset:pageOffset)
 
         URLSession.shared.dataTask(with: request, completionHandler: {(data, response, error) -> Void in
             if data == nil {
                 return
             }
             if (try? JSONSerialization.jsonObject(with: data!, options: .allowFragments) as? NSDictionary) != nil {
+                
                 let json = JSON(data!)
-                print(json)
-                let result = json["assets"].arrayValue
                 DispatchQueue.main.async {
-                    completion(result)
+                    completion(json)
                 }
             }
         }).resume()
     }
     
-    internal func openSeaURLRequest(address:String, tokenAddress:String?, page:String) -> URLRequest{
+    internal func openSeaURLRequest(address:String, page:String, pageOffset:String) -> URLRequest{
         
         let urlString = "https://rinkeby-api.opensea.io/api/v1/assets/"
         let parameters = ["owner":address,
                           "order_by": "token_id",
-                          "asset_contract_address":tokenAddress
+                          "offset":page,
+                          "limit":pageOffset
         ]
         
         let headers = ["X-API-KEY": _CONFIG_openSeaAPIKey]
@@ -148,7 +145,6 @@ extension EtherWallet: TokenService {
         }
         
         urlComponents?.queryItems = queryItems
-        
         var request = URLRequest(url: (urlComponents?.url)!)
         request.httpMethod = "GET"
         
@@ -157,7 +153,6 @@ extension EtherWallet: TokenService {
         }
         
         return request
-        
     }
     
 }

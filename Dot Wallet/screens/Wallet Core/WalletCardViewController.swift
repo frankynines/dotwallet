@@ -55,6 +55,7 @@ class WalletCardViewController:UIViewController, UIScrollViewDelegate, ModalSlid
             self.iboBalance?.text = balance as? String
         }
         
+         self.refreshBalance()
     }
     
     override func viewWillAppear(_ animated: Bool) {

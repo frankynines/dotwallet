@@ -11,6 +11,8 @@ import UIKit
 import QRCodeReader
 import KeychainAccess
 
+//
+
 class ImportWalletViewController: UIViewController, QRCodeReaderViewControllerDelegate, PasswordLoginDelegate {
     @IBOutlet weak var ibo_pkeyField:UITextField?
     var loginVC:PasswordLoginViewController?
@@ -19,17 +21,15 @@ class ImportWalletViewController: UIViewController, QRCodeReaderViewControllerDe
         super.viewDidLoad()
         self.navigationController?.interactivePopGestureRecognizer?.delegate = self as? UIGestureRecognizerDelegate
         self.navigationController?.interactivePopGestureRecognizer?.isEnabled = true
-        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         self.ibo_pkeyField?.becomeFirstResponder()
     }
     
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldBeRequiredToFailBy otherGestureRecognizer: UIGestureRecognizer) -> Bool {
         return true
-    }
-    
-    override func touchesBegan(_ touches: Set<UITouch>,
-                               with event: UIEvent?) {
-        self.view.endEditing(true)
     }
     
     @IBAction func goBack(_ sender: UIButton){
@@ -45,12 +45,12 @@ class ImportWalletViewController: UIViewController, QRCodeReaderViewControllerDe
     @IBAction func iba_qrReader(){
        self.iba_scanAction()
     }
-    
-    
+
     //WALLET CORE
     @IBAction func importWallet() {
+        print(self.ibo_pkeyField?.text?.isEmpty)
         if (self.ibo_pkeyField?.text?.isEmpty == true){
-            self.view.makeToast("No Private Key")
+            self.view.makeToast("Private Key Invalid")
             return
         }
         self.showLoginView(state: .Create)
@@ -59,7 +59,6 @@ class ImportWalletViewController: UIViewController, QRCodeReaderViewControllerDe
     func showLoginView(state:PassState) {
         
         self.ibo_pkeyField?.resignFirstResponder()
-        
         self.loginVC = (storyboard?.instantiateViewController(withIdentifier: "PasswordLoginViewController") as! PasswordLoginViewController)
         self.loginVC!.modalPresentationStyle = .overFullScreen
         self.loginVC!.delegate = self
@@ -86,10 +85,13 @@ class ImportWalletViewController: UIViewController, QRCodeReaderViewControllerDe
                 try keychain.set(pass, key: publicAddress!)
                 self.pushWalletHomeScreen()
             } catch {
-                print(error)
+                print(error.localizedDescription)
+
+                self.showAlert(title: "Ooops", message: error.localizedDescription, completion: false)
             }
         } catch {
-            print(error)
+            print(error.localizedDescription)
+            self.showAlert(title: "Ooops", message: error.localizedDescription, completion: false)
         }
     }
     
@@ -127,7 +129,6 @@ class ImportWalletViewController: UIViewController, QRCodeReaderViewControllerDe
 //                self.ibo_addressField?.text = ethereumURL.replacingOccurrences(of: "ethereum:", with: "")
             }
         }
-        
         readerVC.modalPresentationStyle = .overFullScreen
         present(readerVC, animated: true, completion: nil)
     }
@@ -142,9 +143,17 @@ class ImportWalletViewController: UIViewController, QRCodeReaderViewControllerDe
         dismiss(animated: true, completion: nil)
     }
     
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        self.view.endEditing(true)
-        return false
+    
+    func showAlert(title:String, message:String, completion:Bool) {
+        
+        let alertView = UIAlertController.init(title: title, message: message, preferredStyle: .alert)
+        
+        alertView.addAction(UIAlertAction(title: "Ok", style: .default, handler: { (action) in
+            if completion {
+                self.ibo_pkeyField?.becomeFirstResponder()
+            }
+        }))
+        self.present(alertView, animated: true)
     }
     
 }

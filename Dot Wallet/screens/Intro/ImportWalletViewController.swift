@@ -17,6 +17,22 @@ class ImportWalletViewController: UIViewController, QRCodeReaderViewControllerDe
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationController?.interactivePopGestureRecognizer?.delegate = self as? UIGestureRecognizerDelegate
+        self.navigationController?.interactivePopGestureRecognizer?.isEnabled = true
+    }
+    
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldBeRequiredToFailBy otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        return true
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>,
+                               with event: UIEvent?) {
+        self.view.endEditing(true)
+    }
+    
+    @IBAction func goBack(_ sender: UIButton){
+        let vc = storyboard!.instantiateViewController(withIdentifier :"sb_CreateWalletViewController") as! CreateWalletViewController
+        self.navigationController?.pushViewController(vc, animated: true)
     }
     
     @IBAction func iba_pastePKey(){
@@ -28,6 +44,7 @@ class ImportWalletViewController: UIViewController, QRCodeReaderViewControllerDe
     @IBAction func iba_qrReader(){
        self.iba_scanAction()
     }
+    
     
     //WALLET CORE
     @IBAction func importWallet() {

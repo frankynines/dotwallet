@@ -19,35 +19,6 @@ class CreateWalletViewController: UIViewController, PasswordLoginDelegate {
         super.viewDidLoad()
         self.navigationController?.isNavigationBarHidden = true
 
-        if (EtherWallet.account.hasAccount == true) {
-
-            let publicAddress = EtherWallet.account.address?.lowercased()
-            print(publicAddress)
-            
-            self.pushWalletHomeScreen()
-            
-//            let keychain = Keychain(service: publicAddress!)
-//
-//            do {
-//
-//                let pass = try keychain.get(publicAddress!)
-//                print(pass)
-//                //If user has not setup a passcode
-//                if pass == nil {
-//                    self.showLoginView(state: .Reset)
-//                } else {
-//                    self.showLoginView(state: .Unlock)
-//                }
-//
-//            } catch {
-//                print(error.localizedDescription)
-//            }
-            
-        } else {
-            self.welcomeMessage()
-            self.animateBG()
-        }
-
     }
     
     func welcomeMessage(){
@@ -60,6 +31,35 @@ class CreateWalletViewController: UIViewController, PasswordLoginDelegate {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        if (EtherWallet.account.hasAccount == true) {
+            
+            let publicAddress = EtherWallet.account.address?.lowercased()
+            print(publicAddress)
+            
+            self.pushWalletHomeScreen()
+            
+            //            let keychain = Keychain(service: publicAddress!)
+            //
+            //            do {
+            //
+            //                let pass = try keychain.get(publicAddress!)
+            //                print(pass)
+            //                //If user has not setup a passcode
+            //                if pass == nil {
+            //                    self.showLoginView(state: .Reset)
+            //                } else {
+            //                    self.showLoginView(state: .Unlock)
+            //                }
+            //
+            //            } catch {
+            //                print(error.localizedDescription)
+            //            }
+            
+        } else {
+            self.welcomeMessage()
+            self.animateBG()
+        }
+
         self.inView = true
         self.animateBG()
     }

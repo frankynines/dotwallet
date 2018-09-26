@@ -31,8 +31,7 @@ class ImportWalletViewController: UIViewController, QRCodeReaderViewControllerDe
     }
     
     @IBAction func goBack(_ sender: UIButton){
-        let vc = storyboard!.instantiateViewController(withIdentifier :"sb_CreateWalletViewController") as! CreateWalletViewController
-        self.navigationController?.pushViewController(vc, animated: true)
+        self.navigationController?.popViewController(animated: true)
     }
     
     @IBAction func iba_pastePKey(){

@@ -19,6 +19,8 @@ class ImportWalletViewController: UIViewController, QRCodeReaderViewControllerDe
         super.viewDidLoad()
         self.navigationController?.interactivePopGestureRecognizer?.delegate = self as? UIGestureRecognizerDelegate
         self.navigationController?.interactivePopGestureRecognizer?.isEnabled = true
+        
+        self.ibo_pkeyField?.becomeFirstResponder()
     }
     
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldBeRequiredToFailBy otherGestureRecognizer: UIGestureRecognizer) -> Bool {
@@ -55,6 +57,8 @@ class ImportWalletViewController: UIViewController, QRCodeReaderViewControllerDe
     }
     
     func showLoginView(state:PassState) {
+        
+        self.ibo_pkeyField?.resignFirstResponder()
         
         self.loginVC = (storyboard?.instantiateViewController(withIdentifier: "PasswordLoginViewController") as! PasswordLoginViewController)
         self.loginVC!.modalPresentationStyle = .overFullScreen

@@ -224,26 +224,30 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter Wallet Address" textAlignment="natural" minimumFontSize="17" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="rfb-k6-mAP">
-                                <rect key="frame" x="43" y="318" width="290" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Private Key" textAlignment="center" adjustsFontSizeToFit="NO" minimumFontSize="17" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="rfb-k6-mAP">
+                                <rect key="frame" x="20" y="165" width="335" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="X0L-ia-aGL"/>
+                                </constraints>
                                 <nil key="textColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no" textContentType="password"/>
                             </textField>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Uty-6q-aWX">
-                                <rect key="frame" x="116" y="270" width="145" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Uty-6q-aWX">
+                                <rect key="frame" x="115" y="235" width="145" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="T6q-Lr-GdG"/>
+                                </constraints>
                                 <state key="normal" title="Paste from Clipboard"/>
                                 <connections>
                                     <action selector="iba_pastePKey" destination="BYh-Ne-Ug7" eventType="touchUpInside" id="kXy-D7-Grq"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CCx-C1-LtO" customClass="RoundButton" customModule="Dot_Wallet" customModuleProvider="target">
-                                <rect key="frame" x="40" y="587" width="295" height="40"/>
+                                <rect key="frame" x="40" y="287" width="295" height="40"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="40" id="vhB-gP-xWM"/>
+                                    <constraint firstAttribute="height" constant="40" id="79U-Qm-Me8"/>
                                 </constraints>
                                 <state key="normal" title="Import">
                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -259,28 +263,54 @@
                                     <action selector="importWallet" destination="BYh-Ne-Ug7" eventType="touchUpInside" id="aVq-iM-GZe"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="T7h-4S-l08">
-                                <rect key="frame" x="159" y="381" width="60" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Scan 📷"/>
-                                <connections>
-                                    <action selector="iba_qrReader" destination="BYh-Ne-Ug7" eventType="touchUpInside" id="6l2-TO-XgQ"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SRm-Lh-G2E">
-                                <rect key="frame" x="16" y="30" width="12" height="22"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SRm-Lh-G2E">
+                                <rect key="frame" x="20" y="40" width="12" height="22"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="22" id="5mp-C1-oTv"/>
+                                    <constraint firstAttribute="width" constant="12" id="aGa-8b-am5"/>
+                                </constraints>
                                 <state key="normal" image="btn_back.png"/>
                                 <connections>
                                     <action selector="goBack:" destination="BYh-Ne-Ug7" eventType="touchUpInside" id="xyh-7n-fMe"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Provide your Private key to import an existing wallet." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cMV-96-Xlt">
+                                <rect key="frame" x="20" y="80" width="335" height="65"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="65" id="QOQ-Cm-Mkk"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="18"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Use caution anytime you expose your private key." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f6c-Sd-z2C">
+                                <rect key="frame" x="40" y="347" width="295" height="20"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="20" id="DIA-Y7-7Sf"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.75294117650000003" green="0.72549019609999998" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="v3c-sM-Gax" firstAttribute="trailing" secondItem="CCx-C1-LtO" secondAttribute="trailing" constant="40" id="YJR-sD-BkI"/>
-                            <constraint firstItem="CCx-C1-LtO" firstAttribute="leading" secondItem="v3c-sM-Gax" secondAttribute="leading" constant="40" id="bAh-VZ-f2A"/>
-                            <constraint firstItem="v3c-sM-Gax" firstAttribute="bottom" secondItem="CCx-C1-LtO" secondAttribute="bottom" constant="40" id="vBb-OB-Nqz"/>
+                            <constraint firstItem="v3c-sM-Gax" firstAttribute="bottom" secondItem="f6c-Sd-z2C" secondAttribute="bottom" constant="300" id="07t-2F-T27"/>
+                            <constraint firstItem="SRm-Lh-G2E" firstAttribute="leading" secondItem="v3c-sM-Gax" secondAttribute="leading" constant="20" id="9GT-WZ-9IQ"/>
+                            <constraint firstItem="SRm-Lh-G2E" firstAttribute="top" secondItem="v3c-sM-Gax" secondAttribute="top" constant="20" id="B12-cK-6wa"/>
+                            <constraint firstItem="v3c-sM-Gax" firstAttribute="trailing" secondItem="CCx-C1-LtO" secondAttribute="trailing" constant="40" id="DiL-b5-oke"/>
+                            <constraint firstItem="f6c-Sd-z2C" firstAttribute="leading" secondItem="v3c-sM-Gax" secondAttribute="leading" constant="40" id="ICA-UL-p7t"/>
+                            <constraint firstItem="Uty-6q-aWX" firstAttribute="centerX" secondItem="DwE-u7-pdj" secondAttribute="centerX" id="PTF-Ra-z5G"/>
+                            <constraint firstItem="v3c-sM-Gax" firstAttribute="trailing" secondItem="cMV-96-Xlt" secondAttribute="trailing" constant="20" id="TNi-Hc-4P4"/>
+                            <constraint firstItem="CCx-C1-LtO" firstAttribute="leading" secondItem="v3c-sM-Gax" secondAttribute="leading" constant="40" id="aeU-5t-LDF"/>
+                            <constraint firstItem="Uty-6q-aWX" firstAttribute="top" secondItem="rfb-k6-mAP" secondAttribute="bottom" constant="20" id="fgz-uK-bG7"/>
+                            <constraint firstItem="f6c-Sd-z2C" firstAttribute="top" secondItem="CCx-C1-LtO" secondAttribute="bottom" constant="20" id="g17-7j-BWE"/>
+                            <constraint firstItem="cMV-96-Xlt" firstAttribute="top" secondItem="v3c-sM-Gax" secondAttribute="top" constant="60" id="iSZ-dQ-uiQ"/>
+                            <constraint firstItem="v3c-sM-Gax" firstAttribute="trailing" secondItem="f6c-Sd-z2C" secondAttribute="trailing" constant="40" id="kK7-FV-lWh"/>
+                            <constraint firstItem="v3c-sM-Gax" firstAttribute="trailing" secondItem="rfb-k6-mAP" secondAttribute="trailing" constant="20" id="kTo-nU-76Y"/>
+                            <constraint firstItem="rfb-k6-mAP" firstAttribute="leading" secondItem="v3c-sM-Gax" secondAttribute="leading" constant="20" id="oHG-Ie-hqM"/>
+                            <constraint firstItem="cMV-96-Xlt" firstAttribute="leading" secondItem="v3c-sM-Gax" secondAttribute="leading" constant="20" id="x5t-bM-u1g"/>
+                            <constraint firstItem="rfb-k6-mAP" firstAttribute="top" secondItem="cMV-96-Xlt" secondAttribute="bottom" constant="20" id="zPw-me-zxE"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="v3c-sM-Gax"/>
                     </view>

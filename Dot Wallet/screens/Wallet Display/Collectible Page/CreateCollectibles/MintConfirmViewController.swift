@@ -14,7 +14,10 @@ import SafariServices
 import KeychainAccess
 
 
-class MintConfirmViewController : UIViewController, PasswordLoginDelegate {
+class MintConfirmViewController : UIViewController, PasswordLoginDelegate, GasAdjustViewControllerDelegate {
+   
+    var package = [String:Any]()
+
     
     @IBOutlet weak var ibo_selectedImage:UIImageView!
     var userImage:UIImage?
@@ -22,9 +25,12 @@ class MintConfirmViewController : UIViewController, PasswordLoginDelegate {
     @IBOutlet weak var ibo_itemName:UILabel?
     @IBOutlet weak var ibo_itemDescription:UILabel?
     
-    @IBOutlet weak var ibo_gasFee:UILabel?
+    @IBOutlet weak var ibo_gasPrice:RoundButton?
     
-    var package = [String:Any]()
+    var gasPrice:Int?
+    var gasLimit:Int?
+    
+    var passcodeVC:PasswordLoginViewController!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,6 +41,9 @@ class MintConfirmViewController : UIViewController, PasswordLoginDelegate {
         EtherWallet.balance.etherBalance { (balance) in
             self.title = "Balance: \(balance!)"
         }
+        
+        self.updateGas()
+        
     }
     
     override func viewDidLayoutSubviews() {
@@ -43,8 +52,6 @@ class MintConfirmViewController : UIViewController, PasswordLoginDelegate {
         
         self.ibo_itemName?.text = self.package["name"] as? String
         self.ibo_itemDescription?.text = self.package["description"] as? String
-        
-        self.updateGas()
     }
     
     func updateGas(){
@@ -54,17 +61,34 @@ class MintConfirmViewController : UIViewController, PasswordLoginDelegate {
         var gas:String?
         
         do {
-             gas = try EtherWallet.gas.gasForContractMethod(contractAddress: "0xa12d5111cb7fd6c285faa81530eb5c4dfcea51e7", methodName: "mintCollectible", methodParams: params)
+            gas = try EtherWallet.gas.gasForContractMethod(contractAddress: "0xa12d5111cb7fd6c285faa81530eb5c4dfcea51e7", methodName: "mintCollectible", methodParams: params)
             
         } catch {
             gas = "1000000"
         }
+        
+        self.gasLimit = Int(gas!)
+        self.gasPrice = 3
+        
         gas = EtherWallet.balance.WeiToValue(wei: gas!, dec: 9)
-        ibo_gasFee!.text = "Gas Estimate: \(gas!)"
+        self.ibo_gasPrice?.setTitle(gas!, for: .normal)
     }
     
-    var passcodeVC:PasswordLoginViewController!
-
+    @IBAction func iba_adjustGas(){
+        let storyboard = UIStoryboard(name: "GasAdjustment", bundle: nil)
+        let vc = storyboard.instantiateInitialViewController() as! GasAdjustViewController
+        vc.delegate = self
+        
+        self.present(vc, animated: true, completion: nil)
+    }
+    
+    func gasAdjustedWithValues(gasLimit: Int, gasPrice: Int, totalCost: String) {
+        self.gasPrice = gasPrice
+        self.gasLimit = gasLimit
+        
+        self.ibo_gasPrice?.setTitle(totalCost, for: .normal)
+    }
+    
     
     @objc func iba_mintItem(){
         
@@ -133,7 +157,7 @@ class MintConfirmViewController : UIViewController, PasswordLoginDelegate {
         key.updateChildValues(self.package) { (error, reference) in
             
             if error != nil {
-                self.showAlert(title:"Oops", message: (error?.localizedDescription)!)
+                self.showAlert(title:"Oops", message: (error?.localizedDescription)!, success: false)
                 return
             }
             let blobURL = "\(reference).json"
@@ -142,21 +166,29 @@ class MintConfirmViewController : UIViewController, PasswordLoginDelegate {
     }
     
     func updateBlock(tokenURI:String, key:String, pass:String){
-        
+        print("update block")
         let params = [EtherWallet.account.address, tokenURI, key]
         
         EtherWallet.transaction.sendContractMethod(methodName: "mintCollectible", methodParams: params, pass: pass) { (completion, result) in
-            self.showAlert(title: "Completed", message: result!)
+            self.showAlert(title: "Completed", message: result!, success: completion!)
         }
         
     }
     
-    func showAlert(title: String, message:String){
+    func showAlert(title: String, message:String, success:Bool){
+        var mess = ""
+        if success == true {
+            mess = "Tranascation sent to the block, please allow 3-5 mins for your item to display. TX: \(message)"
+        } else {
+            mess = message
+        }
         
-        let alertView = UIAlertController.init(title: title, message: message, preferredStyle: .alert)
+        let alertView = UIAlertController.init(title: title, message: mess, preferredStyle: .alert)
         
         alertView.addAction(UIAlertAction(title: "Ok", style: .default, handler: { (action) in
-            self.dismiss(animated: true, completion: nil)
+            if success == true {
+                self.dismiss(animated: true, completion: nil)
+            }
         }))
       
         self.view.hideToastActivity()

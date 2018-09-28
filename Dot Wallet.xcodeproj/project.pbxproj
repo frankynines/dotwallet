@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		06D26DBAE46EA9359F86AD05 /* Pods_Dot_Wallet.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5DDA9268F31B9E29C4F2A18 /* Pods_Dot_Wallet.framework */; };
+		2F0BC9F9215E9481007EFC1A /* GasAdjustment.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2F0BC9F8215E9481007EFC1A /* GasAdjustment.storyboard */; };
 		2F0EFC7D21063937003EF740 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F0EFC7C21063937003EF740 /* AppDelegate.swift */; };
 		2F0EFC7F21063937003EF740 /* WalletHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F0EFC7E21063937003EF740 /* WalletHomeViewController.swift */; };
 		2F0EFC8221063937003EF740 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2F0EFC8021063937003EF740 /* Main.storyboard */; };
@@ -77,6 +78,7 @@
 		2FBBDF26215BF32000FC751D /* btn_back@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2FBBDF23215BF31F00FC751D /* btn_back@2x.png */; };
 		2FBBDF27215BF32000FC751D /* btn_back@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2FBBDF24215BF31F00FC751D /* btn_back@3x.png */; };
 		2FBBDF28215BF32000FC751D /* btn_back.png in Resources */ = {isa = PBXBuildFile; fileRef = 2FBBDF25215BF31F00FC751D /* btn_back.png */; };
+		2FBBDF2B215E92A300FC751D /* GasAdjustViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FBBDF2A215E92A300FC751D /* GasAdjustViewController.swift */; };
 		2FC9C1572125710A000EB023 /* HistoryStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC9C1562125710A000EB023 /* HistoryStorage.swift */; };
 		2FC9C159212582C0000EB023 /* TransactionDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC9C158212582C0000EB023 /* TransactionDetailViewController.swift */; };
 		2FC9C15B21260085000EB023 /* icon_copy.png in Resources */ = {isa = PBXBuildFile; fileRef = 2FC9C15A21260085000EB023 /* icon_copy.png */; };
@@ -119,6 +121,7 @@
 		12E973F732A1E95934408745 /* Pods-Dot Wallet.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Dot Wallet.release.xcconfig"; path = "Pods/Target Support Files/Pods-Dot Wallet/Pods-Dot Wallet.release.xcconfig"; sourceTree = "<group>"; };
 		17873D468537B1C8CB4EF2DF /* Pods_Dot_WalletUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Dot_WalletUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2C40B5E0169C1479E5C9125A /* Pods-Dot WalletUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Dot WalletUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Dot WalletUITests/Pods-Dot WalletUITests.release.xcconfig"; sourceTree = "<group>"; };
+		2F0BC9F8215E9481007EFC1A /* GasAdjustment.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = GasAdjustment.storyboard; sourceTree = "<group>"; };
 		2F0EFC7921063937003EF740 /* Dot Wallet.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Dot Wallet.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2F0EFC7C21063937003EF740 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2F0EFC7E21063937003EF740 /* WalletHomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletHomeViewController.swift; sourceTree = "<group>"; };
@@ -194,6 +197,7 @@
 		2FBBDF23215BF31F00FC751D /* btn_back@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_back@2x.png"; sourceTree = "<group>"; };
 		2FBBDF24215BF31F00FC751D /* btn_back@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_back@3x.png"; sourceTree = "<group>"; };
 		2FBBDF25215BF31F00FC751D /* btn_back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_back.png; sourceTree = "<group>"; };
+		2FBBDF2A215E92A300FC751D /* GasAdjustViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GasAdjustViewController.swift; sourceTree = "<group>"; };
 		2FC9C1562125710A000EB023 /* HistoryStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryStorage.swift; sourceTree = "<group>"; };
 		2FC9C158212582C0000EB023 /* TransactionDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionDetailViewController.swift; sourceTree = "<group>"; };
 		2FC9C15A21260085000EB023 /* icon_copy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_copy.png; sourceTree = "<group>"; };
@@ -310,6 +314,7 @@
 		2F0EFCAC210639E2003EF740 /* screens */ = {
 			isa = PBXGroup;
 			children = (
+				2FBBDF29215E928C00FC751D /* Gas Controller */,
 				2F6CBD5D2108FFB00026C858 /* Intro */,
 				2F6CBD5E2108FFBD0026C858 /* Wallet Core */,
 				2F7678E6210B833F00919059 /* Wallet Display */,
@@ -538,6 +543,15 @@
 			path = API;
 			sourceTree = "<group>";
 		};
+		2FBBDF29215E928C00FC751D /* Gas Controller */ = {
+			isa = PBXGroup;
+			children = (
+				2FBBDF2A215E92A300FC751D /* GasAdjustViewController.swift */,
+				2F0BC9F8215E9481007EFC1A /* GasAdjustment.storyboard */,
+			);
+			path = "Gas Controller";
+			sourceTree = "<group>";
+		};
 		2FF9D47321514E4D00A747CB /* CreateCollectibles */ = {
 			isa = PBXGroup;
 			children = (
@@ -683,6 +697,7 @@
 				2F4D31C6211A3AF60046BC61 /* btn_moveUp.png in Resources */,
 				2FA5E2FD211981B900A4406E /* ERC20Tokens.storyboard in Resources */,
 				2F2055722112FD55006C768E /* icon_qr.png in Resources */,
+				2F0BC9F9215E9481007EFC1A /* GasAdjustment.storyboard in Resources */,
 				2FE75050210BFD9200AAD6E6 /* icon_plus.png in Resources */,
 				2F2033FA21516BF900428586 /* DotCollectible.json in Resources */,
 				2F4D31C3211A3ABB0046BC61 /* btn_moveDown@3x.png in Resources */,
@@ -894,6 +909,7 @@
 				2F11AA79210C8DBF00790BAF /* CollectibleListViewController.swift in Sources */,
 				2F0EFCC92106FE6F003EF740 /* GasStationAPIResponse.swift in Sources */,
 				2F6CF99D210C6F070057A50C /* WalletContainerViewController.swift in Sources */,
+				2FBBDF2B215E92A300FC751D /* GasAdjustViewController.swift in Sources */,
 				2F2F74B321091E8200612CF4 /* TokenListViewController.swift in Sources */,
 				2F0EFCC82106FE6F003EF740 /* EthplorerAPIResponse.swift in Sources */,
 				2FBBDF20215AA73B00FC751D /* DotAPI.swift in Sources */,

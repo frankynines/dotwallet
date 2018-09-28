@@ -48,13 +48,15 @@ extension EtherWallet: GasService {
             throw ContractError.contractFailure
         }
         
-        options.gasPrice = 2
+        options.gasPrice = 3
+        
+        print(web3Main.eth.getTransactionCount(address: EthereumAddress(EtherWallet.account.address!)!))
         
         guard let contractMethod = contract.method(methodName, parameters: methodParams as [AnyObject], extraData: Data(), options: options) else {
             throw ContractError.contractFailure
         }
         
-        let gas = contractMethod.estimateGas(options: options, onBlock: "latest")
+        let gas = contractMethod.estimateGas(options: options, onBlock: "pending")
         switch gas {
         case .success(let result):
             return String(result * options.gasPrice!)

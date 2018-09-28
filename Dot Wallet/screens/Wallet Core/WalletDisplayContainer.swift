@@ -11,8 +11,8 @@ import UIKit
 import SafariServices
 
 enum PageViews:Int {
-    case TokenPage = 0
-    case CollectiblePage = 1
+    case CollectiblePage = 0
+    case TokenPage = 1
     case TXHistory = 2
 }
 class WalletDisplayViewController:UIViewController, UIPageViewControllerDelegate, UIScrollViewDelegate, WalletPageViewControllerDelegate, PopOverViewcontrollerDelegate, TokenDetailDelegate, ModalSlideOverViewcontrollerDelegate{

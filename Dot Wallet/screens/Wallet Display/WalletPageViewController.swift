@@ -26,8 +26,8 @@ class WalletPageViewController: UIPageViewController{
     
     lazy var pages: [UIViewController] = {
         return [
+             UIStoryboard(name: "Collectibles", bundle: nil).instantiateViewController(withIdentifier: "sb_CollectibleListViewController"),
             UIStoryboard(name: "ERC20Tokens", bundle: nil).instantiateViewController(withIdentifier: "sb_TokenListViewController"),
-            UIStoryboard(name: "Collectibles", bundle: nil).instantiateViewController(withIdentifier: "sb_CollectibleListViewController"),
             UIStoryboard(name: "TransactionHistory", bundle: nil).instantiateViewController(withIdentifier: "sb_TransactionViewController")
         ]
     }()

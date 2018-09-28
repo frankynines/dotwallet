@@ -181,9 +181,9 @@ extension EtherWallet: TransactionService {
         }
         
         options.gasLimit = BigUInt(stringLiteral: gas!)
-        options.gasPrice = 2
+        options.gasPrice = 3
 
-        let contractCall = contractMethod.send(password: pass, options: options, onBlock: "latest")
+        let contractCall = contractMethod.send(password: pass, options: options, onBlock: "pending")
         
         switch contractCall {
             case .success(let result):

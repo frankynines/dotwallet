@@ -32,6 +32,10 @@ class MintConfirmViewController : UIViewController, PasswordLoginDelegate, GasAd
     
     var passcodeVC:PasswordLoginViewController!
     
+    var blobURL:String?
+    var referenceKey:String?
+
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -110,28 +114,38 @@ class MintConfirmViewController : UIViewController, PasswordLoginDelegate, GasAd
         
     }
     
-    func passcodeVerified(pass:String?) {
+    func passcodeVerified(vc: PasswordLoginViewController, pass:String?) {
         
-        self.view.makeToastActivity(.center)
-        
-        let storage = Storage.storage()
-        var storageRef = storage.reference()
-        
-        let timestamp = Date().timeIntervalSince1970
-        let fileName = "dwc\(timestamp)image.png"
-        let storagePath = "gs://dotwallet.appspot.com/\(fileName)"
-        
-        storageRef = storage.reference(forURL: storagePath)
-        
-        let imagedata = UIImagePNGRepresentation(userImage!)
-        
-        storageRef.putData(imagedata!, metadata: nil) { (metadata, error) in
+        vc.dismiss(animated: false) {
             
-            storageRef.downloadURL { (url, error) in
-                let cleanurl = "https://storage.googleapis.com/dotwallet.appspot.com/\(fileName)"
-                self.addItemToAPI(fileURL: cleanurl, pass:pass!)
+            self.view.makeToastActivity(.center)
+            
+            if (self.blobURL?.isEmpty == false || self.referenceKey?.isEmpty == false) {
+                self.updateBlock(tokenURI: self.blobURL!, key:self.referenceKey!, pass:pass!)
+                return
             }
+            
+            let storage = Storage.storage()
+            var storageRef = storage.reference()
+            
+            let timestamp = Date().timeIntervalSince1970
+            let fileName = "dwc\(timestamp)image.png"
+            let storagePath = "gs://dotwallet.appspot.com/\(fileName)"
+            
+            storageRef = storage.reference(forURL: storagePath)
+            
+            let imagedata = UIImagePNGRepresentation(self.userImage!)
+            
+            storageRef.putData(imagedata!, metadata: nil) { (metadata, error) in
+                
+                storageRef.downloadURL { (url, error) in
+                    let cleanurl = "https://storage.googleapis.com/dotwallet.appspot.com/\(fileName)"
+                    self.addItemToAPI(fileURL: cleanurl, pass:pass!)
+                }
+            }
+            
         }
+        
         
     }
     
@@ -157,13 +171,14 @@ class MintConfirmViewController : UIViewController, PasswordLoginDelegate, GasAd
                 self.showAlert(message: (error?.localizedDescription)!, success: false)
                 return
             }
-            let blobURL = "\(reference).json"
-            self.updateBlock(tokenURI: blobURL, key:reference.key, pass:pass)
+            self.blobURL = "\(reference).json"
+            self.referenceKey = reference.key
+            
+            self.updateBlock(tokenURI: self.blobURL!, key:self.referenceKey!, pass:pass)
         }
     }
     
     func updateBlock(tokenURI:String, key:String, pass:String){
-        print("update block")
         let params = [EtherWallet.account.address, tokenURI, key]
         
         EtherWallet.transaction.sendContractMethod(methodName: "mintCollectible",

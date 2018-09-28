@@ -155,47 +155,48 @@ class SendViewController: UIViewController, QRCodeReaderViewControllerDelegate, 
             
     }
     
-    func passcodeVerified(pass:String?) {
+    func passcodeVerified(vc: PasswordLoginViewController, pass:String?) {
+        vc.dismiss(animated: false) {
         
-        if self.collectible == nil {
+            if self.collectible == nil {
+                
+                if self.balance == nil{
+                    self.showAlert(title: "Oops", message: "Seem to be offline", completion: false)
+                    return
+                }
+                if Float(self.balance)! <= Float(0.00) {
+                    self.showAlert(title: "Oops", message: "You do not have enough to send this transaction", completion: false)
+                    return
+                }
+                
+            }
             
-            if balance == nil{
-                self.showAlert(title: "Oops", message: "Seem to be offline", completion: false)
-                return
-            }
-            if Float(balance)! <= Float(0.00) {
-                self.showAlert(title: "Oops", message: "You do not have enough to send this transaction", completion: false)
-                return
-            }
+            let receiptAddress = self.ibo_addressField?.text?.lowercased()
+            let amount = self.ibo_sendAmount?.text
+            
+            let alertView = UIAlertController.init(title: "Confirm Send", message: "Are you sure you would like to send this transaction.", preferredStyle: .alert)
+            
+            alertView.addAction(UIAlertAction(title: "Enter", style: .default, handler: { (action) in
+                
+                self.view.makeToastActivity(.center)
+                
+                DispatchQueue.main.async {
+                    
+                    if self.token != nil { // ETH TRANSACTION
+                        self.sendTokenTransaction(to: receiptAddress!, amount: amount!, pass:pass!)
+                    } else if self.collectible != nil {
+                        self.sendCollectible(to: receiptAddress!, pass:pass!)
+                    } else {
+                        self.sendEthereumTransaction(to: receiptAddress!, amount: amount!, pass:pass!)
+                    }
+                }
+                
+            }))
+            
+            alertView.addAction(UIAlertAction(title: "Cancel", style: .destructive, handler: nil))
+            self.present(alertView, animated: true, completion: nil)
             
         }
-        
-        let receiptAddress = ibo_addressField?.text?.lowercased()
-        let amount = ibo_sendAmount?.text
-        
-        let alertView = UIAlertController.init(title: "Confirm Send", message: "Are you sure you would like to send this transaction.", preferredStyle: .alert)
-        
-        alertView.addAction(UIAlertAction(title: "Enter", style: .default, handler: { (action) in
-            
-            self.view.makeToastActivity(.center)
-            
-            DispatchQueue.main.async {
-                
-                if self.token != nil { // ETH TRANSACTION
-                    self.sendTokenTransaction(to: receiptAddress!, amount: amount!, pass:pass!)
-                } else if self.collectible != nil {
-                    self.sendCollectible(to: receiptAddress!, pass:pass!)
-                } else {
-                    self.sendEthereumTransaction(to: receiptAddress!, amount: amount!, pass:pass!)
-                }
-            }
-            
-        }))
-        
-        alertView.addAction(UIAlertAction(title: "Cancel", style: .destructive, handler: nil))
-        self.present(alertView, animated: true, completion: nil)
-        
-        
     }
     
     func sendTokenTransaction(to: String, amount:String, pass:String){

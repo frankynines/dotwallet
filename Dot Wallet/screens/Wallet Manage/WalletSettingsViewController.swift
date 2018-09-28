@@ -85,21 +85,24 @@ class WalletSettingViewController:UITableViewController, PasswordLoginDelegate {
             }
     }
     
-    func passcodeVerified(pass:String?) {
+    func passcodeVerified(vc: PasswordLoginViewController,pass:String?) {
+        vc.dismiss(animated: false) {
         
-        do {
-            let pKey = try EtherWallet.account.privateKey(password: pass!)
-            let alert = UIAlertController(title: "Private Key", message: "This key is temporary for testing.\(pKey)", preferredStyle: .alert)
-                        
-            alert.addAction(UIAlertAction(title: "Copy", style: .default, handler: { (action) in
-                UIPasteboard.general.string = pKey
-            }))
+            do {
+                let pKey = try EtherWallet.account.privateKey(password: pass!)
+                let alert = UIAlertController(title: "Private Key", message: "This key is temporary for testing.\(pKey)", preferredStyle: .alert)
+                            
+                alert.addAction(UIAlertAction(title: "Copy", style: .default, handler: { (action) in
+                    UIPasteboard.general.string = pKey
+                }))
+                
+                alert.addAction(UIAlertAction(title: "Close", style: .cancel, handler: { (action) in }))
+                self.present(alert, animated: true, completion: nil)
+                
+            } catch {
+                print(error.localizedDescription)
+            }
             
-            alert.addAction(UIAlertAction(title: "Close", style: .cancel, handler: { (action) in }))
-            self.present(alert, animated: true, completion: nil)
-            
-        } catch {
-            print(error.localizedDescription)
         }
     }
     

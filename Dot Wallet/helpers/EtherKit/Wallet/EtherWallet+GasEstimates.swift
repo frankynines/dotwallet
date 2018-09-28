@@ -58,7 +58,7 @@ extension EtherWallet: GasService {
             return
         }
         
-        let gasEstimate = contractMethod.estimateGas(options: options, onBlock: "pending")
+        let gasEstimate = contractMethod.estimateGas(options: options, onBlock: "latest")
         switch gasEstimate {
         case .success(let result):
             completion(nil, 10, Int(result))

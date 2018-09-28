@@ -20,7 +20,7 @@ enum PassState {
 
 @objc protocol PasswordLoginDelegate {
     @objc optional func createWalletWithPasscode(pass:String?)
-    @objc optional func passcodeVerified(pass:String?)
+    @objc optional func passcodeVerified(vc: PasswordLoginViewController,pass:String?)
 }
 
 class PasswordLoginViewController: UIViewController {
@@ -119,9 +119,7 @@ private extension PasswordLoginViewController {
     }
     
     func validationSuccess() {
-        dismiss(animated: false) {
-            self.delegate!.passcodeVerified!(pass: self.kPass)
-        }
+        self.delegate!.passcodeVerified!(vc:self, pass: self.kPass)
     }
     //CREATE NEW WALLET
     func newValidationSuccess(){

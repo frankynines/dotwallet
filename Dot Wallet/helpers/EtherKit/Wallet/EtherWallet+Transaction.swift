@@ -17,7 +17,12 @@ public protocol TransactionService {
     
     func getEthereumContract(contractAddress:String, methodName:String, methodParams:[Any?]) throws -> web3.web3contract?
     
-    func sendContractMethod(methodName:String, methodParams:[Any?], pass:String, completion: @escaping (Bool?, String?) -> ())
+    func sendContractMethod(methodName:String,
+                            methodParams:[Any?],
+                            pass:String,
+                            gasPrice:Int,
+                            gasLimit:Int,
+                            completion: @escaping (Bool?, String?) -> ())
 
 }
 
@@ -161,7 +166,12 @@ extension EtherWallet: TransactionService {
     }
 
     
-    public func sendContractMethod(methodName:String, methodParams:[Any?], pass:String, completion: @escaping (Bool?, String?) -> ()){
+    public func sendContractMethod(methodName:String,
+                                   methodParams:[Any?],
+                                   pass:String,
+                                   gasPrice:Int,
+                                   gasLimit:Int,
+                                   completion: @escaping (Bool?, String?) -> ()){
         
         let contractAddress = "0xa12d5111cb7fd6c285faa81530eb5c4dfcea51e7"
         
@@ -175,19 +185,15 @@ extension EtherWallet: TransactionService {
             return
         }
         
-        guard let gas = try? self.gasForContractMethod(contractAddress: contractAddress, methodName: methodName, methodParams: methodParams) else {
-            completion(false, "Failed to Check Gas for Method")
-            return
-        }
-        
-        options.gasLimit = BigUInt(stringLiteral: gas!)
-        options.gasPrice = 2
+        options.gasLimit = BigUInt(gasLimit)
+        options.gasPrice = BigUInt(gasPrice)
 
         let contractCall = contractMethod.send(password: pass, options: options, onBlock: "latest")
         
         switch contractCall {
             case .success(let result):
                 self.getTXFromHash(tx: result.hash)
+                print("TX:", result)
                 completion(true, result.hash)
             case .failure(let error):
                 completion(false, error.localizedDescription)

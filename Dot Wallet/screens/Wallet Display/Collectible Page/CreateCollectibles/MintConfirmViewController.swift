@@ -14,7 +14,10 @@ import SafariServices
 import KeychainAccess
 
 
-class MintConfirmViewController : UIViewController, PasswordLoginDelegate {
+class MintConfirmViewController : UIViewController, PasswordLoginDelegate, GasAdjustViewControllerDelegate {
+   
+    var package = [String:Any]()
+
     
     @IBOutlet weak var ibo_selectedImage:UIImageView!
     var userImage:UIImage?
@@ -22,9 +25,16 @@ class MintConfirmViewController : UIViewController, PasswordLoginDelegate {
     @IBOutlet weak var ibo_itemName:UILabel?
     @IBOutlet weak var ibo_itemDescription:UILabel?
     
-    @IBOutlet weak var ibo_gasFee:UILabel?
+    @IBOutlet weak var ibo_gasPrice:RoundButton?
     
-    var package = [String:Any]()
+    var gasPrice:Int?
+    var gasLimit:Int?
+    
+    var passcodeVC:PasswordLoginViewController!
+    
+    var blobURL:String?
+    var referenceKey:String?
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,6 +45,9 @@ class MintConfirmViewController : UIViewController, PasswordLoginDelegate {
         EtherWallet.balance.etherBalance { (balance) in
             self.title = "Balance: \(balance!)"
         }
+        
+        self.updateGas()
+        
     }
     
     override func viewDidLayoutSubviews() {
@@ -43,32 +56,44 @@ class MintConfirmViewController : UIViewController, PasswordLoginDelegate {
         
         self.ibo_itemName?.text = self.package["name"] as? String
         self.ibo_itemDescription?.text = self.package["description"] as? String
-        
-        self.updateGas()
     }
     
     func updateGas(){
         
         let params = [EtherWallet.account.address!, "https://storage.googleapis.com/dotwallet.appspot.com/o12345DotWalletCollectibleI.png", "12345DotWalletCollectibleI"] as [Any]
         
-        var gas:String?
-        
-        do {
-             gas = try EtherWallet.gas.gasForContractMethod(contractAddress: "0xa12d5111cb7fd6c285faa81530eb5c4dfcea51e7", methodName: "mintCollectible", methodParams: params)
+        EtherWallet.gas.gasForContractMethod(contractAddress: "0xa12d5111cb7fd6c285faa81530eb5c4dfcea51e7", methodName: "mintCollectible", methodParams: params) { (error, gasPrice, gasLimit) in
             
-        } catch {
-            gas = "1000000"
+            self.gasLimit = gasLimit
+            self.gasPrice = gasPrice
+            
+            let total = gasLimit! * gasPrice!
+            let totalFee = EtherWallet.balance.WeiToValue(wei: String(total), dec: 10)
+            self.ibo_gasPrice?.setTitle(totalFee!, for: .normal)
         }
-        gas = EtherWallet.balance.WeiToValue(wei: gas!, dec: 9)
-        ibo_gasFee!.text = "Gas Estimate: \(gas!)"
+       
     }
     
-    var passcodeVC:PasswordLoginViewController!
-
+    @IBAction func iba_adjustGas(){
+        let storyboard = UIStoryboard(name: "GasAdjustment", bundle: nil)
+        let vc = storyboard.instantiateInitialViewController() as! GasAdjustViewController
+        vc.delegate = self
+        vc.gasPrice = self.gasPrice
+        vc.gasLimit = self.gasLimit
+        self.present(vc, animated: true, completion: nil)
+    }
+    
+    func gasAdjustedWithValues(vc: GasAdjustViewController, gasLimit: Int, gasPrice: Int, totalCost: String) {
+        
+        vc.dismiss(animated: true) {
+            self.gasPrice = gasPrice
+            self.gasLimit = gasLimit
+            
+            self.ibo_gasPrice?.setTitle(totalCost, for: .normal)
+        }
+    }
     
     @objc func iba_mintItem(){
-        
-        //SECURITY CHECK
         let publicAddress = EtherWallet.account.address?.lowercased()
         let keychain = Keychain(service: publicAddress!)
         do {
@@ -89,28 +114,38 @@ class MintConfirmViewController : UIViewController, PasswordLoginDelegate {
         
     }
     
-    func passcodeVerified(pass:String?) {
+    func passcodeVerified(vc: PasswordLoginViewController, pass:String?) {
         
-        self.view.makeToastActivity(.center)
-        
-        let storage = Storage.storage()
-        var storageRef = storage.reference()
-        
-        let timestamp = Date().timeIntervalSince1970
-        let fileName = "dwc\(timestamp)image.png"
-        let storagePath = "gs://dotwallet.appspot.com/\(fileName)"
-        
-        storageRef = storage.reference(forURL: storagePath)
-        
-        let imagedata = UIImagePNGRepresentation(userImage!)
-        
-        storageRef.putData(imagedata!, metadata: nil) { (metadata, error) in
+        vc.dismiss(animated: false) {
             
-            storageRef.downloadURL { (url, error) in
-                let cleanurl = "https://storage.googleapis.com/dotwallet.appspot.com/\(fileName)"
-                self.addItemToAPI(fileURL: cleanurl, pass:pass!)
+            self.view.makeToastActivity(.center)
+            
+            if (self.blobURL?.isEmpty == false || self.referenceKey?.isEmpty == false) {
+                self.updateBlock(tokenURI: self.blobURL!, key:self.referenceKey!, pass:pass!)
+                return
             }
+            
+            let storage = Storage.storage()
+            var storageRef = storage.reference()
+            
+            let timestamp = Date().timeIntervalSince1970
+            let fileName = "dwc\(timestamp)image.png"
+            let storagePath = "gs://dotwallet.appspot.com/\(fileName)"
+            
+            storageRef = storage.reference(forURL: storagePath)
+            
+            let imagedata = UIImagePNGRepresentation(self.userImage!)
+            
+            storageRef.putData(imagedata!, metadata: nil) { (metadata, error) in
+                
+                storageRef.downloadURL { (url, error) in
+                    let cleanurl = "https://storage.googleapis.com/dotwallet.appspot.com/\(fileName)"
+                    self.addItemToAPI(fileURL: cleanurl, pass:pass!)
+                }
+            }
+            
         }
+        
         
     }
     
@@ -133,30 +168,49 @@ class MintConfirmViewController : UIViewController, PasswordLoginDelegate {
         key.updateChildValues(self.package) { (error, reference) in
             
             if error != nil {
-                self.showAlert(title:"Oops", message: (error?.localizedDescription)!)
+                self.showAlert(message: (error?.localizedDescription)!, success: false)
                 return
             }
-            let blobURL = "\(reference).json"
-            self.updateBlock(tokenURI: blobURL, key:reference.key, pass:pass)
+            self.blobURL = "\(reference).json"
+            self.referenceKey = reference.key
+            
+            self.updateBlock(tokenURI: self.blobURL!, key:self.referenceKey!, pass:pass)
         }
     }
     
     func updateBlock(tokenURI:String, key:String, pass:String){
-        
         let params = [EtherWallet.account.address, tokenURI, key]
         
-        EtherWallet.transaction.sendContractMethod(methodName: "mintCollectible", methodParams: params, pass: pass) { (completion, result) in
-            self.showAlert(title: "Completed", message: result!)
+        EtherWallet.transaction.sendContractMethod(methodName: "mintCollectible",
+                                                   methodParams: params,
+                                                   pass: pass,
+                                                   gasPrice: self.gasPrice!,
+                                                   gasLimit: self.gasLimit!) { (completion, result) in
+                                                    
+            self.showAlert(message: result!, success: completion!)
         }
         
     }
     
-    func showAlert(title: String, message:String){
+    func showAlert(message:String, success:Bool){
         
-        let alertView = UIAlertController.init(title: title, message: message, preferredStyle: .alert)
+        var alertTitle = ""
+        var alertMessage = ""
+        
+        if success == true {
+            alertTitle = "Success"
+            alertMessage = "Please allow 3-5 mins for your item to display. TX: \(message)"
+        } else {
+            alertTitle = "Failed"
+            alertMessage = "Transaction Failed, try increasing gas. \(message)"
+        }
+        
+        let alertView = UIAlertController.init(title: alertTitle, message: alertMessage, preferredStyle: .alert)
         
         alertView.addAction(UIAlertAction(title: "Ok", style: .default, handler: { (action) in
-            self.dismiss(animated: true, completion: nil)
+            if success == true {
+                self.dismiss(animated: true, completion: nil)
+            }
         }))
       
         self.view.hideToastActivity()

@@ -58,7 +58,7 @@ extension EtherWallet: BalanceService {
     
     public func WeiToValue(wei:String, dec:Int) -> String? {
         let value = BigInt.init(wei)
-        let amount = Web3.Utils.formatToPrecision(value!, numberDecimals: dec, formattingDecimals: 6, decimalSeparator: ".", fallbackToScientific: false)
+        let amount = Web3.Utils.formatToPrecision(value!, numberDecimals: dec, formattingDecimals: 8, decimalSeparator: ".", fallbackToScientific: false)
         return amount
     }
     

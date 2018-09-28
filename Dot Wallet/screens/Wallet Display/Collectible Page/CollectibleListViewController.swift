@@ -153,6 +153,15 @@ class CollectibleListViewController:UIViewController, UICollectionViewDelegate, 
     }()
     
     @objc func handleRefresh(_ refreshControl: UIRefreshControl) {
+        
+        self.tokens.removeAll()
+        self.pageIndex = 0
+        self.pageOffset = 20
+        self.ibo_collectionView?.reloadData()
+        
+        self.isOverLoad = false
+        self.loadTokens(page: "0")
+        
         refreshControl.endRefreshing()
     }
 
@@ -161,6 +170,7 @@ class CollectibleListViewController:UIViewController, UICollectionViewDelegate, 
     }
     
     @IBAction func iba_openOpenSea(){
+        
         let url = URL(string: "https://rinkeby.opensea.io/assets/dottestcollectible")
         let vc = SFSafariViewController(url: url!)
         self.present(vc, animated: true) {

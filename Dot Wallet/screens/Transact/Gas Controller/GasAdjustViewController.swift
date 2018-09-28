@@ -10,8 +10,7 @@ import UIKit
 
 protocol GasAdjustViewControllerDelegate {
     
-    func gasAdjustedWithValues(gasLimit:Int, gasPrice:Int, totalCost:String)
-    
+    func gasAdjustedWithValues(vc:GasAdjustViewController, gasLimit:Int, gasPrice:Int, totalCost:String)
 }
 
 class GasAdjustViewController: UIViewController {
@@ -31,10 +30,6 @@ class GasAdjustViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        gasPrice = 10
-        gasLimit = 60000
-        
     }
     
     @IBAction func iba_dimissView(){
@@ -42,18 +37,21 @@ class GasAdjustViewController: UIViewController {
     }
     
     @IBAction func iba_doneAjusting(){
-        
+        self.delegate?.gasAdjustedWithValues(vc:self, gasLimit: self.gasLimit, gasPrice: self.gasPrice, totalCost: (self.ibo_txValue?.text)!)
     }
-
     
-    override func viewDidAppear(_ animated: Bool) {
-    
-        super.viewDidAppear(animated)
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
         
-        self.ibo_gasLimitSlider?.setValue(Float(self.gasLimit), animated: true)
-        self.ibo_gasPriceSlider?.setValue(Float(self.gasPrice), animated: true)
+        self.ibo_gasPriceValue!.text = String(describing: gasPrice!)
+        self.ibo_gasLimitValue!.text = String(describing: gasLimit!)
+        
+        self.ibo_gasLimitSlider?.setValue(Float(self.gasLimit), animated: false)
+        self.ibo_gasPriceSlider?.setValue(Float(self.gasPrice), animated: false)
+        
+        self.calculatePrice()
     }
-
+    
     @IBAction func sliderAdjusted(sender:UISlider){
         if sender.tag == 0 {
             self.gasPrice = Int(sender.value)
@@ -70,7 +68,7 @@ class GasAdjustViewController: UIViewController {
     
     func calculatePrice(){
         let total = gasPrice * gasLimit
-        self.ibo_txValue!.text = EtherWallet.balance.WeiToValue(wei: String(total), dec: 9)
+        self.ibo_txValue!.text = EtherWallet.balance.WeiToValue(wei: String(total), dec: 10)
     }
     
 }

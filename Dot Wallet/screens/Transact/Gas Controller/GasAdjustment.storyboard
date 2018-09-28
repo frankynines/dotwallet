@@ -37,10 +37,10 @@
                                                 <rect key="frame" x="276" y="7" width="83" height="30"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <state key="normal" title="Done"/>
+                                                <connections>
+                                                    <action selector="iba_doneAjusting" destination="QaV-74-Kob" eventType="touchUpInside" id="kpU-W0-AQB"/>
+                                                </connections>
                                             </button>
-                                            <connections>
-                                                <action selector="iba_doneAjusting" destination="QaV-74-Kob" id="7Fd-ER-9tU"/>
-                                            </connections>
                                         </barButtonItem>
                                     </navigationItem>
                                 </items>
@@ -174,7 +174,9 @@
                         <viewLayoutGuide key="safeArea" id="aJi-wR-obR"/>
                     </view>
                     <connections>
+                        <outlet property="ibo_gasLimitSlider" destination="hj1-3n-6Rd" id="YnU-me-e9K"/>
                         <outlet property="ibo_gasLimitValue" destination="ECr-YI-HWa" id="BzC-Zc-hxa"/>
+                        <outlet property="ibo_gasPriceSlider" destination="S3k-qn-7J1" id="m0n-Ox-Gzy"/>
                         <outlet property="ibo_gasPriceValue" destination="4PH-i1-VVy" id="gL4-GR-C7G"/>
                         <outlet property="ibo_txValue" destination="OSi-pC-tjN" id="Omk-0S-mIA"/>
                     </connections>

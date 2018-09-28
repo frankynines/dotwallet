@@ -314,7 +314,6 @@
 		2F0EFCAC210639E2003EF740 /* screens */ = {
 			isa = PBXGroup;
 			children = (
-				2FBBDF29215E928C00FC751D /* Gas Controller */,
 				2F6CBD5D2108FFB00026C858 /* Intro */,
 				2F6CBD5E2108FFBD0026C858 /* Wallet Core */,
 				2F7678E6210B833F00919059 /* Wallet Display */,
@@ -423,6 +422,7 @@
 		2F6CBD5C2108FF9B0026C858 /* Transact */ = {
 			isa = PBXGroup;
 			children = (
+				2FBBDF29215E928C00FC751D /* Gas Controller */,
 				2F0EFCAD210639E2003EF740 /* SendViewController.swift */,
 				2FE495D121569BD4007D2AD7 /* SendView.storyboard */,
 			);

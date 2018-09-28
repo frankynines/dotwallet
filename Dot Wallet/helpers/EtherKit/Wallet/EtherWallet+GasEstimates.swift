@@ -14,7 +14,7 @@ import BigInt
 public protocol GasService {
     
     func gasForSendingEth(to address: String, amount: String) throws -> String
-    func gasForContractMethod(contractAddress:String, methodName:String, methodParams:[Any?]) throws -> String?
+    func gasForContractMethod(contractAddress:String, methodName:String, methodParams:[Any?], completion: @escaping(ContractError?, Int?, Int?) -> ())
 }
 
 extension EtherWallet: GasService {
@@ -27,7 +27,7 @@ extension EtherWallet: GasService {
         let keystoreManager = KeystoreManager([keystore])
         web3Main.addKeystoreManager(keystoreManager)
         
-        options.gasPrice = 2
+        options.gasPrice = 10
         options.value = Web3.Utils.parseToBigUInt(amount, units: .eth)
         
         let intermediateSend = web3Main.contract(Web3.Utils.coldWalletABI, at: toAddress, abiVersion: 2)!.method(options: options)!
@@ -42,26 +42,29 @@ extension EtherWallet: GasService {
         
     }
 
-    public func gasForContractMethod(contractAddress:String, methodName:String, methodParams:[Any?]) throws -> String?{
+    public func gasForContractMethod(contractAddress:String, methodName:String, methodParams:[Any?], completion: @escaping(ContractError?, Int?, Int?) -> ()) {
         
         guard let contract = try! self.getEthereumContract(contractAddress: contractAddress, methodName: methodName, methodParams: methodParams) else {
-            throw ContractError.contractFailure
+            completion(ContractError.contractFailure, nil, nil)
+            return
         }
         
-        options.gasPrice = 3
+        options.gasPrice = 10
         
         print(web3Main.eth.getTransactionCount(address: EthereumAddress(EtherWallet.account.address!)!))
         
         guard let contractMethod = contract.method(methodName, parameters: methodParams as [AnyObject], extraData: Data(), options: options) else {
-            throw ContractError.contractFailure
+            completion(ContractError.contractFailure, nil, nil)
+            return
         }
         
-        let gas = contractMethod.estimateGas(options: options, onBlock: "pending")
-        switch gas {
+        let gasEstimate = contractMethod.estimateGas(options: options, onBlock: "pending")
+        switch gasEstimate {
         case .success(let result):
-            return String(result * options.gasPrice!)
+            completion(nil, 10, Int(result))
         case .failure(_):
-            return "1000000"
+            completion(nil, 10, Int(600000))
+            return
         }
     }
     

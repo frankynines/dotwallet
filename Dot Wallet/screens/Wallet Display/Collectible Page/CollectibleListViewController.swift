@@ -159,6 +159,7 @@ class CollectibleListViewController:UIViewController, UICollectionViewDelegate, 
         self.pageOffset = 20
         self.ibo_collectionView?.reloadData()
         
+        self.isOverLoad = false
         self.loadTokens(page: "0")
         
         refreshControl.endRefreshing()

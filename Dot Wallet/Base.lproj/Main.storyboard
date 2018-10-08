@@ -124,8 +124,14 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="✌️" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7K3-No-4Eo">
+                                <rect key="frame" x="20" y="84" width="335" height="303"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="120"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="highlightedColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AN5-SC-bQj">
-                                <rect key="frame" x="0.0" y="417" width="375" height="250"/>
+                                <rect key="frame" x="0.0" y="407" width="375" height="200"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vcb-9J-Guc" customClass="RoundButton" customModule="Dot_Wallet" customModuleProvider="target">
                                         <rect key="frame" x="40" y="75" width="295" height="40"/>
@@ -140,7 +146,7 @@
                                             <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                                 <real key="value" value="20"/>
                                             </userDefinedRuntimeAttribute>
-                                            <userDefinedRuntimeAttribute type="boolean" keyPath="hasBorder" value="YES"/>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="hasBorder" value="NO"/>
                                         </userDefinedRuntimeAttributes>
                                         <connections>
                                             <action selector="iba_importWallet" destination="Npw-2J-j6Z" eventType="touchUpInside" id="Kvm-8h-J0P"/>
@@ -165,16 +171,7 @@
                                             <action selector="iba_createNewWallet" destination="Npw-2J-j6Z" eventType="touchUpInside" id="dra-eX-0jw"/>
                                         </connections>
                                     </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="By using Dot Wallet you agree to the Terms of Service." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3tn-Yh-84y">
-                                        <rect key="frame" x="20" y="230" width="335" height="20"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="20" id="PD3-Yl-htq"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="9"/>
-                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <color key="highlightedColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                    </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Let's connect your wallet." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d1e-QL-zHV">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Welcome to Dot Wallet!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d1e-QL-zHV">
                                         <rect key="frame" x="40" y="0.0" width="295" height="35"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="35" id="HKe-IA-ivE"/>
@@ -189,24 +186,37 @@
                                     <constraint firstItem="d1e-QL-zHV" firstAttribute="leading" secondItem="AN5-SC-bQj" secondAttribute="leading" constant="40" id="9A2-Mi-c5w"/>
                                     <constraint firstItem="d1e-QL-zHV" firstAttribute="top" secondItem="AN5-SC-bQj" secondAttribute="top" id="Dd0-Bu-JS5"/>
                                     <constraint firstAttribute="trailing" secondItem="d1e-QL-zHV" secondAttribute="trailing" constant="40" id="JAI-EN-teX"/>
-                                    <constraint firstAttribute="trailing" secondItem="3tn-Yh-84y" secondAttribute="trailing" constant="20" id="Pi5-8E-Eb0"/>
                                     <constraint firstAttribute="trailing" secondItem="moE-KG-QzJ" secondAttribute="trailing" constant="40" id="TU2-wR-GAf"/>
                                     <constraint firstItem="moE-KG-QzJ" firstAttribute="leading" secondItem="AN5-SC-bQj" secondAttribute="leading" constant="40" id="U5U-xB-22Y"/>
-                                    <constraint firstAttribute="bottom" secondItem="3tn-Yh-84y" secondAttribute="bottom" id="You-0h-AX3"/>
                                     <constraint firstAttribute="trailing" secondItem="Vcb-9J-Guc" secondAttribute="trailing" constant="40" id="aiF-rk-yIA"/>
                                     <constraint firstItem="Vcb-9J-Guc" firstAttribute="leading" secondItem="AN5-SC-bQj" secondAttribute="leading" constant="40" id="c1U-iD-Qen"/>
                                     <constraint firstItem="Vcb-9J-Guc" firstAttribute="top" secondItem="d1e-QL-zHV" secondAttribute="bottom" constant="40" id="diG-ki-FEe"/>
                                     <constraint firstItem="moE-KG-QzJ" firstAttribute="top" secondItem="Vcb-9J-Guc" secondAttribute="bottom" constant="20" id="fbQ-Vy-Md0"/>
-                                    <constraint firstAttribute="height" constant="250" id="jsV-cv-akh"/>
-                                    <constraint firstItem="3tn-Yh-84y" firstAttribute="leading" secondItem="AN5-SC-bQj" secondAttribute="leading" constant="20" id="oL1-dq-C4d"/>
+                                    <constraint firstAttribute="height" constant="200" id="jsV-cv-akh"/>
                                 </constraints>
                             </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="By using Dot Wallet you agree to the Terms of Service." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3tn-Yh-84y">
+                                <rect key="frame" x="20" y="627" width="335" height="20"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="20" id="PD3-Yl-htq"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="9"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="highlightedColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.75294117647058822" green="0.72549019607843135" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="7K3-No-4Eo" firstAttribute="leading" secondItem="7WK-SE-i88" secondAttribute="leading" constant="20" id="2aO-zI-fzY"/>
+                            <constraint firstItem="7WK-SE-i88" firstAttribute="bottom" secondItem="3tn-Yh-84y" secondAttribute="bottom" constant="20" id="GLI-1U-dZV"/>
+                            <constraint firstItem="7WK-SE-i88" firstAttribute="trailing" secondItem="3tn-Yh-84y" secondAttribute="trailing" constant="20" id="GZI-Ba-2So"/>
                             <constraint firstItem="AN5-SC-bQj" firstAttribute="leading" secondItem="7WK-SE-i88" secondAttribute="leading" id="PdD-th-7cf"/>
                             <constraint firstItem="AN5-SC-bQj" firstAttribute="trailing" secondItem="7WK-SE-i88" secondAttribute="trailing" id="SyN-hx-cD7"/>
-                            <constraint firstItem="AN5-SC-bQj" firstAttribute="bottom" secondItem="7WK-SE-i88" secondAttribute="bottom" id="xFh-cW-bhB"/>
+                            <constraint firstItem="7WK-SE-i88" firstAttribute="trailing" secondItem="7K3-No-4Eo" secondAttribute="trailing" constant="20" id="T7x-hS-yzo"/>
+                            <constraint firstItem="3tn-Yh-84y" firstAttribute="leading" secondItem="7WK-SE-i88" secondAttribute="leading" constant="20" id="TK0-43-zdZ"/>
+                            <constraint firstItem="AN5-SC-bQj" firstAttribute="top" secondItem="7K3-No-4Eo" secondAttribute="bottom" constant="20" id="Yj5-mR-YEE"/>
+                            <constraint firstItem="3tn-Yh-84y" firstAttribute="top" secondItem="AN5-SC-bQj" secondAttribute="bottom" constant="20" id="gQb-Sq-nlI"/>
+                            <constraint firstItem="7K3-No-4Eo" firstAttribute="top" secondItem="7WK-SE-i88" secondAttribute="top" constant="20" id="jYD-0t-ZgT"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="7WK-SE-i88"/>
                     </view>
@@ -395,7 +405,7 @@
                                                     <rect key="frame" x="312.5" y="17" width="46.5" height="14.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                                    <color key="textColor" red="1" green="0.49327188729999999" blue="0.47399842739999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>

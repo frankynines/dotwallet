@@ -14,6 +14,8 @@ class CollectibleListViewController:UIViewController, UICollectionViewDelegate, 
     
     @IBOutlet var ibo_collectionView:UICollectionView?
     @IBOutlet var ibo_tableHeader:UILabel?
+    
+    @IBOutlet var ibo_emptyMessage:UILabel?
         
     var delegate:WalletPageViewControllerDelegate?
 
@@ -27,7 +29,7 @@ class CollectibleListViewController:UIViewController, UICollectionViewDelegate, 
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+    
         self.ibo_collectionView?.addSubview(self.refreshControl)
         self.ibo_collectionView?.backgroundColor = UIColor(patternImage: UIImage(named: "bg_transparent")!)
         self.ibo_collectionView?.contentInset = UIEdgeInsetsMake(20, 0, 40, 0)
@@ -42,11 +44,14 @@ class CollectibleListViewController:UIViewController, UICollectionViewDelegate, 
         layout.minimumInteritemSpacing = padding
         self.ibo_collectionView?.setCollectionViewLayout(layout, animated: false)
         self.loadTokens(page: "0")
+    }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
     }
     
     override func viewWillLayoutSubviews() {
-        super.viewWillLayoutSubviews()  
+        super.viewWillLayoutSubviews()
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -62,9 +67,12 @@ class CollectibleListViewController:UIViewController, UICollectionViewDelegate, 
         
         EtherWallet.tokens.getERC721Tokens(address: userAddress, tokenAddress:nil, page: page, pageOffset: String(self.pageOffset)) { (result) in
             let json = result?.dictionaryValue
+            
             if (json!["assets"]?.arrayValue.count)! <= 0{
                 self.isOverLoad = true
+                return
             }
+            
             for element in (json!["assets"]?.arrayValue)! {
                 self.buildTokenObject(element: element.rawString()!)
             }

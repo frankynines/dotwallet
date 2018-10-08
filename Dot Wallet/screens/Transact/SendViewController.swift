@@ -67,12 +67,9 @@ class SendViewController: UIViewController, QRCodeReaderViewControllerDelegate, 
             self.ibo_walletName?.text = "ETH" + " Balance"
             self.ibo_tokenSymbol?.text = "ETH"
             self.syncEtherBalance()
-            
-            DispatchQueue.global(qos: .background).async {
-                self.updateGas()
-            }
         }
         
+        self.updateGas()
         
     }
     override func viewDidAppear(_ animated: Bool) {
@@ -85,17 +82,10 @@ class SendViewController: UIViewController, QRCodeReaderViewControllerDelegate, 
     
     func updateGas(){
         
-        var gas:String?
-        
-        do {
-            gas = try EtherWallet.gas.gasForSendingEth(to: "0x2Eb9b439Ffb7dC587198e1534e465a6242192b24", amount: "0.1") // TEMP VALUES
-        } catch {
-            gas = "1000000"
-        }
-        gas = EtherWallet.balance.WeiToValue(wei: gas!, dec: 9)
-        DispatchQueue.main.async {
-            self.ibo_gasFee!.text = "\(gas!) ETH"
-        }
+            EtherWallet.gas.currentGasEstimate { (val) in
+                let fee = EtherWallet.balance.WeiToValue(wei: String(val), dec: 16)
+                self.ibo_gasFee!.text = "\(fee!) ETH"
+            }
     }
 
     func syncEtherBalance(){

@@ -15,6 +15,8 @@ public protocol GasService {
     
     func gasForSendingEth(to address: String, amount: String) throws -> String
     func gasForContractMethod(contractAddress:String, methodName:String, methodParams:[Any?], completion: @escaping(ContractError?, Int?, Int?) -> ())
+    
+    func currentGasEstimate(completion: @escaping(Int) -> ())
 }
 
 extension EtherWallet: GasService {
@@ -27,19 +29,32 @@ extension EtherWallet: GasService {
         let keystoreManager = KeystoreManager([keystore])
         web3Main.addKeystoreManager(keystoreManager)
         
-        options.gasPrice = 10
-        options.value = Web3.Utils.parseToBigUInt(amount, units: .eth)
+//        options.gasPrice = 2
+        options.value = BigUInt(defaultGasLimitForTokenTransfer)
+//        options.value = Web3.Utils.parseToBigUInt(amount, units: .eth)
         
         let intermediateSend = web3Main.contract(Web3.Utils.coldWalletABI, at: toAddress, abiVersion: 2)!.method(options: options)!
         
         let gas = intermediateSend.estimateGas(options: options)
         switch gas {
         case .success(let result):
-            return String(result * options.gasPrice!)
+            return String(result)
         case .failure(_):
             return "1000000"
         }
         
+    }
+    
+    public func currentGasEstimate(completion: @escaping(Int) -> ()) {
+        print(options)
+        let intermediateSend = web3Main.eth.getGasPrice()
+        switch intermediateSend {
+        case .success(let result):
+            completion(Int(result))
+        case .failure(_):
+            completion(Int(0))
+            return
+        }
     }
 
     public func gasForContractMethod(contractAddress:String, methodName:String, methodParams:[Any?], completion: @escaping(ContractError?, Int?, Int?) -> ()) {
@@ -49,7 +64,7 @@ extension EtherWallet: GasService {
             return
         }
         
-        options.gasPrice = 10
+        options.gasPrice = 2
         
         print(web3Main.eth.getTransactionCount(address: EthereumAddress(EtherWallet.account.address!)!))
         
@@ -58,12 +73,12 @@ extension EtherWallet: GasService {
             return
         }
         
-        let gasEstimate = contractMethod.estimateGas(options: options, onBlock: "latest")
+        let gasEstimate = contractMethod.estimateGas(options: options, onBlock: "pending")
         switch gasEstimate {
         case .success(let result):
-            completion(nil, 10, Int(result))
+            completion(nil, 2, Int(result))
         case .failure(_):
-            completion(nil, 10, Int(600000))
+            completion(nil, 2, Int(600000))
             return
         }
     }

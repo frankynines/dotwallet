@@ -20,14 +20,6 @@ class CreateWalletViewController: UIViewController, PasswordLoginDelegate {
         self.navigationController?.isNavigationBarHidden = true
 
     }
-    
-    func welcomeMessage(){
-        let alertView = UIAlertController.init(title: "Welcome to Dot Wallet", message: "This version of the wallet has been modified for RINKEBY testnet. Please only test with what you can afford to lose.", preferredStyle: .alert)
-        
-        alertView.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
-        alertView.addAction(UIAlertAction(title: "Cancel", style: .destructive, handler: nil))
-        self.present(alertView, animated: true, completion: nil)
-    }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -38,25 +30,7 @@ class CreateWalletViewController: UIViewController, PasswordLoginDelegate {
             
             self.pushWalletHomeScreen()
             
-            //            let keychain = Keychain(service: publicAddress!)
-            //
-            //            do {
-            //
-            //                let pass = try keychain.get(publicAddress!)
-            //                print(pass)
-            //                //If user has not setup a passcode
-            //                if pass == nil {
-            //                    self.showLoginView(state: .Reset)
-            //                } else {
-            //                    self.showLoginView(state: .Unlock)
-            //                }
-            //
-            //            } catch {
-            //                print(error.localizedDescription)
-            //            }
-            
         } else {
-            self.welcomeMessage()
             self.animateBG()
         }
 
@@ -136,31 +110,20 @@ class CreateWalletViewController: UIViewController, PasswordLoginDelegate {
             return
         }
         
-        UIView.animate(withDuration: 10, delay: 0, options: [.allowUserInteraction], animations: {
+        UIView.animate(withDuration: 1, delay: 0, options: [.allowUserInteraction], animations: {
             self.view.backgroundColor = UIColor(hexString: self.randomColor())
         }) { (done) in
             self.animateBG()
         }
     }
     
-    var testColors = ["696B7A",
-                      "998AFF",
-                      "64E5FF",
-                      "0081FF",
-                      "FF5757",
-                      "FFB357",
-                      "DCF14A",
-                      "40E252",
-                      "CDE6FF",
-                      "DDDDDD",
-                      "FF66C7",
-                      "24294E",
-                      "FFF100",
-                      "BD10E0",
-                      "1D1D1D",
-                      "B8773C",
-                      "7E3BA0",
-                      "BFBFBF"]
+    var testColors = ["ffa3ff",
+                      "59caff",
+                      "8259ff",
+                      "ff597f",
+                      "66ff59",
+                      "fff359",
+                      "ffca59"]
     
     func randomColor() -> String {
         return self.testColors.randomElement()!

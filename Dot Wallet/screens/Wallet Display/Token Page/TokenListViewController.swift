@@ -16,18 +16,19 @@ class TokenListViewController:UIViewController, UITableViewDelegate, UITableView
 
     @IBOutlet var ibo_tableHeader:UILabel?
     @IBOutlet var ibo_tokenTableView:UITableView!
+    
+    @IBOutlet var ibo_emptyMessage:UILabel?
 
     var tokens = [OERC20Token]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.loadTokens()
+        
+        self.ibo_emptyMessage?.isHidden = true
         self.ibo_tokenTableView.addSubview(self.refreshControl)
         self.ibo_tokenTableView.delaysContentTouches = false
-    
-        DispatchQueue.main.async {
-            self.loadTokens()
-        }
         self.ibo_tokenTableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 50, right: 0)
     }
     
@@ -37,13 +38,13 @@ class TokenListViewController:UIViewController, UITableViewDelegate, UITableView
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
+        
         if self.tokens.count > 0 {
             self.ibo_tokenTableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: false)
         }
     }
     
     @IBAction func iba_manageTokens(){
-
         let vc = UIStoryboard(name: "ERC20Tokens", bundle: nil).instantiateViewController(withIdentifier: "sb_AddTokenViewController") as! AddTokenViewController
         vc.delegate = self
         self.present(vc, animated: true, completion: nil)
@@ -57,8 +58,23 @@ class TokenListViewController:UIViewController, UITableViewDelegate, UITableView
     
     func loadTokens(){
         self.tokens.removeAll()
-        self.tokens = TokenCacheManager.shared.loadCachedTokens()
-        self.ibo_tokenTableView.reloadData()
+        
+        DispatchQueue.global(qos: .background).async {
+            
+            TokenCacheManager.shared.loadCachedTokens { (result) in
+                if result.isEmpty == true {
+                    //self.ibo_emptyMessage?.isHidden = false;
+                } else {
+                    self.tokens = result
+                    //self.ibo_emptyMessage?.isHidden = true;
+                }
+                DispatchQueue.main.async {
+                    self.ibo_tokenTableView.reloadData()
+                }
+            }
+            
+        }
+        
     }
 
     func append(_ objectsToAdd: [OERC20Token]) {
@@ -85,7 +101,6 @@ class TokenListViewController:UIViewController, UITableViewDelegate, UITableView
         let vc = UIStoryboard.init(name: "ERC20Tokens", bundle: nil).instantiateViewController(withIdentifier: "sb_ERC20TokenDetailViewController") as! ERC20TokenDetailViewController
         vc.erc20Token = token
         self.present(vc , animated: true, completion: nil)
-        
     }
     
     lazy var refreshControl: UIRefreshControl = {
@@ -134,7 +149,6 @@ class WalletTokenCell:UITableViewCell {
                 if let balance = result {
                     self.iboTokenBalance?.text = EtherWallet.balance.WeiToValue(wei: balance, dec: (self.token?.decimals)!)
                 }
-                
             }
         }
 

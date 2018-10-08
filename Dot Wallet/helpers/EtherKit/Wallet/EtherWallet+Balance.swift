@@ -18,7 +18,7 @@ extension EtherWallet: BalanceService {
         let balanceInWeiUnitResult = web3Main.eth.getBalance(address: ethereumAddress)
         guard case .success(let balanceInWei) = balanceInWeiUnitResult else { throw WalletError.networkFailure }
         
-        guard let balanceInEtherUnitStr = Web3.Utils.formatToEthereumUnits(balanceInWei, toUnits: Web3.Utils.Units.eth, decimals: 8, decimalSeparator: ".") else { throw WalletError.conversionFailure }
+        guard let balanceInEtherUnitStr = Web3.Utils.formatToEthereumUnits(balanceInWei, toUnits: Web3.Utils.Units.eth, decimals: 6, decimalSeparator: ".") else { throw WalletError.conversionFailure }
         
         return balanceInEtherUnitStr
     }
@@ -58,7 +58,7 @@ extension EtherWallet: BalanceService {
     
     public func WeiToValue(wei:String, dec:Int) -> String? {
         let value = BigInt.init(wei)
-        let amount = Web3.Utils.formatToPrecision(value!, numberDecimals: dec, formattingDecimals: 8, decimalSeparator: ".", fallbackToScientific: false)
+        let amount = Web3.Utils.formatToPrecision(value!, numberDecimals: dec, formattingDecimals: 6, decimalSeparator: ".", fallbackToScientific: false)
         return amount
     }
     

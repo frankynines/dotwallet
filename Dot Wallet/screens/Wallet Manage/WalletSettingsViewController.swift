@@ -26,7 +26,7 @@ class WalletSettingViewController:UITableViewController, PasswordLoginDelegate {
         self.title = "Settings"
         self.navigationController?.isNavigationBarHidden = false
         
-        self.ibo_network?.text = "RINKEBY"
+        self.ibo_network?.text = "Main-Net"
         self.userColor()
     }
     
@@ -90,7 +90,7 @@ class WalletSettingViewController:UITableViewController, PasswordLoginDelegate {
         
             do {
                 let pKey = try EtherWallet.account.privateKey(password: pass!)
-                let alert = UIAlertController(title: "Private Key", message: "This key is temporary for testing.\(pKey)", preferredStyle: .alert)
+                let alert = UIAlertController(title: "Private Key", message: "Guard your Private Key: \(pKey)", preferredStyle: .alert)
                             
                 alert.addAction(UIAlertAction(title: "Copy", style: .default, handler: { (action) in
                     UIPasteboard.general.string = pKey
@@ -107,7 +107,7 @@ class WalletSettingViewController:UITableViewController, PasswordLoginDelegate {
     }
     
     @IBAction func iba_killCache(){
-        self.view.makeToast("Cache has been cleared.")
+        self.view.makeToast("Application Cache has been cleared.")
 
         UserDefaults.standard.removeObject(forKey: "ETHBalance")
         TXHistoryCacheManager.shared.killStorage()

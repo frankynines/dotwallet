@@ -27,18 +27,18 @@ class TokenCacheManager {
        
     }
     
-    func loadCachedTokens() -> [OERC20Token]{
+    func loadCachedTokens(completion: @escaping ([OERC20Token]) -> ()){
         var tokens = [OERC20Token]()
         do {
-            
+
             let cachedArray = try userStorage()!.object(forKey:storageKey!)
             for token in cachedArray {
                 tokens.append(token.value!)
             }
-            return tokens
+            completion(tokens)
         } catch {
             print(error.localizedDescription)
-            return []
+            completion([])
         }
     }
     

@@ -48,7 +48,6 @@ class ImportWalletViewController: UIViewController, QRCodeReaderViewControllerDe
 
     //WALLET CORE
     @IBAction func importWallet() {
-        print(self.ibo_pkeyField?.text?.isEmpty)
         if (self.ibo_pkeyField?.text?.isEmpty == true){
             self.view.makeToast("Private Key Invalid")
             return
@@ -124,10 +123,7 @@ class ImportWalletViewController: UIViewController, QRCodeReaderViewControllerDe
                 return
             }
             let urlQuery = URL(string: (result?.value)!)
-            print(result?.value)
-            if let ethereumURL = urlQuery?.absoluteStringByTrimmingQuery(){
-//                self.ibo_addressField?.text = ethereumURL.replacingOccurrences(of: "ethereum:", with: "")
-            }
+    
         }
         readerVC.modalPresentationStyle = .overFullScreen
         present(readerVC, animated: true, completion: nil)

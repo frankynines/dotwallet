@@ -50,8 +50,11 @@ class AddTokenViewController:UIViewController, UITableViewDelegate, UITableViewD
     func loadCacheTokens(){
         
         self.tokens.removeAll()
-        self.tokens = TokenCacheManager.shared.loadCachedTokens()
-        self.ibo_tableView?.reloadData()
+        TokenCacheManager.shared.loadCachedTokens(completion: { (result) in
+            self.tokens = result
+            self.ibo_tableView?.reloadData()
+
+        })
         
     }
     

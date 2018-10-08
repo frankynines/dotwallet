@@ -103,7 +103,6 @@ class CollectibleDetailViewController: UIViewController, UIScrollViewDelegate, M
         
         let vc = SFSafariViewController(url: URL(string: openSeaURL)!)
         self.present(vc, animated: true, completion: nil)
-        
     }
 
     // MODAL FOR SEND
@@ -158,13 +157,5 @@ class CollectibleDetailViewController: UIViewController, UIScrollViewDelegate, M
                 self.ibo_bottomConstraint?.constant = constant
         })
     }
-    
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        
-//        if scrollView.contentOffset.y > 50 {
-//            iba_sendToken()
-//        }
-    
-    }
-    
+
 }

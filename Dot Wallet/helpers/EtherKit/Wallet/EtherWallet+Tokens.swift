@@ -128,7 +128,7 @@ extension EtherWallet: TokenService {
     
     internal func openSeaURLRequest(address:String, page:String, pageOffset:String) -> URLRequest{
         
-        let urlString = "https://rinkeby-api.opensea.io/api/v1/assets/"
+        let urlString = "https://api.opensea.io/api/v1/assets/"
         let parameters = ["owner":address,
                           "order_by": "token_id",
                           "offset":page,

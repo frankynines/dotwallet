@@ -66,7 +66,7 @@ class WalletCardViewController:UIViewController, UIScrollViewDelegate, ModalSlid
             self.refreshBalance()
         }
         self.repeatableTimer.resume()
-        self.ibo_dot?.backgroundColor = UIColor.orange
+        self.ibo_dot?.backgroundColor = UIColor.green
     }
     
     override func viewWillDisappear(_ animated: Bool) {

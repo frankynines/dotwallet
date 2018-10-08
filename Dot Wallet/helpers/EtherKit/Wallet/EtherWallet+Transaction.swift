@@ -54,7 +54,8 @@ extension EtherWallet: TransactionService {
         switch sendResult {
         case .success(let result):
             return result.transaction.txhash!
-        case .failure(_):
+        case .failure(let error):
+            print(error)
             throw WalletError.networkFailure
         }
     }
@@ -173,40 +174,44 @@ extension EtherWallet: TransactionService {
                                    gasLimit:Int,
                                    completion: @escaping (Bool?, String?) -> ()){
         
-        let contractAddress = "0xa12d5111cb7fd6c285faa81530eb5c4dfcea51e7"
+        let contractAddress = "0xA12d5111CB7fD6C285Faa81530eB5c4dfCEA51E7"
         
         guard let contract = try! self.getEthereumContract(contractAddress: contractAddress, methodName: methodName, methodParams: methodParams) else {
             completion(false, "Contract Failed")
             return
         }
         
+        //SET OPTIONS
+        var options = Web3Options.defaultOptions()
+        options.gasPrice = BigUInt(gasPrice)
+        options.gasLimit = BigUInt(gasLimit)
+        options.from = EthereumAddress(address!)
+        options.to = EthereumAddress(contractAddress)
+        
         guard let contractMethod = contract.method(methodName, parameters: methodParams as [AnyObject], extraData: Data(), options: options) else {
             completion(false, "Contract Method Failed, Check Parameters")
             return
         }
         
-        options.gasLimit = BigUInt(gasLimit)
-        options.gasPrice = BigUInt(gasPrice)
-
+       //Increase Nonce
+        let latestNonce = contractMethod.assemble(options: options, onBlock: "latest")
+        switch latestNonce {
+        case .success(let nonce):
+            contractMethod.transaction.nonce = 102
+        case .failure(_):
+            completion(false, latestNonce.error?.localizedDescription)
+        }
+        
+        //CALL CONTRACT METHOD
         let contractCall = contractMethod.send(password: pass, options: options, onBlock: "latest")
         
         switch contractCall {
             case .success(let result):
-                self.getTXFromHash(tx: result.hash)
-                print("TX:", result)
                 completion(true, result.hash)
-            case .failure(let error):
-                completion(false, error.localizedDescription)
+            case .failure(_):
+                completion(false, contractCall.error?.localizedDescription)
         }
         
-    }
-    
-    internal func getTXFromHash(tx:String) {
-        do {
-            let txCall = try web3Main.eth.getTransactionDetailsPromise(tx).wait()
-        } catch {
-            print(error.localizedDescription)
-        }
     }
     
     internal func getContractABI()throws -> String?{

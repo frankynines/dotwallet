@@ -10,8 +10,8 @@ public class EtherWallet {
     public static let tokens: TokenService = EtherWallet.shared
     public static let gas: GasService = EtherWallet.shared
     
-    public var web3Main = Web3.InfuraRinkebyWeb3() // Change to MainNet when Launch
-    public var etherscanURL = "https://api-rinkeby.etherscan.io" // Change to MainNet when Launch
+    public var web3Main = Web3.InfuraMainnetWeb3() // Change to MainNet when Launch
+    public var etherscanURL = "https://api.etherscan.io" // Change to MainNet when Launch
     let tokenImageSrcURL = "https://raw.githubusercontent.com/trustwallet/tokens/master/images/"
     let keystoreDirectoryName = "/keystore"
     let keystoreFileName = "/key.json"
